@@ -1,0 +1,106 @@
+body {
+    margin: 0 auto;
+}
+
+/*nav {*/
+/*margin: 0;*/
+/*padding: .5em;*/
+/*}*/
+
+nav .brand-logo {
+    left: 30%;
+}
+
+@media only screen and (max-width: 992px) {
+    nav .brand-logo {
+        left: 20%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    nav .brand-logo {
+        left: 50%;
+    }
+}
+
+ul.fz-nav-links li.active {
+
+}
+
+footer {
+    text-align: center;
+}
+
+.fz-flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.fz-flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.fz-flex-wrap {
+    flex-wrap: wrap;
+}
+
+.fz-flex-space-around {
+    justify-content: space-around;
+}
+
+.fz-flex-center {
+    justify-content: center;
+}
+
+.fz-flex-v-center {
+    align-items: center;
+}
+
+.fz-project {
+    margin: 20px;
+}
+
+.fz-project img {
+    max-width: 500px;
+    height: 350px;
+}
+
+.fz-work-experience img {
+    width: 250px;
+    padding-right: 10px;
+    margin: auto;
+}
+
+.fz-work-experience-description {
+    padding: 10px;
+}
+
+.fz-size-50-50 {
+    width: 50px;
+    height: 50px;
+}
+
+.fz-size-25-25 {
+    width: 25px;
+    height: 25px;
+}
+
+.fz-link-no-style {
+    text-decoration: none;
+}
+
+.fz-header-title {
+}
+
+.fz-content {
+    width: 75%;
+    padding: 0 .5em;
+    margin: 5px auto;
+}
+
+@media (max-width: 768px) {
+    .fz-content {
+        width: 100%;
+    }
+}
