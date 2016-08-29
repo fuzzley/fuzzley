@@ -1,5 +1,6 @@
 body {
     margin: 0 auto;
+    background-color: #e3e3e3;
 }
 
 /*nav {*/
@@ -7,19 +8,25 @@ body {
 /*padding: .5em;*/
 /*}*/
 
+nav {
+    width: 75%;
+    margin: 0 auto;
+    padding-left: 10px;
+}
+
 nav .brand-logo {
-    left: 30%;
+    left: 0%;
 }
 
 @media only screen and (max-width: 992px) {
     nav .brand-logo {
-        left: 20%;
+        left: 0%;
     }
 }
 
 @media only screen and (max-width: 600px) {
     nav .brand-logo {
-        left: 50%;
+        left: 0%;
     }
 }
 
