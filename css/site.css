@@ -3,11 +3,6 @@ body {
     background-color: #e3e3e3;
 }
 
-/*nav {*/
-/*margin: 0;*/
-/*padding: .5em;*/
-/*}*/
-
 nav {
     width: 75%;
     margin: 0 auto;
@@ -15,23 +10,19 @@ nav {
 }
 
 nav .brand-logo {
-    left: 0%;
+    left: 0;
 }
 
 @media only screen and (max-width: 992px) {
-    nav .brand-logo {
-        left: 0%;
+    nav .brand-logo{
+        transform: translateX(0);
     }
 }
 
-@media only screen and (max-width: 600px) {
-    nav .brand-logo {
-        left: 0%;
-    }
-}
-
-ul.fz-nav-links li.active {
-
+.fz-content {
+    width: 75%;
+    padding: 0 .5em;
+    margin: 0 auto 1em auto;
 }
 
 footer {
@@ -95,19 +86,4 @@ footer {
 
 .fz-link-no-style {
     text-decoration: none;
-}
-
-.fz-header-title {
-}
-
-.fz-content {
-    width: 75%;
-    padding: 0 .5em;
-    margin: 5px auto;
-}
-
-@media (max-width: 768px) {
-    .fz-content {
-        width: 100%;
-    }
 }
