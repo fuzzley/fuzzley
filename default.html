@@ -109,11 +109,56 @@
 
     <!-- About -->
     <div id="fz-tab-about" class="fz-tab-content fz-flex-column" style="display: none;">
+
+        <ul class="collapsible hoverable" data-collapse="accordion">
+            <li>
+                <div class="collapsible-header grey lighten-5" style="margin-top: 20px;">
+                    <div style="text-align: center; padding: .5em;">
+                        <img src="./images/andrey.jpg" alt="Andrey Gavel" class="circle" style="max-width: 150px;"/>
+                    </div>
+                    <div>
+                        <span class="flow-text">As a software engineer, I am driven by exciting and innovative technology. My primary
+                        passion has always involved coding, and I have focused all of my efforts at becoming a great
+                        software developer.</span>
+                    </div>
+                    <div>
+                        (Click to expand)
+                    </div>
+                </div>
+                <div class="collapsible-body fz-collapsible-item fz-flex-row">
+                    <div class="flow-text" style="padding: .5em;">
+                        While earning my Computer Science degree at the University of South Carolina, I had an
+                        opportunity to learn the fundamentals of software development and to explore areas of
+                        ongoing research and innovation.<br/><br/>
+                        Throughout my studies at the university, I also held several jobs related to the computer
+                        science field. The first job started during the fall of Freshman year, at the university's
+                        Financial Aid Department. I became an IT assistant, maintaining department computers and
+                        the department website.<br/><br/>
+                        During my sophomore year I began working at SysEDA, writing Silverlight and WPF
+                        applications. After my summer internship at SysEDA, I got invited to a year-round internship
+                        program at Design Information Technology.<br/><br/>
+                        I worked part-time at Design IT for the next five years, designing Silverlight and WPF
+                        applications, as well as branching out into web development. At this time, I also had an
+                        opportunity to train new interns on web development concepts. I also became the lead on
+                        several web development projects at Design IT, architecting the system, and overseeing other
+                        interns working on the projects.<br/><br/>
+                        During my graduate studies, I also worked as a Graduate Assistant in the Computer Science
+                        department. My responsibilities involved leading a Java lab and a Linux lab. I also
+                        documented and set up a Xen Hypervisor on a university server.<br/><br/>
+                        After graduating from the University of South Carolina with a Master's degree, I worked for
+                        Swampfox Technologies. At Swampfox, I got a chance to work with many Java technologies,
+                        including Avaya's Experience Portal system and Tomcat servers. My other responsibilities
+                        involved web development using Spring MVC and Angular.
+                    </div>
+                </div>
+            </li>
+        </ul>
+
         <!-- Education -->
         <h2 class="header brown-text text-darken-3">Education</h2>
         <ul class="collapsible popout" data-collapse="accordion">
             <li>
-                <div class="collapsible-header fz-work-experience fz-flex-row">
+                <div class="collapsible-header fz-collapsible-item fz-flex-row">
                     <div class="fz-flex-column fz-flex-v-center">
                         <img src="./images/usc_logo_2.jpg"/>
                     </div>
@@ -131,7 +176,7 @@
         <h2 class="header brown-text text-darken-3">Work Experience</h2>
         <ul class="collapsible popout" data-collapse="accordion">
             <li>
-                <div class="collapsible-header fz-work-experience fz-flex-row">
+                <div class="collapsible-header fz-collapsible-item fz-flex-row">
                     <div class="fz-flex-column fz-flex-v-center">
                         <img src="./images/swampfox_logo.png"/>
                     </div>
@@ -141,7 +186,7 @@
                         <h5>IVR, Web Development</h5>
                     </div>
                 </div>
-                <div class="collapsible-body fz-work-experience fz-flex-row">
+                <div class="collapsible-body fz-collapsible-item fz-flex-row">
                     <div class="flow-text fz-flex-row fz-work-experience-description">
                         <div>&bull;&nbsp;</div>
                         <div>
@@ -151,7 +196,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="collapsible-body fz-work-experience fz-flex-row">
+                <div class="collapsible-body fz-collapsible-item fz-flex-row">
                     <div class="flow-text fz-flex-row fz-work-experience-description">
                         <div>&bull;&nbsp;</div>
                         <div>
@@ -161,7 +206,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="collapsible-body fz-work-experience fz-flex-row">
+                <div class="collapsible-body fz-collapsible-item fz-flex-row">
                     <div class="flow-text fz-flex-row fz-work-experience-description">
                         <div>&bull;&nbsp;</div>
                         <div>
@@ -174,7 +219,7 @@
                 </div>
             </li>
             <li>
-                <div class="collapsible-header fz-work-experience fz-flex-row">
+                <div class="collapsible-header fz-collapsible-item fz-flex-row">
                     <div class="fz-flex-column fz-flex-v-center">
                         <img src="./images/design_it_logo.png"/>
                     </div>
@@ -238,7 +283,7 @@
                 </div>
             </li>
             <li>
-                <div class="collapsible-header fz-work-experience fz-flex-row">
+                <div class="collapsible-header fz-collapsible-item fz-flex-row">
                     <div class="fz-flex-column fz-flex-v-center">
                         <img src="./images/SysEda.png"/>
                     </div>
@@ -259,7 +304,7 @@
                 </div>
             </li>
             <li>
-                <div class="collapsible-header fz-work-experience fz-flex-row">
+                <div class="collapsible-header fz-collapsible-item fz-flex-row">
                     <div class="fz-flex-column fz-flex-v-center">
                         <img src="./images/usc_logo_2.jpg"/>
                     </div>
@@ -278,6 +323,8 @@
                             with Java programming assignments, and grading homework and exams.
                         </div>
                     </div>
+                </div>
+                <div class="collapsible-body">
                     <div class="flow-text fz-flex-row fz-work-experience-description">
                         <div>&bull;&nbsp;</div>
                         <div>
@@ -286,6 +333,8 @@
                             enabled students to use Linux effectively as a software development environment.
                         </div>
                     </div>
+                </div>
+                <div class="collapsible-body">
                     <div class="flow-text fz-flex-row fz-work-experience-description">
                         <div>&bull;&nbsp;</div>
                         <div>
@@ -294,6 +343,8 @@
                             single machine.
                         </div>
                     </div>
+                </div>
+                <div class="collapsible-body">
                     <div class="flow-text fz-flex-row fz-work-experience-description">
                         <div>&bull;&nbsp;</div>
                         <div>
@@ -302,6 +353,8 @@
                             financial aid department to function smoothly, despite frequent technical issues.
                         </div>
                     </div>
+                </div>
+                <div class="collapsible-body">
                     <div class="flow-text fz-flex-row fz-work-experience-description">
                         <div>&bull;&nbsp;</div>
                         <div>
@@ -311,38 +364,39 @@
                         </div>
                     </div>
                 </div>
-            </li>
-        </ul>
     </div>
+    </li>
+    </ul>
+</div>
 
-    <!-- Contact -->
-    <div id="fz-tab-contact" class="fz-tab-content fz-flex-column" style="display: none;">
-        <h2 class="header brown-text text-darken-3">Get in Touch</h2>
-        <ul class="card collection">
-            <li class="collection-item flow-text"><i class="material-icons">email</i>&nbsp;&nbsp;&nbsp;andrey.gavel@gmail.com
-            </li>
-            <li class="collection-item flow-text"><i class="material-icons">phone</i>&nbsp;&nbsp;&nbsp;(864) 473-7097
-            </li>
-        </ul>
+<!-- Contact -->
+<div id="fz-tab-contact" class="fz-tab-content fz-flex-column" style="display: none;">
+    <h2 class="header brown-text text-darken-3">Get in Touch</h2>
+    <ul class="card collection">
+        <li class="collection-item flow-text"><i class="material-icons">email</i>&nbsp;&nbsp;&nbsp;andrey.gavel@gmail.com
+        </li>
+        <li class="collection-item flow-text"><i class="material-icons">phone</i>&nbsp;&nbsp;&nbsp;(864) 473-7097
+        </li>
+    </ul>
 
 
-        <h2 class="header brown-text text-darken-3">More Info</h2>
-        <div class="card collection">
-            <a class="collection-item flow-text" href="https://github.com/fuzzley" target="_blank">
-                <img class="fz-size-25-25" src="./images/github_logo.png"/>&nbsp;&nbsp;&nbsp;Github
-                <i class="material-icons">open_in_new</i>
-            </a>
-            <a class="collection-item flow-text" href="https://www.linkedin.com/in/andrey-gavel-3b25b757"
-               target="_blank">
-                <img class="fz-size-25-25" src="./images/linked_in_logo.png"/>&nbsp;&nbsp;&nbsp;LinkedIn
-                <i class="material-icons">open_in_new</i>
-            </a>
-            <a class="collection-item flow-text" href="https://plus.google.com/107345556669518203901" target="_blank">
-                <img class="fz-size-25-25" src="./images/google_plus_logo.png"/>&nbsp;&nbsp;&nbsp;Google Plus
-                <i class="material-icons">open_in_new</i>
-            </a>
-        </div>
+    <h2 class="header brown-text text-darken-3">More Info</h2>
+    <div class="card collection">
+        <a class="collection-item flow-text" href="https://github.com/fuzzley" target="_blank">
+            <img class="fz-size-25-25" src="./images/github_logo.png"/>&nbsp;&nbsp;&nbsp;Github
+            <i class="material-icons">open_in_new</i>
+        </a>
+        <a class="collection-item flow-text" href="https://www.linkedin.com/in/andrey-gavel-3b25b757"
+           target="_blank">
+            <img class="fz-size-25-25" src="./images/linked_in_logo.png"/>&nbsp;&nbsp;&nbsp;LinkedIn
+            <i class="material-icons">open_in_new</i>
+        </a>
+        <a class="collection-item flow-text" href="https://plus.google.com/107345556669518203901" target="_blank">
+            <img class="fz-size-25-25" src="./images/google_plus_logo.png"/>&nbsp;&nbsp;&nbsp;Google Plus
+            <i class="material-icons">open_in_new</i>
+        </a>
     </div>
+</div>
 </div>
 <footer>
     <span>&copy; 2016 Andrey Gavel, All Rights Reserved</span>

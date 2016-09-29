@@ -14,7 +14,7 @@ nav .brand-logo {
 }
 
 @media only screen and (max-width: 992px) {
-    nav .brand-logo{
+    nav .brand-logo {
         transform: translateX(0);
     }
 }
@@ -70,6 +70,11 @@ footer {
     margin: 20px;
 }
 
+.fz-collapsible-item:hover {
+    transition: box-shadow .25s;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .fz-project img {
     max-width: 500px;
     height: 350px;
@@ -82,7 +87,7 @@ footer {
     }
 }
 
-.fz-work-experience img {
+.fz-collapsible-item img {
     width: 250px;
     padding-right: 10px;
     margin: auto;
