@@ -4,7 +4,7 @@ body {
 }
 
 nav {
-    width: 75%;
+    width: 80%;
     margin: 0 auto;
     padding-left: 10px;
 }
@@ -20,9 +20,19 @@ nav .brand-logo {
 }
 
 .fz-content {
-    width: 75%;
+    width: 80%;
     padding: 0 .5em;
     margin: 0 auto 1em auto;
+}
+
+@media only screen and (max-width: 799px) {
+    nav {
+        width: 95%;
+    }
+
+    .fz-content {
+        width: 95%;
+    }
 }
 
 footer {
