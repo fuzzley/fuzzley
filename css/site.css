@@ -4,7 +4,6 @@ body {
 }
 
 nav {
-    width: 80%;
     margin: 0 auto;
     padding-left: 10px;
 }
@@ -20,12 +19,31 @@ nav .brand-logo {
 }
 
 .fz-content {
-    width: 80%;
     padding: 0 .5em;
     margin: 0 auto 1em auto;
 }
 
+@media only screen and (min-width: 800px) {
+    nav {
+        width: 80%;
+    }
+
+    .fz-content {
+        width: 80%;
+    }
+}
+
 @media only screen and (max-width: 799px) {
+    nav {
+        width: 95%;
+    }
+
+    .fz-content {
+        width: 95%;
+    }
+}
+
+@media only screen and (max-device-width: 569px) {
     nav {
         width: 95%;
     }
