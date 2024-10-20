@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fuzzley</title>
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="external/materialize/css/materialize.css">
+    <link rel="stylesheet" href="css/site.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+<div>
+    <!-- Dropdown Structure -->
+    <ul id="nav-dropdown" class="dropdown-content" style="min-width: 101px;">
+        <li><a data-fz-tab="#fz-tab-projects" href="javascript:void(0);">Projects</a></li>
+        <li><a data-fz-tab="#fz-tab-about" href="javascript:void(0);">About Me</a></li>
+        <li><a data-fz-tab="#fz-tab-contact" href="javascript:void(0);">Contact</a></li>
+    </ul>
+    <nav>
+        <div class="nav-wrapper">
+            <a data-fz-tab="#fz-tab-projects" href="javascript:void(0);" class="brand-logo">Andrey Gavel</a>
+            <ul class="right hide-on-small-and-down fz-nav-links">
+                <li><a data-fz-tab="#fz-tab-projects" href="javascript:void(0);">Projects</a></li>
+                <li><a data-fz-tab="#fz-tab-about" href="javascript:void(0);">About Me</a></li>
+                <li><a data-fz-tab="#fz-tab-contact" href="javascript:void(0);">Contact</a></li>
+            </ul>
+            <ul class="right hide-on-large-only hide-on-med-only">
+                <li><a class="dropdown-button" href="#!" data-activates="nav-dropdown"><i
+                        class="material-icons">menu</i></a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="fz-content card">
+    <!-- Projects -->
+    <div id="fz-tab-projects" class="fz-tab-content fz-flex-column">
+        <div class="fz-flex-row fz-flex-wrap fz-flex-center">
+            <!-- Spider Solitaire -->
+            <div class="fz-project card hoverable">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <a href="./spider" target="_blank">
+                        <img class="activator" src="./images/spider_solitaire_500_350.png"/>
+                    </a>
+                </div>
+                <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">
+                    <a href="./spider" target="_blank" class="grey-text text-darken-4">Spider Solitaire</a>
+                </span>
+                    <p><a href="https://github.com/fuzzley/fSpider" target="_blank">
+                        github.com/fuzzley/fSpider<i class="material-icons" style="font-size: inherit;">open_in_new</i>
+                    </a></p>
+                </div>
+            </div>
+
+            <!-- Minesweeper -->
+            <div class="fz-project card hoverable">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <a href="./minesweeper" target="_blank">
+                        <img class="activator" src="./images/minesweeper_500_350.png"/>
+                    </a>
+                </div>
+                <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">
+                    <a href="./minesweeper" target="_blank" class="grey-text text-darken-4">Minesweeper</a>
+                </span>
+                    <p><a href="https://github.com/fuzzley/fMinesweeper" target="_blank">
+                        github.com/fuzzley/fMinesweeper<i class="material-icons"
+                                                          style="font-size: inherit;">open_in_new</i>
+                    </a></p>
+                </div>
+            </div>
+
+            <!-- PATH -->
+            <div class="fz-project card hoverable">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <a href="./path" target="_blank">
+                        <img class="activator" src="./images/path_500_350.png"/>
+                    </a>
+                </div>
+                <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">
+                    <a href="./path" target="_blank" class="grey-text text-darken-4">PATH</a>
+                </span>
+                    <p><a href="https://github.com/fuzzley/PATH" target="_blank">
+                        github.com/fuzzley/PATH<i class="material-icons" style="font-size: inherit;">open_in_new</i>
+                    </a></p>
+                </div>
+            </div>
+
+            <!-- Pong -->
+            <div class="fz-project card hoverable">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <a href="./pong" target="_blank">
+                        <img class="activator" src="./images/pong_500_350.png"/>
+                    </a>
+                </div>
+                <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">
+                    <a href="./pong" target="_blank" class="grey-text text-darken-4">Pong</a>
+                </span>
+                    <p><a href="https://github.com/fuzzley/fPong" target="_blank">
+                        github.com/fuzzley/fPong<i class="material-icons" style="font-size: inherit;">open_in_new</i>
+                    </a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <div id="fz-tab-about" class="fz-tab-content fz-flex-column" style="display: none;">
+
+        <ul class="collapsible hoverable" data-collapse="accordion">
+            <li>
+                <div class="collapsible-header grey lighten-5" style="margin-top: 20px;">
+                    <div style="text-align: center; padding: .5em;">
+                        <img src="./images/andrey.jpg" alt="Andrey Gavel" class="circle" style="max-width: 150px;"/>
+                    </div>
+                    <div>
+                        <span class="flow-text">As a software engineer, I am driven by exciting and innovative technology. My primary
+                        passion has always involved coding, and I have focused all of my efforts at becoming a great
+                        software developer.</span>
+                    </div>
+                    <div>
+                        (Click to expand)
+                    </div>
+                </div>
+                <div class="collapsible-body fz-collapsible-item fz-flex-row">
+                    <div class="flow-text" style="padding: .5em;">
+                        While earning my Computer Science degree at the University of South Carolina, I had an
+                        opportunity to learn the fundamentals of software development and to explore areas of
+                        ongoing research and innovation.<br/><br/>
+                        Throughout my studies at the university, I also held several jobs related to the computer
+                        science field. The first job started during my first semester, at the university's
+                        Financial Aid Department. I became an IT assistant, maintaining department computers and
+                        the department website.<br/><br/>
+                        During my sophomore year I began working at SysEDA, writing Silverlight and WPF
+                        applications. After my summer internship at SysEDA, I got invited to a year-round internship
+                        program at Design Information Technology.<br/><br/>
+                        I worked part-time at Design IT for the next five years, designing Silverlight and WPF
+                        applications, as well as branching out into web development. At this time, I also had an
+                        opportunity to train new interns on web development concepts. I also became the lead on
+                        several web development projects at Design IT, architecting the system, and overseeing other
+                        interns working on the projects.<br/><br/>
+                        During my graduate studies, I also worked as a Graduate Assistant in the Computer Science
+                        department. My responsibilities involved leading a Java lab and a Linux lab. Addtitionally, I
+                        set up a Xen Hypervisor on a university server and documented the process.<br/><br/>
+                        After graduating from the University of South Carolina with a Master's degree, I worked for
+                        Swampfox Technologies. At Swampfox, I got a chance to work with many Java technologies,
+                        including Avaya's Experience Portal system and Tomcat servers. My other responsibilities
+                        involved web development using Spring MVC and Angular.<br/><br/>
+                        After working at Swampfox for a year, I began working for Google, where I worked on internal
+                        tools and infrastructure.
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <!-- Education -->
+        <h2 class="header brown-text text-darken-3">Education</h2>
+        <ul class="collapsible popout" data-collapse="accordion">
+            <li>
+                <div class="collapsible-header fz-collapsible-item fz-flex-row">
+                    <div class="fz-flex-column fz-flex-v-center">
+                        <img src="./images/usc_logo_2.jpg"/>
+                    </div>
+                    <div>
+                        <h3>University of South Carolina</h3>
+                        <h5>Bachelors, Computer Science, 3.836 GPA</h5>
+                        <h5>Masters of Engineering, Computer Science, 3.885 GPA</h5>
+                        <h5>Capstone Scholar, Upsilon Pi Epsilon Officer</h5>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <!-- Work Experience -->
+        <h2 class="header brown-text text-darken-3">Work Experience</h2>
+        <ul class="collapsible popout" data-collapse="accordion">
+            <li>
+                <div class="collapsible-header fz-collapsible-item fz-flex-row">
+                    <div class="fz-flex-column fz-flex-v-center">
+                        <img src="images/google_logo.png"/>
+                    </div>
+                    <div>
+                        <h3>Google</h3>
+                        <h5>January 2017 to Present</h5>
+                        <h5>Internal Tools & Infrastructure</h5>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header fz-collapsible-item fz-flex-row">
+                    <div class="fz-flex-column fz-flex-v-center">
+                        <img src="./images/swampfox_logo.png"/>
+                    </div>
+                    <div>
+                        <h3>Swampfox Technologies</h3>
+                        <h5>January 2016 to January 2017</h5>
+                        <h5>IVR, Web Development</h5>
+                    </div>
+                </div>
+                <div class="collapsible-body fz-collapsible-item fz-flex-row">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Responsible for developing and maintaining administrative web portals for configuring IVRs
+                            and related software. This involved working with Java Faces to maintain older web portals
+                            and using Spring and Angular to build new web portals.
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsible-body fz-collapsible-item fz-flex-row">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Independently developed and maintained Interactive Voice Response (IVR) systems for major
+                            insurance, banking, and utility companies, enabling them to reduce their customer support
+                            costs and to provide more focused customer support.
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsible-body fz-collapsible-item fz-flex-row">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Provided customer support to partnered companies regarding IVR system maintenance and
+                            upgrades.
+                            Tasks included instructing other companies’ IT departments on properly setting up their
+                            development environments and also helping them troubleshoot problems with their IVR systems.
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header fz-collapsible-item fz-flex-row">
+                    <div class="fz-flex-column fz-flex-v-center">
+                        <img src="./images/design_it_logo.png"/>
+                    </div>
+                    <div>
+                        <h3>Design Information Technology</h3>
+                        <h5>August 2011 to January 2016</h5>
+                        <h5>Silverlight, WPF, Web Development</h5>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Responsible for the training of 12 junior developers in HTML5/JavaScript and the ASP.NET web
+                            development stack, enabling the company to transition from a focus on C#/Silverlight to a
+                            focus on the more modern HTML5/JavaScript approach to web development.
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Lead a team of 12 junior developers to successfully port a C#/Silverlight application, used
+                            for electrical systems modeling and simulation, to HTML5/JavaScript, providing the
+                            application with a fresh start and improving its usability and accessibility features.
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Collaborated with a web designer to develop and execute a plan for rewriting a
+                            C#/Silverlight asset management application in HTML5/JavaScript. As a result, the
+                            application’s lifetime was extended, and the application became accessible through smart
+                            phones and tablets.
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Oversaw a team of four developers in rewriting a data visualization tool, used by the
+                            freight industry, from a C++ desktop environment to a HTML5/JavaScript web environment.
+                            Along with improving the application’s accessibility, the rewrite enabled users to stream
+                            and visualize data over the internet, removing the need for users to store large amounts of
+                            data locally.
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Worked with two other developers to maintain a Silverlight/C# asset management application,
+                            fixing bugs, improving performance, and adding new user-requested features.
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header fz-collapsible-item fz-flex-row">
+                    <div class="fz-flex-column fz-flex-v-center">
+                        <img src="./images/SysEda.png"/>
+                    </div>
+                    <div>
+                        <h3>SysEDA</h3>
+                        <h5>May 2011 to August 2011</h5>
+                        <h5>Silverlight, WPF, Web Development</h5>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Maintained a mature C#/Silverlight application with five senior developers, learning and
+                            practicing common software development processes and patterns.
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header fz-collapsible-item fz-flex-row">
+                    <div class="fz-flex-column fz-flex-v-center">
+                        <img src="./images/usc_logo_2.jpg"/>
+                    </div>
+                    <div>
+                        <h3>University of South Carolina</h3>
+                        <h5>November 2009 to June 2014</h5>
+                        <h5>Teach Java Lab, Teach Linux Lab, Computer Maintenance</h5>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Responsible for teaching an Algorithmic Design (Java) lab with another graduate assistant
+                            for two semesters, instructing students on fundamental topics in Java, assisting students
+                            with Java programming assignments, and grading homework and exams.
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Taught a full Unix/Linux Fundamentals course, providing students with the necessary skills
+                            and knowledge to fully understand and utilize the Linux operating system. The lessons
+                            enabled students to use Linux effectively as a software development environment.
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Successfully documented and executed the setup of a Xen hypervisor on a Debian system,
+                            enabling the university to host and run multiple instances of an operating system on a
+                            single machine.
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Responsible for troubleshooting and resolving technical issues for 30+ employees of the
+                            financial aid department. Quick and effective solutions to technical problems allowed the
+                            financial aid department to function smoothly, despite frequent technical issues.
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="flow-text fz-flex-row fz-work-experience-description">
+                        <div>&bull;&nbsp;</div>
+                        <div>
+                            Performed necessary maintenance on the department website, utilizing knowledge of HTML5,
+                            JavaScript, and PHP to fix layout and back-end issues as well as to add new content and
+                            features for students seeking financial aid assistance.
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Contact -->
+    <div id="fz-tab-contact" class="fz-tab-content fz-flex-column" style="display: none;">
+        <h2 class="header brown-text text-darken-3">Get in Touch</h2>
+        <ul class="card collection">
+            <li class="collection-item flow-text"><i class="material-icons">email</i>&nbsp;&nbsp;&nbsp;andrey.gavel@gmail.com
+            </li>
+            <li class="collection-item flow-text"><i class="material-icons">phone</i>&nbsp;&nbsp;&nbsp;(864) 473-7097
+            </li>
+        </ul>
+
+        <h2 class="header brown-text text-darken-3">More Info</h2>
+        <div class="card collection">
+            <a class="collection-item flow-text" href="https://github.com/fuzzley" target="_blank">
+                <img class="fz-size-25-25" src="./images/github_logo.png"/>&nbsp;&nbsp;&nbsp;Github
+                <i class="material-icons">open_in_new</i>
+            </a>
+            <a class="collection-item flow-text" href="https://www.linkedin.com/in/andrey-gavel-3b25b757"
+               target="_blank">
+                <img class="fz-size-25-25" src="./images/linked_in_logo.png"/>&nbsp;&nbsp;&nbsp;LinkedIn
+                <i class="material-icons">open_in_new</i>
+            </a>
+            <a class="collection-item flow-text" href="https://plus.google.com/107345556669518203901" target="_blank">
+                <img class="fz-size-25-25" src="./images/google_plus_logo.png"/>&nbsp;&nbsp;&nbsp;Google Plus
+                <i class="material-icons">open_in_new</i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <span>&copy; 2016 Andrey Gavel, All Rights Reserved</span>
+</footer>
+
+<script type="text/javascript" src="./external/jQuery/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="./external/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="./external/hasher/signals.min.js"></script>
+<script type="text/javascript" src="./external/hasher/hasher.min.js"></script>
+<script type="text/javascript">
+    var Page = (function () {
+        'use strict';
+
+        var Page = {};
+
+        Page.tabs = {
+            projects: {
+                hash: 'projects',
+                element: '#fz-tab-projects'
+            },
+            about: {
+                hash: 'about',
+                element: '#fz-tab-about'
+            },
+            contact: {
+                hash: 'contact',
+                element: '#fz-tab-contact'
+            }
+        };
+        Page.defaultTab = Page.tabs.projects;
+
+        Page.initialize = function () {
+            Page.initializeTabs();
+            Page.initializeHasher();
+        };
+
+        Page.initializeTabs = function () {
+            $('[data-fz-tab]').on('click', function () {
+                var $el = $(this);
+                var target = $el.data('fz-tab');
+                if (!target) {
+                    return;
+                } //else
+
+                Page.selectTab(target);
+            });
+        };
+
+        Page.initializeHasher = function () {
+            hasher.changed.add(Page.hashChanged);
+            hasher.initialized.add(Page.hashInitialized);
+            hasher.init();
+        };
+
+        Page.hashInitialized = function (curHash) {
+            if (!curHash && Page.defaultTab) {
+                hasher.setHash(Page.defaultTab.hash);
+            }
+
+            var tab = Page.findTabForHash(hasher.getHash());
+            if (tab) {
+                Page.selectTab(tab.element);
+            }
+        };
+
+        Page.hashChanged = function (newHash, oldHash) {
+            var tab = Page.findTabForHash(newHash);
+            if (!tab) {
+                return;
+            } //else
+
+            Page.selectTab(tab.element);
+        };
+
+        Page.selectTab = function (target) {
+            $('.fz-tab-content').hide();
+            $(target).show();
+
+            $('ul.fz-nav-links li').removeClass('active');
+            $('ul.fz-nav-links li a[data-fz-tab="' + target + '"]').parent().addClass('active');
+
+            var tab = Page.findTabForElement(target);
+            if (tab) {
+                Page.setHashSilently(tab.hash);
+            }
+        };
+
+        Page.setHashSilently = function (hash) {
+            hasher.changed.active = false;
+            hasher.setHash(hash);
+            hasher.changed.active = true;
+        };
+
+        Page.findTabForHash = function (hash) {
+            if (!hash) {
+                return null;
+            } //else
+
+            for (var tab in Page.tabs) {
+                if (Page.tabs.hasOwnProperty(tab) && Page.tabs[tab].hash === hash) {
+                    return Page.tabs[tab];
+                }
+            } //else
+
+            return null;
+        };
+
+        Page.findTabForElement = function (element) {
+            if (!element) {
+                return null;
+            } //else
+
+            for (var tab in Page.tabs) {
+                if (Page.tabs.hasOwnProperty(tab) && Page.tabs[tab].element === element) {
+                    return Page.tabs[tab];
+                }
+            } //else
+
+            return null;
+        };
+
+        return Page;
+    })();
+
+    $(document).ready(function () {
+        Page.initialize();
+    });
+</script>
+</body>
+</html>
