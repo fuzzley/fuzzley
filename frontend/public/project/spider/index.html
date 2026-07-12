@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Fuzzley - Spider Solitaire</title>
+    <link href="content/font_awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="content/site.css" rel="stylesheet"/>
+    <link href="content/spider.css" rel="stylesheet"/>
+  <script type="module" crossorigin src="./assets/index-BNmHfuUk.js"></script>
+</head>
+<body>
+<div id="canvas-wrap">
+</div>
+<div id="ui-container">
+    <div id="score-display" class="lite-green" style="display: none;" data-bind="text: board.score"></div>
+    <div id="moves-display" class="lite-red" style="display: none;" data-bind="text: board.moves"></div>
+    <div id="time-display" class="lite-yellow" style="display: none;" data-bind="timeShortText: board.timeElapsed"></div>
+    <div id="options-wrap" style="display: none;">
+        <div>
+            <label for="animate-checkbox" style="float: left;">Animate</label>
+            <input id="animate-checkbox" name="animate-checkbox" style="float: right;" type="checkbox" data-bind="checked: gameSettings.animate" />
+        </div>
+        <div class="clear"></div>
+        <div>
+            <label for="sound-checkbox" style="float: left;">Sound</label>
+            <input id="sound-checkbox" name="sound-checkbox" style="float: right;" type="checkbox" data-bind="checked: gameSettings.volume" />
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="game-ctrls-wrap" style="display: none;">
+        <button id="new-game-btn">New Game</button>
+        <label for="difficulty-select"></label>
+        <select id="difficulty-select" name="difficulty-select"
+                data-bind="options: gameSettings.difficultyOptions, optionsText: 'text', optionsValue: 'value', value: gameSettings.difficulty">
+        </select>
+        <button id="restart-btn" data-bind="enable: board.gameInProgress">Restart</button>
+        <button id="undo-btn" data-bind="enable: gameHistory.canUndo">Undo (Ctrl+Z)</button>
+        <button id="redo-btn" data-bind="enable: gameHistory.canRedo">Redo (Ctrl+Y)</button>
+    </div>
+    <div id="global-settings-open-wrap">
+        <button id="global-settings-open-btn"><i class="icon-cogs"></i></button>
+    </div>
+    <div id="dim-overlay" style="display: none;"></div>
+    <div id="global-options-dlg" style="display: none;">
+        <div id="global-options-header">
+            <div style="float: left;">Options</div>
+            <i id="global-options-close-btn" class="icon-remove" style="float: right;"></i>
+        </div>
+        <div class="clear"></div>
+        <fieldset class="global-options-section">
+            <legend>Game</legend>
+            <div style="text-align: center;">
+                <button id="glbl-game-new-game-btn">New Game</button>
+            </div>
+            <div class="clear"></div>
+            <div style="text-align: center;">
+                <button id="glbl-game-restart-btn" data-bind="enable: board.gameInProgress">Restart Game</button>
+            </div>
+            <div class="clear"></div>
+        </fieldset>
+        <fieldset class="global-options-section">
+            <legend>Settings</legend>
+            <div>
+                <label for="glbl-game-difficulty-select" style="float: left;">Difficulty</label>
+                <select id="glbl-game-difficulty-select" name="glbl-game-difficulty-select" style="float: right;"
+                        data-bind="options: gameSettings.difficultyOptions, optionsText: 'text',
+                        optionsValue: 'value', value: gameSettings.difficulty">
+                </select>
+            </div>
+            <div class="clear"></div>
+            <div>
+                <label for="glbl-stng-animate-chk" style="float: left;">Animate</label>
+                <input id="glbl-stng-animate-chk" name="glbl-stng-animate-chk" style="float: right;" type="checkbox"
+                       data-bind="checked: gameSettings.animate" />
+            </div>
+            <div class="clear"></div>
+            <div>
+                <label for="glbl-stng-sound-chk" style="float: left;">Sound</label>
+                <input id="glbl-stng-sound-chk" name="glbl-stng-sound-chk" style="float: right;" type="checkbox"
+                       data-bind="checked: gameSettings.volume" />
+            </div>
+            <div class="clear"></div>
+        </fieldset>
+        <fieldset class="global-options-section">
+            <legend>Windows</legend>
+            <div>
+                <label for="glbl-wnd-score-chk" style="float: left;">Score</label>
+                <input id="glbl-wnd-score-chk" name="glbl-wnd-score-chk" style="float: right;" type="checkbox" data-bind="checked: uiSettings.windows.score.vm.isOpen"/>
+            </div>
+            <div class="clear"></div>
+            <div>
+                <label for="glbl-wnd-moves-chk" style="float: left;">Moves</label>
+                <input id="glbl-wnd-moves-chk" name="glbl-wnd-moves-chk" style="float: right;" type="checkbox"  data-bind="checked: uiSettings.windows.moves.vm.isOpen"/>
+            </div>
+            <div class="clear"></div>
+            <div>
+                <label for="glbl-wnd-time-chk" style="float: left;">Time</label>
+                <input id="glbl-wnd-time-chk" name="glbl-wnd-time-chk" style="float: right;" type="checkbox"  data-bind="checked: uiSettings.windows.time.vm.isOpen"/>
+            </div>
+            <div class="clear"></div>
+            <div>
+                <label for="glbl-wnd-options-chk" style="float: left;">Options</label>
+                <input id="glbl-wnd-options-chk" name="glbl-wnd-options-chk" style="float: right;" type="checkbox"
+                       data-bind="checked: uiSettings.windows.options.vm.isOpen"/>
+            </div>
+            <div class="clear"></div>
+            <div>
+                <label for="glbl-wnd-game-chk" style="float: left;">Game</label>
+                <input id="glbl-wnd-game-chk" name="glbl-wnd-game-chk" style="float: right;" type="checkbox"  data-bind="checked: uiSettings.windows.game.vm.isOpen"/>
+            </div>
+            <div class="clear"></div>
+        </fieldset>
+    </div>
+</div>
+<div id="canvas-resources">
+    <!-- cards -->
+    <img id="playing-card-assets-large" src="content/art_assets/cards/playing_card_assets_large.png"/>
+
+    <!-- miscellaneous -->
+    <img id="tableau-ph" src="content/art_assets/cards/tableau_ph.png"/>
+</div>
+
+<script src="vendor/jquery/jquery-2.0.3.min.js"></script>
+<script src="vendor/knockout/knockout-3.0.0.js"></script>
+<script src="vendor/kinetic/kinetic-v4.7.4.min.js"></script>
+<script src="vendor/howler/howler.js"></script>
+
+</body>
+</html>
