@@ -1,0 +1,66 @@
+name: Build and Sync to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force deployment even if there are no changes"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  build-and-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout fuzzley
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "yarn"
+          cache-dependency-path: frontend/yarn.lock
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: yarn install --frozen-lockfile
+
+      - name: Build production assets
+        working-directory: frontend
+        run: yarn build
+
+      - name: Configure git credentials
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Sync built assets to fuzzley.github.io
+        env:
+          PAT_TOKEN: ${{ secrets.MAIN_GITHUB_IO_REPO_DEPLOY_PAT }}
+          FORCE_DEPLOY: ${{ github.event.inputs.force }}
+        run: |
+          # 1. Clone the GitHub Pages repository (fuzzley/fuzzley.github.io)
+          git clone --depth 1 https://x-access-token:${{ env.PAT_TOKEN }}@github.com/fuzzley/fuzzley.github.io.git main-website
+
+          # 2. Clean out old files in the main-website directory (except .git)
+          find main-website -maxdepth 1 -mindepth 1 -not -name ".git" -exec rm -rf {} +
+
+          # 3. Copy new build files from frontend/dist
+          cp -r frontend/dist/. main-website/
+
+          # 4. Commit and push the updates if there are changes
+          cd main-website
+          git add -A
+
+          if git diff-index --quiet HEAD && [ "$FORCE_DEPLOY" != "true" ]; then
+            echo "No changes in fuzzley production build. Skipping commit."
+          else
+            git commit --allow-empty -m "chore(deploy): sync fuzzley production build from fuzzley/fuzzley@${{ github.sha }}"
+            git push origin HEAD
+          fi
