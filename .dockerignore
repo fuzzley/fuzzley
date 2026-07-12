@@ -1,0 +1,9 @@
+.git
+.github
+node_modules
+frontend/node_modules
+frontend/dist
+*.md
+.gitignore
+.prettier*
+eslint.config.cjs
