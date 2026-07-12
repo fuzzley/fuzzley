@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PATH - Personal App for Technology Help</title>
+    <link href="content/bootstrap.css" rel="stylesheet" />
+    <link href="content/bootstrap.readable.css" rel="stylesheet" />
+    <link href="content/bootstrap-custom.css" rel="stylesheet" />
+    <link href="content/font-awesome.css" rel="stylesheet" />
+    <link href="content/site.css" rel="stylesheet" />
+  <script type="module" crossorigin src="./assets/index-B_RehIoD.js"></script>
+</head>
+<body>
+<div class="container body-content">
+
+    <div id="menu-splash" style="margin-top: 15px; display: none;">
+        <div class="form-group well well-sm" style="text-align: center; min-height: 300px; padding: 30px;">
+            <h1 style="font-size: 5em;">PATH</h1>
+            <h3 style="margin: 0 0 1em 0;">Personal App for Technology Help</h3>
+            <button class="btn btn-primary" style="font-size: 3em; padding: 0 1em;" data-targetroute="#Home">Enter</button>
+        </div>
+    </div>
+
+    <div id="menu-main" style="display: none;">
+        <div>
+            <h1>Find appliance</h1>
+        </div>
+        <div class="form-group well well-sm">
+            <h3 class="section-header">Search by</h3>
+            <hr />
+
+            <div class="row margin-sm" style="text-align: center;">
+                <div class="row margin-sm">
+                    <button class="btn btn-primary nav-btn" data-targetroute="#Search/Barcode">
+                        <span style="float: left;"><i class="fa fa-barcode"></i>&nbsp;&nbsp;Barcode</span>
+                        <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                    </button>
+                </div>
+                <div class="row margin-sm">
+                    <button class="btn btn-primary nav-btn" data-targetroute="#Search/ModelNumber">
+                        <span style="float: left;"><i class="fa fa-keyboard-o"></i>&nbsp;&nbsp;Model #</span>
+                        <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                    </button>
+                </div>
+                <div class="row margin-sm">
+                    <button class="btn btn-primary nav-btn" data-targetroute="#Browse">
+                        <span style="float: left;"><i class="fa fa-th"></i>&nbsp;&nbsp;Browse</span>
+                        <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-find-by-barcode" style="display: none;">
+        <div>
+            <h1>Barcode</h1>
+        </div>
+        <div class="form-group well well-sm">
+            <div class="row margin-sm">
+                <div class="row margin-sm">
+                    <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                        <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                        <span style="float: right;">Home</span>
+                    </button>
+                </div>
+                <div class="row margin-sm">
+                    <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                        <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                        <span style="float: right;">Back</span>
+                    </button>
+                </div>
+            </div>
+            <div class="row margin-sm" style="text-align: center;">
+                <div style="border: 2px gray dashed;" data-bind="click: takeBarcodePicture">
+                    <div>
+                        <img src="images/camera-256.png" />
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" style="font-size: 1.8em; margin: 2px;">Take Picture</button>
+                    </div>
+                </div>
+            </div>
+            <input id="barcode-capture-input" accept="image/*" style="display: none;" type="file" capture="camera" />
+        </div>
+    </div>
+
+    <div id="menu-find-by-model-number" style="display: none;">
+        <div>
+            <h1>Model #</h1>
+        </div>
+        <div class="form-group well well-sm">
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                    <span style="float: right;">Home</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                    <span style="float: right;">Back</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <div style="border: 2px gray dashed; padding: 7px;">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label for="find-by-model-num-txt" style="font-size: 1.8em;">Model Number: </label>
+                        </div>
+                        <div class="col-sm-7">
+                            <input id="find-by-model-num-txt" type="text" class="form-control" data-bind="textInput: modelNumber" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-success nav-btn" data-bind="click: function () { searchModelNumber($root.modelNumber()); }">
+                    <span style="float: left;"><i class="fa fa-search fa-lg"></i>&nbsp;&nbsp;Go</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Browse Section begin -->
+
+    <div id="menu-browse" style="display: none;">
+        <div>
+            <h1>Browse</h1>
+        </div>
+        <div class="form-group well well-sm container-fluid">
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                    <span style="float: right;">Home</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                    <span style="float: right;">Back</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Browse/Mobile">
+                    <span style="float: left;"><i class="fa fa-mobile"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Browse/Entertainment">
+                    <span style="float: left;"><i class="fa fa-gamepad"></i>&nbsp;&nbsp;Entertainment</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Browse/Houseware">
+                    <span style="float: left;"><i class="fa fa-plug"></i>&nbsp;&nbsp;Home Appliances</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Browse/Computers">
+                    <span style="float: left;"><i class="fa fa-desktop"></i>&nbsp;&nbsp;Computer</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-browse-mobile" style="display: none;">
+        <div>
+            <h1>Mobile</h1>
+        </div>
+        <div class="form-group well well-sm container-fluid">
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                    <span style="float: right;">Home</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Browse">
+                    <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                    <span style="float: right;">Back</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=cellphone">
+                    <span style="float: left;">Cell Phone</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=tablet">
+                    <span style="float: left;">Tablet</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=watch">
+                    <span style="float: left;">Watch</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-browse-entertainment" style="display: none;">
+        <div>
+            <h1>Entertainment</h1>
+        </div>
+        <div class="form-group well well-sm container-fluid">
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                    <span style="float: right;">Home</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Browse">
+                    <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                    <span style="float: right;">Back</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=television">
+                    <span style="float: left;">Television</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=speakers">
+                    <span style="float: left;">Speakers</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=gaming">
+                    <span style="float: left;">Gaming</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-browse-houseware" style="display: none;">
+        <div>
+            <h1>Home Appliances</h1>
+        </div>
+        <div class="form-group well well-sm container-fluid">
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                    <span style="float: right;">Home</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Browse">
+                    <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                    <span style="float: right;">Back</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=washer-dryer">
+                    <span style="float: left;">Washer/Dryer</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=refrigerator">
+                    <span style="float: left;">Refrigerator</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=microwave">
+                    <span style="float: left;">Microwave</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=television">
+                    <span style="float: left;">Television</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-browse-computers" style="display: none;">
+        <div>
+            <h1>Computer</h1>
+        </div>
+        <div class="form-group well well-sm container-fluid">
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                    <span style="float: right;">Home</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Browse">
+                    <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                    <span style="float: right;">Back</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Browse/Accessories">
+                    <span style="float: left;">Accessories</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=desktop">
+                    <span style="float: left;">Desktop</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=laptop">
+                    <span style="float: left;">Laptop</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=tablet">
+                    <span style="float: left;">Tablet</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-browse-accessories" style="display: none;">
+        <div>
+            <h1>Accessories</h1>
+        </div>
+        <div class="form-group well well-sm container-fluid">
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                    <span style="float: right;">Home</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Browse/Computers">
+                    <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                    <span style="float: right;">Back</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=computer-speakers">
+                    <span style="float: left;">Computer Speakers</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=monitor">
+                    <span style="float: left;">Monitors</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=mouse">
+                    <span style="float: left;">Mice</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-targetroute="#Search/Results?categoryId=keyboard">
+                    <span style="float: left;">Keyboards</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Browse Section end -->
+
+    <div id="menu-search-results" style="display: none;">
+        <div>
+            <h1>Search Results</h1>
+        </div>
+        <div class="form-group container-fluid well well-sm">
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                    <span style="float: right;">Home</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-bind="attr: { 'data-targetroute': lastSearchFrom() || '#Home' }">
+                    <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                    <span style="float: right;">Back</span>
+                </button>
+            </div>
+
+            <div class="row margin-sm" style="text-align: center;">
+                <div style="margin-top: 10px;">
+                    <legend>Results</legend>
+                    <!-- ko foreach: products -->
+                    <div class="row margin-sm">
+                        <button class="btn btn-primary nav-btn" data-bind="click: $root.navigateToProduct">
+                            <div style="float: left;">
+                                <img class="result-icon" data-bind="attr: { src: attributes.iconUrl }" />
+                                &nbsp;&nbsp;<span data-bind="text: attributes.name"></span>
+                            </div>
+                            <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                        </button>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: products().length <= 0 -->
+                        <h2>No products found.</h2>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appliance Section begin -->
+
+    <div id="menu-appliance-main" style="display: none;">
+        <div>
+            <h1 data-bind="text: currProduct().attributes.name"></h1>
+        </div>
+        <div class="form-group well well-sm">
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                    <span style="float: right;">Home</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-bind="attr: { 'data-targetroute': lastSearchUrl() || '#Search/Results' }" data-targetroute="#Search/Results">
+                    <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                    <span style="float: right;">Back</span>
+                </button>
+            </div>
+
+            <h3 class="section-header">Model Number</h3>
+            <hr />
+            <div class="row margin-sm">
+                <h5 data-bind="text: currProduct().attributes.modelNumber"></h5>
+            </div>
+
+            <h3 class="section-header">Manuals</h3>
+            <hr />
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-bind="attr: { 'data-targetroute': '#Appliance/SimpleManual?id=' + currProduct().attributes.id }" data-targetroute="#Appliance/SimpleManual">
+                    <span style="float: left;"><i class="fa fa-list-ol"></i>&nbsp;&nbsp;Simplified</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-bind="attr: { 'data-targetroute': '#Appliance/OriginalManual?id=' + currProduct().attributes.id }" data-targetroute="#Appliance/OriginalManual">
+                    <span style="float: left;"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;Original</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+
+            <h3 class="section-header">Other</h3>
+            <hr />
+            <div class="row margin-sm">
+                <button class="btn btn-primary nav-btn" data-bind="attr: { 'data-targetroute': '#Appliance/Videos?id=' + currProduct().attributes.id }" data-targetroute="#Appliance/Videos">
+                    <span style="float: left;"><i class="fa fa-youtube-play"></i>&nbsp;&nbsp;Videos</span>
+                    <span style="float: right;"><i class="fa fa-angle-right fa-lg"></i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-appliance-simple-manual" style="display: none;">
+        <div>
+            <h1 data-bind="text: currProduct().attributes.name"></h1>
+        </div>
+        <div class="form-group well well-sm">
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                    <span style="float: right;">Home</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-bind="attr: { 'data-targetroute': '#Appliance/Home?id=' + currProduct().attributes.id }">
+                    <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                    <span style="float: right;">Back</span>
+                </button>
+            </div>
+            <div class="row margin-sm" style="text-align: center;">
+                <div style="margin-top: 10px;">
+                    <legend>Simplified Manual</legend>
+                    <div style="padding: 5px; overflow: auto;" class="simple-instr-container light-border">
+                        <div id="simple-manual-instr-step-1" class="container-fluid" data-bind="visible: activeInstruction() == 1">
+                            <h4>Step 1</h4>
+                            <div class="row light-border">
+                                <div class="col-sm-12"><h5>Connect Your TV</h5></div>
+                            </div>
+                            <div class="row light-border">
+                                Plug one end of the HDMI cable into the "HDMI Out" port on the back of your cable or satellite box and plug the other end of the cable into one of the "HDMI/DVI In" ports on the back of your LG TV.
+                            </div>
+                            <div class="row light-border">
+                                <div class="col-sm-6" style="font-weight: bold;">
+                                    HDMI Cable
+                                </div>
+                                <div class="col-sm-6 light-border-l">
+                                    <img src="sample/simple_manual_step_1_01.jpg" class="instr-image" alt="HDMI Cable" />
+                                </div>
+                            </div>
+                            <div class="row light-border">
+                                <div class="col-sm-6" style="font-weight: bold;">
+                                    HDMI Port
+                                </div>
+                                <div class="col-sm-6 light-border-l">
+                                    <img src="sample/simple_manual_step_1_02.jpg" class="instr-image" alt="HDMI Port" />
+                                </div>
+                            </div>
+                            <div class="row light-border">
+                                <div class="col-sm-6" style="font-weight: bold;">
+                                    Side Connection Panel
+                                </div>
+                                <div class="col-sm-6 light-border-l">
+                                    <img src="sample/simple_manual_step_1_03.jpg" class="instr-image" alt="Slide Panel" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="simple-manual-instr-step-2" class="container-fluid" data-bind="visible: activeInstruction() == 2">
+                            <h4>Step 2</h4>
+                            <div class="row light-border">
+                                <div class="col-sm-12"><h5>Turn On Your TV</h5></div>
+                            </div>
+                            <div class="row light-border">
+                                Turn on the TV either using the Power button on your LG TV or the Power button on your remote.
+                            </div>
+                            <div class="row light-border">
+                                <div class="col-sm-6" style="font-weight: bold;">
+                                    TV Power Button
+                                </div>
+                                <div class="col-sm-6 light-border-l">
+                                    <img src="sample/simple_manual_step_2_01.jpg" class="instr-image" alt="TV Power Button" />
+                                </div>
+                            </div>
+                            <div class="row light-border">
+                                <div class="col-sm-6" style="font-weight: bold;">
+                                    Remote Power Button
+                                </div>
+                                <div class="col-sm-6 light-border-l">
+                                    <img src="sample/simple_manual_step_2_02.jpg" class="instr-image" alt="Remote Power Button" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="simple-manual-instr-step-3" class="container-fluid" data-bind="visible: activeInstruction() == 3">
+                            <h4>Step 3</h4>
+                            <div class="row light-border">
+                                <div class="col-sm-12"><h5>Select the Input Device</h5></div>
+                            </div>
+                            <div class="row light-border">
+                                Press the "Input" button until the HDMI Port number you used appears on the TV.
+                            </div>
+                            <div class="row light-border">
+                                <div class="col-sm-6" style="font-weight: bold;">
+                                    Input Button on Your LG TV
+                                </div>
+                                <div class="col-sm-6 light-border-l">
+                                    <img src="sample/simple_manual_step_3_01.jpg" class="instr-image" alt="TV Input Button" />
+                                </div>
+                            </div>
+                            <div class="row light-border">
+                                <div class="col-sm-6" style="font-weight: bold;">
+                                    HDMI Port Numbers
+                                </div>
+                                <div class="col-sm-6 light-border-l">
+                                    <img src="sample/simple_manual_step_3_03.jpg" class="instr-image" alt="HDMI Port Numbers" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="simple-manual-instr-step-4" class="container-fluid" data-bind="visible: activeInstruction() == 4">
+                            <h4>Step 4</h4>
+                            <div class="row light-border">
+                                <div class="col-sm-12"><h5>Enjoy Your LG TV</h5></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="pagination" id="simple-instructions-pagination">
+                        <li><a href="#" data-bind="click: decrActiveInstruction">&lsaquo;</a></li>
+                        <li data-bind="css: { active: activeInstruction() == 1 }"><a href="#" data-bind="click: function () { activeInstruction(1); }">1</a></li>
+                        <li data-bind="css: { active: activeInstruction() == 2 }"><a href="#" data-bind="click: function () { activeInstruction(2); }">2</a></li>
+                        <li data-bind="css: { active: activeInstruction() == 3 }"><a href="#" data-bind="click: function () { activeInstruction(3); }">3</a></li>
+                        <li data-bind="css: { active: activeInstruction() == 4 }"><a href="#" data-bind="click: function () { activeInstruction(4); }">4</a></li>
+                        <li><a href="#" data-bind="click: incrActiveInstruction">&rsaquo;</a></li>
+                    </ul>
+                    <div style="text-align: left; margin: 20px; margin-top: 0;">
+                        <a href="sample/sample_manual_01.docx" target="_blank">Download (docx, 173KB)  <i class="fa fa-external-link"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-appliance-original-manual" style="display: none;">
+        <div>
+            <h1 data-bind="text: currProduct().attributes.name"></h1>
+        </div>
+        <div class="form-group well well-sm">
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                    <span style="float: right;">Home</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-bind="attr: { 'data-targetroute': '#Appliance/Home?id=' + currProduct().attributes.id }">
+                    <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                    <span style="float: right;">Back</span>
+                </button>
+            </div>
+
+            <div class="row margin-sm" style="text-align: center;">
+                <div style="margin-top: 10px;">
+                    <legend>Original Manual</legend>
+                    <div class="light-border floating-info-label-parent">
+                        <span class="label label-info floating-info-label">Preview</span>
+                        <div class="original-manual-preview">
+                            <img src="sample/manual_01_sample.png" alt="Manual 01 sample image" />
+                        </div>
+                    </div>
+                    <div style="text-align: left; margin: 20px;">
+                        <a href="sample/manual_01.pdf" target="_blank">Download (pdf, 23.2MB)  <i class="fa fa-external-link"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-appliance-videos" style="display: none;">
+        <div>
+            <h1 data-bind="text: currProduct().attributes.name"></h1>
+        </div>
+        <div class="form-group well well-sm">
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-targetroute="#Home">
+                    <span style="float: left;"><i class="fa fa-angle-double-left fa-lg"></i></span>
+                    <span style="float: right;">Home</span>
+                </button>
+            </div>
+            <div class="row margin-sm">
+                <button class="btn btn-info nav-btn" data-bind="attr: { 'data-targetroute': '#Appliance/Home?id=' + currProduct().attributes.id }">
+                    <span style="float: left;"><i class="fa fa-angle-left fa-lg"></i></span>
+                    <span style="float: right;">Back</span>
+                </button>
+            </div>
+
+            <div class="container-fluid margin-sm" style="text-align: center;">
+                <fieldset style="margin-top: 10px;">
+                    <legend>Videos</legend>
+                    <div class="row">
+                        <div class="col-sm-12 video-row">
+                            <iframe id="appliance-manual-video-0" type="text/html" class="video-iframe"
+                                    src="https://www.youtube.com/embed/5upTJFpc5j8"
+                                    frameborder="0"></iframe>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 video-row">
+                            <iframe id="appliance-manual-video-1" type="text/html" class="video-iframe"
+                                    src="https://www.youtube.com/embed/Ef8b3C8jxGo"
+                                    frameborder="0"></iframe>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 video-row">
+                            <iframe id="appliance-manual-video-2" type="text/html" class="video-iframe"
+                                    src="https://www.youtube.com/embed/drlK8xgFNlU"
+                                    frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appliance Section end -->
+    <!-- Search overlay -->
+    <div id="searching-overlay" style="display: none;">
+        <div class="page-overlay"></div>
+        <div class="page-overlay-inner">
+            <h3>Searching..</h3>
+            <span class="fa fa-spinner fa-4x center-block fa-spin"></span>
+        </div>
+    </div>
+</div>
+
+<script src="vendor/jquery-2.1.1.js"></script>
+<script src="vendor/bootstrap.js"></script>
+<script src="vendor/respond.js"></script>
+<script src="vendor/knockout-3.2.0.debug.js"></script>
+<script src="vendor/signals.js"></script>
+<script src="vendor/crossroads.js"></script>
+<script src="vendor/hasher.js"></script>
+
+<script type="text/javascript" src="https://www.youtube.com/player_api?version=3"></script>
+
+</body>
+</html>
