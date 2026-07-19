@@ -2,6 +2,12 @@ server {
     listen ${PORT};
     server_name localhost;
 
+    # Runtime config is regenerated per-deploy; never cache it.
+    location = /env.js {
+        root /usr/share/nginx/html;
+        add_header Cache-Control "no-store";
+    }
+
     location / {
         root /usr/share/nginx/html;
         index index.html index.htm;

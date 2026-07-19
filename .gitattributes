@@ -1,0 +1,3 @@
+# Shell scripts must keep LF endings; the nginx image's /bin/sh chokes on a
+# CRLF shebang, so never let Windows checkouts convert these to CRLF.
+*.sh text eol=lf

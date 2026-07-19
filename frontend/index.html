@@ -5,6 +5,20 @@
     <meta charset="UTF-8">
     <title>fuzzley</title>
 
+    <script src="env.js"></script>
+    <script>
+        if (window.__ENV && window.__ENV.GA_ID) {
+            var gaScript = document.createElement("script");
+            gaScript.async = true;
+            gaScript.src = "https://www.googletagmanager.com/gtag/js?id=" + window.__ENV.GA_ID;
+            document.head.appendChild(gaScript);
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag("js", new Date());
+            gtag("config", window.__ENV.GA_ID);
+        }
+    </script>
+
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="external/materialize/css/materialize.css">
     <link rel="stylesheet" href="css/site.css">
@@ -47,7 +61,8 @@
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4">
-                            <a href="./project/solitaire/index.html" target="_blank" class="grey-text text-darken-4">Solitaire</a>
+                            <a href="./project/solitaire/index.html" target="_blank"
+                                class="grey-text text-darken-4">Solitaire</a>
                         </span>
                         <p><a href="https://github.com/fuzzley/fSolitaire" target="_blank">
                                 github.com/fuzzley/fSolitaire<i class="material-icons"
