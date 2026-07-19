@@ -27,7 +27,13 @@ COPY --from=build /app/frontend/dist /usr/share/nginx/html
 # Copy our custom Nginx template that uses the PORT environment variable
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 
-# Cloud Run injects the PORT environment variable, and the official Nginx image
-# will automatically substitute $PORT in /etc/nginx/templates/default.conf.template
-# and output to /etc/nginx/conf.d/default.conf on startup.
+# Generate runtime config (e.g. GA_AG_MEASUREMENT_ID) into env.js at container
+# startup. The nginx image runs every /docker-entrypoint.d/*.sh before starting;
+# chmod is required because git on Windows does not preserve the exec bit.
+COPY docker-entrypoint.d/40-generate-env-config.sh /docker-entrypoint.d/40-generate-env-config.sh
+RUN chmod +x /docker-entrypoint.d/40-generate-env-config.sh
+
+# The official Nginx image automatically substitutes $PORT in
+# /etc/nginx/templates/default.conf.template and outputs to
+# /etc/nginx/conf.d/default.conf on startup.
 EXPOSE 8080
