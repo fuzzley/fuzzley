@@ -128,3 +128,11 @@ footer {
 .fz-link-no-style {
     text-decoration: none;
 }
+
+.fz-project .card-content p a {
+    transition: color .2s ease;
+}
+
+.fz-project .card-content p a:hover {
+    color: #01579b;
+}
