@@ -8,6 +8,12 @@ server {
         add_header Cache-Control "no-store";
     }
 
+    # Version info should never be cached.
+    location = /version.json {
+        root /usr/share/nginx/html;
+        add_header Cache-Control "no-store";
+    }
+
     location / {
         root /usr/share/nginx/html;
         index index.html index.htm;
