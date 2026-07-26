@@ -8,7 +8,7 @@ COPY frontend/package.json frontend/yarn.lock* frontend/.yarnrc.yml* ./frontend/
 
 # Install dependencies (using Yarn 4 via Corepack)
 WORKDIR /app/frontend
-RUN corepack enable && yarn install --immutable
+RUN npm install -g corepack && corepack enable && yarn install --immutable
 
 # Copy the rest of the frontend source code
 WORKDIR /app
