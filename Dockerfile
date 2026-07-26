@@ -1,14 +1,14 @@
 # Stage 1: Build the Vite application
-FROM node:22-alpine AS build
+FROM node:26-alpine AS build
 
 WORKDIR /app
 
-# Copy package files and lock files
-COPY frontend/package.json frontend/yarn.lock* ./frontend/
+# Copy package files, lock files, and yarnrc
+COPY frontend/package.json frontend/yarn.lock* frontend/.yarnrc.yml* ./frontend/
 
-# Install dependencies (using yarn since yarn.lock exists)
+# Install dependencies (using Yarn 4 via Corepack)
 WORKDIR /app/frontend
-RUN yarn install --frozen-lockfile
+RUN corepack enable && yarn install --immutable
 
 # Copy the rest of the frontend source code
 WORKDIR /app
