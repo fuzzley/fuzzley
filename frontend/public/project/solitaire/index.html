@@ -9,14 +9,28 @@
     />
     <meta http-equiv="cleartype" content="on" />
     <style>
+      /*
+       * Phaser only expands the canvas parent for its own scale modes, and the
+       * game runs in NONE mode so ViewportScaler can control the backing store
+       * resolution. These rules stand in for that, sizing #game to the viewport
+       * without making it a positioned box, which would paint it over the UI
+       * overlay that precedes it in the document.
+       */
       html,
       body {
         margin: 0;
         padding: 0;
+        height: 100%;
+      }
+
+      #game {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
       }
     </style>
-    <script type="module" crossorigin src="./assets/index-BSSCga0h.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/phaser-BKXmNobT.js">
+    <script type="module" crossorigin src="./assets/index-D2xYnIDp.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/phaser-BtpJC9Ug.js">
     <link rel="stylesheet" crossorigin href="./assets/index-CwyQbXbq.css">
   </head>
   <body>
