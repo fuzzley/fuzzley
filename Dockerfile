@@ -1,6 +1,10 @@
 # Stage 1: Build the Vite application
 FROM node:26-alpine AS build
 
+ARG COMMIT_SHA
+ARG GITHUB_SHA
+ENV COMMIT_SHA=${COMMIT_SHA:-$GITHUB_SHA}
+
 WORKDIR /app
 
 # Copy package files, lock files, and yarnrc
