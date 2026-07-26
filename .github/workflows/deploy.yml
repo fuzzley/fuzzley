@@ -34,6 +34,8 @@ jobs:
 
       - name: Build production assets
         working-directory: frontend
+        env:
+          GITHUB_SHA: ${{ github.sha }}
         run: yarn build
 
       - name: Configure git credentials

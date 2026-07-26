@@ -120,6 +120,19 @@ var Page = (function () {
   return Page;
 })();
 
+if (typeof __BUILD_INFO__ !== "undefined") {
+  window.__BUILD_INFO__ = __BUILD_INFO__;
+}
+
 $(document).ready(function () {
+  if (window.__BUILD_INFO__ && window.__BUILD_INFO__.commit) {
+    var meta = document.querySelector('meta[name="build-version"]');
+    if (meta) {
+      meta.setAttribute(
+        "content",
+        window.__BUILD_INFO__.commit + " (" + window.__BUILD_INFO__.buildTime + ")"
+      );
+    }
+  }
   Page.initialize();
 });
