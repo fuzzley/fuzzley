@@ -3,31 +3,21 @@
   <head>
     <title>fSolitaire</title>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="user-scalable=no, width=device-width, initial-scale=1.0"
-    />
+    <!--
+      No `user-scalable=no`: the board is a canvas, but the header, the game
+      rail and the settings drawer are real text, and blocking pinch-zoom on
+      them fails WCAG 1.4.4 for anyone who needs to enlarge it.
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="cleartype" content="on" />
-    <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-      }
-
-      /*
-       * The app fills the viewport: the game canvas host inside it sizes itself
-       * to 100% height, which only resolves if its ancestors do too.
-       */
-      app-root {
-        display: block;
-        height: 100%;
-      }
-    </style>
-    <script type="module" crossorigin src="./assets/index-NWy4YMK6.js"></script>
+    <!--
+      The document reset and the `app-root { height: 100% }` rule the whole
+      absolute-positioned layout depends on live in src/ui/app/styles.css,
+      alongside the design tokens, rather than being invisible here.
+    -->
+    <script type="module" crossorigin src="./assets/index-0d2JpU7h.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/phaser-h7GCY5wB.js">
-    <link rel="stylesheet" crossorigin href="./assets/index-Cfpssn4R.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DVZIJCP-.css">
   </head>
   <body>
     <app-root></app-root>
