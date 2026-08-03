@@ -33,4 +33,15 @@ module.exports = [
       },
     },
   },
+  {
+    // Build tooling that runs in Node rather than the browser (ESM).
+    files: ["tools/**/*.mjs"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
 ];
