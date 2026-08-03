@@ -6,19 +6,10 @@
     <meta name="build-version" content="">
     <title>fuzzley</title>
 
+    <!-- Runtime config, then the shared analytics bootstrap. Order matters:
+         analytics.js reads the measurement ID out of window.__ENV. -->
     <script src="env.js"></script>
-    <script>
-        if (window.__ENV && window.__ENV.GA_ID) {
-            var gaScript = document.createElement("script");
-            gaScript.async = true;
-            gaScript.src = "https://www.googletagmanager.com/gtag/js?id=" + window.__ENV.GA_ID;
-            document.head.appendChild(gaScript);
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag("js", new Date());
-            gtag("config", window.__ENV.GA_ID);
-        }
-    </script>
+    <script src="analytics.js"></script>
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="external/materialize/css/materialize.css">

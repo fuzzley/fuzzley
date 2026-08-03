@@ -7,9 +7,9 @@
   "scripts": {
     "dev": "vite",
     "start": "vite",
-    "build": "vite build",
-    "build:dev": "vite build --mode development",
-    "build:prod": "vite build --mode production",
+    "build": "vite build && node tools/inject-analytics.mjs",
+    "build:dev": "vite build --mode development && node tools/inject-analytics.mjs",
+    "build:prod": "vite build --mode production && node tools/inject-analytics.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
     "prettier": "prettier . --write"

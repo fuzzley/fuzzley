@@ -62,11 +62,28 @@ anywhere with different configuration.
 2. On startup, `docker-entrypoint.d/40-generate-env-config.sh` (run
    automatically by the nginx base image) overwrites the served `env.js` from
    the container's environment variables.
-3. `index.html` loads `env.js` and initializes each feature only when its value
-   is present. With nothing set, the feature stays off — so local dev and
-   unconfigured containers run with analytics disabled.
+3. `index.html` loads `env.js` and then `analytics.js`, the shared Google
+   Analytics bootstrap, which initializes only when a measurement ID is present.
+   With nothing set, the feature stays off — so local dev and unconfigured
+   containers run with analytics disabled.
 4. nginx serves `env.js` with `Cache-Control: no-store`, so a configuration
-   change is never served from a stale cache.
+   change is never served from a stale cache. Rotating the ID therefore needs a
+   container restart, not a rebuild.
+
+### Project sub-pages
+
+The pages under `/project/<slug>/` are production builds pushed in by their own
+repositories (fMinesweeper, fPong, fSolitaire, fSpider, PATH). Those
+repositories carry no analytics code of their own, so `yarn build` runs
+`frontend/tools/inject-analytics.mjs`, which adds the `env.js` and
+`analytics.js` tags to each project's `index.html` **in `dist/`** — never in
+`public/`, whose contents the next sync from a project repository overwrites.
+
+Every page therefore reports to the same measurement ID, and Google Analytics
+separates them by path. A new project dropped into `public/project/<slug>/` is
+picked up automatically at the next build; the script fails the build if a
+project page has no `</head>` to attach to, so a page cannot go untracked
+silently.
 
 ### Supported variables
 
