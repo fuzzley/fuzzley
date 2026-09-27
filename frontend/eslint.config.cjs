@@ -19,6 +19,8 @@ module.exports = [
         jQuery: "readonly",
         hasher: "readonly",
         signals: "readonly",
+        // Replaced at build time through Vite's `define`.
+        __BUILD_INFO__: "readonly",
       },
     },
   },
@@ -35,7 +37,7 @@ module.exports = [
   },
   {
     // Build tooling that runs in Node rather than the browser (ESM).
-    files: ["tools/**/*.mjs"],
+    files: ["tools/**/*.mjs", "vite.config.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
