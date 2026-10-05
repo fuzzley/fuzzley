@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>fSolitaire</title>
     <meta charset="UTF-8" />
+    <title>Solitaire Collection</title>
     <!--
       No `user-scalable=no`: the board is a canvas, but the header, the game
       browser and the settings drawer are real text, and blocking pinch-zoom
@@ -16,11 +16,146 @@
     -->
     <meta name="theme-color" content="#0f172a" />
     <!-- The document reset lives in src/ui/app/styles/, with the tokens. -->
-    <script type="module" crossorigin src="./assets/index-rGvioMiE.js"></script>
+
+    <!--
+      For search engines and link previews. Every game is reached through a
+      hash route, so this one URL stands for all of them. The keywords and the
+      list in <noscript> name every game the game browser lists, which
+      test/ui/index_html.spec.ts checks against the catalog.
+    -->
+    <meta
+      name="description"
+      content="Play free solitaire in your browser: Klondike, Spider, FreeCell, Pyramid, TriPeaks, Golf, Yukon, Canfield and dozens more card games. No download, no sign-up."
+    />
+    <meta
+      name="keywords"
+      content="solitaire, solitaire games, free solitaire, online solitaire, solitaire collection, patience, card games, klondike solitaire, spider solitaire, freecell solitaire, pyramid solitaire, golf solitaire, Klondike, Whitehead, Thumb and Pouch, Saratoga, Easthaven, Double Klondike, FreeCell, Baker's Game, Challenge FreeCell, Super Challenge FreeCell, Eight Off, Seahaven Towers, Penguin, Spider, Scorpion, Wasp, Scorpion II, Simple Simon, Mrs. Mop, Spiderette, Will o' the Wisp, Yukon, Alaska, Russian Solitaire, Moosehide, Forty Thieves, Josephine, Streets, Rank and File, Indian, Number Ten, Maria, Limited, Lucas, Golf, Queens on Kings, Putt Putt, Black Hole, All in a Row, TriPeaks, Three Peaks, Tri Towers, Bristol, Belvedere, La Belle Lucie, Fair Lucy, Midnight Oil, The Fan, Shamrocks, Trefoil, Nestor, Monte Carlo, Weddings, Monte Carlo Thirteens, Pyramid, Relaxed Pyramid, Canfield, Demon, Fascination, Storehouse, Thirteen Up, Reserve, Superior Canfield, Rainbow, Beleaguered Castle, Streets and Alleys, Citadel, Fortress, Baker's Dozen, Montana, Gaps, Addiction, Blue Moon, Red Moon, Bisley, Aces Up, Calculation, Broken Intervals, Sir Tommy, Old Patience, Flower Garden, The Garden, Bouquet, Grandfather's Clock, Clock, Poker Squares, Poker Solitaire"
+    />
+    <link
+      rel="canonical"
+      href="https://fuzzley.info/project/solitaire/index.html"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Solitaire Collection" />
+    <meta
+      property="og:description"
+      content="Play free solitaire in your browser: Klondike, Spider, FreeCell, Pyramid, TriPeaks, Golf, Yukon, Canfield and dozens more card games. No download, no sign-up."
+    />
+    <meta
+      property="og:url"
+      content="https://fuzzley.info/project/solitaire/index.html"
+    />
+    <meta
+      property="og:image"
+      content="https://fuzzley.info/project/solitaire/docs/screenshots/klondike/preview.webp"
+    />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="720" />
+    <meta
+      property="og:image:alt"
+      content="A game of Klondike solitaire on a green felt table."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Solitaire Collection",
+        "url": "https://fuzzley.info/project/solitaire/index.html",
+        "description": "Play free solitaire in your browser: Klondike, Spider, FreeCell, Pyramid, TriPeaks, Golf, Yukon, Canfield and dozens more card games. No download, no sign-up.",
+        "applicationCategory": "GameApplication",
+        "genre": ["Solitaire", "Card game"],
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript.",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+    <script type="module" crossorigin src="./assets/index-DzmPvDN0.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/phaser-CmSKBl5n.js">
     <link rel="stylesheet" crossorigin href="./assets/index-BrwKhDXs.css">
   </head>
   <body>
     <app-root></app-root>
+    <noscript>
+      <h1>Solitaire Collection</h1>
+      <p>
+        Free solitaire card games to play in your browser. Turn on JavaScript to
+        play any of them:
+      </p>
+      <ul>
+        <li>Klondike</li>
+        <li>Whitehead</li>
+        <li>Thumb and Pouch</li>
+        <li>Saratoga</li>
+        <li>Easthaven</li>
+        <li>Double Klondike</li>
+        <li>FreeCell</li>
+        <li>Baker's Game</li>
+        <li>Challenge FreeCell</li>
+        <li>Super Challenge FreeCell</li>
+        <li>Eight Off</li>
+        <li>Seahaven Towers</li>
+        <li>Penguin</li>
+        <li>Spider</li>
+        <li>Scorpion</li>
+        <li>Wasp</li>
+        <li>Scorpion II</li>
+        <li>Simple Simon</li>
+        <li>Mrs. Mop</li>
+        <li>Spiderette</li>
+        <li>Will o' the Wisp</li>
+        <li>Yukon</li>
+        <li>Alaska</li>
+        <li>Russian Solitaire</li>
+        <li>Moosehide</li>
+        <li>Forty Thieves</li>
+        <li>Josephine</li>
+        <li>Rank and File</li>
+        <li>Indian</li>
+        <li>Number Ten</li>
+        <li>Maria</li>
+        <li>Limited</li>
+        <li>Lucas</li>
+        <li>Golf</li>
+        <li>Queens on Kings</li>
+        <li>Putt Putt</li>
+        <li>Black Hole</li>
+        <li>All in a Row</li>
+        <li>TriPeaks</li>
+        <li>Bristol</li>
+        <li>Belvedere</li>
+        <li>La Belle Lucie</li>
+        <li>The Fan</li>
+        <li>Shamrocks</li>
+        <li>Trefoil</li>
+        <li>Nestor</li>
+        <li>Monte Carlo</li>
+        <li>Monte Carlo Thirteens</li>
+        <li>Pyramid</li>
+        <li>Relaxed Pyramid</li>
+        <li>Canfield</li>
+        <li>Storehouse</li>
+        <li>Superior Canfield</li>
+        <li>Rainbow</li>
+        <li>Beleaguered Castle</li>
+        <li>Streets and Alleys</li>
+        <li>Citadel</li>
+        <li>Fortress</li>
+        <li>Baker's Dozen</li>
+        <li>Montana</li>
+        <li>Addiction</li>
+        <li>Blue Moon</li>
+        <li>Red Moon</li>
+        <li>Bisley</li>
+        <li>Aces Up</li>
+        <li>Calculation</li>
+        <li>Sir Tommy</li>
+        <li>Flower Garden</li>
+        <li>Grandfather's Clock</li>
+        <li>Poker Squares</li>
+      </ul>
+    </noscript>
   </body>
 </html>
