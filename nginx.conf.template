@@ -2,6 +2,12 @@ server {
     listen ${PORT};
     server_name localhost;
 
+    # Ensure redirects (such as adding a trailing slash to directories like /project/solitaire)
+    # are relative so that the internal container port (e.g. :8080) and HTTP scheme are not leaked
+    # when running behind a TLS-terminating reverse proxy (Cloud Run).
+    absolute_redirect off;
+    port_in_redirect off;
+
     # Runtime config is regenerated per-deploy; never cache it.
     location = /env.js {
         root /usr/share/nginx/html;
