@@ -12,6 +12,10 @@ on:
         type: boolean
         default: false
 
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
 jobs:
   build-and-sync:
     runs-on: ubuntu-latest
