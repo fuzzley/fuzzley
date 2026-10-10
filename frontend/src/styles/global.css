@@ -61,9 +61,9 @@
     --on-strong: light-dark(#14171b, #f4f6f8);
     --on-strong-muted: light-dark(#476152, #aab3bf);
     --on-strong-line: light-dark(rgb(23 77 46 / 0.25), rgb(255 255 255 / 0.22));
-    --on-accent: light-dark(#1b3a8c, #ffffff);
-    --on-accent-muted: light-dark(#4560a6, #c9d6ff);
-    --on-accent-line: light-dark(rgb(27 58 140 / 0.3), rgb(255 255 255 / 0.35));
+    --on-accent: light-dark(#102a6b, #ffffff);
+    --on-accent-muted: light-dark(#2c4787, #dbe4ff);
+    --on-accent-line: light-dark(rgb(16 42 107 / 0.4), rgb(255 255 255 / 0.45));
     --pill: rgb(255 255 255 / 0.95);
     --on-pill: #14171b;
 
