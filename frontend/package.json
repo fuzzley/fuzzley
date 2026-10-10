@@ -9,6 +9,8 @@
     "start": "astro dev",
     "build": "astro build && node tools/inject-analytics.mjs",
     "preview": "astro preview",
+    "stop": "node tools/stop-dev-servers.mjs",
+    "astro": "astro",
     "check": "astro check",
     "lint": "eslint .",
     "prettier": "prettier . --write",
