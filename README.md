@@ -70,6 +70,19 @@ GitHub Pages. GitHub Pages deploys from the repository its workflow runs in,
 which is why the publishing job lives there. The run here waits for that
 deploy to finish, so a failed deploy shows on the commit.
 
+The GitHub Pages copy leaves out the games. Its workflow builds with
+`PLAY_ORIGIN=https://fuzzley.info`, which deletes `projects/<slug>/play/` from
+`dist/` and points every play link, and the old `/project/<slug>/` redirects,
+at the games on fuzzley.info. To see that build locally:
+
+```sh
+cd frontend
+PLAY_ORIGIN=https://fuzzley.info yarn build && yarn preview
+```
+
+Without `PLAY_ORIGIN`, as in the Docker build and `yarn dev`, the games ship
+with the site.
+
 ## Docker Build & Run (Local Testing)
 
 To test the containerized application locally, run these commands from the repository root directory:
@@ -134,6 +147,7 @@ separates them by path. A new game dropped into `public/projects/<slug>/play/`
 is picked up automatically at the next build; the script fails the build if a
 game has no `</head>` to attach to, so a page cannot go untracked silently. A
 new game also needs `src/content/projects/<slug>.md` for its tile and page.
+A build with `PLAY_ORIGIN` set has no games, so there the script does nothing.
 
 ### Supported variables
 

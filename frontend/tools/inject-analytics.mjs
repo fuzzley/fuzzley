@@ -78,6 +78,13 @@ assetsExist();
 let instrumented = 0;
 let alreadyDone = 0;
 
+// A build with PLAY_ORIGIN set has no games: omitGames in astro.config.mjs
+// deletes them, and the site links to them on that origin instead.
+if (process.env.PLAY_ORIGIN) {
+  console.log("inject-analytics: PLAY_ORIGIN is set, so there are no games");
+  process.exit(0);
+}
+
 for (const page of findProjectPages()) {
   const name = toPosix(path.relative(distDir, page));
   const html = fs.readFileSync(page, "utf8");
