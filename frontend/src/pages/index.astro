@@ -2,6 +2,7 @@
 import { Picture } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import GameTile from "../components/GameTile.astro";
+import GitHubLink from "../components/GitHubLink.astro";
 import me from "../assets/profile/me.jpg";
 import { education, links, profile } from "../data/profile";
 import {
@@ -105,6 +106,7 @@ const jsonLd = {
         style={coverTransition(feature)}
         loading="eager"
       />
+      <GitHubLink href={feature.data.repo} projectTitle={feature.data.title} />
       <div class="feature-card">
         <div>
           <h2 id="feature-title">

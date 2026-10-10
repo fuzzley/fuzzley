@@ -2,6 +2,7 @@
 // A game's screenshot on its own color, with its name linking to the project
 // page and a button straight into the game.
 import { Picture } from "astro:assets";
+import GitHubLink from "./GitHubLink.astro";
 import {
   coverTransition,
   playPath,
@@ -47,6 +48,7 @@ const widths = wide ? [480, 720, 960, 1280] : [320, 480, 640];
     fallbackFormat="webp"
     style={coverTransition(project)}
   />
+  <GitHubLink href={project.data.repo} projectTitle={project.data.title} />
   <div class="game-bar">
     <Heading class="pill game-title">
       <a class="stretched" href={projectPath(project)}>

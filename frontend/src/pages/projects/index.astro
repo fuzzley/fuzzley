@@ -1,6 +1,7 @@
 ---
 import { Picture } from "astro:assets";
 import Base from "../../layouts/Base.astro";
+import GitHubLink from "../../components/GitHubLink.astro";
 import {
   coverTransition,
   getProjects,
@@ -38,6 +39,10 @@ const projects = await getProjects();
             style={coverTransition(project)}
           />
         </div>
+        <GitHubLink
+          href={project.data.repo}
+          projectTitle={project.data.title}
+        />
         <p class="tile-label">{projectYears(project)}</p>
         <h2>
           <a class="stretched" href={projectPath(project)}>
