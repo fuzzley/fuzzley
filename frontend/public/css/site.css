@@ -43,15 +43,6 @@ nav .brand-logo {
     }
 }
 
-@media only screen and (max-device-width: 569px) {
-    nav {
-        width: 95%;
-    }
-
-    .fz-content {
-        width: 95%;
-    }
-}
 
 footer {
     text-align: center;
@@ -109,6 +100,31 @@ footer {
     width: 250px;
     padding-right: 10px;
     margin: auto;
+}
+
+/* Phones: let the project cards and screenshots shrink to the screen, and
+   stack the employer logos above their details. */
+@media only screen and (max-width: 798px) {
+    .fz-project {
+        margin: 12px 0;
+        width: 100%;
+    }
+
+    .fz-project img {
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 10 / 7;
+        object-fit: cover;
+    }
+
+    .fz-collapsible-item.fz-flex-row {
+        flex-direction: column;
+    }
+
+    .fz-collapsible-item img {
+        width: 160px;
+        padding-right: 0;
+    }
 }
 
 .fz-work-experience-description {
