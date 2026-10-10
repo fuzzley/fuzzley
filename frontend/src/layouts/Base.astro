@@ -84,6 +84,19 @@ const build = __BUILD_INFO__;
          analytics.js reads the measurement ID out of window.__ENV. -->
     <script is:inline src="/env.js"></script>
     <script is:inline src="/analytics.js"></script>
+    <script is:inline>
+      // Counts plays, which Google Analytics doesn't see on its own because
+      // the games are on the same site: a click on any link into
+      // /projects/<slug>/play/ sends a play_game event naming the game.
+      document.addEventListener("click", function (event) {
+        const link = event.target.closest && event.target.closest("a[href]");
+        if (!link || typeof window.gtag !== "function") return;
+        const match = link
+          .getAttribute("href")
+          .match(/\/projects\/([^/]+)\/play\//);
+        if (match) window.gtag("event", "play_game", { game: match[1] });
+      });
+    </script>
     <slot name="head" />
   </head>
   <body>
