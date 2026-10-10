@@ -63,7 +63,8 @@ and builds, then triggers the workflow in
 [fuzzley/fuzzley.github.io](https://github.com/fuzzley/fuzzley.github.io) that
 builds the site again and publishes it with GitHub Pages. GitHub Pages deploys
 from the repository its workflow runs in, which is why the publishing job lives
-there.
+there. The run here waits for that deploy to finish, so a failed deploy shows
+on the commit.
 
 The Docker image below is the older way the site was served, on Cloud Run. It
 still builds and works.

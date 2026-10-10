@@ -3,7 +3,8 @@ name: Verify and deploy
 # Every push and pull request is type-checked, linted and built. Pushes to
 # main then ask fuzzley/fuzzley.github.io to build and publish the site:
 # GitHub Pages deploys from the repository its workflow runs in, so the
-# publishing job lives there (.github/workflows/pages.yml in that repo).
+# publishing job lives there (.github/workflows/pages.yml in that repo). This
+# run waits for that one, so a failed deploy shows here too.
 
 on:
   push:
@@ -44,12 +45,39 @@ jobs:
     needs: verify
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      GH_TOKEN: ${{ secrets.MAIN_GITHUB_IO_REPO_DEPLOY_PAT }}
+      # Names this attempt of this run, so a re-run never mistakes an earlier
+      # deploy of the same commit for its own.
+      RUN_TAG: ${{ github.run_id }}.${{ github.run_attempt }}
 
     steps:
       - name: Trigger the GitHub Pages deploy
-        env:
-          GH_TOKEN: ${{ secrets.MAIN_GITHUB_IO_REPO_DEPLOY_PAT }}
         run: |
           gh api repos/fuzzley/fuzzley.github.io/dispatches \
             -f event_type=fuzzley-updated \
-            -f "client_payload[sha]=${{ github.sha }}"
+            -f "client_payload[sha]=${{ github.sha }}" \
+            -f "client_payload[run]=$RUN_TAG"
+
+      # The dispatch API doesn't say which run it started. pages.yml puts
+      # "(fuzzley run <RUN_TAG>)" in each run's name, so look for that.
+      - name: Wait for the GitHub Pages deploy
+        run: |
+          for attempt in $(seq 1 30); do
+            run_id=$(gh run list --repo fuzzley/fuzzley.github.io \
+              --workflow pages.yml --event repository_dispatch --limit 20 \
+              --json databaseId,displayTitle \
+              --jq "map(select(.displayTitle | contains(\"(fuzzley run $RUN_TAG)\"))) | first | .databaseId // empty")
+            if [ -n "$run_id" ]; then break; fi
+            sleep 5
+          done
+
+          if [ -z "$run_id" ]; then
+            echo "::error::fuzzley.github.io started no Pages run for fuzzley run $RUN_TAG."
+            exit 1
+          fi
+
+          echo "Waiting for https://github.com/fuzzley/fuzzley.github.io/actions/runs/$run_id"
+          gh run watch "$run_id" --repo fuzzley/fuzzley.github.io --exit-status --interval 10
