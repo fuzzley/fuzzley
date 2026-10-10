@@ -56,7 +56,11 @@ const jsonLd = {
         />
         <h1 id="hero-name">{profile.name}</h1>
       </div>
-      <p class="hero-lede">{profile.lede}</p>
+      <p class="hero-lede">
+        {profile.lede.split(/(?<=\.)\s+/).map((sentence) => (
+          <span>{sentence}</span>
+        ))}
+      </p>
     </section>
 
     <section
@@ -255,11 +259,16 @@ const jsonLd = {
     line-height: 0.95;
   }
 
+  /* One sentence per line. The size follows the card's width so the first
+     sentence fits on its line at every desktop width; phones still wrap. */
   .hero-lede {
-    max-width: 34ch;
     color: var(--muted);
-    font-size: var(--step-1);
+    font-size: clamp(1rem, 4.2cqi, var(--step-1));
     line-height: 1.45;
+  }
+
+  .hero-lede span {
+    display: block;
   }
 
   /* Featured game */
