@@ -1,23 +1,23 @@
-name: Build and Sync to GitHub Pages
+name: Verify and deploy
+
+# Every push and pull request is type-checked, linted and built. Pushes to
+# main then ask fuzzley/fuzzley.github.io to build and publish the site:
+# GitHub Pages deploys from the repository its workflow runs in, so the
+# publishing job lives there (.github/workflows/pages.yml in that repo).
 
 on:
   push:
     branches:
       - main
+  pull_request:
   workflow_dispatch:
-    inputs:
-      force:
-        description: "Force deployment even if there are no changes"
-        required: false
-        type: boolean
-        default: false
 
 concurrency:
-  group: pages-deploy
+  group: verify-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build-and-sync:
+  verify:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,41 +36,20 @@ jobs:
         working-directory: frontend
         run: yarn install --immutable
 
-      - name: Build production assets
+      - name: Type-check, lint, check formatting and build
         working-directory: frontend
+        run: yarn verify
+
+  deploy:
+    needs: verify
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger the GitHub Pages deploy
         env:
-          GITHUB_SHA: ${{ github.sha }}
-        run: yarn build:prod
-
-      - name: Configure git credentials
+          GH_TOKEN: ${{ secrets.MAIN_GITHUB_IO_REPO_DEPLOY_PAT }}
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Sync built assets to fuzzley.github.io
-        env:
-          PAT_TOKEN: ${{ secrets.MAIN_GITHUB_IO_REPO_DEPLOY_PAT }}
-          FORCE_DEPLOY: ${{ github.event.inputs.force }}
-        run: |
-          # 1. Clone the GitHub Pages repository (fuzzley/fuzzley.github.io)
-          git clone --depth 1 https://x-access-token:${{ env.PAT_TOKEN }}@github.com/fuzzley/fuzzley.github.io.git main-website
-
-          # 2. Clean out old files in the main-website directory (except .git)
-          find main-website -maxdepth 1 -mindepth 1 -not -name ".git" -exec rm -rf {} +
-
-          # 3. Copy new build files from frontend/dist
-          cp -r frontend/dist/. main-website/
-
-          # 4. Remove project folder from GitHub Pages deployment
-          rm -rf main-website/project
-
-          # 5. Commit and push the updates if there are changes
-          cd main-website
-          git add -A
-
-          if git diff-index --quiet HEAD && [ "$FORCE_DEPLOY" != "true" ]; then
-            echo "No changes in fuzzley production build. Skipping commit."
-          else
-            git commit --allow-empty -m "chore(deploy): sync fuzzley production build from fuzzley/fuzzley@${{ github.sha }}"
-            git push origin HEAD
-          fi
+          gh api repos/fuzzley/fuzzley.github.io/dispatches \
+            -f event_type=fuzzley-updated \
+            -f "client_payload[sha]=${{ github.sha }}"
