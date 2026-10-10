@@ -8,7 +8,6 @@ Personal website for Andrey Gavel: https://fuzzley.info
   client-side framework.
 - `branding/`: the favicon set and the home page's link preview, with the
   scripts that draw them.
-- `docs/`: the redesign work log.
 
 ## Frontend Development
 
@@ -22,9 +21,9 @@ yarn install     # install dev dependencies
 yarn dev         # start the dev server on http://localhost:9000
 yarn build       # produce a production build in dist/
 yarn preview     # serve the production build locally
-yarn stop        # stop every dev or preview server running from this checkout
+yarn stop        # stop a dev server started with `astro dev --background`
+yarn force-stop  # stop every dev or preview server running from this checkout
                  #   (--dry-run lists them without stopping them)
-yarn astro       # run any Astro CLI command, e.g. `yarn astro sync`
 yarn check       # type-check with astro check
 yarn lint        # run ESLint
 yarn prettier    # format the code with Prettier
