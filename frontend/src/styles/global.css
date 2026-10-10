@@ -6,6 +6,7 @@
 @layer reset, tokens, base, layout, components, utilities;
 
 @layer reset {
+
   *,
   *::before,
   *::after {
@@ -49,7 +50,7 @@
     --tile: light-dark(#ffffff, #1a1d21);
     /* The Now tile: warm grey in light mode, slate in dark. */
     --tile-strong: light-dark(#dfdbdb, #262b31);
-    /* The contact tile: pale blue in light mode, deep blue in dark. */
+    /* The contact tile: light gray in light mode, deep blue in dark. */
     --tile-accent: light-dark(#dae5fc, #233c86);
     --ink: light-dark(#14171b, #e9ecef);
     --muted: light-dark(#5b636d, #9ea7b1);
@@ -61,7 +62,7 @@
     --on-strong: light-dark(#14171b, #f4f6f8);
     --on-strong-muted: light-dark(#476152, #aab3bf);
     --on-strong-line: light-dark(rgb(23 77 46 / 0.25), rgb(255 255 255 / 0.22));
-    /* Neutral text on the pale blue tile in light mode: blue on blue blurs. */
+    /* Neutral text on the light gray tile in light mode: blue on blue blurs. */
     --on-accent: light-dark(#14171b, #ffffff);
     --on-accent-muted: light-dark(#3f4a5a, #dbe4ff);
     --on-accent-line: light-dark(rgb(20 23 27 / 0.3), rgb(255 255 255 / 0.45));
@@ -491,7 +492,7 @@
     line-height: 1.6;
   }
 
-  .prose > * + * {
+  .prose>*+* {
     margin-top: 0.8em;
   }
 
