@@ -1,5 +1,6 @@
 ---
 title: Spider Solitaire
+homeSlot: 4
 order: 2
 started: 2013
 status: finished

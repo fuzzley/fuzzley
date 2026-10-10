@@ -1,5 +1,6 @@
 ---
 title: Minesweeper
+homeSlot: 1
 order: 3
 started: 2016
 status: finished

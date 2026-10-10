@@ -19,7 +19,12 @@ import {
   yearRange,
 } from "../lib/experience";
 
-const [feature, ...games] = await getProjects();
+const projects = await getProjects();
+const feature = projects[0];
+// The games in the grid's four slots, in slot order (see `homeSlot`).
+const games = projects
+  .filter((project) => project.data.homeSlot !== undefined)
+  .sort((a, b) => (a.data.homeSlot ?? 0) - (b.data.homeSlot ?? 0));
 const jobs = await getJobs();
 const current = jobs.find((job) => !job.data.end) ?? jobs[0];
 const outcomes = visibleHighlights(current);
@@ -142,11 +147,11 @@ const jsonLd = {
       )}
     </section>
 
-    {games.map((project, index) => (
+    {games.map((project) => (
       <GameTile
         project={project}
-        class={`game-${index + 1}`}
-        wide={index === 0 || index === 3}
+        class={`game-${project.data.homeSlot}`}
+        wide={project.data.homeSlot === 1 || project.data.homeSlot === 4}
       />
     ))}
 
