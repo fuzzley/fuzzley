@@ -42,13 +42,6 @@ const jsonLd = {
   ogType="profile"
   jsonLd={jsonLd}
 >
-  <script is:inline slot="head">
-    // The old site routed tabs through hasher, as #/projects, #/about and
-    // #/contact. Send those links to the matching section.
-    if (location.hash.indexOf("#/") === 0) {
-      location.replace("#" + location.hash.slice(2));
-    }
-  </script>
   <div class="bento home">
     <section class="tile hero" id="about" aria-labelledby="hero-name">
       <Picture

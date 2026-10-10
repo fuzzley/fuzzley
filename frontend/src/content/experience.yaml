@@ -8,13 +8,13 @@ google:
   org: Google
   role: Staff Software Engineer & Manager
   start: "2017-01"
-  focus: Generative AI, usage insights and documentation infrastructure
+  focus: Generative AI, Data Insights, Tools & Infrastructure
   highlights:
-    - Manage a team of eight engineers and lead cross-functional teams of engineers, data scientists and UX designers.
-    - Improve LLM and generative AI results across Google Cloud, Firebase and other products by making more training data available and improving the tooling for fine-tuning models.
-    - Shape high-level product decisions by measuring product usage and presenting the insights to senior Google leadership.
-    - Build critical infrastructure for Google Cloud's documentation platform.
-    - Maintain and improve the content management system behind Google's developer documentation, including its templating and compilation engines, machine translation system and content-serving frontend.
+    - Manage a team of eight engineers and lead efforts across teams of project managers, data scientists, and UX designers.
+    - Improve LLM and generative AI results across Google products via tooling to improve training data quality and availability.
+    - Shape high-level product decisions by building tools to measure and surface product level data insights.
+    - Lead development of content compiler, presentation, and delivery infrastructure for Google developer documentation platform.
+    - Build Google-scale load and performance testing and UI testing tools and infrastructure.
 
 swampfox:
   org: Swampfox Technologies
