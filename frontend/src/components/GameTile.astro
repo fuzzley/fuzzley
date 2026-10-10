@@ -14,6 +14,8 @@ interface Props {
   project: Project;
   headingLevel?: 2 | 3;
   class?: string;
+  /** A large 16:9 preview spanning two grid columns, instead of a 4:3 tile. */
+  wide?: boolean;
   /** The image's displayed width, for picking a source size. */
   sizes?: string;
 }
@@ -22,20 +24,24 @@ const {
   project,
   headingLevel = 2,
   class: className,
-  sizes = "(min-width: 56rem) 18rem, 50vw",
+  wide = false,
+  sizes = wide
+    ? "(min-width: 56rem) 37rem, calc(100vw - 32px)"
+    : "(min-width: 56rem) 18rem, 50vw",
 } = Astro.props;
 const Heading = headingLevel === 3 ? "h3" : "h2";
+const widths = wide ? [480, 720, 960, 1280] : [320, 480, 640];
 ---
 
 <article
-  class:list={["tile tile--media game", className]}
+  class:list={["tile tile--media game", { "game--wide": wide }, className]}
   style={`--tint: ${project.data.tint}`}
 >
   <Picture
     src={project.data.cover}
     alt=""
     pictureAttributes={{ class: "tile-media" }}
-    widths={[320, 480, 640]}
+    widths={widths}
     sizes={sizes}
     formats={["avif"]}
     fallbackFormat="webp"
@@ -61,6 +67,10 @@ const Heading = headingLevel === 3 ? "h3" : "h2";
   .game {
     aspect-ratio: 4 / 3;
     container-type: inline-size;
+  }
+
+  .game--wide {
+    aspect-ratio: 16 / 9;
   }
 
   /* Too narrow for both pills: keep the name, which leads to the project

@@ -143,7 +143,11 @@ const jsonLd = {
     </section>
 
     {games.map((project, index) => (
-      <GameTile project={project} class={`game-${index + 1}`} />
+      <GameTile
+        project={project}
+        class={`game-${index + 1}`}
+        wide={index === 0 || index === 3}
+      />
     ))}
 
     <section
@@ -181,35 +185,42 @@ const jsonLd = {
 </Base>
 
 <style>
+  /* g1 and g4 are wide 16:9 game previews; g2 and g3 are 4:3 tiles. */
   .home {
     grid-template-areas:
       "hero hero"
       "mail mail"
       "feat feat"
       "now now"
-      "g1 g2"
-      "g3 g4"
+      "g1 g1"
+      "g2 g3"
+      "g4 g4"
       "exp exp"
       "edu edu";
   }
 
-  /* On wide screens the name and contact cards stack on the left, together
-     as tall as the featured game on the right. */
+  /* Wide screens pair cards of about the same height, alternating sides:
+     the name and contact cards beside the featured game, the Now card beside
+     a wide preview over two tiles, and a wide preview over Education beside
+     Experience. */
   @media (min-width: 56rem) {
     .home {
       grid-template-areas:
         "hero hero feat feat"
         "mail mail feat feat"
-        "now now g1 g2"
-        "now now g3 g4"
-        "exp exp edu edu";
+        "now now g1 g1"
+        "now now g2 g3"
+        "g4 g4 exp exp"
+        "edu edu exp exp";
     }
 
-    /* Beside the Now tile the two game rows share its height, so the game
-       tiles fill their cells instead of keeping their 4:3 shape. */
+    /* The games' shapes set their rows' minimum height. Where the card
+       beside them is a little taller, they stretch to fill the gap instead
+       of leaving one. The fixed width stops a stretched tile from widening
+       to keep its shape and spilling out of its columns. */
     .home :global(.game) {
-      aspect-ratio: auto;
-      min-height: 13rem;
+      align-self: stretch;
+      width: 100%;
     }
   }
 
