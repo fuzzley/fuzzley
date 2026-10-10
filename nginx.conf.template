@@ -8,6 +8,19 @@ server {
     absolute_redirect off;
     port_in_redirect off;
 
+    # The nginx image ships with compression off. HTML is always included once
+    # it is on; these are the other text types the site serves.
+    gzip on;
+    gzip_min_length 1024;
+    gzip_types text/css application/javascript application/json image/svg+xml application/manifest+json;
+
+    # The build fingerprints every file in /assets/, so one never changes in
+    # place and browsers can keep it for a year.
+    location /assets/ {
+        root /usr/share/nginx/html;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+
     # Runtime config is regenerated per-deploy; never cache it.
     location = /env.js {
         root /usr/share/nginx/html;
