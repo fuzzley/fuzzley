@@ -48,20 +48,26 @@ const widths = wide ? [480, 720, 960, 1280] : [320, 480, 640];
     fallbackFormat="webp"
     style={coverTransition(project)}
   />
-  <GitHubLink href={project.data.repo} projectTitle={project.data.title} />
   <div class="game-bar">
     <Heading class="pill game-title">
       <a class="stretched" href={projectPath(project)}>
         {project.data.title}
       </a>
     </Heading>
-    <a
-      class="pill pill--dark above"
-      href={playPath(project)}
-      aria-label={`${playShort(project)} ${project.data.title}`}
-    >
-      {playShort(project)}
-    </a>
+    <div class="game-actions above">
+      <a
+        class="pill pill--dark"
+        href={playPath(project)}
+        aria-label={`${playShort(project)} ${project.data.title}`}
+      >
+        {playShort(project)}
+      </a>
+      <GitHubLink
+        href={project.data.repo}
+        projectTitle={project.data.title}
+        variant="overlay"
+      />
+    </div>
   </div>
 </article>
 
@@ -75,10 +81,10 @@ const widths = wide ? [480, 720, 960, 1280] : [320, 480, 640];
     aspect-ratio: 16 / 9;
   }
 
-  /* Too narrow for both pills: keep the name, which leads to the project
-     page and its full-size play button. */
+  /* Too narrow for the name and both buttons: drop Play and keep the name,
+     which leads to the project page and its full-size play button. */
   @container (max-width: 14rem) {
-    .game-bar .pill--dark {
+    .game-actions .pill--dark {
       display: none;
     }
   }
@@ -98,8 +104,12 @@ const widths = wide ? [480, 720, 960, 1280] : [320, 480, 640];
     letter-spacing: 0;
   }
 
-  /* Keeps the button on the right when a long title pushes it to a new line. */
-  .game-bar .pill--dark {
+  /* Play and GitHub, kept on the right even when a long title pushes them
+     to a new line. */
+  .game-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     margin-left: auto;
   }
 

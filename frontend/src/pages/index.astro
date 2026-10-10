@@ -106,7 +106,6 @@ const jsonLd = {
         style={coverTransition(feature)}
         loading="eager"
       />
-      <GitHubLink href={feature.data.repo} projectTitle={feature.data.title} />
       <div class="feature-card">
         <div>
           <h2 id="feature-title">
@@ -116,9 +115,15 @@ const jsonLd = {
           </h2>
           <p class="feature-tagline">{feature.data.tagline}</p>
         </div>
-        <a class="button button--primary above" href={playPath(feature)}>
-          Play
-        </a>
+        <div class="feature-actions above">
+          <a class="button button--primary" href={playPath(feature)}>
+            Play
+          </a>
+          <GitHubLink
+            href={feature.data.repo}
+            projectTitle={feature.data.title}
+          />
+        </div>
       </div>
     </section>
 
@@ -322,6 +327,12 @@ const jsonLd = {
   .feature-card .button--primary {
     background: #14171b;
     color: #ffffff;
+  }
+
+  .feature-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   @media (max-width: 55.99rem) {

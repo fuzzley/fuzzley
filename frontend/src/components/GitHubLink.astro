@@ -1,18 +1,24 @@
 ---
-// A round GitHub-logo button linking to a project's source, placed in the
-// top-right corner of its card. The card must be positioned (every .tile is).
-// The logo is the mark-github icon from GitHub's Octicons (MIT license).
+// A round GitHub-logo button linking to a project's source, placed beside
+// the project's Play button. The logo is the mark-github icon from GitHub's
+// Octicons (MIT license).
 interface Props {
   href: string;
   /** The project's name, for the button's accessible name. */
   projectTitle: string;
+  /**
+   * "overlay": dark and translucent, matching the Play pill on a screenshot.
+   * "outline": an outlined button in the surrounding text color, matching a
+   * full-size Play button on a solid card.
+   */
+  variant?: "overlay" | "outline";
 }
 
-const { href, projectTitle } = Astro.props;
+const { href, projectTitle, variant = "outline" } = Astro.props;
 ---
 
 <a
-  class="github-link"
+  class:list={["github-link", `github-link--${variant}`]}
   href={href}
   aria-label={`${projectTitle} source code on GitHub`}
   title="Source on GitHub"
@@ -23,30 +29,49 @@ const { href, projectTitle } = Astro.props;
 </a>
 
 <style>
-  /* Above the card's stretched title link (z-index 1), so it stays
-     clickable. Dark enough to read on any screenshot. */
   .github-link {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 2;
+    flex: none;
     display: grid;
     place-items: center;
-    width: 36px;
-    height: 36px;
     border-radius: 999px;
-    background: rgb(20 23 27 / 0.82);
-    color: #ffffff;
     transition: background 0.2s ease;
   }
 
-  .github-link:hover {
-    background: rgb(20 23 27 / 0.96);
+  .github-link svg {
+    fill: currentColor;
   }
 
-  .github-link svg {
+  /* The height of the .pill--dark Play button beside it. */
+  .github-link--overlay {
+    width: 29px;
+    height: 29px;
+    background: rgb(20 23 27 / 0.88);
+    color: #ffffff;
+  }
+
+  .github-link--overlay:hover {
+    background: rgb(20 23 27 / 0.98);
+  }
+
+  .github-link--overlay svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* The height of the .button Play button beside it. */
+  .github-link--outline {
+    width: 41px;
+    height: 41px;
+    border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+    color: inherit;
+  }
+
+  .github-link--outline:hover {
+    background: color-mix(in srgb, currentColor 8%, transparent);
+  }
+
+  .github-link--outline svg {
     width: 20px;
     height: 20px;
-    fill: currentColor;
   }
 </style>
