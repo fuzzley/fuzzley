@@ -10,9 +10,11 @@ google:
   start: "2017-01"
   focus: Developer relations, data insights and internal infrastructure
   highlights:
-    - "TODO: Outcome 1. What your team shipped and the difference it made."
-    - "TODO: Outcome 2. A system or tool you built, and who relies on it."
-    - "TODO: Outcome 3. How you grew the team or the people on it."
+    - Manage a team of eight engineers and lead cross-functional teams of engineers, data scientists and UX designers.
+    - Improve LLM and generative AI results across Google Cloud, Firebase and other products by making more training data available and improving the tooling for fine-tuning models.
+    - Shape high-level product decisions by measuring product usage and presenting the insights to senior Google leadership.
+    - Build critical infrastructure for Google Cloud's documentation platform.
+    - Maintain and improve the content management system behind Google's developer documentation, including its templating and compilation engines, machine translation system and content-serving frontend.
 
 swampfox:
   org: Swampfox Technologies
