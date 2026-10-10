@@ -9,10 +9,18 @@ Plan, mocks and rationale: https://claude.ai/artifact/NpYyaw1fX9REPFMcC6i2sM
 
 ## Status
 
-- **Current branch:** `quick-fixes`
-- **Last step finished:** work log created
-- **Next step:** Phase 0 quick fixes on the current site
+- **Current branch:** `redesign` (built on `quick-fixes`)
+- **Last step finished:** deploy workflows for GitHub Pages
+- **Next step:** point the five game repos at `public/projects/<slug>/play`
 - **Nothing has been pushed.** All work is in local commits.
+
+### Branches
+
+| Repository          | Branch                 | Holds                                                         |
+| ------------------- | ---------------------- | ------------------------------------------------------------- |
+| fuzzley             | `quick-fixes`          | Phase 0 fixes to the old site. Can ship on its own.           |
+| fuzzley             | `redesign`             | Everything in `quick-fixes`, plus the Astro rebuild.          |
+| fuzzley.github.io   | `pages-actions-deploy` | The Pages workflow that builds and publishes fuzzley.info.    |
 
 ## How to resume
 
@@ -71,13 +79,28 @@ Gathered with read-only `gcloud` and DNS lookups on 2026-10-10.
 
 ## Checklist
 
-- [ ] Phase 0: quick fixes on the current site (`quick-fixes` branch)
-- [ ] Phase 1: Astro foundation (`redesign` branch)
-- [ ] Phase 2: Bento pages and the `/projects` tree
-- [ ] Phase 3: hosting move, prepared (workflows written; cutover needs the owner)
+- [x] Phase 0: quick fixes on the current site (`quick-fixes` branch)
+- [x] Phase 1: Astro foundation (`redesign` branch)
+- [x] Phase 2: Bento pages and the `/projects` tree
+- [x] Phase 3: hosting move, prepared (workflows written; cutover needs the owner)
 - [ ] Phase 4: polish
 - [ ] Game repos: point each deploy at `public/projects/<slug>/play`
 - [ ] Cutover runbook carried out by the owner (see below)
+
+## Checking pages
+
+`yarn verify` runs `astro check`, ESLint, the Prettier check and the build.
+To look at pages, `yarn build && yarn preview`, then screenshot with headless
+Chrome using a throwaway profile:
+
+```sh
+chrome --headless=new --user-data-dir=<temp dir> --window-size=1280,1600 \
+  --screenshot=out.png http://localhost:4321/
+```
+
+Add `--blink-settings=preferredColorScheme=1` for light mode or `=0` for
+dark. For a phone width, load the page in a 390px-wide `<iframe>` inside a
+page shot at 512px, then crop.
 
 ## Cutover runbook
 
@@ -94,3 +117,53 @@ _Filled in during Phase 3._
 - Created branch `quick-fixes` from `main` at `cf092ae`.
 - Generated the favicon set in `branding/favicon/` (script, README, exports).
 - Next: Phase 0 quick fixes.
+
+### 2026-10-10: Phase 0 on `quick-fixes`
+
+Commits `4d83cf4`, `513310e`.
+
+- Added the viewport tag, title, description, canonical URL and Open Graph
+  tags (with `public/images/og-home.jpg`, a 1200x630 crop of Klondike).
+- Removed the phone number. Fixed typos. Added alt text to every image.
+- Re-encoded screenshots and logos as WebP (766 KB to about 150 KB); deleted
+  nine unused images.
+- CSS for phones: project cards and logos shrink and stack below 799px.
+- Wired in the tiled-f favicon set.
+- nginx: gzip on; `/assets/` cached for a year.
+- Checked at 390px with headless Chrome (see "Checking pages" below).
+- Not checked: the Docker build. The Docker daemon wasn't running, and I
+  didn't start it.
+
+### 2026-10-10: Astro rebuild on `redesign`
+
+Commits `90c7129`, `1e9a1be`.
+
+- Astro 7.3.8, Vite 8, TypeScript 6.0 (typescript-eslint and
+  `@astrojs/check` don't support TypeScript 7 yet). `@emnapi/core` and
+  `@emnapi/runtime` are listed only because `@astrojs/check` needs them and
+  Yarn doesn't install peer dependencies.
+- Pages: `/`, `/projects/`, `/projects/<slug>/`, `/cv/`, `/404`, and
+  `/project/<slug>/` redirect pages that keep the `#hash`.
+- Games moved with `git mv` from `public/project/<slug>/` to
+  `public/projects/<slug>/play/`. nginx 301s the old paths.
+- Content: `src/content/projects/*.md`, `src/content/experience.yaml`,
+  `src/data/profile.ts`. Google's outcomes are three `TODO:` placeholders:
+  shown by `yarn dev`, hidden in builds, with a build warning.
+- Images in `src/assets/`, restored at full size from `main` (Phase 0 had
+  deleted the originals) plus the solitaire screenshots.
+- `deploy.yml` verifies every push and PR; on main it dispatches
+  `fuzzley-updated` to fuzzley.github.io. That repo's new `pages.yml`
+  (branch `pages-actions-deploy`) builds and publishes, games included.
+- Gotchas found:
+  - Astro 7 scopes component CSS with attribute selectors, which add
+    specificity. A scoped `.a > *` outranks a scoped `.b`; name elements
+    explicitly.
+  - Astro drops whitespace at a line break before an inline element.
+    Prettier's Astro plugin inserts `{" "}` where needed, so run
+    `yarn prettier` before committing.
+  - Headless Chrome won't render narrower than 512px; check phone widths
+    through an iframe (see below).
+- Content note: fMinesweeper's README says "TypeScript and Angular", but
+  the deployed build is JavaScript with Knockout and Bootstrap. The project
+  page describes what ships.
+- Next: game repos.
