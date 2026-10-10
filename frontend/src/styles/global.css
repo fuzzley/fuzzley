@@ -47,8 +47,8 @@
 
     --bg: light-dark(#e9ecef, #0f1113);
     --tile: light-dark(#ffffff, #1a1d21);
-    /* The Now tile: soft felt green in light mode, slate in dark. */
-    --tile-strong: light-dark(#d8eedf, #262b31);
+    /* The Now tile: soft pink in light mode, slate in dark. */
+    --tile-strong: light-dark(#fcdcdc, #262b31);
     /* The contact tile: pale blue in light mode, deep blue in dark. */
     --tile-accent: light-dark(#dae5fc, #233c86);
     --ink: light-dark(#14171b, #e9ecef);
