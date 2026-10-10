@@ -3,15 +3,29 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="build-version" content="">
-    <title>fuzzley</title>
+    <title>Andrey Gavel | Software engineer and manager</title>
+    <meta name="description"
+        content="Andrey Gavel is a staff software engineer and manager at Google. Play his browser games: Solitaire Collection, Spider Solitaire, Minesweeper, Pong and more.">
+    <link rel="canonical" href="https://fuzzley.info/">
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Andrey Gavel">
+    <meta property="og:description"
+        content="Staff software engineer and manager at Google, and the maker of a collection of browser card games.">
+    <meta property="og:url" content="https://fuzzley.info/">
+    <meta property="og:image" content="https://fuzzley.info/images/og-home.jpg">
+    <meta name="twitter:card" content="summary_large_image">
 
     <!-- Runtime config, then the shared analytics bootstrap. Order matters:
          analytics.js reads the measurement ID out of window.__ENV. -->
     <script src="env.js"></script>
     <script src="analytics.js"></script>
 
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
     <link rel="stylesheet" href="external/materialize/css/materialize.css">
     <link rel="stylesheet" href="css/site.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -48,7 +62,7 @@
                 <div class="fz-project card hoverable">
                     <div class="card-image waves-effect waves-block waves-light">
                         <a href="./project/solitaire/" target="_blank">
-                            <img class="activator" src="./images/solitaire_500_350.png" />
+                            <img alt="A game of Klondike in Solitaire Collection" class="activator" src="./images/solitaire_500_350.webp" />
                         </a>
                     </div>
                     <div class="card-content">
@@ -71,7 +85,7 @@
                 <div class="fz-project card hoverable">
                     <div class="card-image waves-effect waves-block waves-light">
                         <a href="./project/spider/" target="_blank">
-                            <img class="activator" src="./images/spider_solitaire_500_350.png" />
+                            <img alt="A game of Spider Solitaire in progress" class="activator" src="./images/spider_solitaire_500_350.webp" />
                         </a>
                     </div>
                     <div class="card-content">
@@ -94,7 +108,7 @@
                 <div class="fz-project card hoverable">
                     <div class="card-image waves-effect waves-block waves-light">
                         <a href="./project/minesweeper/" target="_blank">
-                            <img class="activator" src="./images/minesweeper_500_350.png" />
+                            <img alt="A Minesweeper board partly cleared" class="activator" src="./images/minesweeper_500_350.webp" />
                         </a>
                     </div>
                     <div class="card-content">
@@ -116,7 +130,7 @@
                 <div class="fz-project card hoverable">
                     <div class="card-image waves-effect waves-block waves-light">
                         <a href="./project/path/" target="_blank">
-                            <img class="activator" src="./images/path_500_350.png" />
+                            <img alt="A product page in the PATH mobile prototype" class="activator" src="./images/path_500_350.webp" />
                         </a>
                     </div>
                     <div class="card-content">
@@ -137,7 +151,7 @@
                 <div class="fz-project card hoverable">
                     <div class="card-image waves-effect waves-block waves-light">
                         <a href="./project/pong/" target="_blank">
-                            <img class="activator" src="./images/pong_500_350.png" />
+                            <img alt="A game of Pong in progress" class="activator" src="./images/pong_500_350.webp" />
                         </a>
                     </div>
                     <div class="card-content">
@@ -192,7 +206,7 @@
                             several web development projects at Design IT, architecting the system, and overseeing other
                             interns working on the projects.<br /><br />
                             During my graduate studies, I also worked as a Graduate Assistant in the Computer Science
-                            department. My responsibilities involved leading a Java lab and a Linux lab. Addtitionally,
+                            department. My responsibilities involved leading a Java lab and a Linux lab. Additionally,
                             I
                             set up a Xen Hypervisor on a university server and documented the process.<br /><br />
                             After graduating from the University of South Carolina with a Master's degree, I worked for
@@ -215,7 +229,7 @@
                 <li>
                     <div class="collapsible-header fz-collapsible-item fz-flex-row">
                         <div class="fz-flex-column fz-flex-v-center">
-                            <img src="images/google_logo.png" />
+                            <img alt="Google" src="images/google_logo.webp" />
                         </div>
                         <div>
                             <h3>Google</h3>
@@ -228,7 +242,7 @@
                 <li>
                     <div class="collapsible-header fz-collapsible-item fz-flex-row">
                         <div class="fz-flex-column fz-flex-v-center">
-                            <img src="./images/swampfox_logo.png" />
+                            <img alt="Swampfox Technologies" src="./images/swampfox_logo.webp" />
                         </div>
                         <div>
                             <h3>Swampfox Technologies</h3>
@@ -273,7 +287,7 @@
                 <li>
                     <div class="collapsible-header fz-collapsible-item fz-flex-row">
                         <div class="fz-flex-column fz-flex-v-center">
-                            <img src="./images/design_it_logo.png" />
+                            <img alt="Design Information Technology" src="./images/design_it_logo.webp" />
                         </div>
                         <div>
                             <h3>Design Information Technology</h3>
@@ -296,7 +310,7 @@
                         <div class="flow-text fz-flex-row fz-work-experience-description">
                             <div>&bull;&nbsp;</div>
                             <div>
-                                Lead a team of 12 junior developers to successfully port a C#/Silverlight application,
+                                Led a team of 12 junior developers to successfully port a C#/Silverlight application,
                                 used for electrical systems modeling and simulation, to HTML5/JavaScript, providing the
                                 application with a fresh start and improving its usability and accessibility features.
                             </div>
@@ -309,8 +323,7 @@
                                 Collaborated with a web designer to develop and execute a plan for rewriting a
                                 C#/Silverlight asset management application in HTML5/JavaScript. As a result, the
                                 application&apos;s lifetime was extended, and the application became accessible through
-                                smart
-                                phones and tablets.
+                                smartphones and tablets.
                             </div>
                         </div>
                     </div>
@@ -339,7 +352,7 @@
                 <li>
                     <div class="collapsible-header fz-collapsible-item fz-flex-row">
                         <div class="fz-flex-column fz-flex-v-center">
-                            <img src="./images/SysEda.png" />
+                            <img alt="SysEDA" src="./images/SysEda.webp" />
                         </div>
                         <div>
                             <h3>SysEDA</h3>
@@ -361,7 +374,7 @@
                 <li>
                     <div class="collapsible-header fz-collapsible-item fz-flex-row">
                         <div class="fz-flex-column fz-flex-v-center">
-                            <img src="./images/usc_logo_2.jpg" />
+                            <img alt="University of South Carolina" src="./images/usc_logo_2.webp" />
                         </div>
                         <div>
                             <h3>University of South Carolina</h3>
@@ -429,12 +442,12 @@
                 <li>
                     <div class="collapsible-header fz-collapsible-item fz-flex-row">
                         <div class="fz-flex-column fz-flex-v-center">
-                            <img src="./images/usc_logo_2.jpg" />
+                            <img alt="University of South Carolina" src="./images/usc_logo_2.webp" />
                         </div>
                         <div>
                             <h3>University of South Carolina</h3>
-                            <h5>Bachelors of Science, Computer Science</h5>
-                            <h5>Masters of Engineering, Computer Science</h5>
+                            <h5>Bachelor of Science, Computer Science</h5>
+                            <h5>Master of Engineering, Computer Science</h5>
                         </div>
                     </div>
                 </li>
@@ -448,25 +461,22 @@
                 <li class="collection-item flow-text"><i
                         class="material-icons">email</i>&nbsp;&nbsp;&nbsp;andrey.gavel@gmail.com
                 </li>
-                <li class="collection-item flow-text"><i class="material-icons">phone</i>&nbsp;&nbsp;&nbsp;(864)
-                    473-7097
-                </li>
             </ul>
 
             <h2 class="header brown-text text-darken-3">More Info</h2>
             <div class="card collection">
                 <a class="collection-item flow-text" href="https://github.com/fuzzley" target="_blank">
-                    <img class="fz-size-25-25" src="./images/github_logo.png" />&nbsp;&nbsp;&nbsp;Github
+                    <img alt="" class="fz-size-25-25" src="./images/github_logo.webp" />&nbsp;&nbsp;&nbsp;GitHub
                     <i class="material-icons">open_in_new</i>
                 </a>
                 <a class="collection-item flow-text" href="https://www.linkedin.com/in/andrey-gavel-3b25b757"
                     target="_blank">
-                    <img class="fz-size-25-25" src="./images/linked_in_logo.png" />&nbsp;&nbsp;&nbsp;LinkedIn
+                    <img alt="" class="fz-size-25-25" src="./images/linked_in_logo.webp" />&nbsp;&nbsp;&nbsp;LinkedIn
                     <i class="material-icons">open_in_new</i>
                 </a>
                 <a class="collection-item flow-text" href="https://me.developers.google.com/u/111756247306367074343"
                     target="_blank">
-                    <img class="fz-size-25-25" src="./images/g_logo.png" />&nbsp;&nbsp;&nbsp;Google Developer
+                    <img alt="" class="fz-size-25-25" src="./images/g_logo.webp" />&nbsp;&nbsp;&nbsp;Google Developer
                     <i class="material-icons">open_in_new</i>
                 </a>
             </div>
