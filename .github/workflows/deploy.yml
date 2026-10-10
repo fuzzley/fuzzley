@@ -1,10 +1,13 @@
 name: Verify and deploy
 
 # Every push and pull request is type-checked, linted and built. Pushes to
-# main then ask fuzzley/fuzzley.github.io to build and publish the site:
-# GitHub Pages deploys from the repository its workflow runs in, so the
+# main then ask fuzzley/fuzzley.github.io to build and publish its copy of the
+# site: GitHub Pages deploys from the repository its workflow runs in, so the
 # publishing job lives there (.github/workflows/pages.yml in that repo). This
 # run waits for that one, so a failed deploy shows here too.
+#
+# fuzzley.info itself is served by Cloud Run, which builds the Dockerfile from
+# main on its own and doesn't depend on this workflow.
 
 on:
   push:
