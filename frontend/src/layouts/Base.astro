@@ -106,7 +106,9 @@ const build = __BUILD_INFO__;
     <script is:inline>
       // Counts plays, which Google Analytics doesn't see on its own because
       // the games are on the same site: a click on any link into
-      // /projects/<slug>/play/ sends a play_game event naming the game.
+      // /projects/<slug>/play/ sends a play_game event naming the game. The
+      // GitHub Pages copy links to the games on fuzzley.info, which the
+      // pattern matches too.
       document.addEventListener("click", function (event) {
         const link = event.target.closest && event.target.closest("a[href]");
         if (!link || typeof window.gtag !== "function") return;

@@ -5,6 +5,13 @@ import { buildInfo } from "./tools/build-info.mjs";
 
 const site = "https://fuzzley.info";
 
+// Set only by the GitHub Pages workflow in fuzzley.github.io. That copy of the
+// site leaves the games out and links to them on fuzzley.info instead. Unset,
+// as in the Docker build and local builds, the games ship as usual.
+const playOrigin = process.env.PLAY_ORIGIN
+  ? new URL(process.env.PLAY_ORIGIN).origin
+  : "";
+
 // The games are prebuilt pages copied from public/, so Astro does not know
 // about them. List them in the sitemap by hand.
 const playPages = fs
@@ -24,6 +31,30 @@ function versionJson() {
           new URL("version.json", dir),
           JSON.stringify(buildInfo, null, 2),
         );
+      },
+    },
+  };
+}
+
+// With PLAY_ORIGIN set, deletes the games from dist/. Only the play/ folders
+// go: dist/projects/<slug>/ itself is the site's own project page.
+function omitGames() {
+  return {
+    name: "omit-games",
+    hooks: {
+      "astro:build:done": ({ dir, logger }) => {
+        if (!playOrigin) return;
+        const projectsDir = new URL("projects/", dir);
+        for (const entry of fs.readdirSync(projectsDir, {
+          withFileTypes: true,
+        })) {
+          if (!entry.isDirectory()) continue;
+          fs.rmSync(new URL(`${entry.name}/play/`, projectsDir), {
+            recursive: true,
+            force: true,
+          });
+        }
+        logger.info(`Left the games out; play links go to ${playOrigin}.`);
       },
     },
   };
@@ -64,6 +95,7 @@ export default defineConfig({
       customPages: playPages,
     }),
     versionJson(),
+    omitGames(),
     placeholderReport(),
   ],
   server: {
@@ -72,6 +104,7 @@ export default defineConfig({
   vite: {
     define: {
       __BUILD_INFO__: JSON.stringify(buildInfo),
+      __PLAY_ORIGIN__: JSON.stringify(playOrigin),
     },
   },
 });
