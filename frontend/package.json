@@ -9,7 +9,7 @@
     "start": "vite",
     "build": "vite build && node tools/inject-analytics.mjs",
     "build:dev": "vite build --mode development && node tools/inject-analytics.mjs",
-    "build:prod": "vite build --mode production && node tools/inject-analytics.mjs",
+    "build:prod": "vite build --mode deploy && node tools/inject-analytics.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
     "prettier": "prettier . --write"

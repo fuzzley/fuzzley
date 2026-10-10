@@ -40,7 +40,7 @@ jobs:
         working-directory: frontend
         env:
           GITHUB_SHA: ${{ github.sha }}
-        run: yarn build
+        run: yarn build:prod
 
       - name: Configure git credentials
         run: |
@@ -64,19 +64,7 @@ jobs:
           # 4. Remove project folder from GitHub Pages deployment
           rm -rf main-website/project
 
-          # 5. Rewrite project links to point to https://fuzzley.info
-          node -e '
-            const fs = require("fs");
-            const file = "main-website/index.html";
-            let html = fs.readFileSync(file, "utf8");
-            const count = (html.match(/href="(?:\.\/)?project\//g) || []).length;
-            html = html.replaceAll("href=\"./project/", "href=\"https://fuzzley.info/project/");
-            html = html.replaceAll("href=\"project/", "href=\"https://fuzzley.info/project/");
-            fs.writeFileSync(file, html);
-            console.log("Rewrote " + count + " project links to https://fuzzley.info/project/");
-          '
-
-          # 6. Commit and push the updates if there are changes
+          # 5. Commit and push the updates if there are changes
           cd main-website
           git add -A
 
