@@ -92,7 +92,7 @@ Gathered with read-only `gcloud` and DNS lookups on 2026-10-10.
 - [x] Phase 4: polish (link preview image, play events, view transitions)
 - [x] Game repos: point each deploy at `public/projects/<slug>/play`
 - [ ] Cutover runbook carried out by the owner (see below)
-- [ ] Owner writes the three Google outcomes in `src/content/experience.yaml`
+- [x] Google outcomes in `src/content/experience.yaml` (from the owner's text)
 
 Ideas not started: game clips on the tiles (declined for now), fPoker's tile
 (waits until it is playable), a Content Security Policy as a `<meta>` tag,
@@ -256,4 +256,21 @@ Commits `90c7129`, `1e9a1be`.
 - Commits on `redesign`: `44c80b6` (new link preview, drawn by
   `branding/og-image/make_og_home.py`), `2b2f026` (README), `2e0c544`
   (`play_game` analytics event for clicks into a game).
+- Next: the owner's review and the Cutover runbook.
+
+### 2026-10-10: Google outcomes and the Now tile
+
+- LinkedIn's public profile is behind its sign-in wall and the Chrome
+  extension wasn't connected, so the owner pasted the role description.
+  `15981a3` turns it into five present-tense highlights: the team of eight,
+  LLM training data and fine-tuning tooling, usage insights for leadership,
+  Cloud documentation infrastructure, and the developer documentation CMS.
+- `0980773`: Google's focus is now "Generative AI, usage insights and
+  documentation infrastructure". The Now tile is one column (job and date,
+  then Focus, then outcomes) and takes half the grid from 56rem up, with
+  the four game tiles in a 2x2 block beside it. Checked at 1280px, 960px
+  and 390px.
+- Not changed: the `/cv` bio in `src/data/profile.ts` still describes the
+  Google role as managing "a team of software engineers working on
+  developer relations projects".
 - Next: the owner's review and the Cutover runbook.
