@@ -47,8 +47,10 @@
 
     --bg: light-dark(#e9ecef, #0f1113);
     --tile: light-dark(#ffffff, #1a1d21);
-    --tile-strong: light-dark(#14171b, #262b31);
-    --tile-accent: light-dark(#1d4ed8, #233c86);
+    /* The Now tile: soft felt green in light mode, slate in dark. */
+    --tile-strong: light-dark(#d8eedf, #262b31);
+    /* The contact tile: pale blue in light mode, deep blue in dark. */
+    --tile-accent: light-dark(#dae5fc, #233c86);
     --ink: light-dark(#14171b, #e9ecef);
     --muted: light-dark(#5b636d, #9ea7b1);
     --line: light-dark(#d6dbe1, #2e333a);
@@ -56,10 +58,12 @@
     --green: light-dark(#179a50, #3cc277);
     --focus: light-dark(#1d4ed8, #93b4ff);
     --placeholder: light-dark(#b45309, #f5a54a);
-    --on-strong: #f4f6f8;
-    --on-strong-muted: #aab3bf;
-    --on-accent: #ffffff;
-    --on-accent-muted: #c9d6ff;
+    --on-strong: light-dark(#14171b, #f4f6f8);
+    --on-strong-muted: light-dark(#476152, #aab3bf);
+    --on-strong-line: light-dark(rgb(23 77 46 / 0.25), rgb(255 255 255 / 0.22));
+    --on-accent: light-dark(#1b3a8c, #ffffff);
+    --on-accent-muted: light-dark(#4560a6, #c9d6ff);
+    --on-accent-line: light-dark(rgb(27 58 140 / 0.3), rgb(255 255 255 / 0.35));
     --pill: rgb(255 255 255 / 0.95);
     --on-pill: #14171b;
 
@@ -445,7 +449,7 @@
   }
 
   .tile--strong .chips li {
-    border-color: rgb(255 255 255 / 0.22);
+    border-color: var(--on-strong-line);
   }
 
   .link-row {
@@ -470,7 +474,7 @@
   }
 
   .tile--accent .link-row a {
-    border-color: rgb(255 255 255 / 0.35);
+    border-color: var(--on-accent-line);
   }
 
   .more-link {
@@ -510,11 +514,6 @@
   .placeholder::before {
     content: "Placeholder: ";
     font-weight: 700;
-  }
-
-  .tile--strong .placeholder {
-    color: #f5a54a;
-    outline-color: #f5a54a;
   }
 }
 
