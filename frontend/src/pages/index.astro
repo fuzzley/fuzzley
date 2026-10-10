@@ -44,17 +44,19 @@ const jsonLd = {
 >
   <div class="bento home">
     <section class="tile hero" id="about" aria-labelledby="hero-name">
-      <Picture
-        src={me}
-        alt="Portrait of Andrey Gavel"
-        class="hero-photo"
-        widths={[80, 160]}
-        sizes="80px"
-        formats={["avif"]}
-        fallbackFormat="webp"
-      />
-      <div class="hero-text">
+      <div class="hero-id">
+        <Picture
+          src={me}
+          alt="Portrait of Andrey Gavel"
+          class="hero-photo"
+          widths={[80, 160]}
+          sizes="80px"
+          formats={["avif"]}
+          fallbackFormat="webp"
+        />
         <h1 id="hero-name">{profile.name}</h1>
+      </div>
+      <div class="hero-text">
         <p class="hero-lede">{profile.lede}</p>
         <ul class="link-row" role="list">
           {links
@@ -223,16 +225,41 @@ const jsonLd = {
 
   .hero {
     grid-area: hero;
+    container-type: inline-size;
     justify-content: space-between;
     gap: 28px;
     min-height: 23rem;
   }
 
+  /* The photo and the name share the top line. The name is sized to the
+     card's width (the card is its container), so it fits on that line at
+     every screen size. */
+  .hero-id {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2vw, 22px);
+  }
+
   .hero :global(.hero-photo) {
+    flex: none;
     width: 80px;
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
+  }
+
+  @media (max-width: 30rem) {
+    .hero :global(.hero-photo) {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  @media (max-width: 22rem) {
+    .hero :global(.hero-photo) {
+      width: 52px;
+      height: 52px;
+    }
   }
 
   .hero-text {
@@ -241,7 +268,7 @@ const jsonLd = {
   }
 
   .hero h1 {
-    font-size: var(--step-4);
+    font-size: clamp(1.75rem, 11.5cqi, 3.75rem);
     font-weight: 800;
     letter-spacing: -0.035em;
     line-height: 0.95;
