@@ -66,6 +66,25 @@ const build = __BUILD_INFO__;
       content="#0f1113"
       media="(prefers-color-scheme: dark)"
     />
+    <script is:inline>
+      // Applies a theme chosen with the toggle (components/ThemeToggle.astro)
+      // before the first paint, so the page never flashes the other one, and
+      // tints the browser's toolbar to match.
+      (function () {
+        let theme = null;
+        try {
+          theme = localStorage.getItem("theme");
+        } catch {
+          // Storage is blocked: follow the system theme.
+        }
+        if (theme !== "light" && theme !== "dark") return;
+        document.documentElement.dataset.theme = theme;
+        const color = theme === "dark" ? "#0f1113" : "#e9ecef";
+        document
+          .querySelectorAll('meta[name="theme-color"]')
+          .forEach((meta) => meta.setAttribute("content", color));
+      })();
+    </script>
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
