@@ -61,9 +61,10 @@
     --on-strong: light-dark(#14171b, #f4f6f8);
     --on-strong-muted: light-dark(#476152, #aab3bf);
     --on-strong-line: light-dark(rgb(23 77 46 / 0.25), rgb(255 255 255 / 0.22));
-    --on-accent: light-dark(#102a6b, #ffffff);
-    --on-accent-muted: light-dark(#2c4787, #dbe4ff);
-    --on-accent-line: light-dark(rgb(16 42 107 / 0.4), rgb(255 255 255 / 0.45));
+    /* Neutral text on the pale blue tile in light mode: blue on blue blurs. */
+    --on-accent: light-dark(#14171b, #ffffff);
+    --on-accent-muted: light-dark(#3f4a5a, #dbe4ff);
+    --on-accent-line: light-dark(rgb(20 23 27 / 0.3), rgb(255 255 255 / 0.45));
     --pill: rgb(255 255 255 / 0.95);
     --on-pill: #14171b;
 
