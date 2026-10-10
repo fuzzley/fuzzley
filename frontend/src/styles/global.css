@@ -79,6 +79,16 @@
     --radius: 22px;
     --radius-inner: 14px;
   }
+
+  /* A choice made with the theme toggle. Every color above comes from
+     light-dark(), which follows color-scheme, so this switches them all. */
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+  }
 }
 
 @layer base {
@@ -226,6 +236,12 @@
     fill: var(--green);
   }
 
+  .header-end {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
   .site-nav ul {
     display: flex;
     gap: 2px;
@@ -243,6 +259,13 @@
   .site-nav a:hover,
   .site-nav a[aria-current] {
     background: var(--tile);
+  }
+
+  /* Keeps the brand, links and theme toggle on one line on small phones. */
+  @media (max-width: 22rem) {
+    .site-nav a {
+      padding-inline: 10px;
+    }
   }
 
   .site-footer {

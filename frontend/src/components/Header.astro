@@ -1,17 +1,16 @@
 ---
 import Mark from "./Mark.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 
 const path = Astro.url.pathname;
 
 const items = [
   { href: "/projects/", label: "Projects" },
   { href: "/cv/", label: "CV" },
-  { href: "/#contact", label: "Contact" },
 ];
 
 // "page" for the page itself, "true" for a page inside its section.
 function current(href: string) {
-  if (href.includes("#")) return undefined;
   if (path === href || path === href.slice(0, -1)) return "page";
   return path.startsWith(href) ? "true" : undefined;
 }
@@ -22,15 +21,18 @@ function current(href: string) {
     <Mark size={26} />
     <span>fuzzley</span>
   </a>
-  <nav class="site-nav" aria-label="Main">
-    <ul role="list">
-      {items.map((item) => (
-        <li>
-          <a href={item.href} aria-current={current(item.href)}>
-            {item.label}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
+  <div class="header-end">
+    <nav class="site-nav" aria-label="Main">
+      <ul role="list">
+        {items.map((item) => (
+          <li>
+            <a href={item.href} aria-current={current(item.href)}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <ThemeToggle />
+  </div>
 </header>

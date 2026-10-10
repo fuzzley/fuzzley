@@ -1,0 +1,126 @@
+---
+// Switches between the light and dark themes. It starts from the system's
+// theme; a choice is saved in localStorage and applied on every page by the
+// inline script in layouts/Base.astro.
+---
+
+<button
+  type="button"
+  class="theme-toggle"
+  aria-label="Dark theme"
+  aria-pressed="false"
+>
+  <svg
+    class="icon-moon"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"></path>
+  </svg>
+  <svg
+    class="icon-sun"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"></path>
+  </svg>
+</button>
+
+<script>
+  type Theme = "light" | "dark";
+
+  const root = document.documentElement;
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+  // The page background in each theme, for the browser's toolbar.
+  const toolbarColors: Record<Theme, string> = {
+    light: "#e9ecef",
+    dark: "#0f1113",
+  };
+
+  const currentTheme = (): Theme => {
+    const chosen = root.dataset.theme;
+    if (chosen === "light" || chosen === "dark") return chosen;
+    return systemDark.matches ? "dark" : "light";
+  };
+
+  function choose(theme: Theme) {
+    root.dataset.theme = theme;
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {
+      // Storage is blocked: the choice lasts until the next page.
+    }
+    document
+      .querySelectorAll('meta[name="theme-color"]')
+      .forEach((meta) => meta.setAttribute("content", toolbarColors[theme]));
+  }
+
+  for (const button of document.querySelectorAll(".theme-toggle")) {
+    const sync = () =>
+      button.setAttribute("aria-pressed", String(currentTheme() === "dark"));
+    button.addEventListener("click", () => {
+      choose(currentTheme() === "dark" ? "light" : "dark");
+      sync();
+    });
+    // Until someone chooses, the button follows the system's theme.
+    systemDark.addEventListener("change", sync);
+    sync();
+  }
+</script>
+
+<style>
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .theme-toggle:hover {
+    background: var(--tile);
+  }
+
+  .theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* The moon offers the dark theme; the sun, once dark, offers the light
+     one. Chosen in CSS rather than script so the icon is right on the first
+     paint. */
+  .icon-sun {
+    display: none;
+  }
+
+  :global(:root[data-theme="dark"]) .icon-sun {
+    display: block;
+  }
+
+  :global(:root[data-theme="dark"]) .icon-moon {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .icon-sun {
+      display: block;
+    }
+
+    :global(:root:not([data-theme="light"])) .icon-moon {
+      display: none;
+    }
+  }
+</style>
