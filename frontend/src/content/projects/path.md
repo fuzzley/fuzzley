@@ -1,5 +1,6 @@
 ---
 title: PATH
+homeSlot: 2
 order: 5
 started: 2014
 status: finished

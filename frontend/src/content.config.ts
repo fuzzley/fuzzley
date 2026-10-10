@@ -14,6 +14,10 @@ const projects = defineCollection({
       title: z.string(),
       // Position in grids and lists, lowest first.
       order: z.number().int(),
+      // The game's slot in the home page grid: 1 and 4 are wide previews,
+      // 2 and 3 small tiles. Leave it out to keep a game off that grid; the
+      // featured game (the lowest `order`) has its own tile.
+      homeSlot: z.number().int().min(1).max(4).optional(),
       started: z.number().int(),
       status: z.enum(["active", "finished"]),
       kind: z.enum(["card-game", "arcade", "prototype"]),
