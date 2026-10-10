@@ -39,10 +39,6 @@ const projects = await getProjects();
             style={coverTransition(project)}
           />
         </div>
-        <GitHubLink
-          href={project.data.repo}
-          projectTitle={project.data.title}
-        />
         <p class="tile-label">{projectYears(project)}</p>
         <h2>
           <a class="stretched" href={projectPath(project)}>
@@ -50,13 +46,19 @@ const projects = await getProjects();
           </a>
         </h2>
         <p class="card-summary">{project.data.summary}</p>
-        <a
-          class="button button--primary above card-play"
-          href={playPath(project)}
-          aria-label={`${project.data.playLabel}: ${project.data.title}`}
-        >
-          {project.data.playLabel}
-        </a>
+        <div class="card-actions above">
+          <a
+            class="button button--primary"
+            href={playPath(project)}
+            aria-label={`${project.data.playLabel}: ${project.data.title}`}
+          >
+            {project.data.playLabel}
+          </a>
+          <GitHubLink
+            href={project.data.repo}
+            projectTitle={project.data.title}
+          />
+        </div>
       </li>
     ))}
   </ul>
@@ -114,8 +116,11 @@ const projects = await getProjects();
     color: var(--muted);
   }
 
-  .card-play {
-    align-self: flex-start;
+  /* Play and GitHub, at the bottom of the card whatever its summary length. */
+  .card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     margin-top: auto;
   }
 </style>
