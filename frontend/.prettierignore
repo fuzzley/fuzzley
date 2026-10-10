@@ -1,4 +1,5 @@
 dist
 public
 node_modules
-index.html
+.astro
+yarn.lock

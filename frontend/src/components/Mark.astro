@@ -1,0 +1,23 @@
+---
+// The tiled f, the same geometry as branding/favicon/icon.svg. Colors come
+// from the page's tokens, so it follows the theme.
+interface Props {
+  size?: number;
+}
+
+const { size = 24 } = Astro.props;
+---
+
+<svg
+  class="mark"
+  width={size}
+  height={size}
+  viewBox="0 0 32 32"
+  aria-hidden="true"
+  focusable="false"
+>
+  <rect class="ink" x="2" y="12" width="6" height="6" rx="1.5"></rect>
+  <rect class="ink" x="10" y="8" width="6" height="22" rx="1.5"></rect>
+  <rect class="green" x="18" y="2" width="10" height="8" rx="1.5"></rect>
+  <rect class="ink" x="18" y="12" width="8" height="6" rx="1.5"></rect>
+</svg>

@@ -1,0 +1,61 @@
+# Work history. Order doesn't matter: pages sort by `start`.
+#
+# Highlights are one sentence each, written as outcomes. Any highlight that
+# still starts with "TODO" is a placeholder: `yarn dev` shows it with a dashed
+# outline, and production builds leave it out (the build prints a warning).
+
+google:
+  org: Google
+  role: Staff Software Engineer & Manager
+  start: "2017-01"
+  focus: Developer relations, data insights and internal infrastructure
+  highlights:
+    - "TODO: Outcome 1. What your team shipped and the difference it made."
+    - "TODO: Outcome 2. A system or tool you built, and who relies on it."
+    - "TODO: Outcome 3. How you grew the team or the people on it."
+
+swampfox:
+  org: Swampfox Technologies
+  role: Software Engineer
+  start: "2016-01"
+  end: "2017-01"
+  focus: IVR systems and web development
+  highlights:
+    - Developed and maintained administrative web portals for configuring IVRs and related software, maintaining older Java Faces portals and building new ones with Spring and Angular.
+    - Independently developed and maintained interactive voice response systems for major insurance, banking and utility companies, reducing their support costs and making their customer support more focused.
+    - Supported partner companies through IVR maintenance and upgrades, helping their IT departments set up development environments and troubleshoot their systems.
+
+design-it:
+  org: Design Information Technology
+  role: Software Engineer
+  start: "2011-08"
+  end: "2016-01"
+  focus: .NET (Silverlight, WPF) and web development
+  highlights:
+    - Trained 12 junior developers in HTML5, JavaScript and the ASP.NET web stack, moving the company from C# and Silverlight to modern web development.
+    - Led a team of 12 junior developers in porting a C# and Silverlight application for electrical systems modeling and simulation to HTML5 and JavaScript, improving its usability and accessibility.
+    - Worked with a web designer to plan and carry out the rewrite of a Silverlight asset management application in HTML5 and JavaScript, extending its life and making it usable on smartphones and tablets.
+    - Oversaw four developers rewriting a freight-industry data visualization tool from a C++ desktop application to the web, so users could stream data instead of storing it locally.
+    - Maintained a Silverlight and C# asset management application with two other developers, fixing bugs, improving performance and adding requested features.
+
+syseda:
+  org: SysEDA
+  role: Software Engineer
+  start: "2011-05"
+  end: "2011-08"
+  focus: .NET (Silverlight, WPF) and web development
+  highlights:
+    - Maintained a mature C# and Silverlight application alongside five senior developers, learning common software development processes and patterns.
+
+usc:
+  org: University of South Carolina
+  role: Teaching Assistant and IT Specialist
+  start: "2009-11"
+  end: "2014-06"
+  focus: Java and Linux labs, computer maintenance
+  highlights:
+    - Taught an Algorithmic Design (Java) lab for two semesters with another graduate assistant, helping students with assignments and grading homework and exams.
+    - Taught a full Unix and Linux fundamentals course, preparing students to use Linux as a software development environment.
+    - Documented and carried out the setup of a Xen hypervisor on a Debian server, letting the university run several operating system instances on one machine.
+    - Resolved technical issues for more than 30 staff in the financial aid department.
+    - Maintained the financial aid department website with HTML5, JavaScript and PHP, fixing layout and back-end issues and adding content for students.

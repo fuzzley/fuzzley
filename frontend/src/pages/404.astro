@@ -1,0 +1,47 @@
+---
+import Base from "../layouts/Base.astro";
+import GameTile from "../components/GameTile.astro";
+import { getProjects } from "../lib/projects";
+
+const projects = await getProjects();
+---
+
+<Base
+  title="Page not found | Andrey Gavel"
+  description="There's no page at this address."
+  noindex
+>
+  <div class="bento">
+    <section class="tile missing span-all" aria-labelledby="missing-title">
+      <p class="tile-label">404</p>
+      <h1 id="missing-title">There's no page at this address</h1>
+      <p>
+        It may have moved when the site was rebuilt. The games now live under{" "}
+        <a href="/projects/">Projects</a>, or start from the{" "}
+        <a href="/">home page</a>.
+      </p>
+    </section>
+    {projects.slice(0, 4).map((project) => (
+      <GameTile project={project} />
+    ))}
+  </div>
+</Base>
+
+<style>
+  .missing {
+    gap: 14px;
+    padding-block: clamp(28px, 5vw, 56px);
+  }
+
+  .missing h1 {
+    font-size: var(--step-4);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+  }
+
+  .missing p:last-child {
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: var(--step-1);
+  }
+</style>

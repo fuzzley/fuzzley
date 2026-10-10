@@ -1,0 +1,304 @@
+---
+import { render } from "astro:content";
+import { getImage, Picture } from "astro:assets";
+import Base from "../../../layouts/Base.astro";
+import GameTile from "../../../components/GameTile.astro";
+import { profile } from "../../../data/profile";
+import {
+  coverTransition,
+  getProjects,
+  playPath,
+  projectYears,
+  type Project,
+} from "../../../lib/projects";
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      others: projects.filter((other) => other.id !== project.id),
+    },
+  }));
+}
+
+interface Props {
+  project: Project;
+  others: Project[];
+}
+
+const { project, others } = Astro.props;
+const { data } = project;
+const { Content } = await render(project);
+
+const kindLabel = {
+  "card-game": "Card game",
+  arcade: "Arcade game",
+  prototype: "App prototype",
+}[data.kind];
+
+const preview = await getImage({
+  src: data.cover,
+  width: 1200,
+  format: "jpeg",
+});
+
+const playUrl = new URL(playPath(project), Astro.site).href;
+const author = { "@type": "Person", name: profile.name, url: Astro.site?.href };
+const jsonLd =
+  data.kind === "prototype"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        name: data.title,
+        description: data.summary,
+        url: playUrl,
+        applicationCategory: "UtilitiesApplication",
+        operatingSystem: "Any",
+        author,
+      }
+    : {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        name: data.title,
+        description: data.summary,
+        url: playUrl,
+        gamePlatform: "Web browser",
+        applicationCategory: "Game",
+        operatingSystem: "Any",
+        offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+        author,
+      };
+---
+
+<Base
+  title={`${data.title} | Andrey Gavel`}
+  description={data.summary}
+  image={preview.src}
+  jsonLd={jsonLd}
+>
+  <p class="crumbs">
+    <a href="/projects/">All projects</a>
+  </p>
+
+  <div class="bento project">
+    <section class="tile intro" aria-labelledby="project-title">
+      <p class="tile-label">
+        {kindLabel}, {projectYears(project)}
+      </p>
+      <h1 id="project-title">{data.title}</h1>
+      <p class="intro-summary">{data.summary}</p>
+      <div class="actions">
+        <a class="button button--primary" href={playPath(project)}>
+          {data.playLabel}
+        </a>
+        <a class="button button--quiet" href={data.repo}>
+          Source on GitHub
+        </a>
+      </div>
+    </section>
+
+    <figure class="tile tile--media cover" style={`--tint: ${data.tint}`}>
+      <Picture
+        src={data.cover}
+        alt={data.coverAlt}
+        pictureAttributes={{ class: "tile-media" }}
+        widths={[480, 720, 960, 1280]}
+        sizes="(min-width: 56rem) 37rem, calc(100vw - 32px)"
+        formats={["avif"]}
+        fallbackFormat="webp"
+        style={coverTransition(project)}
+        loading="eager"
+      />
+    </figure>
+
+    <section class="tile body prose" aria-label="About this project">
+      <Content />
+    </section>
+
+    <aside class="tile facts" aria-label="Project facts">
+      <dl>
+        <div>
+          <dt class="tile-label">Started</dt>
+          <dd>{data.started}</dd>
+        </div>
+        <div>
+          <dt class="tile-label">Status</dt>
+          <dd>{data.status === "active" ? "In development" : "Finished"}</dd>
+        </div>
+        <div>
+          <dt class="tile-label">Built with</dt>
+          <dd>
+            <ul class="chips" role="list">
+              {data.stack.map((tool) => (
+                <li>{tool}</li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+      </dl>
+    </aside>
+
+    {data.gallery.length > 0 && (
+      <section class="span-all gallery" aria-label="More screenshots">
+        {data.gallery.map((shot) => (
+          <figure class="tile tile--media shot" style={`--tint: ${data.tint}`}>
+            <Picture
+              src={shot.image}
+              alt={shot.alt}
+              pictureAttributes={{ class: "tile-media" }}
+              widths={[400, 640, 800]}
+              sizes="(min-width: 56rem) 24rem, calc(100vw - 32px)"
+              formats={["avif"]}
+              fallbackFormat="webp"
+            />
+            <figcaption class="pill shot-caption">{shot.caption}</figcaption>
+          </figure>
+        ))}
+      </section>
+    )}
+  </div>
+
+  <section class="more" aria-labelledby="more-title">
+    <h2 id="more-title">More projects</h2>
+    <div class="bento">
+      {others.map((other) => (
+        <GameTile project={other} headingLevel={3} />
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs {
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .crumbs a::before {
+    content: "← ";
+  }
+
+  /* Named one by one: Astro scopes each selector with an attribute, so a
+     `.project > *` catch-all would outrank the per-tile spans below. */
+  .intro,
+  .cover,
+  .body,
+  .facts,
+  .gallery {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 56rem) {
+    .intro,
+    .cover {
+      grid-column: span 2;
+    }
+
+    .body {
+      grid-column: span 3;
+    }
+
+    .facts {
+      grid-column: span 1;
+    }
+
+    .gallery {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .intro {
+    justify-content: flex-end;
+    gap: 14px;
+    min-height: 22rem;
+  }
+
+  .intro h1 {
+    font-size: var(--step-4);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+  }
+
+  .intro-summary {
+    max-width: 40ch;
+    color: var(--muted);
+    font-size: var(--step-1);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .cover {
+    margin: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  @media (min-width: 56rem) {
+    .cover {
+      aspect-ratio: auto;
+      min-height: 22rem;
+    }
+  }
+
+  /* The tile fills its columns; the text inside keeps a readable measure. */
+  .body {
+    max-width: none;
+  }
+
+  .body :global(p) {
+    max-width: 62ch;
+  }
+
+  /* Long lists, like the solitaire games, flow into columns. */
+  .body :global(ul) {
+    columns: 12rem auto;
+    column-gap: 28px;
+  }
+
+  .body :global(li) {
+    break-inside: avoid;
+  }
+
+  .facts dl {
+    display: grid;
+    gap: 16px;
+  }
+
+  .facts dd {
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: var(--gap);
+  }
+
+  .shot {
+    margin: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .shot-caption {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+  }
+
+  .more {
+    margin-top: 40px;
+  }
+
+  .more h2 {
+    margin-bottom: 14px;
+    font-size: var(--step-3);
+  }
+</style>
