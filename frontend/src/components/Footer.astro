@@ -15,13 +15,13 @@ const builtOn = builtAt.toLocaleDateString("en-US", {
   <p>
     © {builtAt.getUTCFullYear()} {profile.name}
   </p>
-  <p>
-    Built from{" "}
-    {build.commit === "dev" ? (
-      "a local checkout"
-    ) : (
-      <a href={`${sourceRepo}/commit/${build.commit}`}>{build.commit}</a>
-    )}{" "}
-    on {builtOn}
-  </p>
+  {build.commit === "dev" ? (
+    <p>Built on {builtOn}</p>
+  ) : (
+    <p>
+      Built from{" "}
+      <a href={`${sourceRepo}/commit/${build.commit}`}>{build.commit}</a> on{" "}
+      {builtOn}
+    </p>
+  )}
 </footer>

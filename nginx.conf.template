@@ -14,11 +14,24 @@ server {
     gzip_min_length 1024;
     gzip_types text/css application/javascript application/json image/svg+xml application/manifest+json;
 
-    # The build fingerprints every file in /assets/, so one never changes in
-    # place and browsers can keep it for a year.
-    location /assets/ {
+    # The site's build fingerprints every file in /_astro/, and each game's
+    # build does the same in its own assets/ folder, so these files never
+    # change in place and browsers can keep them for a year.
+    location /_astro/ {
         root /usr/share/nginx/html;
         add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+
+    location ~ ^/projects/[^/]+/play/assets/ {
+        root /usr/share/nginx/html;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+
+    # The games moved from /project/<slug>/ to /projects/<slug>/play/. A
+    # permanent redirect keeps old links and search results working, and the
+    # browser carries any #hash across.
+    location ^~ /project/ {
+        rewrite ^/project/([^/]+)/?(.*)$ /projects/$1/play/$2 permanent;
     }
 
     # Runtime config is regenerated per-deploy; never cache it.
@@ -33,10 +46,18 @@ server {
         add_header Cache-Control "no-store";
     }
 
+    # Every page is a real file, so anything else is a 404 rather than the
+    # home page served with a 200.
     location / {
         root /usr/share/nginx/html;
-        index index.html index.htm;
-        try_files $uri $uri/ /index.html;
+        index index.html;
+        try_files $uri $uri/ =404;
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+        root /usr/share/nginx/html;
+        internal;
     }
 
     error_page 500 502 503 504 /50x.html;
