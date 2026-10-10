@@ -49,7 +49,7 @@
     --bg: light-dark(#e9ecef, #0f1113);
     --tile: light-dark(#ffffff, #1a1d21);
     /* The Now tile: warm grey in light mode, slate in dark. */
-    --tile-strong: light-dark(#dfdbdb, #262b31);
+    --tile-strong: light-dark(#f3f3f3, #262b31);
     /* The contact tile: light gray in light mode, deep blue in dark. */
     --tile-accent: light-dark(#dae5fc, #233c86);
     --ink: light-dark(#14171b, #e9ecef);
