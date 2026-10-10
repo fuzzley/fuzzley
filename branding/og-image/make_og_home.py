@@ -79,7 +79,7 @@ def main():
     name = font(82, 800)
     lede = font(31, 420, opsz=24)
     y = left[3] - 44 - 3 * 42
-    for line in wrap(draw, "Staff software engineer and manager at Google. I build browser card games on the side.", lede, 500):
+    for line in wrap(draw, "Staff software engineer and manager at Google. Building browser games on the side.", lede, 500):
         draw.text((s(left[0] + 44), s(y)), line, font=lede, fill=MUTED)
         y += 42
     draw.text(

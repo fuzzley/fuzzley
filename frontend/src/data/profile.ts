@@ -3,7 +3,7 @@
 export const profile = {
   name: "Andrey Gavel",
   role: "Staff software engineer and manager at Google",
-  lede: "Staff software engineer and manager at Google. I build browser card games on the side.",
+  lede: "Staff software engineer and manager at Google. Building browser games on the side.",
   email: "andrey.gavel@gmail.com",
   // The longer story, for /cv. Present first, then how I got here.
   bio: [
