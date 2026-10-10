@@ -2,8 +2,8 @@
 /**
  * Force stops every dev or preview server running from this checkout.
  *
- *   yarn stop
- *   yarn stop --dry-run
+ *   yarn force-stop
+ *   yarn force-stop --dry-run
  *
  * A server is a process running this checkout's own `astro dev` or
  * `astro preview`, or its own Vite (older branches served the site with Vite
@@ -21,7 +21,7 @@ import { setTimeout as sleep } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 
-const USAGE = `Usage: yarn stop [--dry-run]
+const USAGE = `Usage: yarn force-stop [--dry-run]
 
 Force stops every dev or preview server running from this checkout.
 
