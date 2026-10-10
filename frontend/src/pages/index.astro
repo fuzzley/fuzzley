@@ -111,30 +111,30 @@ const jsonLd = {
     </section>
 
     <section class="tile tile--strong now" aria-labelledby="now-title">
-      <div class="now-main">
+      <div class="now-group">
         <p class="tile-label">Now</p>
         <h2 id="now-title">{current.data.org}</h2>
         <p class="now-role">
           {current.data.role}, since {longMonth(current.data.start)}
         </p>
       </div>
-      <div class="now-detail">
+      <div class="now-group">
         <p class="tile-label">Focus</p>
         <ul class="chips" role="list">
           {focusAreas(current).map((area) => (
             <li>{area}</li>
           ))}
         </ul>
-        {outcomes.length > 0 && (
-          <ul class="now-outcomes">
-            {outcomes.map((text) => (
-              <li class:list={{ placeholder: isPlaceholder(text) }}>
-                {text.replace(/^TODO:\s*/, "")}
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
+      {outcomes.length > 0 && (
+        <ul class="now-outcomes">
+          {outcomes.map((text) => (
+            <li class:list={{ placeholder: isPlaceholder(text) }}>
+              {text.replace(/^TODO:\s*/, "")}
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
 
     {games.map((project, index) => (
@@ -212,10 +212,17 @@ const jsonLd = {
     .home {
       grid-template-areas:
         "hero hero feat feat"
-        "now now now now"
-        "g1 g2 g3 g4"
+        "now now g1 g2"
+        "now now g3 g4"
         "exp exp mail mail"
         "exp exp edu edu";
+    }
+
+    /* Beside the Now tile the two game rows share its height, so the game
+       tiles fill their cells instead of keeping their 4:3 shape. */
+    .home :global(.game) {
+      aspect-ratio: auto;
+      min-height: 13rem;
     }
   }
 
@@ -300,30 +307,21 @@ const jsonLd = {
     }
   }
 
-  /* Now: the current job, alone on its row. */
+  /* Now: the current job. Half the grid on wide screens, with the games
+     beside it; the full width below that. */
 
   .now {
     grid-area: now;
-    display: grid;
-    gap: 18px 40px;
-  }
-
-  @media (min-width: 56rem) {
-    .now {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      align-items: start;
-    }
+    gap: 22px;
   }
 
   .now h2 {
     font-size: var(--step-3);
   }
 
-  .now-main,
-  .now-detail {
+  .now-group {
     display: grid;
     gap: 8px;
-    align-content: start;
   }
 
   .now-role {
@@ -333,7 +331,6 @@ const jsonLd = {
   .now-outcomes {
     display: grid;
     gap: 8px;
-    margin-top: 6px;
     padding-left: 1.1em;
   }
 

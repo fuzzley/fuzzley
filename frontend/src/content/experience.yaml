@@ -8,7 +8,7 @@ google:
   org: Google
   role: Staff Software Engineer & Manager
   start: "2017-01"
-  focus: Developer relations, data insights and internal infrastructure
+  focus: Generative AI, usage insights and documentation infrastructure
   highlights:
     - Manage a team of eight engineers and lead cross-functional teams of engineers, data scientists and UX designers.
     - Improve LLM and generative AI results across Google Cloud, Firebase and other products by making more training data available and improving the tooling for fine-tuning models.
