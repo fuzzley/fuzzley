@@ -1,0 +1,419 @@
+---
+import { Picture } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import GameTile from "../components/GameTile.astro";
+import me from "../assets/profile/me.jpg";
+import { education, links, profile } from "../data/profile";
+import {
+  coverTransition,
+  getProjects,
+  playPath,
+  projectPath,
+} from "../lib/projects";
+import {
+  focusAreas,
+  getJobs,
+  isPlaceholder,
+  longMonth,
+  visibleHighlights,
+  yearRange,
+} from "../lib/experience";
+
+const [feature, ...games] = await getProjects();
+const jobs = await getJobs();
+const current = jobs.find((job) => !job.data.end) ?? jobs[0];
+const outcomes = visibleHighlights(current);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  url: Astro.site?.href,
+  jobTitle: current.data.role,
+  worksFor: { "@type": "Organization", name: current.data.org },
+  alumniOf: { "@type": "CollegeOrUniversity", name: education.school },
+  sameAs: links.map((link) => link.href),
+};
+---
+
+<Base
+  title="Andrey Gavel | Software engineer and manager"
+  description="Andrey Gavel is a staff software engineer and manager at Google. Play his browser games: Solitaire Collection, Spider Solitaire, Minesweeper, Pong and more."
+  ogType="profile"
+  jsonLd={jsonLd}
+>
+  <script is:inline slot="head">
+    // The old site routed tabs through hasher, as #/projects, #/about and
+    // #/contact. Send those links to the matching section.
+    if (location.hash.indexOf("#/") === 0) {
+      location.replace("#" + location.hash.slice(2));
+    }
+  </script>
+  <div class="bento home">
+    <section class="tile hero" id="about" aria-labelledby="hero-name">
+      <Picture
+        src={me}
+        alt="Portrait of Andrey Gavel"
+        class="hero-photo"
+        widths={[80, 160]}
+        sizes="80px"
+        formats={["avif"]}
+        fallbackFormat="webp"
+      />
+      <div class="hero-text">
+        <h1 id="hero-name">{profile.name}</h1>
+        <p class="hero-lede">{profile.lede}</p>
+        <ul class="link-row" role="list">
+          {links
+            .filter((link) => link.label !== "Google Developer")
+            .map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          <li>
+            <a href="/cv/">CV</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section
+      class="tile tile--media feature"
+      id="projects"
+      style={`--tint: ${feature.data.tint}`}
+      aria-labelledby="feature-title"
+    >
+      <Picture
+        src={feature.data.cover}
+        alt={feature.data.coverAlt}
+        pictureAttributes={{ class: "tile-media" }}
+        widths={[480, 720, 960, 1280]}
+        sizes="(min-width: 56rem) 37rem, calc(100vw - 32px)"
+        formats={["avif"]}
+        fallbackFormat="webp"
+        style={coverTransition(feature)}
+        loading="eager"
+      />
+      <div class="feature-card">
+        <div>
+          <h2 id="feature-title">
+            <a class="stretched" href={projectPath(feature)}>
+              {feature.data.title}
+            </a>
+          </h2>
+          <p class="feature-tagline">{feature.data.tagline}</p>
+        </div>
+        <a class="button button--primary above" href={playPath(feature)}>
+          Play
+        </a>
+      </div>
+    </section>
+
+    <section class="tile tile--strong now" aria-labelledby="now-title">
+      <div class="now-main">
+        <p class="tile-label">Now</p>
+        <h2 id="now-title">{current.data.org}</h2>
+        <p class="now-role">
+          {current.data.role}, since {longMonth(current.data.start)}
+        </p>
+      </div>
+      <div class="now-detail">
+        <p class="tile-label">Focus</p>
+        <ul class="chips" role="list">
+          {focusAreas(current).map((area) => (
+            <li>{area}</li>
+          ))}
+        </ul>
+        {outcomes.length > 0 && (
+          <ul class="now-outcomes">
+            {outcomes.map((text) => (
+              <li class:list={{ placeholder: isPlaceholder(text) }}>
+                {text.replace(/^TODO:\s*/, "")}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+
+    {games.map((project, index) => (
+      <GameTile project={project} class={`game-${index + 1}`} />
+    ))}
+
+    <section
+      class="tile experience"
+      id="experience"
+      aria-labelledby="exp-title"
+    >
+      <h2 id="exp-title">Experience</h2>
+      <ol class="jobs" role="list">
+        {jobs.map((job) => (
+          <li>
+            <span class="job-org">{job.data.org}</span>
+            <span class="job-years">{yearRange(job)}</span>
+            <span class="job-role">{job.data.role}</span>
+          </li>
+        ))}
+      </ol>
+      <a class="more-link" href="/cv/">
+        Full history and highlights
+      </a>
+    </section>
+
+    <section
+      class="tile tile--accent contact"
+      id="contact"
+      aria-labelledby="contact-title"
+    >
+      <h2 class="tile-label" id="contact-title">
+        Say hello
+      </h2>
+      <a class="contact-email" href={`mailto:${profile.email}`}>
+        {profile.email}
+      </a>
+      <ul class="link-row" role="list">
+        {links.map((link) => (
+          <li>
+            <a href={link.href}>{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="tile education" aria-labelledby="edu-title">
+      <h2 class="tile-label" id="edu-title">
+        Education
+      </h2>
+      <p class="edu-school">{education.school}</p>
+      <ul class="edu-degrees" role="list">
+        {education.degrees.map((degree) => (
+          <li>{degree}</li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .home {
+    grid-template-areas:
+      "hero hero"
+      "feat feat"
+      "now now"
+      "g1 g2"
+      "g3 g4"
+      "exp exp"
+      "mail mail"
+      "edu edu";
+  }
+
+  @media (min-width: 56rem) {
+    .home {
+      grid-template-areas:
+        "hero hero feat feat"
+        "now now now now"
+        "g1 g2 g3 g4"
+        "exp exp mail mail"
+        "exp exp edu edu";
+    }
+  }
+
+  /* Hero */
+
+  .hero {
+    grid-area: hero;
+    justify-content: space-between;
+    gap: 28px;
+    min-height: 23rem;
+  }
+
+  .hero :global(.hero-photo) {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .hero-text {
+    display: grid;
+    gap: 14px;
+  }
+
+  .hero h1 {
+    font-size: var(--step-4);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+  }
+
+  .hero-lede {
+    max-width: 34ch;
+    color: var(--muted);
+    font-size: var(--step-1);
+    line-height: 1.45;
+  }
+
+  /* Featured game */
+
+  .feature {
+    grid-area: feat;
+    min-height: 23rem;
+  }
+
+  .feature-card {
+    position: absolute;
+    inset: auto 12px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 16px;
+    padding: 14px 16px;
+    border-radius: var(--radius-inner);
+    background: var(--pill);
+    color: var(--on-pill);
+  }
+
+  .feature-card h2 {
+    font-size: var(--step-2);
+  }
+
+  .feature-tagline {
+    color: #5b636d;
+    font-size: var(--step--1);
+  }
+
+  .feature-card .button--primary {
+    background: #14171b;
+    color: #ffffff;
+  }
+
+  @media (max-width: 55.99rem) {
+    .hero,
+    .feature {
+      min-height: 0;
+    }
+
+    .feature {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  /* Now: the current job, alone on its row. */
+
+  .now {
+    grid-area: now;
+    display: grid;
+    gap: 18px 40px;
+  }
+
+  @media (min-width: 56rem) {
+    .now {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+
+  .now h2 {
+    font-size: var(--step-3);
+  }
+
+  .now-main,
+  .now-detail {
+    display: grid;
+    gap: 8px;
+    align-content: start;
+  }
+
+  .now-role {
+    color: var(--on-strong-muted);
+  }
+
+  .now-outcomes {
+    display: grid;
+    gap: 8px;
+    margin-top: 6px;
+    padding-left: 1.1em;
+  }
+
+  /* Games */
+
+  .home :global(.game-1) {
+    grid-area: g1;
+  }
+
+  .home :global(.game-2) {
+    grid-area: g2;
+  }
+
+  .home :global(.game-3) {
+    grid-area: g3;
+  }
+
+  .home :global(.game-4) {
+    grid-area: g4;
+  }
+
+  /* Experience */
+
+  .experience {
+    grid-area: exp;
+  }
+
+  .jobs {
+    display: grid;
+  }
+
+  .jobs li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0 12px;
+    padding-block: 10px;
+    border-top: 1px solid var(--line);
+  }
+
+  .job-org {
+    font-weight: 650;
+  }
+
+  .job-years {
+    color: var(--muted);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .job-role {
+    grid-column: 1 / -1;
+    color: var(--muted);
+    font-size: var(--step--1);
+  }
+
+  /* Contact and education */
+
+  .contact {
+    grid-area: mail;
+    justify-content: space-between;
+  }
+
+  .contact-email {
+    font-size: var(--step-2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    overflow-wrap: anywhere;
+  }
+
+  .education {
+    grid-area: edu;
+  }
+
+  .edu-school {
+    font-size: var(--step-1);
+    font-weight: 700;
+  }
+
+  .edu-degrees {
+    color: var(--muted);
+  }
+</style>

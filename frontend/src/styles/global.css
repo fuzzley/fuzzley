@@ -1,0 +1,507 @@
+/* Layout: a bento grid of tiles inside a 75rem page with at least a 16px
+   gutter, four columns wide from 56rem and two below. Tiles get their color
+   from their role: white for content, ink for the current job, blue for
+   contact, and each game's own color behind its screenshot. */
+
+@layer reset, tokens, base, layout, components, utilities;
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+  }
+
+  img,
+  picture,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  img {
+    height: auto;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  ul[role="list"],
+  ol[role="list"] {
+    list-style: none;
+    padding: 0;
+  }
+}
+
+@layer tokens {
+  :root {
+    color-scheme: light dark;
+
+    --bg: light-dark(#e9ecef, #0f1113);
+    --tile: light-dark(#ffffff, #1a1d21);
+    --tile-strong: light-dark(#14171b, #262b31);
+    --tile-accent: light-dark(#1d4ed8, #233c86);
+    --ink: light-dark(#14171b, #e9ecef);
+    --muted: light-dark(#5b636d, #9ea7b1);
+    --line: light-dark(#d6dbe1, #2e333a);
+    --link: light-dark(#1d4ed8, #93b4ff);
+    --green: light-dark(#179a50, #3cc277);
+    --focus: light-dark(#1d4ed8, #93b4ff);
+    --placeholder: light-dark(#b45309, #f5a54a);
+    --on-strong: #f4f6f8;
+    --on-strong-muted: #aab3bf;
+    --on-accent: #ffffff;
+    --on-accent-muted: #c9d6ff;
+    --pill: rgb(255 255 255 / 0.95);
+    --on-pill: #14171b;
+
+    --font:
+      "Bricolage Grotesque Variable", system-ui, -apple-system, "Segoe UI",
+      Roboto, sans-serif;
+    --step--1: 0.875rem;
+    --step-0: 1rem;
+    --step-1: 1.125rem;
+    --step-2: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+    --step-3: clamp(1.6rem, 1.3rem + 1.4vw, 2.25rem);
+    --step-4: clamp(2.5rem, 1.7rem + 3.4vw, 3.75rem);
+
+    --page: 75rem;
+    --gap: clamp(10px, 1.2vw, 14px);
+    --pad: clamp(18px, 2.4vw, 26px);
+    --radius: 22px;
+    --radius-inner: 14px;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: var(--step-0);
+    line-height: 1.5;
+    font-optical-sizing: auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 750;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: var(--link);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--green) 30%, transparent);
+  }
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer layout {
+  .page {
+    width: min(var(--page), 100% - 32px);
+    margin-inline: auto;
+  }
+
+  main {
+    flex: 1;
+    padding-block-end: 40px;
+  }
+
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gap);
+  }
+
+  @media (min-width: 56rem) {
+    .bento {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .span-all {
+    grid-column: 1 / -1;
+  }
+}
+
+@layer components {
+  /* Header and footer */
+
+  .skip-link {
+    position: absolute;
+    left: 16px;
+    top: -100px;
+    z-index: 10;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--bg);
+    font-weight: 650;
+  }
+
+  .skip-link:focus {
+    top: 12px;
+  }
+
+  .site-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    padding-block: 18px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink);
+    font-size: var(--step-1);
+    font-weight: 750;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .mark .ink {
+    fill: var(--ink);
+  }
+
+  .mark .green {
+    fill: var(--green);
+  }
+
+  .site-nav ul {
+    display: flex;
+    gap: 2px;
+  }
+
+  .site-nav a {
+    display: block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .site-nav a:hover,
+  .site-nav a[aria-current] {
+    background: var(--tile);
+  }
+
+  .site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 6px 24px;
+    padding-block: 8px 32px;
+    color: var(--muted);
+    font-size: var(--step--1);
+  }
+
+  .site-footer a {
+    color: inherit;
+  }
+
+  /* Tiles */
+
+  .tile {
+    position: relative;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: var(--pad);
+    border-radius: var(--radius);
+    background: var(--tile);
+    overflow: hidden;
+  }
+
+  .tile h2 {
+    font-size: var(--step-2);
+  }
+
+  /* Two classes deep so it also wins on a heading used as a label. */
+  .tile .tile-label,
+  .tile-label {
+    color: var(--muted);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .tile--strong {
+    background: var(--tile-strong);
+    color: var(--on-strong);
+  }
+
+  .tile--strong .tile-label {
+    color: var(--on-strong-muted);
+  }
+
+  .tile--accent {
+    background: var(--tile-accent);
+    color: var(--on-accent);
+  }
+
+  .tile--accent a {
+    color: inherit;
+  }
+
+  .tile--accent .tile-label {
+    color: var(--on-accent-muted);
+  }
+
+  /* A tile filled edge to edge by a screenshot, on the game's own color. */
+  .tile--media {
+    padding: 0;
+    background: var(--tint, var(--tile-strong));
+  }
+
+  .tile-media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .tile-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+  }
+
+  /* Makes a heading's link cover its whole tile. Other links in the tile sit
+     above it with .above. */
+  .stretched {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .stretched::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+  }
+
+  .stretched:focus-visible {
+    outline: none;
+  }
+
+  .stretched:focus-visible::after {
+    outline: 3px solid var(--focus);
+    outline-offset: -3px;
+  }
+
+  .above {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Buttons, pills and chips */
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 650;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .button--primary {
+    background: var(--ink);
+    color: var(--tile);
+  }
+
+  .button--quiet {
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+
+  .button--primary:hover,
+  .button--quiet:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--pill);
+    color: var(--on-pill);
+    font-size: var(--step--1);
+    font-weight: 650;
+    line-height: 1.3;
+  }
+
+  .pill--dark {
+    background: rgb(20 23 27 / 0.88);
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .pill--dark:hover {
+    text-decoration: underline;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chips li {
+    padding: 4px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: var(--step--1);
+    font-weight: 550;
+  }
+
+  .tile--strong .chips li {
+    border-color: rgb(255 255 255 / 0.22);
+  }
+
+  .link-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .link-row a {
+    display: inline-block;
+    padding: 6px 13px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: inherit;
+    font-size: var(--step--1);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .link-row a:hover {
+    text-decoration: underline;
+  }
+
+  .tile--accent .link-row a {
+    border-color: rgb(255 255 255 / 0.35);
+  }
+
+  .more-link {
+    margin-top: auto;
+    font-weight: 650;
+  }
+
+  /* Written content: project write-ups and the CV. */
+
+  .prose {
+    max-width: 42rem;
+    font-size: var(--step-1);
+    line-height: 1.6;
+  }
+
+  .prose > * + * {
+    margin-top: 0.8em;
+  }
+
+  .prose h2 {
+    margin-top: 1.4em;
+    font-size: var(--step-2);
+  }
+
+  .prose ul {
+    padding-left: 1.2em;
+  }
+
+  /* Placeholder text, shown by `yarn dev` only. */
+  .placeholder {
+    color: var(--placeholder);
+    outline: 2px dashed var(--placeholder);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  .placeholder::before {
+    content: "Placeholder: ";
+    font-weight: 700;
+  }
+
+  .tile--strong .placeholder {
+    color: #f5a54a;
+    outline-color: #f5a54a;
+  }
+}
+
+@layer utilities {
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}

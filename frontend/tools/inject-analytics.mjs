@@ -1,10 +1,10 @@
-// Adds the site's analytics tags to the project sub-pages in the build output.
+// Adds the site's analytics tags to the games in the build output.
 //
-// The pages under public/project/<slug>/ are production builds pushed in by the
-// project repositories (fMinesweeper, fPong, fSolitaire, fSpider, PATH). Those
-// repositories deliberately carry no analytics code, so the tags are added here
-// instead, after `vite build`, to the copies in dist/ — never to the sources in
-// public/, which the next sync from a project repository overwrites.
+// The pages under public/projects/<slug>/play/ are production builds pushed in
+// by the project repositories (fMinesweeper, fPong, fSolitaire, fSpider, PATH).
+// Those repositories deliberately carry no analytics code, so the tags are added
+// here instead, after `astro build`, to the copies in dist/ — never to the
+// sources in public/, which the next sync from a project repository overwrites.
 //
 // Run as part of `yarn build`. Safe to re-run: a page that already has the tags
 // is left alone.
@@ -18,7 +18,7 @@ const frontendDir = path.resolve(
   "..",
 );
 const distDir = path.join(frontendDir, "dist");
-const projectsDir = path.join(distDir, "project");
+const projectsDir = path.join(distDir, "projects");
 
 // The tags are useless if what they point at is missing, so treat that as a
 // build failure rather than shipping pages that quietly 404.
@@ -45,24 +45,26 @@ function assetsExist() {
 
 function findProjectPages() {
   if (!fs.existsSync(projectsDir)) {
-    fail("dist/project not found — run `vite build` first.");
+    fail("dist/projects not found — run `astro build` first.");
   }
 
+  // Only the games: dist/projects/<slug>/index.html is the site's own project
+  // page, which already carries the tags from the base layout.
   const pages = fs
     .readdirSync(projectsDir, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
-    .map((entry) => path.join(projectsDir, entry.name, "index.html"))
+    .map((entry) => path.join(projectsDir, entry.name, "play", "index.html"))
     .filter((page) => fs.existsSync(page));
 
   if (pages.length === 0) {
-    fail("no index.html found under dist/project.");
+    fail("no index.html found under dist/projects/*/play.");
   }
 
   return pages;
 }
 
-// Relative rather than root-absolute, matching the build's `base: "./"`, so the
-// site does not have to be served from a domain root.
+// Relative rather than root-absolute, so a game still finds the tags if the
+// site is ever served from a subpath.
 function tagsFor(page) {
   const prefix = toPosix(path.relative(path.dirname(page), distDir));
   return (

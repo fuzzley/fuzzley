@@ -1,0 +1,101 @@
+---
+// A game's screenshot on its own color, with its name linking to the project
+// page and a button straight into the game.
+import { Picture } from "astro:assets";
+import {
+  coverTransition,
+  playPath,
+  playShort,
+  projectPath,
+  type Project,
+} from "../lib/projects";
+
+interface Props {
+  project: Project;
+  headingLevel?: 2 | 3;
+  class?: string;
+  /** The image's displayed width, for picking a source size. */
+  sizes?: string;
+}
+
+const {
+  project,
+  headingLevel = 2,
+  class: className,
+  sizes = "(min-width: 56rem) 18rem, 50vw",
+} = Astro.props;
+const Heading = headingLevel === 3 ? "h3" : "h2";
+---
+
+<article
+  class:list={["tile tile--media game", className]}
+  style={`--tint: ${project.data.tint}`}
+>
+  <Picture
+    src={project.data.cover}
+    alt=""
+    pictureAttributes={{ class: "tile-media" }}
+    widths={[320, 480, 640]}
+    sizes={sizes}
+    formats={["avif"]}
+    fallbackFormat="webp"
+    style={coverTransition(project)}
+  />
+  <div class="game-bar">
+    <Heading class="pill game-title">
+      <a class="stretched" href={projectPath(project)}>
+        {project.data.title}
+      </a>
+    </Heading>
+    <a
+      class="pill pill--dark above"
+      href={playPath(project)}
+      aria-label={`${playShort(project)} ${project.data.title}`}
+    >
+      {playShort(project)}
+    </a>
+  </div>
+</article>
+
+<style>
+  .game {
+    aspect-ratio: 4 / 3;
+    container-type: inline-size;
+  }
+
+  /* Too narrow for both pills: keep the name, which leads to the project
+     page and its full-size play button. */
+  @container (max-width: 14rem) {
+    .game-bar .pill--dark {
+      display: none;
+    }
+  }
+
+  .game-bar {
+    position: absolute;
+    inset: auto 10px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .game-title {
+    font-size: var(--step--1);
+    letter-spacing: 0;
+  }
+
+  /* Keeps the button on the right when a long title pushes it to a new line. */
+  .game-bar .pill--dark {
+    margin-left: auto;
+  }
+
+  .game :global(img) {
+    transition: transform 0.4s ease;
+  }
+
+  .game:hover :global(img) {
+    transform: scale(1.03);
+  }
+</style>

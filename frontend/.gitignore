@@ -73,3 +73,5 @@ dist
 # VSCode
 
 .vscode
+# Astro generated types
+.astro

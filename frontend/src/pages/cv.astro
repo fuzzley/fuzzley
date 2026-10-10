@@ -1,0 +1,238 @@
+---
+import Base from "../layouts/Base.astro";
+import { education, links, profile } from "../data/profile";
+import {
+  getJobs,
+  isPlaceholder,
+  monthRange,
+  visibleHighlights,
+} from "../lib/experience";
+import { getProjects, projectPath, projectYears } from "../lib/projects";
+
+const jobs = await getJobs();
+const projects = await getProjects();
+---
+
+<Base
+  title="CV | Andrey Gavel"
+  description="The work history of Andrey Gavel: Google, Swampfox Technologies, Design Information Technology, SysEDA and the University of South Carolina."
+>
+  <article class="tile cv">
+    <header class="cv-head">
+      <h1>{profile.name}</h1>
+      <p class="cv-role">{profile.role}</p>
+      <ul class="cv-contact" role="list">
+        <li>
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        </li>
+        {links.map((link) => (
+          <li>
+            <a href={link.href}>{link.label}</a>
+          </li>
+        ))}
+        <li>
+          <a href="https://fuzzley.info/">fuzzley.info</a>
+        </li>
+      </ul>
+    </header>
+
+    <section class="cv-section" aria-labelledby="cv-about">
+      <h2 id="cv-about">About</h2>
+      <div class="cv-body">
+        {profile.bio.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+    </section>
+
+    <section class="cv-section" aria-labelledby="cv-experience">
+      <h2 id="cv-experience">Experience</h2>
+      <div class="cv-body jobs">
+        {jobs.map((job) => {
+          const highlights = visibleHighlights(job);
+          return (
+            <section class="job">
+              <div class="job-head">
+                <h3>{job.data.org}</h3>
+                <p class="job-dates">{monthRange(job)}</p>
+              </div>
+              <p class="job-role">
+                {job.data.role}. {job.data.focus}.
+              </p>
+              {highlights.length > 0 && (
+                <ul>
+                  {highlights.map((text) => (
+                    <li class:list={{ placeholder: isPlaceholder(text) }}>
+                      {text.replace(/^TODO:\s*/, "")}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="cv-section" aria-labelledby="cv-education">
+      <h2 id="cv-education">Education</h2>
+      <div class="cv-body">
+        <h3>{education.school}</h3>
+        <ul>
+          {education.degrees.map((degree) => (
+            <li>{degree}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="cv-section" aria-labelledby="cv-projects">
+      <h2 id="cv-projects">Projects</h2>
+      <div class="cv-body">
+        <ul class="cv-projects" role="list">
+          {projects.map((project) => (
+            <li>
+              <a href={projectPath(project)}>{project.data.title}</a>
+              <span class="job-dates"> ({projectYears(project)})</span>.{" "}
+              {project.data.summary}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .cv {
+    gap: 0;
+    padding: clamp(22px, 4vw, 48px);
+  }
+
+  .cv-head {
+    display: grid;
+    gap: 8px;
+    padding-bottom: 28px;
+  }
+
+  .cv h1 {
+    font-size: var(--step-4);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+  }
+
+  .cv-role {
+    color: var(--muted);
+    font-size: var(--step-1);
+  }
+
+  .cv-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    font-weight: 600;
+  }
+
+  .cv-section {
+    display: grid;
+    gap: 8px 32px;
+    padding-block: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 48rem) {
+    .cv-section {
+      grid-template-columns: 11rem minmax(0, 1fr);
+    }
+  }
+
+  .cv h2 {
+    font-size: var(--step-1);
+  }
+
+  .cv h3 {
+    font-size: var(--step-1);
+  }
+
+  .cv-body {
+    display: grid;
+    gap: 12px;
+    max-width: 46rem;
+    line-height: 1.6;
+  }
+
+  .cv-body ul {
+    display: grid;
+    gap: 6px;
+    padding-left: 1.2em;
+  }
+
+  .jobs {
+    gap: 26px;
+  }
+
+  .job {
+    display: grid;
+    gap: 6px;
+  }
+
+  .job-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2px 16px;
+  }
+
+  .job-dates {
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .job-role {
+    color: var(--muted);
+  }
+
+  .cv-projects {
+    padding-left: 0 !important;
+  }
+
+  @media print {
+    :global(.site-header),
+    :global(.site-footer),
+    :global(.skip-link) {
+      display: none;
+    }
+
+    :global(body) {
+      background: #ffffff;
+      color: #000000;
+      font-size: 10.5pt;
+    }
+
+    :global(main) {
+      width: auto;
+      padding: 0;
+    }
+
+    .cv {
+      padding: 0;
+      border-radius: 0;
+      background: none;
+    }
+
+    .cv a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .cv-section {
+      grid-template-columns: 9rem minmax(0, 1fr);
+      padding-block: 14px;
+    }
+
+    .job {
+      break-inside: avoid;
+    }
+  }
+</style>
