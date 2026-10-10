@@ -101,6 +101,9 @@ an automated accessibility check (axe) in CI.
 ## Checking pages
 
 `yarn verify` runs `astro check`, ESLint, the Prettier check and the build.
+`yarn stop --dry-run` lists any dev or preview servers left running from this
+checkout, and `yarn stop` ends them. Use the dry run first: the owner may have
+a server of their own running.
 To look at pages, `yarn build && yarn preview`, then screenshot with headless
 Chrome using a throwaway profile:
 
