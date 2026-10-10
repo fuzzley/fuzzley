@@ -74,6 +74,26 @@ const jsonLd = {
     </section>
 
     <section
+      class="tile tile--accent contact"
+      id="contact"
+      aria-labelledby="contact-title"
+    >
+      <h2 class="tile-label" id="contact-title">
+        Say hello
+      </h2>
+      <a class="contact-email" href={`mailto:${profile.email}`}>
+        {profile.email}
+      </a>
+      <ul class="link-row" role="list">
+        {links.map((link) => (
+          <li>
+            <a href={link.href}>{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section
       class="tile tile--media feature"
       id="projects"
       style={`--tint: ${feature.data.tint}`}
@@ -156,26 +176,6 @@ const jsonLd = {
       </a>
     </section>
 
-    <section
-      class="tile tile--accent contact"
-      id="contact"
-      aria-labelledby="contact-title"
-    >
-      <h2 class="tile-label" id="contact-title">
-        Say hello
-      </h2>
-      <a class="contact-email" href={`mailto:${profile.email}`}>
-        {profile.email}
-      </a>
-      <ul class="link-row" role="list">
-        {links.map((link) => (
-          <li>
-            <a href={link.href}>{link.label}</a>
-          </li>
-        ))}
-      </ul>
-    </section>
-
     <section class="tile education" aria-labelledby="edu-title">
       <h2 class="tile-label" id="edu-title">
         Education
@@ -194,22 +194,24 @@ const jsonLd = {
   .home {
     grid-template-areas:
       "hero hero"
+      "mail mail"
       "feat feat"
       "now now"
       "g1 g2"
       "g3 g4"
       "exp exp"
-      "mail mail"
       "edu edu";
   }
 
+  /* On wide screens the name and contact cards stack on the left, together
+     as tall as the featured game on the right. */
   @media (min-width: 56rem) {
     .home {
       grid-template-areas:
         "hero hero feat feat"
+        "mail mail feat feat"
         "now now g1 g2"
         "now now g3 g4"
-        "exp exp mail mail"
         "exp exp edu edu";
     }
 
@@ -227,7 +229,6 @@ const jsonLd = {
     grid-area: hero;
     container-type: inline-size;
     gap: 22px;
-    min-height: 23rem;
   }
 
   /* The photo and the name share the top line. The name is sized to the
@@ -316,12 +317,8 @@ const jsonLd = {
   }
 
   @media (max-width: 55.99rem) {
-    .hero,
     .feature {
       min-height: 0;
-    }
-
-    .feature {
       aspect-ratio: 4 / 3;
     }
   }
