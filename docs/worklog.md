@@ -10,17 +10,23 @@ Plan, mocks and rationale: https://claude.ai/artifact/NpYyaw1fX9REPFMcC6i2sM
 ## Status
 
 - **Current branch:** `redesign` (built on `quick-fixes`)
-- **Last step finished:** deploy workflows for GitHub Pages
-- **Next step:** point the five game repos at `public/projects/<slug>/play`
+- **Last step finished:** all code work. Every branch below is committed.
+- **Next step:** the owner reviews, then follows the
+  [Cutover runbook](#cutover-runbook) from step 1.
 - **Nothing has been pushed.** All work is in local commits.
 
 ### Branches
 
-| Repository          | Branch                 | Holds                                                         |
-| ------------------- | ---------------------- | ------------------------------------------------------------- |
-| fuzzley             | `quick-fixes`          | Phase 0 fixes to the old site. Can ship on its own.           |
-| fuzzley             | `redesign`             | Everything in `quick-fixes`, plus the Astro rebuild.          |
-| fuzzley.github.io   | `pages-actions-deploy` | The Pages workflow that builds and publishes fuzzley.info.    |
+| Repository        | Branch                  | Holds                                                       |
+| ----------------- | ----------------------- | ----------------------------------------------------------- |
+| fuzzley           | `quick-fixes`           | Phase 0 fixes to the old site. Can ship on its own.         |
+| fuzzley           | `redesign`              | Everything in `quick-fixes`, plus the Astro rebuild.        |
+| fuzzley.github.io | `pages-actions-deploy`  | The Pages workflow that builds and publishes fuzzley.info.  |
+| fSolitaire        | `move-to-projects-play` | Deploys to the new path; canonical and preview URLs moved.  |
+| fSpider           | `move-to-projects-play` | Deploys to the new path; README link.                       |
+| fMinesweeper      | `move-to-projects-play` | Deploys to the new path; README link.                       |
+| fPong             | `move-to-projects-play` | Deploys to the new path; README link.                       |
+| PATH              | `move-to-projects-play` | Deploys to the new path; README link.                       |
 
 ## How to resume
 
@@ -83,9 +89,14 @@ Gathered with read-only `gcloud` and DNS lookups on 2026-10-10.
 - [x] Phase 1: Astro foundation (`redesign` branch)
 - [x] Phase 2: Bento pages and the `/projects` tree
 - [x] Phase 3: hosting move, prepared (workflows written; cutover needs the owner)
-- [ ] Phase 4: polish
-- [ ] Game repos: point each deploy at `public/projects/<slug>/play`
+- [x] Phase 4: polish (link preview image, play events, view transitions)
+- [x] Game repos: point each deploy at `public/projects/<slug>/play`
 - [ ] Cutover runbook carried out by the owner (see below)
+- [ ] Owner writes the three Google outcomes in `src/content/experience.yaml`
+
+Ideas not started: game clips on the tiles (declined for now), fPoker's tile
+(waits until it is playable), a Content Security Policy as a `<meta>` tag,
+an automated accessibility check (axe) in CI.
 
 ## Checking pages
 
@@ -107,7 +118,69 @@ page shot at 512px, then crop.
 Steps that change live systems. Each needs the owner's go-ahead; none has
 been done.
 
-_Filled in during Phase 3._
+Order matters: each step assumes the ones before it. Steps 1 to 4 ship the
+redesign on the current hosting (Cloud Run); steps 5 to 11 move hosting to
+GitHub Pages and can wait.
+
+**Ship the redesign**
+
+1. **Test the container build.** Cloud Run rebuilds from `main` on every push,
+   and the Docker build of the Astro site hasn't been run yet. Start Docker
+   Desktop, then from the repo root:
+   `docker build -t fuzzley-site . && docker run --rm -p 8080:8080 -e PORT=8080 fuzzley-site`
+   and check http://localhost:8080/, `/projects/solitaire/play/`,
+   `/project/solitaire/` (should 301) and a missing page (should 404).
+2. **Optional, to ship the Phase 0 fixes first:** push `quick-fixes` to `main`
+   (a fast-forward). It deploys to Cloud Run and to the current Pages copy.
+3. **Merge `redesign` into `main` and push.** Cloud Run rebuilds with the new
+   site. The new `deploy.yml` also sends a dispatch to fuzzley.github.io;
+   until step 6 nothing there listens, which is harmless.
+4. **Right after step 3, merge each game repo's `move-to-projects-play`
+   branch and push.** Each push redeploys that game into
+   `public/projects/<slug>/play/`. Don't let a game deploy from its old
+   `main` after step 3: it would write the old `public/project/<slug>/`
+   folder back, which clashes with the redirect pages Astro builds there.
+
+**Move hosting to GitHub Pages**
+
+5. **Give Pages the analytics ID.** Read it with
+   `gcloud secrets versions access latest --secret=ga-ag-measurement-id --project=agavel-personal`
+   and set it with
+   `gh variable set GA_AG_MEASUREMENT_ID --repo fuzzley/fuzzley.github.io --body <id>`.
+6. **Merge fuzzley.github.io's `pages-actions-deploy` into its `main` and
+   push.** GitHub only runs `repository_dispatch` workflows from the default
+   branch.
+7. **Switch the Pages source.** fuzzley.github.io → Settings → Pages →
+   Source: **GitHub Actions**. Then Actions → "Build and deploy fuzzley.info"
+   → Run workflow. Check https://fuzzley.github.io/ shows the new site and
+   the games play.
+8. **Verify the domain with GitHub first** (prevents takeover):
+   github.com/settings/pages → Add a domain → fuzzley.info, then add the TXT
+   record it shows at Porkbun.
+9. **Point fuzzley.info at Pages.** At Porkbun, delete the eight Cloud Run
+   records (A 216.239.32.21, .34.21, .36.21, .38.21; AAAA
+   2001:4860:4802:32::15, :34::15, :36::15, :38::15) and add:
+   - A: 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153
+   - AAAA: 2606:50c0:8000::153, 2606:50c0:8001::153, 2606:50c0:8002::153,
+     2606:50c0:8003::153
+   - CNAME `www` → `fuzzley.github.io` (optional; Pages then redirects www)
+
+   Then in fuzzley.github.io → Settings → Pages, set the custom domain to
+   fuzzley.info, wait for the certificate, and tick **Enforce HTTPS**.
+   fuzzley.github.io starts redirecting to fuzzley.info by itself.
+10. **Forward the other four domains** (andreygavel.com, andrey-gavel.com,
+    fuzzley.net, fuzzley.org). At Porkbun, for each: delete its Cloud Run A
+    and AAAA records, then add URL forwarding to `https://fuzzley.info` as a
+    permanent (301) redirect, with the path included. Check that
+    `https://` works on each afterwards. If Porkbun's forwarding can't serve
+    HTTPS for one, keep that domain's Cloud Run mapping until it can.
+11. **After a week with no problems, retire Cloud Run:** delete the five
+    domain mappings (`gcloud beta run domain-mappings delete --domain <d>
+    --region us-central1 --project agavel-personal`), both `fuzzley-git`
+    services (us-central1 and northamerica-northeast2), and the
+    deploy-from-repository connection. The old images in Artifact Registry
+    can go too. The built files at the top of the fuzzley.github.io repo
+    can be deleted; Pages ignores them once it deploys from Actions.
 
 ## Log
 
@@ -167,3 +240,20 @@ Commits `90c7129`, `1e9a1be`.
   the deployed build is JavaScript with Knockout and Bootstrap. The project
   page describes what ships.
 - Next: game repos.
+
+### 2026-10-10: game repos, polish, docs
+
+- Game repos: each has a `move-to-projects-play` branch that deploys to
+  `public/projects/<slug>/play` and updates README links. fSolitaire also
+  moves its canonical, `og:url`, `og:image` and structured-data URLs and its
+  agent docs; its `yarn lint` and `test/ui/index_html.spec.ts` pass.
+- Checked in headless Chrome: `/project/solitaire/#klondike` ends at
+  `/projects/solitaire/play/#/klondike` with Klondike open, and `/#/contact`
+  ends at `/#contact`.
+- Home page weight, measured from `dist/` for a 1280px screen: about
+  149 KB (HTML 4 KB and CSS 2 KB gzipped, font 75 KB, images 67 KB). The
+  only scripts are `env.js` and `analytics.js` plus two small inline ones.
+- Commits on `redesign`: `44c80b6` (new link preview, drawn by
+  `branding/og-image/make_og_home.py`), `2b2f026` (README), `2e0c544`
+  (`play_game` analytics event for clicks into a game).
+- Next: the owner's review and the Cutover runbook.
