@@ -58,16 +58,17 @@ A highlight in `experience.yaml` that starts with `TODO` is a placeholder:
 
 ## Deployment
 
-Pushes to `main` run `.github/workflows/deploy.yml`, which type-checks, lints
-and builds, then triggers the workflow in
-[fuzzley/fuzzley.github.io](https://github.com/fuzzley/fuzzley.github.io) that
-builds the site again and publishes it with GitHub Pages. GitHub Pages deploys
-from the repository its workflow runs in, which is why the publishing job lives
-there. The run here waits for that deploy to finish, so a failed deploy shows
-on the commit.
+fuzzley.info is the site. Cloud Run serves it from the Docker image below, and
+rebuilds and deploys that image on every push to `main` by itself, without
+waiting for the checks that follow.
 
-The Docker image below is the older way the site was served, on Cloud Run. It
-still builds and works.
+Pushes to `main` also run `.github/workflows/deploy.yml`, which type-checks,
+lints and builds, then triggers the workflow in
+[fuzzley/fuzzley.github.io](https://github.com/fuzzley/fuzzley.github.io) that
+builds a copy of the site and publishes it at https://fuzzley.github.io/ with
+GitHub Pages. GitHub Pages deploys from the repository its workflow runs in,
+which is why the publishing job lives there. The run here waits for that
+deploy to finish, so a failed deploy shows on the commit.
 
 ## Docker Build & Run (Local Testing)
 
