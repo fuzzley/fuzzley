@@ -473,13 +473,14 @@ These help whichever option is chosen:
 
 - **Guard against dead files** in each game's CI: fail when `dist/`
   contains a file no loaded file mentions (the method is in the work log).
-- **WebP rules screenshots in fSolitaire:** about 12 MiB less per copy, and
-  less for players to download on the rules pages. Its screenshot tool
-  (`tools/build-screenshot-thumbs.mjs`) and the spec that checks the
-  screenshots would change with it.
-- **Minified vendor scripts** in fMinesweeper, fPong, fSpider and PATH,
-  tested game by game (Knockout's debug and release builds expose different
-  internals).
+- **WebP rules screenshots in fSolitaire:** done (fSolitaire `a9ece90`).
+  The rules page serves a 1600 × 900 `overview.webp` (4.4 MB for all 41
+  instead of 19.8 MB of PNG); the lossless originals moved to
+  `docs/screenshots/` and no longer ship.
+- **Minified vendor scripts** in fMinesweeper, fPong, fSpider and PATH:
+  done, by minifying them at build time with Vite's own minifier rather than
+  switching to the libraries' `.min.js` builds, so Knockout's debug build
+  keeps its API. Pong's download went from 472 KB to 165 KB gzipped.
 - **PATH's sample manual PDF** is 23 MiB, nearly all of PATH's size. It is
   a download link, not something the prototype displays, so re-saving it at
   screen resolution, or linking to the manufacturer's copy, would cut most
