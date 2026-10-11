@@ -12,15 +12,21 @@ uses (short term), and choose where game builds should live (long term, see
 ## Status
 
 - **Current branch:** `trim-game-builds` in every repository below.
-- **Last step finished:** branch created, work log started.
-- **Next step:** trim the unused files from each game repository.
+- **Last step finished:** the short-term trim, in all five repositories,
+  checked in Chrome.
+- **Next step:** write the long-term plan in `docs/game-builds.md`.
 - **Nothing has been pushed.** All work is in local commits.
 
 ### Branches
 
-| Repository   | Branch             | Holds |
-| ------------ | ------------------ | ----- |
-| fuzzley      | `trim-game-builds` | This log, the long-term plan, the trimmed copies of the games. |
+| Repository   | Branch             | Holds                                                           |
+| ------------ | ------------------ | --------------------------------------------------------------- |
+| fuzzley      | `trim-game-builds` | This log, the long-term plan, the trimmed copies of the games.  |
+| fMinesweeper | `trim-game-builds` | `247f16a`: deletes 21 unused files from `public/` (1.1 MiB).    |
+| fPong        | `trim-game-builds` | `229f43b`: deletes 11 unused files from `public/` (2.0 MiB).    |
+| fSpider      | `trim-game-builds` | `b984747`: deletes 8 unused files from `public/` (2.5 MiB).     |
+| PATH         | `trim-game-builds` | `e346f36`: deletes 26 unused files from `public/` (1.4 MiB).    |
+| fSolitaire   | none               | Nothing to change: its build ships only what it loads.          |
 
 ## How to resume
 
@@ -34,20 +40,37 @@ The game repositories are cloned beside this one, in `~/Projects/`:
 
 ## Checklist
 
-- [ ] Work out which files each game loads
-- [ ] fMinesweeper: delete the unused files from `public/`
-- [ ] fPong: delete the unused files from `public/`
-- [ ] fSpider: delete the unused files from `public/`
-- [ ] PATH: delete the unused files from `public/`
-- [ ] fSolitaire: confirm nothing unused ships
-- [ ] fuzzley: trim the deployed copies to match
-- [ ] Check every game plays from a local build
+- [x] Work out which files each game loads
+- [x] fMinesweeper: delete the unused files from `public/`
+- [x] fPong: delete the unused files from `public/`
+- [x] fSpider: delete the unused files from `public/`
+- [x] PATH: delete the unused files from `public/`
+- [x] fSolitaire: confirm nothing unused ships
+- [x] fuzzley: trim the deployed copies to match (`bd108a5`)
+- [x] Check every game plays from a local build
 - [ ] Long-term plan in `docs/game-builds.md`
 - [ ] Owner: review and push (see [Shipping](#shipping))
 
 ## Shipping
 
-Not done yet. Filled in once the branches are ready.
+Each step needs the owner's go-ahead; none has been done. Either order
+works, because this repository's branch deletes exactly the files the next
+sync from each game would delete.
+
+1. **This repository.** `git switch main && git merge --ff-only
+   trim-game-builds && git push`. `deploy.yml` verifies and redeploys the
+   GitHub Pages copy; Cloud Run rebuilds the image from `main` by itself.
+   Afterwards, open each `/projects/<slug>/play/` on fuzzley.info.
+2. **Each game repository** (fMinesweeper, fPong, fSpider, PATH):
+   `git switch main && git merge --ff-only trim-game-builds && git push`.
+   Its deploy job rebuilds and syncs. Expect the Actions log to say
+   "No changes in ... production build. Skipping commit." If it pushes a
+   sync commit instead, look at what it changed: the bundle names should
+   match the ones here.
+3. Delete the `trim-game-builds` branches.
+
+Until step 2 is done for a game, any push to that game's `main` brings its
+unused files back here.
 
 ## Log
 
@@ -66,3 +89,48 @@ Not done yet. Filled in once the branches are ready.
   pack, and 92 of its 182 commits are syncs (80 from fSolitaire since
   2026-07-12).
 - Next: trace which files each game loads.
+
+### 2026-10-10: the short-term trim
+
+Commits: fuzzley `bd108a5`; fMinesweeper `247f16a`, fPong `229f43b`,
+fSpider `b984747`, PATH `e346f36`. Each commit message lists what it
+removes and why.
+
+- **How the files were found.** A throwaway Node script started at each
+  game's `index.html` and followed `src`/`href`, CSS `url()` and
+  `@import`, `sourceMappingURL` comments and path-like strings in scripts.
+  Any file whose name appeared anywhere in a loaded file was kept, so paths
+  built at runtime survive. Every leftover file was then checked by hand,
+  and a final grep confirmed no kept file names a removed one.
+- **What went.** The unused twin, minified or not, of each script and
+  style that `index.html` loads (mostly the minified one), unused
+  Bootstrap and Material themes, jQuery Validation, the Application
+  Insights SDK, Visual Studio helpers (`_references.js`, `-vsdoc.js`,
+  `.intellisense.js`), Font Awesome's IE7 stylesheets and desktop `.otf`
+  files, Spider's source SVG for its card sheet, PATH's unused
+  `simple_manual_step_3_02.jpg` and a LibreOffice lock file. 66 files,
+  about 6.9 MiB.
+- **What stayed on purpose.** Source maps of files that load (dev tools
+  ask for them). All three Spider card sounds: howler gets `.ogg`, `.mp3`
+  and `.wav` and plays the first the browser supports.
+- **fSolitaire needed nothing.** Its `docs/screenshots/<id>/overview.png`
+  files look like documentation but are the rules-page pictures
+  (`src/ui/app/provider/game_documentation_data.ts`); `thumb.webp` and
+  `preview.webp` feed the game browser. This corrects the code health
+  review, which called the PNGs dead weight. They are, however, 20 MB of
+  the game's 42 MB; see the long-term plan.
+- **Checks.** Each game repository's `public/` matched its deployed copy
+  here file for file before the change. After it, `yarn build` in each
+  produced the same script bundle names as the deployed builds; only the
+  line endings of `index.html` differ, from the Windows checkout. In
+  Chrome, against `astro preview` of this repository: Minesweeper (started
+  a game), Pong, Spider (dealt, card sound loaded) and PATH (browsed to a
+  product, opened the simplified manual, paged to step 3) all loaded with
+  every local request answered 200 and no console errors. `astro build`
+  and `inject-analytics` still instrument all five games.
+- **Not changed:** the games still load unminified vendor scripts
+  (`phaser.js`, `knockout-*.debug.js`, `jquery-*.js`). Switching to the
+  minified copies would cut what players download, but Knockout's debug
+  and release builds expose different internals, so it needs testing game
+  by game. Listed as a follow-up in the long-term plan.
+- Next: the long-term plan.
