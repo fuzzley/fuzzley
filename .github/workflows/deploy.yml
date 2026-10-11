@@ -74,7 +74,17 @@ jobs:
               failed=1
             fi
           }
+          expect_cache() {
+            value=$(curl -s -o /dev/null -D - "http://localhost:8080$1" |
+              tr -d '\r' | sed -n 's/^cache-control: //Ip')
+            echo "Cache-Control: $value  $1"
+            if [ "$value" != "$2" ]; then
+              echo "::error::Expected Cache-Control: $2 for $1, got '$value'."
+              failed=1
+            fi
+          }
           expect 200 /
+          expect_cache / "no-cache"
           expect 200 /projects/
           expect 200 /cv/
           expect 404 /no-such-page/
@@ -83,6 +93,7 @@ jobs:
             slug=$(basename "$file" .md)
             expect 200 "/projects/$slug/"
             expect 200 "/projects/$slug/play/"
+            expect_cache "/projects/$slug/play/" "no-cache"
             expect 301 "/project/$slug/"
           done
           exit $failed
