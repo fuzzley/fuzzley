@@ -18,8 +18,9 @@ This project uses [Yarn](https://yarnpkg.com/) for dependency management and
 cd frontend
 
 yarn install     # install dev dependencies
-yarn dev         # start the dev server on http://localhost:9000
-yarn build       # produce a production build in dist/
+yarn dev         # fetch the games, then start the dev server on http://localhost:9000
+yarn build       # fetch the games, then produce a production build in dist/
+yarn games       # fetch the games pinned in games.json (--force to fetch them again)
 yarn preview     # serve the production build locally
 yarn stop        # stop a dev server started with `astro dev --background`
 yarn force-stop  # stop every dev or preview server running from this checkout
@@ -32,21 +33,21 @@ yarn verify      # type-check, lint, check formatting and build
 
 ## Pages and Content
 
-| Path                        | What it is                                                     |
-| --------------------------- | -------------------------------------------------------------- |
-| `/`                         | The home page: a bento grid of tiles.                          |
-| `/projects/`                | Every project.                                                 |
-| `/projects/<slug>/`         | A page about one project.                                      |
-| `/projects/<slug>/play/`    | The game itself, built and pushed in by its own repository.    |
-| `/cv/`                      | The full work history, laid out to print as a resume.          |
-| `/project/<slug>/`          | Old game addresses. They redirect to `/projects/<slug>/play/`. |
+| Path                     | What it is                                                          |
+| ------------------------ | ------------------------------------------------------------------- |
+| `/`                      | The home page: a bento grid of tiles.                               |
+| `/projects/`             | Every project.                                                      |
+| `/projects/<slug>/`      | A page about one project.                                           |
+| `/projects/<slug>/play/` | The game itself, built by its own repository (see [Games](#games)). |
+| `/cv/`                   | The full work history, laid out to print as a resume.               |
+| `/project/<slug>/`       | Old game addresses. They redirect to `/projects/<slug>/play/`.      |
 
 The words and pictures live in content files, not in the pages:
 
 - `frontend/src/content/projects/<slug>.md`: one file per project. The front
   matter is checked against the schema in `frontend/src/content.config.ts`,
   and the body becomes the project page's write-up. The file name must match
-  the game's folder in `frontend/public/projects/`.
+  the game's key in `frontend/games.json`.
 - `frontend/src/content/experience.yaml`: the work history.
 - `frontend/src/data/profile.ts`: name, bio, links and education.
 - `frontend/src/assets/`: screenshots and the photo. The build resizes them
@@ -55,6 +56,40 @@ The words and pictures live in content files, not in the pages:
 A highlight in `experience.yaml` that starts with `TODO` is a placeholder:
 `yarn dev` shows it with a dashed outline, production builds leave it out, and
 `yarn build` prints a warning while any remain.
+
+## Games
+
+Each game is built in its own repository (fSolitaire, fSpider, fMinesweeper,
+fPong, PATH). Every push to a game's `main` builds it and uploads the build to
+that repository's `site-build` release as `<slug>-<short sha>.tar.gz`, then
+replaces `latest.json` there, which names the newest archive. The release keeps
+the ten newest archives and the one this site pins.
+
+`frontend/games.json` pins one archive per game, by name and SHA-256.
+`frontend/tools/fetch-games.mjs` downloads each pinned archive (cached in
+`node_modules/.cache/games/`), checks its SHA-256 and unpacks it into
+`frontend/public/projects/<slug>/play/`, which git ignores. `yarn dev` and
+`yarn build` run it first, so the Docker build fetches the games too.
+
+Every 15 minutes, `.github/workflows/update-games.yml` moves each pin to the
+newest build, builds the site, and pushes the change to `main` if the build
+passes; Cloud Run then deploys it. It uses only its own `GITHUB_TOKEN`, and
+no game repository can push here. If the build fails, it opens a
+"Game update failed" issue and skips that archive until the issue is closed or
+a newer build appears. GitHub turns scheduled workflows off after 60 days
+without activity, so if a game's update never arrives, check that Update games
+is enabled under Actions.
+
+- **Roll a game back:** set its entry in `games.json` to an older archive
+  from its release (`gh release view site-build --repo fuzzley/<repo>`), with
+  that archive's SHA-256 and commit, and push. The next scheduled run moves
+  it forward again once the game has a newer build than that.
+- **Add a game:** give its repository the same deploy job (copy one of the
+  others), push once so its release exists, add its entry to `games.json`
+  from its `latest.json`, and add `frontend/src/content/projects/<slug>.md`.
+
+Why it works this way, and the options considered, are in
+[docs/game-builds.md](docs/game-builds.md).
 
 ## Deployment
 
@@ -80,19 +115,25 @@ cd frontend
 PLAY_ORIGIN=https://fuzzley.info yarn build && yarn preview
 ```
 
-Without `PLAY_ORIGIN`, as in the Docker build and `yarn dev`, the games ship
-with the site.
+Without `PLAY_ORIGIN`, as in the Docker build and `yarn dev`, the games are
+fetched and ship with the site.
+
+Pushes made by Update games don't run `deploy.yml` (GitHub doesn't start
+workflows from a workflow's own pushes), which is fine: the GitHub Pages copy
+has no games. Cloud Run deploys them as usual.
 
 ## Docker Build & Run (Local Testing)
 
 To test the containerized application locally, run these commands from the repository root directory:
 
 1. **Build the Docker Image**:
+
    ```sh
    docker build -t fuzzley-site .
    ```
 
 2. **Run the Container Locally**:
+
    ```sh
    docker run -d --name fuzzley-container -p 8080:8080 -e PORT=8080 fuzzley-site
    ```
@@ -135,25 +176,23 @@ in fuzzley/fuzzley.github.io.
 
 ### Games
 
-The games under `/projects/<slug>/play/` are production builds pushed in by their own
-repositories (fMinesweeper, fPong, fSolitaire, fSpider, PATH). Those
-repositories carry no analytics code of their own, so `yarn build` runs
-`frontend/tools/inject-analytics.mjs`, which adds the `env.js` and
-`analytics.js` tags to each project's `index.html` **in `dist/`** — never in
-`public/`, whose contents the next sync from a project repository overwrites.
+The games under `/projects/<slug>/play/` are production builds of their own
+repositories (see [Games](#games)), which carry no analytics code of their
+own, so `yarn build` runs `frontend/tools/inject-analytics.mjs`, which adds the
+`env.js` and `analytics.js` tags to each game's `index.html` **in `dist/`**,
+never in the fetched files in `public/`.
 
 Every page therefore reports to the same measurement ID, and Google Analytics
-separates them by path. A new game dropped into `public/projects/<slug>/play/`
-is picked up automatically at the next build; the script fails the build if a
-game has no `</head>` to attach to, so a page cannot go untracked silently. A
-new game also needs `src/content/projects/<slug>.md` for its tile and page.
-A build with `PLAY_ORIGIN` set has no games, so there the script does nothing.
+separates them by path. Every fetched game is instrumented at the next build;
+the script fails the build if a game has no `</head>` to attach to, so a page
+cannot go untracked silently. A build with `PLAY_ORIGIN` set has no games, so
+there the script does nothing.
 
 ### Supported variables
 
-| Environment variable   | Purpose                                                                  | Example        |
-| ---------------------- | ------------------------------------------------------------------------ | -------------- |
-| `GA_AG_MEASUREMENT_ID` | Google Analytics 4 measurement ID. Leave unset to disable analytics.     | `G-XXXXXXXXXX` |
+| Environment variable   | Purpose                                                              | Example        |
+| ---------------------- | -------------------------------------------------------------------- | -------------- |
+| `GA_AG_MEASUREMENT_ID` | Google Analytics 4 measurement ID. Leave unset to disable analytics. | `G-XXXXXXXXXX` |
 
 ### Providing values
 
@@ -171,4 +210,3 @@ docker run -d --name fuzzley-container -p 8080:8080 \
   -e GA_AG_MEASUREMENT_ID=G-XXXXXXXXXX \
   fuzzley-site
 ```
-
