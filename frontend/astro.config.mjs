@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import fs from "node:fs";
 import { buildInfo } from "./tools/build-info.mjs";
+import { readManifest } from "./tools/games.mjs";
 
 const site = "https://fuzzley.info";
 
@@ -12,14 +13,20 @@ const playOrigin = process.env.PLAY_ORIGIN
   ? new URL(process.env.PLAY_ORIGIN).origin
   : "";
 
-// The games are prebuilt pages copied from public/, so Astro does not know
-// about them. List them in the sitemap by hand.
-const playPages = fs
-  .readdirSync(new URL("./public/projects/", import.meta.url), {
-    withFileTypes: true,
-  })
-  .filter((entry) => entry.isDirectory())
-  .map((entry) => `${site}/projects/${entry.name}/play/`);
+// The games are prebuilt pages, so Astro does not know about them. List them
+// in the sitemap by hand: the ones pinned in games.json, which aren't there
+// until fetched (and never are with PLAY_ORIGIN set), and the ones still
+// committed to public/projects/.
+const projectsDir = new URL("./public/projects/", import.meta.url);
+const committedGames = fs.existsSync(projectsDir)
+  ? fs
+      .readdirSync(projectsDir, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+  : [];
+const playPages = [
+  ...new Set([...Object.keys(readManifest()), ...committedGames]),
+].map((slug) => `${site}/projects/${slug}/play/`);
 
 // Writes dist/version.json, which nginx serves uncached.
 function versionJson() {

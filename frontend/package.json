@@ -5,9 +5,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build && node tools/inject-analytics.mjs",
+    "dev": "node tools/fetch-games.mjs --optional && astro dev",
+    "start": "yarn dev",
+    "build": "node tools/fetch-games.mjs && astro build && node tools/inject-analytics.mjs",
+    "games": "node tools/fetch-games.mjs",
     "preview": "astro preview",
     "force-stop": "node tools/stop-dev-servers.mjs",
     "stop": "astro dev stop",
@@ -33,6 +34,7 @@
     "prettier": "^3.9.9",
     "prettier-plugin-astro": "^1.1.1",
     "sharp": "^0.35.5",
+    "tar": "^7.5.22",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.71.1"
   },
