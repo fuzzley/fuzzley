@@ -18,7 +18,7 @@ uses (short term), and choose where game builds should live (long term, see
 | 3. fSolitaire rules screenshots as WebP       | Not started |
 | 4. Minified vendor scripts in the older games | Not started |
 
-- **Working on:** phase 2, step 3: the pull request `games-from-releases` (Pong fetched from its release, Docker image built in CI).
+- **Working on:** phase 2, step 4: trying `update-games.yml` by hand on GitHub.
 - **Pushing:** the owner approved pushing each step once it is verified
   (2026-10-10). Changes to how this repository builds go through a pull
   request first, so CI can build the Docker image; Docker isn't installed
@@ -101,8 +101,8 @@ Phase 2, option E (steps follow the migration plan in game-builds.md):
 
 - [x] 1. fPong publishes a `site-build` release (sync kept for now)
 - [x] 2. `games.json` and `fetch-games.mjs`, checked against the committed copy
-- [ ] 3. Pong switched: folder out of git, CI builds the Docker image, live check
-- [ ] 3b. fPong's sync step removed
+- [x] 3. Pong switched: folder out of git, CI builds the Docker image, live check
+- [x] 3b. fPong's sync step removed
 - [ ] 4. `update-games.yml` bumps the manifest; tried by hand
 - [ ] 5. fMinesweeper, fSpider, PATH, then fSolitaire moved over
 - [ ] 6. Delete `MAIN_REPO_DEPLOY_PAT` everywhere; README and docs updated
@@ -277,3 +277,24 @@ removes and why.
 - Next: push the branch, open a pull request, wait for `verify` and
   `docker`, then fast-forward `main`, watch Cloud Run, and check Pong on
   fuzzley.info.
+
+### 2026-10-10: option E, steps 3, 3b and 4
+
+- **Step 3 live.** Pull request #1 (`games-from-releases`) passed `verify`
+  and the new `docker` job, whose image build fetched Pong and served every
+  project's page, game and old redirect. `main` was fast-forwarded to
+  `056ec44` and the branch deleted. Cloud Run's own image build fetched
+  Pong too: fuzzley.info served `056ec44`, with Pong's page, assets,
+  analytics tag, `/project/pong/` redirect and sitemap entry all in place.
+- **Step 3b.** fPong `6dfa7d0` drops the sync step and its token use; the
+  workflow is now "Build and publish to fuzzley.info". Its run published
+  `pong-6dfa7d0.tar.gz`, moved the tag, and kept `pong-76b68ce.tar.gz`
+  because `games.json` pins it.
+- **Step 4.** `57c127e` adds `tools/update-games.mjs` and
+  `.github/workflows/update-games.yml`. Locally, the script found
+  `pong-6dfa7d0.tar.gz`, wrote the expected outputs and commit message, and
+  left the pin alone when that archive was in `SKIP_ASSETS`.
+- **Seen, not changed:** Dependabot alert #23 (moderate) for
+  `brace-expansion` in `frontend/yarn.lock`, open before this work.
+- Next: push, run Update games by hand, and check that it pins
+  `pong-6dfa7d0.tar.gz`, pushes, and that Cloud Run deploys it.
