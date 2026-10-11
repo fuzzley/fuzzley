@@ -1,10 +1,11 @@
 name: Verify and deploy
 
-# Every push and pull request is type-checked, linted and built. Pushes to
-# main then ask fuzzley/fuzzley.github.io to build and publish its copy of the
-# site: GitHub Pages deploys from the repository its workflow runs in, so the
-# publishing job lives there (.github/workflows/pages.yml in that repo). This
-# run waits for that one, so a failed deploy shows here too.
+# Every push and pull request is type-checked, linted and built, and its
+# Docker image is built and served. Pushes to main then ask
+# fuzzley/fuzzley.github.io to build and publish its copy of the site: GitHub
+# Pages deploys from the repository its workflow runs in, so the publishing
+# job lives there (.github/workflows/pages.yml in that repo). This run waits
+# for that one, so a failed deploy shows here too.
 #
 # fuzzley.info itself is served by Cloud Run, which builds the Dockerfile from
 # main on its own and doesn't depend on this workflow.
@@ -43,6 +44,48 @@ jobs:
       - name: Type-check, lint, check formatting and build
         working-directory: frontend
         run: yarn verify
+
+  # Cloud Run builds the same Dockerfile from main without waiting for these
+  # checks, so build the image here too, serve it, and request a few pages.
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout fuzzley
+        uses: actions/checkout@v7
+
+      - name: Build the image
+        run: docker build --build-arg COMMIT_SHA=${{ github.sha }} -t fuzzley-site .
+
+      - name: Serve the image and check its pages
+        run: |
+          docker run -d --name site -p 8080:8080 -e PORT=8080 fuzzley-site
+          for attempt in $(seq 1 30); do
+            curl -fs -o /dev/null http://localhost:8080/ && break
+            sleep 1
+          done
+
+          failed=0
+          expect() {
+            status=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:8080$2")
+            echo "$status $2"
+            if [ "$status" != "$1" ]; then
+              echo "::error::Expected $1 for $2, got $status."
+              failed=1
+            fi
+          }
+          expect 200 /
+          expect 200 /projects/
+          expect 200 /cv/
+          expect 404 /no-such-page/
+          # Every game, whether fetched from its release or still committed.
+          for file in frontend/src/content/projects/*.md; do
+            slug=$(basename "$file" .md)
+            expect 200 "/projects/$slug/"
+            expect 200 "/projects/$slug/play/"
+            expect 301 "/project/$slug/"
+          done
+          exit $failed
 
   deploy:
     needs: verify
