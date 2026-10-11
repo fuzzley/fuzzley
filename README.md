@@ -97,6 +97,13 @@ fuzzley.info is the site. Cloud Run serves it from the Docker image below, and
 rebuilds and deploys that image on every push to `main` by itself, without
 waiting for the checks that follow.
 
+The images go to Artifact Registry (`cloud-run-source-deploy` in
+`northamerica-northeast2`), whose cleanup policy keeps the 30 newest versions,
+about ten builds since each build also stores two small provenance records,
+and deletes any other once it is a week old. Cloud Run keeps its own copy of
+the image a serving revision runs, so the policy never takes the site down; it
+only limits how far back a rollback can go.
+
 Pushes to `main` also run `.github/workflows/deploy.yml`, which type-checks,
 lints and builds, then triggers the workflow in
 [fuzzley/fuzzley.github.io](https://github.com/fuzzley/fuzzley.github.io) that
