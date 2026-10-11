@@ -11,14 +11,68 @@ uses (short term), and choose where game builds should live (long term, see
 
 ## Status
 
-- **Short-term trim: done and live.** Pushed to `main` in all five
-  repositories on 2026-10-10; the `trim-game-builds` branches are deleted.
-- **Long-term plan: waiting on the owner.** Choose an option and answer the
-  open questions at the end of the migration plan in
-  [game-builds.md](game-builds.md), then start its step 1.
-- No branches are open for this work.
+| Phase                                         | State       |
+| --------------------------------------------- | ----------- |
+| 1. Trim unused files from the game builds     | Done, live  |
+| 2. Option E: releases and a pinned manifest   | In progress |
+| 3. fSolitaire rules screenshots as WebP       | Not started |
+| 4. Minified vendor scripts in the older games | Not started |
 
-### Commits on `main`
+- **Working on:** phase 2, step 1 (publish a release from fPong).
+- **Pushing:** the owner approved pushing each step once it is verified
+  (2026-10-10). Changes to how this repository builds go through a pull
+  request first, so CI can build the Docker image; Docker isn't installed
+  on the development machine.
+
+## Decisions
+
+Agreed with the owner on 2026-10-10.
+
+| Topic           | Decision                                                                                                  |
+| --------------- | --------------------------------------------------------------------------------------------------------- |
+| Long-term model | Option E in game-builds.md: each game publishes a release asset; `frontend/games.json` pins one per game. |
+| Releases        | One rolling release per game, not one per deploy.                                                         |
+| Bumps           | Automatic, every 15 minutes, with no extra token. Merged without review once the build passes.            |
+| WebP, minifying | Separate steps, after option E (so their new files never enter this repository's history).                |
+
+## Design for option E
+
+- **Release.** Each game repository has one release, tag `site-build`,
+  never marked "latest". Every deploy uploads `<slug>-<short sha>.tar.gz`
+  (its `dist/`, packed) and then replaces `latest.json`, which names that
+  archive with its SHA-256 and commit. The tag moves to the deployed
+  commit. The deploy job uses its own `GITHUB_TOKEN`; no token for this
+  repository is involved.
+- **Pins survive the rolling release.** A rolling release that kept only
+  the newest archive would break any build of this repository between a
+  game deploy and the next bump, and make rollback impossible. So each
+  deploy keeps the ten newest archives plus whichever one `games.json` on
+  this repository's `main` pins (read from raw.githubusercontent.com,
+  which needs no token), and deletes the rest.
+- **Manifest.** `frontend/games.json` maps each slug to its repository,
+  commit, archive name and SHA-256. Download URLs are
+  `https://github.com/<repo>/releases/download/site-build/<asset>`, which
+  don't count against GitHub's API rate limit.
+- **Fetching.** `frontend/tools/fetch-games.mjs` downloads each pinned
+  archive into `node_modules/.cache/games/`, checks its SHA-256 and unpacks
+  it into `public/projects/<slug>/play/` (git-ignored). It does nothing
+  when `PLAY_ORIGIN` is set or when the installed copy already matches.
+  `yarn dev` and `yarn build` run it first; Yarn 4 has no `pre` scripts.
+  The Docker build needs no change, since it runs `yarn build`.
+- **Bumping without a token.** A scheduled workflow here
+  (`update-games.yml`, every 15 minutes) reads each game's `latest.json`,
+  updates `games.json`, runs `yarn build`, and pushes the commit to `main`
+  with its own `GITHUB_TOKEN`. A pull request opened with `GITHUB_TOKEN`
+  would never get CI runs (GitHub doesn't start workflows from that
+  token's events), so it couldn't auto-merge on passing checks; running
+  the build inside the bump job is the check instead. Cloud Run still
+  deploys the push, since its trigger is a GitHub App, not a workflow.
+- **Failed bumps.** If the build fails, nothing is pushed and the job
+  opens an issue named after the archive. Later runs skip any archive
+  with an open issue, so a bad build doesn't fail every 15 minutes; the
+  next good deploy, or closing the issue, retries.
+
+### Commits on `main` (phase 1)
 
 | Repository   | Commits                | What                                                          |
 | ------------ | ---------------------- | ------------------------------------------------------------- |
@@ -33,14 +87,36 @@ uses (short term), and choose where game builds should live (long term, see
 
 1. Read the newest [Log](#log) entry and its "Next" line.
 2. Check the [Checklist](#checklist) for the remaining work.
-3. For the long-term work, follow the migration plan in
-   [game-builds.md](game-builds.md) on a new branch in each repository it
-   touches, and log each step here.
+3. In each repository, `git status` and `git log --oneline origin/main..`
+   show anything committed but not yet pushed.
+4. `gh release view site-build --repo fuzzley/<game>` shows a game's
+   release; `frontend/games.json` shows what the site pins.
 
 The game repositories are cloned beside this one, in `~/Projects/`:
 `fSolitaire`, `fSpider`, `fMinesweeper`, `fPong` and `PATH`.
 
 ## Checklist
+
+Phase 2, option E (steps follow the migration plan in game-builds.md):
+
+- [ ] 1. fPong publishes a `site-build` release (sync kept for now)
+- [ ] 2. `games.json` and `fetch-games.mjs`, checked against the committed copy
+- [ ] 3. Pong switched: folder out of git, CI builds the Docker image, live check
+- [ ] 3b. fPong's sync step removed
+- [ ] 4. `update-games.yml` bumps the manifest; tried by hand
+- [ ] 5. fMinesweeper, fSpider, PATH, then fSolitaire moved over
+- [ ] 6. Delete `MAIN_REPO_DEPLOY_PAT` everywhere; README and docs updated
+- [ ] Owner: revoke the personal access token behind `MAIN_REPO_DEPLOY_PAT`
+
+Phase 3, fSolitaire WebP screenshots:
+
+- [ ] Rules screenshots served as WebP; its tools and specs updated
+
+Phase 4, minified vendor scripts:
+
+- [ ] fPong, fMinesweeper, fSpider, PATH load minified copies, each tested
+
+Phase 1, trim (done):
 
 - [x] Work out which files each game loads
 - [x] fMinesweeper: delete the unused files from `public/`
@@ -52,7 +128,7 @@ The game repositories are cloned beside this one, in `~/Projects/`:
 - [x] Check every game plays from a local build
 - [x] Long-term plan in `docs/game-builds.md`
 - [x] Push to `main` and delete the branches (see [Shipping](#shipping))
-- [ ] Owner: choose a long-term option and answer the open questions
+- [x] Owner: choose a long-term option and answer the open questions
 
 ## Shipping
 
