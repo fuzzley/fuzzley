@@ -13,20 +13,23 @@ uses (short term), and choose where game builds should live (long term, see
 
 - **Current branch:** `trim-game-builds` in every repository below.
 - **Last step finished:** the short-term trim, in all five repositories,
-  checked in Chrome.
-- **Next step:** write the long-term plan in `docs/game-builds.md`.
+  checked in Chrome; the long-term plan in
+  [game-builds.md](game-builds.md).
+- **Next step:** the owner reviews, follows [Shipping](#shipping) for the
+  trim, and answers the open questions in game-builds.md before any
+  long-term work starts.
 - **Nothing has been pushed.** All work is in local commits.
 
 ### Branches
 
-| Repository   | Branch             | Holds                                                           |
-| ------------ | ------------------ | --------------------------------------------------------------- |
-| fuzzley      | `trim-game-builds` | This log, the long-term plan, the trimmed copies of the games.  |
-| fMinesweeper | `trim-game-builds` | `247f16a`: deletes 21 unused files from `public/` (1.1 MiB).    |
-| fPong        | `trim-game-builds` | `229f43b`: deletes 11 unused files from `public/` (2.0 MiB).    |
-| fSpider      | `trim-game-builds` | `b984747`: deletes 8 unused files from `public/` (2.5 MiB).     |
-| PATH         | `trim-game-builds` | `e346f36`: deletes 26 unused files from `public/` (1.4 MiB).    |
-| fSolitaire   | none               | Nothing to change: its build ships only what it loads.          |
+| Repository   | Branch             | Holds                                                          |
+| ------------ | ------------------ | -------------------------------------------------------------- |
+| fuzzley      | `trim-game-builds` | This log, the long-term plan, the trimmed copies of the games. |
+| fMinesweeper | `trim-game-builds` | `247f16a`: deletes 21 unused files from `public/` (1.1 MiB).   |
+| fPong        | `trim-game-builds` | `229f43b`: deletes 11 unused files from `public/` (2.0 MiB).   |
+| fSpider      | `trim-game-builds` | `b984747`: deletes 8 unused files from `public/` (2.5 MiB).    |
+| PATH         | `trim-game-builds` | `e346f36`: deletes 26 unused files from `public/` (1.4 MiB).   |
+| fSolitaire   | none               | Nothing to change: its build ships only what it loads.         |
 
 ## How to resume
 
@@ -48,7 +51,7 @@ The game repositories are cloned beside this one, in `~/Projects/`:
 - [x] fSolitaire: confirm nothing unused ships
 - [x] fuzzley: trim the deployed copies to match (`bd108a5`)
 - [x] Check every game plays from a local build
-- [ ] Long-term plan in `docs/game-builds.md`
+- [x] Long-term plan in `docs/game-builds.md`
 - [ ] Owner: review and push (see [Shipping](#shipping))
 
 ## Shipping
@@ -58,7 +61,7 @@ works, because this repository's branch deletes exactly the files the next
 sync from each game would delete.
 
 1. **This repository.** `git switch main && git merge --ff-only
-   trim-game-builds && git push`. `deploy.yml` verifies and redeploys the
+trim-game-builds && git push`. `deploy.yml` verifies and redeploys the
    GitHub Pages copy; Cloud Run rebuilds the image from `main` by itself.
    Afterwards, open each `/projects/<slug>/play/` on fuzzley.info.
 2. **Each game repository** (fMinesweeper, fPong, fSpider, PATH):
@@ -134,3 +137,27 @@ removes and why.
   and release builds expose different internals, so it needs testing game
   by game. Listed as a follow-up in the long-term plan.
 - Next: the long-term plan.
+
+### 2026-10-10: the long-term plan
+
+- Wrote [game-builds.md](game-builds.md): how builds ship today and what
+  it costs, the requirements any change must keep, nine options (keep
+  committing with guard rails, a builds repository, Git LFS, submodules,
+  GitHub Releases with a manifest, packages, a proxy, a bucket, a
+  monorepo) with pros, cons and effort, a comparison table, a
+  recommendation and a step-by-step migration.
+- **Recommendation:** GitHub Releases plus a pinned, checksummed manifest
+  here (option E), with a scheduled workflow opening auto-merging bump
+  pull requests. Fallback: a separate builds repository with a pinned
+  commit (option B). Leave the existing history alone.
+- **Constraint found:** Solitaire, Spider and Minesweeper keep settings,
+  statistics or saved games in `localStorage`, so the games must stay on
+  fuzzley.info's origin. Any option that serves them from another host
+  name needs a same-origin proxy.
+- **Measured for the follow-ups:** fSolitaire's 41 `overview.png` files are
+  19.8 MiB, about 7.3 MiB as WebP at quality 85. Minified vendor scripts
+  would cut Pong's `phaser.js` from 409 KB to 140 KB gzipped. PATH's
+  `sample/manual_01.pdf` alone is 23 MiB of its 26 MiB.
+- Open questions for the owner are listed at the end of the migration
+  plan.
+- Next: the owner's review.
