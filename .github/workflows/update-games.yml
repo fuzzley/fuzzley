@@ -23,7 +23,9 @@ name: Update games
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    # Every 15 minutes, off the hour: GitHub delays, and sometimes drops,
+    # scheduled runs at busy times, the start of each hour most of all.
+    - cron: "4,19,34,49 * * * *"
   workflow_dispatch:
 
 permissions:
