@@ -14,9 +14,9 @@
 // With no ID configured — local dev, or a container started without
 // GA_AG_MEASUREMENT_ID — this does nothing and analytics stays off.
 //
-// The project sub-pages under project/<slug>/ are builds pushed in from their
-// own repositories, which carry no analytics code. Their tags are injected into
-// the build output by frontend/tools/inject-analytics.mjs.
+// The games under projects/<slug>/play/ are built by their own repositories,
+// which carry no analytics code. Their tags are injected into the build
+// output by frontend/tools/inject-analytics.mjs.
 (function () {
   "use strict";
 

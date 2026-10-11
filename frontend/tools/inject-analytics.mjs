@@ -1,10 +1,11 @@
 // Adds the site's analytics tags to the games in the build output.
 //
-// The pages under public/projects/<slug>/play/ are production builds pushed in
-// by the project repositories (fMinesweeper, fPong, fSolitaire, fSpider, PATH).
-// Those repositories deliberately carry no analytics code, so the tags are added
-// here instead, after `astro build`, to the copies in dist/ — never to the
-// sources in public/, which the next sync from a project repository overwrites.
+// The pages under public/projects/<slug>/play/ are production builds of the
+// project repositories (fMinesweeper, fPong, fSolitaire, fSpider, PATH),
+// fetched from their releases by fetch-games.mjs. Those repositories
+// deliberately carry no analytics code, so the tags are added here instead,
+// after `astro build`, to the copies in dist/, never to the fetched files in
+// public/.
 //
 // Run as part of `yarn build`. Safe to re-run: a page that already has the tags
 // is left alone.

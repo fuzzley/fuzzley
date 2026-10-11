@@ -76,6 +76,6 @@ dist
 # Astro generated types
 .astro
 
-# Games fetched from their releases by tools/fetch-games.mjs (see games.json).
-# The rest are still committed until they move over.
-public/projects/pong/
+# The games, fetched from their releases by tools/fetch-games.mjs (see
+# games.json).
+public/projects/

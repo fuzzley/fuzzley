@@ -6,7 +6,7 @@ const yearMonth = z.string().regex(/^\d{4}-\d{2}$/, "Use YYYY-MM");
 
 // One Markdown file per project. The file name is the slug: it sets both the
 // project page (/projects/<slug>/) and the game (/projects/<slug>/play/), so
-// it must match the folder in public/projects/.
+// it must match the game's key in games.json.
 const projects = defineCollection({
   loader: glob({ pattern: "*.md", base: "./src/content/projects" }),
   schema: ({ image }) =>

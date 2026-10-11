@@ -1,8 +1,32 @@
 {
+  "minesweeper": {
+    "repo": "fuzzley/fMinesweeper",
+    "commit": "2a2d1db3469ef93b090776e278e64a9a7242c7d3",
+    "asset": "minesweeper-2a2d1db.tar.gz",
+    "sha256": "e113107699bcee1a252f26d3053d88af57358c9e39973deda65cda4237c7120d"
+  },
+  "path": {
+    "repo": "fuzzley/PATH",
+    "commit": "58259ac0a99eec910c04558d877589f3cb5016c5",
+    "asset": "path-58259ac.tar.gz",
+    "sha256": "5bac2c5ffc707973b9beff8a76d8bdd5e19d4f611fdce2f7e8e7fa9b72aa126a"
+  },
   "pong": {
     "repo": "fuzzley/fPong",
     "commit": "6dfa7d02807cf10998bc9749cd54c204d633b768",
     "asset": "pong-6dfa7d0.tar.gz",
     "sha256": "a30921bd8d0b25139e4ae06e27b9090aea52fd21053035213b86bc7dc756924e"
+  },
+  "solitaire": {
+    "repo": "fuzzley/fSolitaire",
+    "commit": "1c72dce1fb7d41eea70e42fe3874125badd04153",
+    "asset": "solitaire-1c72dce.tar.gz",
+    "sha256": "bc90aaacdfbc73061bf66786d6b6d9b1657f1f9a5e5f6e88c3ece105e6f8125c"
+  },
+  "spider": {
+    "repo": "fuzzley/fSpider",
+    "commit": "9379bb8527b58ed2f589bfb1a3b367bff90059a8",
+    "asset": "spider-9379bb8.tar.gz",
+    "sha256": "0e16eafb3211490bb50ae9ff3f97f93fc37f250f2c9be04f1010b823142d16ea"
   }
 }
