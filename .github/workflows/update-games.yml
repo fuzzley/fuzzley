@@ -1,0 +1,110 @@
+name: Update games
+
+# Every 15 minutes, moves each game's pin in frontend/games.json to the newest
+# build on that game's site-build release, which its own deploy job publishes
+# (see docs/game-builds.md).
+#
+# It needs no token beyond its own GITHUB_TOKEN. It builds the site with the
+# new pins and pushes to main only if the build passes, which is the check
+# that stands in for review. (A pull request opened with GITHUB_TOKEN would
+# get no CI runs, so it could never auto-merge on passing checks.) Pushes made
+# with GITHUB_TOKEN don't start other workflows, so deploy.yml doesn't run for
+# them, which is fine: the GitHub Pages copy has no games. Cloud Run deploys
+# the push as it does any other.
+#
+# When the build fails, nothing is pushed and the job opens an issue titled
+# "Game update failed: <archive>". Later runs skip that archive, so a broken
+# build doesn't fail every 15 minutes; closing the issue, or a newer build,
+# makes them try again.
+#
+# GitHub turns scheduled workflows off after 60 days without activity in a
+# public repository. If a game's update never arrives, check that this
+# workflow is enabled under Actions.
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: update-games
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout fuzzley
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 26
+
+      - name: List archives whose update already failed
+        id: failed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "assets<<EOF"
+            gh issue list --state open --limit 100 --json title --jq \
+              '.[].title | select(startswith("Game update failed: ")) | ltrimstr("Game update failed: ")'
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Move the pins to the newest builds
+        id: update
+        env:
+          SKIP_ASSETS: ${{ steps.failed.outputs.assets }}
+        run: node frontend/tools/update-games.mjs
+
+      - name: Enable Corepack
+        if: steps.update.outputs.changed == 'true'
+        run: corepack enable
+
+      - name: Install dependencies
+        if: steps.update.outputs.changed == 'true'
+        working-directory: frontend
+        run: yarn install --immutable
+
+      - name: Build the site with the new pins
+        id: build
+        if: steps.update.outputs.changed == 'true'
+        working-directory: frontend
+        run: yarn build
+
+      - name: Commit and push the new pins
+        if: steps.update.outputs.changed == 'true'
+        env:
+          MESSAGE: ${{ steps.update.outputs.message }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add frontend/games.json
+          git commit -m "$MESSAGE"
+          # main may have moved while the site was building.
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Open an issue for each archive that failed to build
+        if: failure() && steps.build.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ASSETS: ${{ steps.update.outputs.assets }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          while read -r asset; do
+            if [ -z "$asset" ]; then continue; fi
+            printf -v body '%s\n\n%s' \
+              "The site didn't build with \`$asset\` pinned in \`frontend/games.json\`, so nothing was pushed: $RUN_URL" \
+              "Update games skips this archive while this issue is open. Close it to try again; a newer build of the game is tried either way."
+            gh issue create --title "Game update failed: $asset" --body "$body"
+          done <<< "$ASSETS"
