@@ -1,7 +1,7 @@
 ---
 // A round GitHub-logo button linking to a project's source, placed beside
-// the project's Play button. The logo is the mark-github icon from GitHub's
-// Octicons (MIT license).
+// the project's Play button. It opens in a new tab. The logo is the
+// mark-github icon from GitHub's Octicons (MIT license).
 interface Props {
   href: string;
   /** The project's name, for the button's accessible name. */
@@ -20,7 +20,9 @@ const { href, projectTitle, variant = "outline" } = Astro.props;
 <a
   class:list={["github-link", `github-link--${variant}`]}
   href={href}
-  aria-label={`${projectTitle} source code on GitHub`}
+  target="_blank"
+  rel="noopener"
+  aria-label={`${projectTitle} source code on GitHub (opens in a new tab)`}
   title="Source on GitHub"
 >
   <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
