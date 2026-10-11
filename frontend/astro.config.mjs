@@ -13,20 +13,12 @@ const playOrigin = process.env.PLAY_ORIGIN
   ? new URL(process.env.PLAY_ORIGIN).origin
   : "";
 
-// The games are prebuilt pages, so Astro does not know about them. List them
-// in the sitemap by hand: the ones pinned in games.json, which aren't there
-// until fetched (and never are with PLAY_ORIGIN set), and the ones still
-// committed to public/projects/.
-const projectsDir = new URL("./public/projects/", import.meta.url);
-const committedGames = fs.existsSync(projectsDir)
-  ? fs
-      .readdirSync(projectsDir, { withFileTypes: true })
-      .filter((entry) => entry.isDirectory())
-      .map((entry) => entry.name)
-  : [];
-const playPages = [
-  ...new Set([...Object.keys(readManifest()), ...committedGames]),
-].map((slug) => `${site}/projects/${slug}/play/`);
+// The games are prebuilt pages fetched into public/ (see games.json), so
+// Astro does not know about them. List them in the sitemap by hand, from the
+// manifest: they aren't on disk until fetched, and never with PLAY_ORIGIN set.
+const playPages = Object.keys(readManifest()).map(
+  (slug) => `${site}/projects/${slug}/play/`,
+);
 
 // Writes dist/version.json, which nginx serves uncached.
 function versionJson() {

@@ -7,5 +7,6 @@ frontend/dist
 .gitignore
 .prettier*
 eslint.config.cjs
-# Fetched by the image build itself, from the pins in frontend/games.json.
-frontend/public/projects/pong
+# The games: the image build fetches them itself, from the pins in
+# frontend/games.json.
+frontend/public/projects
