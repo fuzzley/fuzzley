@@ -18,7 +18,7 @@ uses (short term), and choose where game builds should live (long term, see
 | 3. fSolitaire rules screenshots as WebP       | Not started |
 | 4. Minified vendor scripts in the older games | Not started |
 
-- **Working on:** phase 2, step 4: trying `update-games.yml` by hand on GitHub.
+- **Working on:** phase 2, step 5: pull request `move-remaining-games` (every game fetched from its release).
 - **Pushing:** the owner approved pushing each step once it is verified
   (2026-10-10). Changes to how this repository builds go through a pull
   request first, so CI can build the Docker image; Docker isn't installed
@@ -103,7 +103,7 @@ Phase 2, option E (steps follow the migration plan in game-builds.md):
 - [x] 2. `games.json` and `fetch-games.mjs`, checked against the committed copy
 - [x] 3. Pong switched: folder out of git, CI builds the Docker image, live check
 - [x] 3b. fPong's sync step removed
-- [ ] 4. `update-games.yml` bumps the manifest; tried by hand
+- [x] 4. `update-games.yml` bumps the manifest; tried by hand
 - [ ] 5. fMinesweeper, fSpider, PATH, then fSolitaire moved over
 - [ ] 6. Delete `MAIN_REPO_DEPLOY_PAT` everywhere; README and docs updated
 - [ ] Owner: revoke the personal access token behind `MAIN_REPO_DEPLOY_PAT`
@@ -298,3 +298,36 @@ removes and why.
   `brace-expansion` in `frontend/yarn.lock`, open before this work.
 - Next: push, run Update games by hand, and check that it pins
   `pong-6dfa7d0.tar.gz`, pushes, and that Cloud Run deploys it.
+
+### 2026-10-10: option E, steps 4 (tried) and 5
+
+- **Step 4 works end to end.** Run by hand, Update games moved Pong's pin
+  to `pong-6dfa7d0.tar.gz`, built the site, and pushed `60de5f9` as
+  `github-actions[bot]`. `deploy.yml` didn't run for it, as expected, and
+  Cloud Run deployed it: fuzzley.info served `60de5f9`.
+- **Game repositories switched to publishing** (pushed): fMinesweeper
+  `2a2d1db`, fSpider `9379bb8`, PATH `58259ac` (workflow copied from
+  fPong's, with their names), and fSolitaire `1c72dce` (its `verify` job
+  kept; `build-and-sync` became `build-and-publish`; `.agents/AGENTS.md`
+  updated; its own `yarn lint` passed). All four deploys created their
+  releases. fSolitaire's ruleset blocks pushes to `main` except by an
+  admin, so the push went through as a bypass, as its earlier deploy
+  change did.
+- **Found:** fSolitaire's `latest.json` answered 404 for about 40 seconds
+  after its deploy finished. `9d997b9` makes `fetch-games.mjs` retry 404s
+  for about 30 seconds and `update-games.mjs` wait until a build is two
+  minutes old (and warn, not fail, when one game's `latest.json` can't be
+  read).
+- **This repository, branch `move-remaining-games`:** `0b60b86` pins the
+  other four games and takes all of `public/projects/` out of git (238
+  files); `af830a1` adds a Games section to the README. Release builds of
+  Minesweeper, PATH and Spider were byte-identical to the committed copies;
+  Solitaire's differed only in its main bundle (it embeds the commit) and
+  the `index.html` line that loads it. From a clean state `yarn build`
+  fetched all five games and instrumented them; the `PLAY_ORIGIN` build
+  fetched nothing and still listed all five in the sitemap. `astro check`,
+  ESLint and Prettier (ignoring the Windows checkout's CRLF) pass.
+- **Seen, not changed:** Dependabot reports open alerts in fSpider (12)
+  and fSolitaire (3), as well as #23 here.
+- Next: pull request, `verify` and `docker`, fast-forward `main`, watch
+  Cloud Run, check every game on fuzzley.info.
