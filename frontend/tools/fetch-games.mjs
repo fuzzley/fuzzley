@@ -33,7 +33,10 @@ const cacheDir = path.join(frontendDir, "node_modules", ".cache", "games");
 // Which archive is unpacked in each game's folder, by slug.
 const installedFile = path.join(cacheDir, "installed.json");
 
-const ATTEMPTS = 3;
+// A release's files can answer 404 for a little while after they are
+// uploaded, so a 404 is tried again as well as a network error or a 5xx,
+// for about half a minute in all.
+const RETRY_DELAYS_MS = [1000, 2000, 4000, 8000, 16000];
 
 const { values: options } = parseArgs({
   options: {
@@ -56,19 +59,22 @@ function readInstalled() {
 
 const sha256 = (data) => createHash("sha256").update(data).digest("hex");
 
-/** Downloads a file, trying again after a network error or a 5xx. */
+/** Downloads a file, trying again when that might help. */
 async function download(url) {
-  for (let attempt = 1; ; attempt++) {
+  for (let attempt = 0; ; attempt++) {
+    let failure;
+    let retry = true;
     try {
       const response = await fetch(url);
       if (response.ok) return Buffer.from(await response.arrayBuffer());
-      if (response.status < 500 || attempt === ATTEMPTS) {
-        throw new Error(`HTTP ${response.status}`);
-      }
+      failure = `HTTP ${response.status}`;
+      // Any other 4xx won't change by asking again.
+      retry = response.status === 404 || response.status >= 500;
     } catch (error) {
-      if (attempt === ATTEMPTS) throw error;
+      failure = error.message;
     }
-    await sleep(1000 * attempt);
+    if (!retry || attempt === RETRY_DELAYS_MS.length) throw new Error(failure);
+    await sleep(RETRY_DELAYS_MS[attempt]);
   }
 }
 
