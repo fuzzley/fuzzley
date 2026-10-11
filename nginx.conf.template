@@ -48,10 +48,15 @@ server {
 
     # Every page is a real file, so anything else is a 404 rather than the
     # home page served with a 200.
+    #
+    # Browsers must check back before reusing anything served from here: a
+    # stale page would ask for /_astro/ or play/assets/ files that the next
+    # deploy no longer has. An unchanged file costs only a 304.
     location / {
         root /usr/share/nginx/html;
         index index.html;
         try_files $uri $uri/ =404;
+        add_header Cache-Control "no-cache";
     }
 
     error_page 404 /404.html;
