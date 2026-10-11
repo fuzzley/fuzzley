@@ -413,3 +413,25 @@ removes and why.
   should list runs. If it stays empty for a few hours, try disabling and
   re-enabling the workflow (`gh workflow disable update-games.yml`, then
   `enable`), which re-registers its schedule.
+
+### 2026-10-10: Dependabot alerts
+
+- 16 alerts were open: here #23 (`brace-expansion`), fSolitaire #405 to
+  #407 (`sharp`, `source-map-js`, `brace-expansion`) and fSpider #16 to
+  #29 (`undici` ten times, `source-map-js`, `brace-expansion`).
+  fMinesweeper, fPong and PATH had none, but locked the same vulnerable
+  versions. Every one is a development or build tool (ESLint's file
+  matching, PostCSS source maps, node-gyp, the screenshot tool's image
+  library); none ships to players. All were addressed rather than
+  dismissed, since each had a patched version inside the range its parent
+  already asks for, so no override or major upgrade was needed.
+- `yarn up -R brace-expansion source-map-js undici` in all six
+  repositories, and `sharp` to `^0.35.5` in fSolitaire. Commits (pushed):
+  this repository `52c1347`, fSolitaire `a4d7808`, fSpider `46a1b50`,
+  fMinesweeper `5c7234a`, fPong `fad3f3b`, PATH `128aa0a`.
+- **Checks:** `yarn install --immutable`, then here `astro check`, ESLint
+  and the build; in each older game lint and build (the minified output
+  was the same size); in fSolitaire `yarn verify` (6940 tests) and
+  `yarn build:thumbs`, whose images came out byte for byte the same with
+  the new `sharp`. Every CI run passed. Dependabot closed all 16 alerts
+  within a few minutes, leaving none open in any of the six repositories.
