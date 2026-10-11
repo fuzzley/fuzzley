@@ -18,7 +18,7 @@ uses (short term), and choose where game builds should live (long term, see
 | 3. fSolitaire rules screenshots as WebP       | Not started |
 | 4. Minified vendor scripts in the older games | Not started |
 
-- **Working on:** phase 2, step 1 (publish a release from fPong).
+- **Working on:** phase 2, step 3: the pull request `games-from-releases` (Pong fetched from its release, Docker image built in CI).
 - **Pushing:** the owner approved pushing each step once it is verified
   (2026-10-10). Changes to how this repository builds go through a pull
   request first, so CI can build the Docker image; Docker isn't installed
@@ -99,8 +99,8 @@ The game repositories are cloned beside this one, in `~/Projects/`:
 
 Phase 2, option E (steps follow the migration plan in game-builds.md):
 
-- [ ] 1. fPong publishes a `site-build` release (sync kept for now)
-- [ ] 2. `games.json` and `fetch-games.mjs`, checked against the committed copy
+- [x] 1. fPong publishes a `site-build` release (sync kept for now)
+- [x] 2. `games.json` and `fetch-games.mjs`, checked against the committed copy
 - [ ] 3. Pong switched: folder out of git, CI builds the Docker image, live check
 - [ ] 3b. fPong's sync step removed
 - [ ] 4. `update-games.yml` bumps the manifest; tried by hand
@@ -244,3 +244,36 @@ removes and why.
   Knockout); a sample of removed files return 404.
 - Next: the owner chooses a long-term option in
   [game-builds.md](game-builds.md).
+
+### 2026-10-10: option E, steps 1 and 2
+
+- **fPong `76b68ce`** (pushed): the deploy job packs `dist/`, uploads
+  `pong-<short sha>.tar.gz` and `latest.json` to the `site-build` release,
+  moves the tag, and prunes old archives except the ten newest and the one
+  `games.json` pins. Its first run created the release; the archive's
+  SHA-256 in `latest.json` matched GitHub's own digest. The sync to this
+  repository still ran ("No changes"). The prune step warned that
+  `games.json` didn't exist yet, and deleted nothing, as designed.
+- **This repository, branch `games-from-releases`** (not pushed yet):
+  `6be48b1` adds `games.json`, `tools/games.mjs` and
+  `tools/fetch-games.mjs`, runs the fetch from `yarn dev` (with
+  `--optional`) and `yarn build`, lists pinned games in the sitemap, and
+  takes `public/projects/pong/` out of git (ignored here and in the Docker
+  context). `22cf3fa` adds a `docker` job to `deploy.yml` that builds the
+  image, serves it, and checks every project's page, game and old
+  redirect.
+- **Checks:** fetching Pong over its committed folder gave the same 11
+  files, byte for byte (git on Windows still lists 7 as modified, because
+  the committed blobs have CRLF line endings and `core.autocrlf` is on).
+  From a clean state, `yarn build` downloaded Pong, built, and instrumented
+  all five games; a second fetch said "up to date". With `PLAY_ORIGIN` set
+  the fetch was skipped, `dist/` had no game folders, and the sitemap
+  still listed Pong. `yarn dev` served Pong's files. `astro check` and
+  ESLint pass.
+- **Seen, not changed:** Astro's dev server returns 404 for a folder URL in
+  `public/`, such as `/projects/solitaire/play/`, but serves its
+  `index.html`. This was already so before these changes; nginx handles
+  folder URLs in production.
+- Next: push the branch, open a pull request, wait for `verify` and
+  `docker`, then fast-forward `main`, watch Cloud Run, and check Pong on
+  fuzzley.info.
