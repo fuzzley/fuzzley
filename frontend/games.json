@@ -1,32 +1,32 @@
 {
   "minesweeper": {
     "repo": "fuzzley/fMinesweeper",
-    "commit": "fbcfb069dc19b2796b68141f2f440199bb8c3c5c",
-    "asset": "minesweeper-fbcfb06.tar.gz",
-    "sha256": "ea1cfd42d848edbf79dc03f3b1dba14994200840a924718ffa7adbf6522f6f6d"
+    "commit": "5c7234acea09c6066febae1edf529b335daa2a52",
+    "asset": "minesweeper-5c7234a.tar.gz",
+    "sha256": "cad33606a1358983f15d19ab218b921dbb21d051c79c04650d08d29cc43177ec"
   },
   "path": {
     "repo": "fuzzley/PATH",
-    "commit": "7b6fb31fe81423070724dcc2676519da800c1dd8",
-    "asset": "path-7b6fb31.tar.gz",
-    "sha256": "90b0a1799b265ebac0550b023364b201c679952962e9bf79bf8a8b7a985b5630"
+    "commit": "128aa0adc9826e18dbe521d2f1aec304a9fbd4db",
+    "asset": "path-128aa0a.tar.gz",
+    "sha256": "74e24d34f1df6e9f7adf2d0edbaf89d94b276e9e105ddd82341f1a13a68db4d4"
   },
   "pong": {
     "repo": "fuzzley/fPong",
-    "commit": "38325fa13f1238e73f792703d7c59d26441d19d3",
-    "asset": "pong-38325fa.tar.gz",
-    "sha256": "5d9c30ae7df4bb2f2e862f13b7b26a94794b219ede4bf74865c9ea8cf855fd3f"
+    "commit": "fad3f3bee7404b651a8e8d899feaf70f1016b917",
+    "asset": "pong-fad3f3b.tar.gz",
+    "sha256": "11af6ffee402dffa909d8bca67974b6f76b680c112ba7936e1fff2870df47479"
   },
   "solitaire": {
     "repo": "fuzzley/fSolitaire",
-    "commit": "a9ece907440252551dc6e001db1d1b47ef70ebc8",
-    "asset": "solitaire-a9ece90.tar.gz",
-    "sha256": "4cbe0fd17e6cc58921aed922ec4bb5419a30680c100c002c25c175c6e15fa5ce"
+    "commit": "a4d78082731e5088d6a3be069f83933a2ae3cfb3",
+    "asset": "solitaire-a4d7808.tar.gz",
+    "sha256": "2aba8c13bbc6b4b32ae762a21f0a76d2b50f97151baade0178cf048eed98f1e7"
   },
   "spider": {
     "repo": "fuzzley/fSpider",
-    "commit": "b2138cd5caf77344beda0128f138f499444d646d",
-    "asset": "spider-b2138cd.tar.gz",
-    "sha256": "3b1cc96e2e1e0d4f421a7f1a3f0685a98ff7f9893461df31b5f17199c8d82ad1"
+    "commit": "46a1b5073bc7f5480c77b48c850d799a962a677f",
+    "asset": "spider-46a1b50.tar.gz",
+    "sha256": "00a2acfa5cab480ff3c63f716676b86146dc01a7aadaa8a51566bced33a26776"
   }
 }
