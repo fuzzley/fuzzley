@@ -14,11 +14,11 @@ uses (short term), and choose where game builds should live (long term, see
 | Phase                                         | State       |
 | --------------------------------------------- | ----------- |
 | 1. Trim unused files from the game builds     | Done, live  |
-| 2. Option E: releases and a pinned manifest   | In progress |
+| 2. Option E: releases and a pinned manifest   | Done, live  |
 | 3. fSolitaire rules screenshots as WebP       | Not started |
 | 4. Minified vendor scripts in the older games | Not started |
 
-- **Working on:** phase 2, step 5: pull request `move-remaining-games` (every game fetched from its release).
+- **Working on:** phase 3 (fSolitaire WebP screenshots). Phase 2 needs only the owner to revoke the old token, and a first scheduled Update games run to be seen.
 - **Pushing:** the owner approved pushing each step once it is verified
   (2026-10-10). Changes to how this repository builds go through a pull
   request first, so CI can build the Docker image; Docker isn't installed
@@ -104,8 +104,8 @@ Phase 2, option E (steps follow the migration plan in game-builds.md):
 - [x] 3. Pong switched: folder out of git, CI builds the Docker image, live check
 - [x] 3b. fPong's sync step removed
 - [x] 4. `update-games.yml` bumps the manifest; tried by hand
-- [ ] 5. fMinesweeper, fSpider, PATH, then fSolitaire moved over
-- [ ] 6. Delete `MAIN_REPO_DEPLOY_PAT` everywhere; README and docs updated
+- [x] 5. fMinesweeper, fSpider, PATH, then fSolitaire moved over
+- [x] 6. Delete `MAIN_REPO_DEPLOY_PAT` everywhere; README and docs updated
 - [ ] Owner: revoke the personal access token behind `MAIN_REPO_DEPLOY_PAT`
 
 Phase 3, fSolitaire WebP screenshots:
@@ -331,3 +331,25 @@ removes and why.
   and fSolitaire (3), as well as #23 here.
 - Next: pull request, `verify` and `docker`, fast-forward `main`, watch
   Cloud Run, check every game on fuzzley.info.
+
+### 2026-10-10: option E, steps 5 and 6 done
+
+- Pull request #2 (`move-remaining-games`) passed `verify`, `docker` (the
+  image fetched all five games and served each one's page, game and old
+  redirect) and a Cloud Build check. `main` fast-forwarded to `2ad9f82`;
+  the branch is deleted. Cloud Run served `2ad9f82`, with all five games
+  answering 200 and carrying the analytics tag. Solitaire, whose bundle
+  changed, loaded in Chrome on fuzzley.info with no console errors or failed
+  requests.
+- `MAIN_REPO_DEPLOY_PAT` deleted from fSolitaire, fSpider, fMinesweeper,
+  fPong and PATH; no workflow referred to it any more. This repository's
+  own `MAIN_GITHUB_IO_REPO_DEPLOY_PAT` stays: `deploy.yml` uses it to start
+  the GitHub Pages build.
+- `docs/game-builds.md` now opens with the outcome and how the build
+  differs from the plan, and records the owner's answers.
+- **Still open for phase 2:** the owner revokes the token that was behind
+  `MAIN_REPO_DEPLOY_PAT` (GitHub settings, developer settings, personal
+  access tokens). A scheduled run of Update games hasn't been seen yet;
+  GitHub can take a while to start a new schedule. Check with
+  `gh run list --workflow update-games.yml --event schedule`.
+- Next: phase 3, fSolitaire's rules screenshots as WebP.

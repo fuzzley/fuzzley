@@ -1,12 +1,39 @@
 # Where the game builds live
 
 The games under `/projects/<slug>/play/` are built in their own repositories
-and copied into this one. This document lays out how that works today, what
-it costs, the ways it could work instead, and a recommendation. It is item 29
-of the code health review; the short-term trim of unused files is recorded in
+and were copied into this one. This document lays out how that worked, what
+it cost, the ways it could work instead, and a recommendation. It is item 29
+of the code health review; the work itself is recorded in
 [worklog.md](worklog.md).
 
 Figures were measured on 2026-10-10.
+
+## Outcome
+
+**Option E was chosen and is live** (2026-10-10). Every game publishes to a
+rolling `site-build` release, `frontend/games.json` pins one build of each,
+`tools/fetch-games.mjs` fetches them at build time, and
+`.github/workflows/update-games.yml` moves the pins every 15 minutes. The
+README's Games section describes how to run it. Where it differs from the
+plan below:
+
+- **Releases:** one rolling release per game (the owner's choice), which
+  keeps the ten newest archives plus whichever one `games.json` pins, so a
+  pin, and a rollback to a recent build, always has its archive.
+- **Bumps:** automatic, with no extra token (the owner's choice). A pull
+  request opened with `GITHUB_TOKEN` gets no CI runs and so could never
+  auto-merge on passing checks, so the scheduled job builds the site itself
+  and pushes straight to `main` only when the build passes. A failed build
+  opens a "Game update failed" issue instead, and that archive is skipped
+  while the issue is open.
+- **Timing:** a newly uploaded release file can answer 404 for up to about a
+  minute, so a build is pinned only once it is two minutes old, and the
+  fetch retries 404s for about 30 seconds.
+- **Clean-up:** `MAIN_REPO_DEPLOY_PAT` is deleted from all five game
+  repositories. The token itself still needs revoking in the owner's GitHub
+  settings.
+
+The rest of this document is the analysis as written before the work.
 
 ## Summary
 
@@ -410,15 +437,18 @@ Each step leaves the site working, so it can stop between any two.
    document. Decide whether to prune old releases (fSolitaire will make
    several a day).
 
-Open questions for the owner before starting:
+Open questions for the owner before starting, with the answers given on
+2026-10-10:
 
 - One release per deploy, or one rolling release per game whose asset is
   replaced? Per-deploy is simpler to pin and roll back; rolling avoids
-  hundreds of releases.
+  hundreds of releases. **Rolling.**
 - Auto-merge game bumps, or review each one? Auto-merge keeps deploys hands
   off; review gives a manual gate for a site that changes rarely.
+  **Automatic.**
 - How quickly must a game deploy go live? A 15-minute schedule is simplest;
   a dispatch is near-instant but needs a token per game repository.
+  **Fifteen minutes is fine, without a token.**
 
 ## The existing history
 
