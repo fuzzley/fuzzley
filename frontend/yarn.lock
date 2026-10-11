@@ -2846,6 +2846,7 @@ __metadata:
     prettier: "npm:^3.9.9"
     prettier-plugin-astro: "npm:^1.1.1"
     sharp: "npm:^0.35.5"
+    tar: "npm:^7.5.22"
     typescript: "npm:~6.0.3"
     typescript-eslint: "npm:^8.71.1"
   languageName: unknown
@@ -5320,7 +5321,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar@npm:^7.5.7":
+"tar@npm:^7.5.22, tar@npm:^7.5.7":
   version: 7.5.22
   resolution: "tar@npm:7.5.22"
   dependencies:

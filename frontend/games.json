@@ -1,0 +1,8 @@
+{
+  "pong": {
+    "repo": "fuzzley/fPong",
+    "commit": "76b68ce96bba03006361e27ec423c44f3722ff25",
+    "asset": "pong-76b68ce.tar.gz",
+    "sha256": "b940a245c30a259c27449febdd37fd00259aa4bed2773c3068c1e378f3f32054"
+  }
+}
