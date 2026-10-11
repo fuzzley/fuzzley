@@ -29,6 +29,10 @@ const skip = new Set(
     .filter(Boolean),
 );
 
+// A release's files can answer 404 for a little while after they are
+// uploaded, so a build is left for the next run until it is this old.
+const SETTLE_MS = 2 * 60 * 1000;
+
 function log(message) {
   console.log(`update-games: ${message}`);
 }
@@ -61,13 +65,22 @@ const manifest = readManifest();
 const changes = [];
 
 for (const [slug, game] of Object.entries(manifest)) {
-  const latest = await latestBuild(game.repo);
+  let latest;
+  try {
+    latest = await latestBuild(game.repo);
+  } catch (error) {
+    // The next run tries again; the other games needn't wait.
+    console.log(`::warning::update-games: ${slug}: ${error.message}`);
+    continue;
+  }
   if (!latest) {
     log(`${slug}: ${game.repo} has no latest.json yet`);
   } else if (latest.asset === game.asset) {
     log(`${slug}: up to date (${game.asset})`);
   } else if (skip.has(latest.asset)) {
     log(`${slug}: skipping ${latest.asset}, whose update already failed`);
+  } else if (Date.now() - Date.parse(latest.built) < SETTLE_MS) {
+    log(`${slug}: ${latest.asset} is under two minutes old; next run`);
   } else {
     log(`${slug}: ${game.asset} -> ${latest.asset}`);
     changes.push({ slug, from: game, to: latest });
