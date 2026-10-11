@@ -11,32 +11,31 @@ uses (short term), and choose where game builds should live (long term, see
 
 ## Status
 
-- **Current branch:** `trim-game-builds` in every repository below.
-- **Last step finished:** the short-term trim, in all five repositories,
-  checked in Chrome; the long-term plan in
-  [game-builds.md](game-builds.md).
-- **Next step:** the owner reviews, follows [Shipping](#shipping) for the
-  trim, and answers the open questions in game-builds.md before any
-  long-term work starts.
-- **Nothing has been pushed.** All work is in local commits.
+- **Short-term trim: done and live.** Pushed to `main` in all five
+  repositories on 2026-10-10; the `trim-game-builds` branches are deleted.
+- **Long-term plan: waiting on the owner.** Choose an option and answer the
+  open questions at the end of the migration plan in
+  [game-builds.md](game-builds.md), then start its step 1.
+- No branches are open for this work.
 
-### Branches
+### Commits on `main`
 
-| Repository   | Branch             | Holds                                                          |
-| ------------ | ------------------ | -------------------------------------------------------------- |
-| fuzzley      | `trim-game-builds` | This log, the long-term plan, the trimmed copies of the games. |
-| fMinesweeper | `trim-game-builds` | `247f16a`: deletes 21 unused files from `public/` (1.1 MiB).   |
-| fPong        | `trim-game-builds` | `229f43b`: deletes 11 unused files from `public/` (2.0 MiB).   |
-| fSpider      | `trim-game-builds` | `b984747`: deletes 8 unused files from `public/` (2.5 MiB).    |
-| PATH         | `trim-game-builds` | `e346f36`: deletes 26 unused files from `public/` (1.4 MiB).   |
-| fSolitaire   | none               | Nothing to change: its build ships only what it loads.         |
+| Repository   | Commits                | What                                                          |
+| ------------ | ---------------------- | ------------------------------------------------------------- |
+| fuzzley      | `063efcc` to `c24957c` | This log, the long-term plan, the trimmed copies (`bd108a5`). |
+| fMinesweeper | `247f16a`              | Deletes 21 unused files from `public/` (1.1 MiB).             |
+| fPong        | `229f43b`              | Deletes 11 unused files from `public/` (2.0 MiB).             |
+| fSpider      | `b984747`              | Deletes 8 unused files from `public/` (2.5 MiB).              |
+| PATH         | `e346f36`              | Deletes 26 unused files from `public/` (1.4 MiB).             |
+| fSolitaire   | none                   | Nothing to change: its build ships only what it loads.        |
 
 ## How to resume
 
-1. In each repository, `git switch trim-game-builds` and
-   `git log --oneline main..` to see what is done.
-2. Read the newest [Log](#log) entry and its "Next" line.
-3. Check the [Checklist](#checklist) for the remaining work.
+1. Read the newest [Log](#log) entry and its "Next" line.
+2. Check the [Checklist](#checklist) for the remaining work.
+3. For the long-term work, follow the migration plan in
+   [game-builds.md](game-builds.md) on a new branch in each repository it
+   touches, and log each step here.
 
 The game repositories are cloned beside this one, in `~/Projects/`:
 `fSolitaire`, `fSpider`, `fMinesweeper`, `fPong` and `PATH`.
@@ -52,28 +51,23 @@ The game repositories are cloned beside this one, in `~/Projects/`:
 - [x] fuzzley: trim the deployed copies to match (`bd108a5`)
 - [x] Check every game plays from a local build
 - [x] Long-term plan in `docs/game-builds.md`
-- [ ] Owner: review and push (see [Shipping](#shipping))
+- [x] Push to `main` and delete the branches (see [Shipping](#shipping))
+- [ ] Owner: choose a long-term option and answer the open questions
 
 ## Shipping
 
-Each step needs the owner's go-ahead; none has been done. Either order
-works, because this repository's branch deletes exactly the files the next
-sync from each game would delete.
+Done on 2026-10-10, in this order:
 
-1. **This repository.** `git switch main && git merge --ff-only
-trim-game-builds && git push`. `deploy.yml` verifies and redeploys the
-   GitHub Pages copy; Cloud Run rebuilds the image from `main` by itself.
-   Afterwards, open each `/projects/<slug>/play/` on fuzzley.info.
-2. **Each game repository** (fMinesweeper, fPong, fSpider, PATH):
-   `git switch main && git merge --ff-only trim-game-builds && git push`.
-   Its deploy job rebuilds and syncs. Expect the Actions log to say
-   "No changes in ... production build. Skipping commit." If it pushes a
-   sync commit instead, look at what it changed: the bundle names should
-   match the ones here.
-3. Delete the `trim-game-builds` branches.
-
-Until step 2 is done for a game, any push to that game's `main` brings its
-unused files back here.
+1. This repository's `main` fast-forwarded to `c24957c` and pushed first,
+   so the game deploys would find their trimmed folders already here.
+   `deploy.yml` passed `verify` and the GitHub Pages deploy.
+2. fMinesweeper, fPong, fSpider and PATH fast-forwarded and pushed. Each
+   deploy job rebuilt its game and logged "No changes in ... production
+   build. Skipping commit.", which confirms the trimmed copies here match
+   what each game now builds.
+3. The `trim-game-builds` branches deleted. They were never pushed.
+4. Cloud Run rebuilt on its own; `https://fuzzley.info/version.json`
+   reported `c24957c` about ten minutes after the push.
 
 ## Log
 
@@ -161,3 +155,16 @@ removes and why.
 - Open questions for the owner are listed at the end of the migration
   plan.
 - Next: the owner's review.
+
+### 2026-10-10: shipped
+
+- Pushed `main` in all five repositories (this one first) and deleted the
+  `trim-game-builds` branches. See [Shipping](#shipping).
+- Every game deploy logged "No changes ... Skipping commit", so no sync
+  commits followed. This repository's `verify` and Pages deploy passed.
+- Checked on fuzzley.info once it served `c24957c`: each game's page and a
+  sample of the files it loads return 200 (Pong's `phaser.js`, Spider's
+  card sound and minified Kinetic, PATH's step 3 picture, Minesweeper's
+  Knockout); a sample of removed files return 404.
+- Next: the owner chooses a long-term option in
+  [game-builds.md](game-builds.md).
