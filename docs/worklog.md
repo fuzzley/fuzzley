@@ -11,14 +11,14 @@ uses (short term), and choose where game builds should live (long term, see
 
 ## Status
 
-| Phase                                         | State       |
-| --------------------------------------------- | ----------- |
-| 1. Trim unused files from the game builds     | Done, live  |
-| 2. Option E: releases and a pinned manifest   | Done, live  |
-| 3. fSolitaire rules screenshots as WebP       | Not started |
-| 4. Minified vendor scripts in the older games | Not started |
+| Phase                                         | State      |
+| --------------------------------------------- | ---------- |
+| 1. Trim unused files from the game builds     | Done, live |
+| 2. Option E: releases and a pinned manifest   | Done, live |
+| 3. fSolitaire rules screenshots as WebP       | Done, live |
+| 4. Minified vendor scripts in the older games | Done, live |
 
-- **Working on:** phase 3 (fSolitaire WebP screenshots). Phase 2 needs only the owner to revoke the old token, and a first scheduled Update games run to be seen.
+- **Working on:** confirming that Update games runs on its schedule (see the newest log entry). Otherwise every phase is done; the owner still needs to revoke the old token.
 - **Pushing:** the owner approved pushing each step once it is verified
   (2026-10-10). Changes to how this repository builds go through a pull
   request first, so CI can build the Docker image; Docker isn't installed
@@ -110,11 +110,11 @@ Phase 2, option E (steps follow the migration plan in game-builds.md):
 
 Phase 3, fSolitaire WebP screenshots:
 
-- [ ] Rules screenshots served as WebP; its tools and specs updated
+- [x] Rules screenshots served as WebP; its tools and specs updated
 
 Phase 4, minified vendor scripts:
 
-- [ ] fPong, fMinesweeper, fSpider, PATH load minified copies, each tested
+- [x] fPong, fMinesweeper, fSpider, PATH serve minified vendor scripts, each tested
 
 Phase 1, trim (done):
 
@@ -353,3 +353,63 @@ removes and why.
   GitHub can take a while to start a new schedule. Check with
   `gh run list --workflow update-games.yml --event schedule`.
 - Next: phase 3, fSolitaire's rules screenshots as WebP.
+
+### 2026-10-10: phase 3, WebP rules screenshots
+
+- **fSolitaire `a9ece90`** (pushed, as an admin bypass of its ruleset like
+  the earlier changes). The rules page displays its screenshot at no more
+  than 800 CSS px wide, but served the 2880 × 1620 lossless PNG.
+  `yarn build:thumbs` now also writes `overview.webp`, 1600 × 900 at
+  quality 90 (4.4 MB for all 41, from 19.8 MB), and the rules pages point
+  at it. The lossless originals moved to `docs/screenshots/`, outside
+  `public/`, so they stay for making the images again but don't ship;
+  `capture:screenshots` writes there. A new spec checks every rules
+  page's screenshot exists. AGENTS.md and the add-solitaire-game skill
+  describe the layout. `thumb.webp` and `preview.webp` came out byte for
+  byte the same.
+- **Checks:** fSolitaire's `yarn verify` (lint, tsc, build, 6940 tests)
+  passed; its build went from 41 MB to 26 MB. In Chrome, against
+  `vite preview`, Klondike's rules page loaded the 81 KB `overview.webp`
+  and it looked as sharp as the PNG.
+- Live after the bump below: `overview.webp` answers 200 on fuzzley.info
+  and `overview.png` 404.
+
+### 2026-10-10: phase 4, minified vendor scripts
+
+- **Approach:** minify at build time rather than switch to the libraries'
+  own `.min.js` files. Each game's `vite.config.js` gets a small plugin
+  that, when the build finishes, minifies every `dist/vendor/**/*.js` not
+  named `.min.js`, with the minifier Vite 8 ships (`minify` from `vite`,
+  which is Oxc), as classic scripts (`module: false`, so top-level names
+  stay global) and keeping license comments. No dependency is added, file
+  names don't change, and Knockout's debug build stays the debug build, so
+  the debug-versus-release API risk doesn't arise. CSS is left alone: its
+  old IE hacks make Lightning CSS refuse it, and it's a small share.
+- **Commits** (pushed): fPong `38325fa`, fMinesweeper `fbcfb06`, fSpider
+  `b2138cd`, PATH `7b6fb31`.
+- **Savings, gzipped:** Pong 472 KB to 165 KB (Phaser 400 to 136),
+  Minesweeper 289 to 107, PATH 161 to 64, Spider 24 to 19 (its jQuery,
+  Kinetic and Knockout were already minified).
+- **Checks:** in Chrome against `vite preview` of each: Pong started and
+  the ball and computer paddle moved; Minesweeper started, revealed cells,
+  lost lives to mines, restarted, and flagged and unflagged a cell with
+  the counter following; Spider dealt from the stock, played its sound and
+  undid the deal; PATH deep-linked to a manual, paged, went back and home.
+  No console errors except the standalone preview's missing favicon. The
+  same games then loaded on fuzzley.info with no errors or failed requests.
+
+### 2026-10-10: the schedule hasn't fired yet
+
+- No scheduled run of Update games had started by 03:21 UTC, about 64
+  minutes after the workflow was added, though it shows as active and
+  Actions are enabled. GitHub documents that scheduled runs are delayed,
+  and under load dropped, at busy times, the start of each hour most of
+  all; a new schedule can also take a while to start.
+- To ship phases 3 and 4, Update games was run by hand: `66997ae` pinned
+  all five new builds after the site built, and Cloud Run deployed it.
+- `fc7a802` moves the schedule to 4, 19, 34 and 49 past the hour, which
+  avoids minute 0 and makes GitHub register the schedule again.
+- **To check:** `gh run list --workflow update-games.yml --event schedule`
+  should list runs. If it stays empty for a few hours, try disabling and
+  re-enabling the workflow (`gh workflow disable update-games.yml`, then
+  `enable`), which re-registers its schedule.
