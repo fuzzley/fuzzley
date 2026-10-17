@@ -42,12 +42,18 @@ yarn verify      # type-check, lint, check formatting and build
 | `/cv/`                   | The full work history, laid out to print as a resume.               |
 | `/project/<slug>/`       | Old game addresses. They redirect to `/projects/<slug>/play/`.      |
 
+The Solitaire Collection is played on [fuzzley.games](https://fuzzley.games)
+now, at https://fuzzley.games/play/solitaire/. Its project page stays here,
+and its old addresses, `/projects/solitaire/play/` and `/project/solitaire/`,
+redirect there with every file under them (see [Games](#games)).
+
 The words and pictures live in content files, not in the pages:
 
 - `frontend/src/content/projects/<slug>.md`: one file per project. The front
   matter is checked against the schema in `frontend/src/content.config.ts`,
   and the body becomes the project page's write-up. The file name must match
-  the game's key in `frontend/games.json`.
+  the game's key in `frontend/games.json`, unless the game is played on
+  another site, which `playUrl` names.
 - `frontend/src/content/experience.yaml`: the work history.
 - `frontend/src/data/profile.ts`: name, bio, links and education.
 - `frontend/src/assets/`: screenshots and the photo. The build resizes them
@@ -59,8 +65,8 @@ A highlight in `experience.yaml` that starts with `TODO` is a placeholder:
 
 ## Games
 
-Each game is built in its own repository (fSolitaire, fSpider, fMinesweeper,
-fPong, PATH). Every push to a game's `main` builds it and uploads the build to
+Each game is built in its own repository (fSpider, fMinesweeper, fPong,
+PATH). Every push to a game's `main` builds it and uploads the build to
 that repository's `site-build` release as `<slug>-<short sha>.tar.gz`, then
 replaces `latest.json` there, which names the newest archive. The release keeps
 the ten newest archives and the one this site pins.
@@ -88,6 +94,15 @@ is enabled under Actions.
   others), push once so its release exists, add its entry to `games.json`
   from its `latest.json`, and add `frontend/src/content/projects/<slug>.md`.
 
+A game can move to another site. The Solitaire Collection (fSolitaire) did,
+to fuzzley.games, which pins and fetches it the same way. Such a game has no
+entry in `games.json`, and its content file names its new address in
+`playUrl`, which every play link uses. `fetch-games.mjs` deletes its old
+folder from `public/projects/`. nginx answers its old addresses with a 301
+(see `nginx.conf.template`); GitHub Pages can't, so the build also makes a
+`/projects/<slug>/play/` page that forwards there, as the `/project/<slug>/`
+pages do.
+
 Why it works this way, and the options considered, are in
 [docs/game-builds.md](docs/game-builds.md).
 
@@ -113,9 +128,10 @@ which is why the publishing job lives there. The run here waits for that
 deploy to finish, so a failed deploy shows on the commit.
 
 The GitHub Pages copy leaves out the games. Its workflow builds with
-`PLAY_ORIGIN=https://fuzzley.info`, which deletes `projects/<slug>/play/` from
-`dist/` and points every play link, and the old `/project/<slug>/` redirects,
-at the games on fuzzley.info. To see that build locally:
+`PLAY_ORIGIN=https://fuzzley.info`, which deletes each fetched game's
+`projects/<slug>/play/` from `dist/` and points every play link, and the old
+`/project/<slug>/` redirects, at the games on fuzzley.info. A game with a
+`playUrl` is linked there instead, from both copies. To see that build locally:
 
 ```sh
 cd frontend

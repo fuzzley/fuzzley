@@ -33,6 +33,14 @@ plan below:
   repositories. The token itself still needs revoking in the owner's GitHub
   settings.
 
+**Solitaire moved to fuzzley.games** (2026-10-17). fuzzley/fuzzley-games
+now pins and serves the Solitaire Collection at
+https://fuzzley.games/play/solitaire/, from the same release, with the same
+manifest and scheduled update. fuzzley.info keeps its project page and
+answers its old addresses with a 301 there; the README's Games section says
+how. The move gave up requirement 1 below for this game on purpose: its
+players' settings and saved games stay behind on fuzzley.info's origin.
+
 The rest of this document is the analysis as written before the work.
 
 ## Summary
