@@ -108,14 +108,19 @@ const build = __BUILD_INFO__;
       // the games are on the same site: a click on any link into
       // /projects/<slug>/play/ sends a play_game event naming the game. The
       // GitHub Pages copy links to the games on fuzzley.info, which the
-      // pattern matches too.
+      // pattern matches too, and both link to the games on fuzzley.games at
+      // /play/<slug>/.
       document.addEventListener("click", function (event) {
         const link = event.target.closest && event.target.closest("a[href]");
         if (!link || typeof window.gtag !== "function") return;
         const match = link
           .getAttribute("href")
-          .match(/\/projects\/([^/]+)\/play\//);
-        if (match) window.gtag("event", "play_game", { game: match[1] });
+          .match(
+            /\/projects\/([^/]+)\/play\/|^https:\/\/fuzzley\.games\/play\/([^/]+)\//,
+          );
+        if (match) {
+          window.gtag("event", "play_game", { game: match[1] || match[2] });
+        }
       });
     </script>
     <slot name="head" />

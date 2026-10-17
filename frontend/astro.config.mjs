@@ -35,20 +35,17 @@ function versionJson() {
   };
 }
 
-// With PLAY_ORIGIN set, deletes the games from dist/. Only the play/ folders
-// go: dist/projects/<slug>/ itself is the site's own project page.
+// With PLAY_ORIGIN set, deletes the fetched games from dist/. Only their play/
+// folders go: dist/projects/<slug>/ itself is the site's own project page, and
+// the play/ page of a game played on another site forwards there.
 function omitGames() {
   return {
     name: "omit-games",
     hooks: {
       "astro:build:done": ({ dir, logger }) => {
         if (!playOrigin) return;
-        const projectsDir = new URL("projects/", dir);
-        for (const entry of fs.readdirSync(projectsDir, {
-          withFileTypes: true,
-        })) {
-          if (!entry.isDirectory()) continue;
-          fs.rmSync(new URL(`${entry.name}/play/`, projectsDir), {
+        for (const slug of Object.keys(readManifest())) {
+          fs.rmSync(new URL(`projects/${slug}/play/`, dir), {
             recursive: true,
             force: true,
           });
@@ -89,8 +86,11 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      // The /project/<slug>/ pages only redirect to the games.
-      filter: (page) => !page.includes("/project/"),
+      // The /project/<slug>/ pages only redirect to the games, as does the
+      // play/ page of a game played on another site.
+      filter: (page) =>
+        !page.includes("/project/") &&
+        (!page.endsWith("/play/") || playPages.includes(page)),
       customPages: playPages,
     }),
     versionJson(),

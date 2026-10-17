@@ -6,7 +6,8 @@ const yearMonth = z.string().regex(/^\d{4}-\d{2}$/, "Use YYYY-MM");
 
 // One Markdown file per project. The file name is the slug: it sets both the
 // project page (/projects/<slug>/) and the game (/projects/<slug>/play/), so
-// it must match the game's key in games.json.
+// it must match the game's key in games.json, unless the game is played on
+// another site (`playUrl`).
 const projects = defineCollection({
   loader: glob({ pattern: "*.md", base: "./src/content/projects" }),
   schema: ({ image }) =>
@@ -27,6 +28,10 @@ const projects = defineCollection({
       summary: z.string().max(200),
       stack: z.array(z.string()).min(1),
       repo: z.url(),
+      // Where the game is played, when that is another site rather than this
+      // one. Such a game has no entry in games.json, and its old addresses
+      // here forward to this one.
+      playUrl: z.url().optional(),
       playLabel: z.string().default("Play"),
       // The game's own background color, used behind its tile.
       tint: z.string().regex(/^#[0-9a-f]{6}$/i),

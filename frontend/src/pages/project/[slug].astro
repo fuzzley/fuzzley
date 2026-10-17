@@ -1,9 +1,10 @@
 ---
 // The games used to live at /project/<slug>/. Hosts that can send real 301s
 // (nginx) never serve these pages; GitHub Pages can't, so it serves this one,
-// which forwards to the game's address (on fuzzley.info, for the Pages copy)
-// and keeps any #hash, which the solitaire game uses to pick a game.
-import { getProjects, playPath } from "../../lib/projects";
+// which forwards to the game's address (on fuzzley.info, for the Pages copy,
+// or wherever the project's `playUrl` says).
+import Moved from "../../components/Moved.astro";
+import { getProjects } from "../../lib/projects";
 
 export async function getStaticPaths() {
   const projects = await getProjects();
@@ -14,26 +15,6 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const title = project.data.title;
-const target = playPath(project);
-const canonical = new URL(target, Astro.site);
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>{title} has moved</title>
-    <meta name="robots" content="noindex" />
-    <link rel="canonical" href={canonical} />
-    <script is:inline define:vars={{ target }}>
-      location.replace(target + location.search + location.hash);
-    </script>
-    <meta http-equiv="refresh" content={`0; url=${target}`} />
-  </head>
-  <body>
-    <p>
-      {title} has moved to <a href={target}>{canonical}</a>.
-    </p>
-  </body>
-</html>
+<Moved project={project} />

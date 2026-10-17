@@ -1,0 +1,21 @@
+---
+// A game played on another site (its `playUrl`) used to be served here, at
+// /projects/<slug>/play/. nginx answers this address with a 301 to the new
+// one; GitHub Pages can't, so it serves this page, which forwards there.
+import Moved from "../../../../components/Moved.astro";
+import { getProjects } from "../../../../lib/projects";
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects
+    .filter((project) => project.data.playUrl)
+    .map((project) => ({
+      params: { slug: project.id },
+      props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+---
+
+<Moved project={project} />

@@ -4,7 +4,8 @@
 // This downloads each pinned archive once, keeps it in
 // node_modules/.cache/games/, checks its SHA-256, and unpacks it in place of
 // whatever was in the game's folder. A game whose installed copy already
-// matches its pin is left alone, so running this again is quick.
+// matches its pin is left alone, so running this again is quick, and a game
+// games.json no longer pins is deleted.
 //
 //   node tools/fetch-games.mjs [--optional] [--force]
 //
@@ -115,16 +116,34 @@ async function install(slug, game) {
   }
 }
 
+// Deletes each game games.json no longer pins, such as one now played on
+// another site, whose old address is then a page of this site's own.
+function removeUnpinned(manifest, installed) {
+  if (!fs.existsSync(projectsDir)) return;
+  for (const entry of fs.readdirSync(projectsDir, { withFileTypes: true })) {
+    if (!entry.isDirectory() || entry.name in manifest) continue;
+    fs.rmSync(path.join(projectsDir, entry.name), {
+      recursive: true,
+      force: true,
+    });
+    delete installed[entry.name];
+    log(`removed ${entry.name}, which games.json no longer pins`);
+  }
+}
+
 async function main() {
+  const manifest = readManifest();
+  const installed = options.force ? {} : readInstalled();
+  removeUnpinned(manifest, installed);
+
   if (process.env.PLAY_ORIGIN) {
     log("PLAY_ORIGIN is set, so this build has no games to fetch");
     return;
   }
 
-  const installed = options.force ? {} : readInstalled();
   const failures = [];
 
-  for (const [slug, game] of Object.entries(readManifest())) {
+  for (const [slug, game] of Object.entries(manifest)) {
     const playDir = path.join(projectsDir, slug, "play");
     const name = `${slug} (${game.asset})`;
     if (

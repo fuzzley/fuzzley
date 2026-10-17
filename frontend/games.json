@@ -17,12 +17,6 @@
     "asset": "pong-fad3f3b.tar.gz",
     "sha256": "11af6ffee402dffa909d8bca67974b6f76b680c112ba7936e1fff2870df47479"
   },
-  "solitaire": {
-    "repo": "fuzzley/fSolitaire",
-    "commit": "a4d78082731e5088d6a3be069f83933a2ae3cfb3",
-    "asset": "solitaire-a4d7808.tar.gz",
-    "sha256": "2aba8c13bbc6b4b32ae762a21f0a76d2b50f97151baade0178cf048eed98f1e7"
-  },
   "spider": {
     "repo": "fuzzley/fSpider",
     "commit": "46a1b5073bc7f5480c77b48c850d799a962a677f",

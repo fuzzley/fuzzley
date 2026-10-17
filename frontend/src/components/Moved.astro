@@ -1,0 +1,34 @@
+---
+// A page that forwards to a game's address and keeps any #hash, which the
+// solitaire game uses to pick a game. For hosts that can't send a real 301,
+// such as GitHub Pages; nginx answers these addresses with a 301 instead.
+import { playPath, type Project } from "../lib/projects";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const title = project.data.title;
+const target = playPath(project);
+const canonical = new URL(target, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title} has moved</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={canonical} />
+    <script is:inline define:vars={{ target }}>
+      location.replace(target + location.search + location.hash);
+    </script>
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+  </head>
+  <body>
+    <p>
+      {title} has moved to <a href={target}>{canonical}</a>.
+    </p>
+  </body>
+</html>
