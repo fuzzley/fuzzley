@@ -9,6 +9,8 @@ tagline: The classic, with lives
 summary: Minesweeper in the browser, with lives, so one wrong click doesn't have to end the game.
 stack: [JavaScript, Knockout, Bootstrap]
 repo: https://github.com/fuzzley/fMinesweeper
+playUrl: https://fuzzley.games/play/minesweeper/
+playLabel: Play on fuzzley.games
 tint: "#6e9bc5"
 cover: ../../assets/projects/minesweeper.png
 coverAlt: A Minesweeper board partly cleared, with lives and mines found counted at the top.

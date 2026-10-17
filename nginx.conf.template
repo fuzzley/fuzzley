@@ -34,18 +34,26 @@ server {
         rewrite ^/project/([^/]+)/?(.*)$ /projects/$1/play/$2 permanent;
     }
 
-    # The Solitaire Collection moved to fuzzley.games. Its old addresses, and
-    # every file under them, go straight there in one permanent redirect, so
-    # old links, link previews and search results keep working; the browser
-    # carries the #hash that picks a game across. These are prefix matches
-    # with ^~, so the play/assets/ rule above never sees them, and the longer
-    # prefix wins over /project/.
+    # The Solitaire Collection and Minesweeper moved to fuzzley.games. Their old
+    # addresses, and every file under them, go straight there in one permanent
+    # redirect, so old links, link previews and search results keep working; the
+    # browser carries the #hash that picks a game across. These are prefix
+    # matches with ^~, so the play/assets/ rule above never sees them, and the
+    # longer prefix wins over /project/.
     location ^~ /projects/solitaire/play {
         rewrite ^/projects/solitaire/play/?(.*)$ https://fuzzley.games/play/solitaire/$1 permanent;
     }
 
     location ^~ /project/solitaire {
         rewrite ^/project/solitaire/?(.*)$ https://fuzzley.games/play/solitaire/$1 permanent;
+    }
+
+    location ^~ /projects/minesweeper/play {
+        rewrite ^/projects/minesweeper/play/?(.*)$ https://fuzzley.games/play/minesweeper/$1 permanent;
+    }
+
+    location ^~ /project/minesweeper {
+        rewrite ^/project/minesweeper/?(.*)$ https://fuzzley.games/play/minesweeper/$1 permanent;
     }
 
     # Runtime config is regenerated per-deploy; never cache it.
