@@ -42,9 +42,11 @@ yarn verify      # type-check, lint, check formatting and build
 | `/cv/`                   | The full work history, laid out to print as a resume.               |
 | `/project/<slug>/`       | Old game addresses. They redirect to `/projects/<slug>/play/`.      |
 
-The Solitaire Collection is played on [fuzzley.games](https://fuzzley.games)
-now, at https://fuzzley.games/play/solitaire/. Its project page stays here,
-and its old addresses, `/projects/solitaire/play/` and `/project/solitaire/`,
+The Solitaire Collection and Minesweeper are played on
+[fuzzley.games](https://fuzzley.games) now, at
+https://fuzzley.games/play/solitaire/ and
+https://fuzzley.games/play/minesweeper/. Their project pages stay here, and
+their old addresses, `/projects/<slug>/play/` and `/project/<slug>/`,
 redirect there with every file under them (see [Games](#games)).
 
 The words and pictures live in content files, not in the pages:
@@ -65,8 +67,8 @@ A highlight in `experience.yaml` that starts with `TODO` is a placeholder:
 
 ## Games
 
-Each game is built in its own repository (fSpider, fMinesweeper, fPong,
-PATH). Every push to a game's `main` builds it and uploads the build to
+Each game is built in its own repository (fSpider, fPong, PATH). Every push
+to a game's `main` builds it and uploads the build to
 that repository's `site-build` release as `<slug>-<short sha>.tar.gz`, then
 replaces `latest.json` there, which names the newest archive. The release keeps
 the ten newest archives and the one this site pins.
@@ -94,8 +96,9 @@ is enabled under Actions.
   others), push once so its release exists, add its entry to `games.json`
   from its `latest.json`, and add `frontend/src/content/projects/<slug>.md`.
 
-A game can move to another site. The Solitaire Collection (fSolitaire) did,
-to fuzzley.games, which pins and fetches it the same way. Such a game has no
+A game can move to another site. The Solitaire Collection (fSolitaire) and
+Minesweeper (fMinesweeper) did, to fuzzley.games, which pins and fetches them
+the same way. Such a game has no
 entry in `games.json`, and its content file names its new address in
 `playUrl`, which every play link uses. `fetch-games.mjs` deletes its old
 folder from `public/projects/`. nginx answers its old addresses with a 301

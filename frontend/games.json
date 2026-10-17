@@ -1,10 +1,4 @@
 {
-  "minesweeper": {
-    "repo": "fuzzley/fMinesweeper",
-    "commit": "5c7234acea09c6066febae1edf529b335daa2a52",
-    "asset": "minesweeper-5c7234a.tar.gz",
-    "sha256": "cad33606a1358983f15d19ab218b921dbb21d051c79c04650d08d29cc43177ec"
-  },
   "path": {
     "repo": "fuzzley/PATH",
     "commit": "128aa0adc9826e18dbe521d2f1aec304a9fbd4db",

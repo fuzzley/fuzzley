@@ -106,12 +106,15 @@ jobs:
             expect_cache "/projects/$slug/play/" "no-cache"
             expect 301 "/project/$slug/"
           done
-          # The Solitaire Collection moved to fuzzley.games, files and all.
+          # The Solitaire Collection and Minesweeper moved to fuzzley.games, files and all.
           expect_moved /projects/solitaire/play/ https://fuzzley.games/play/solitaire/
           expect_moved /projects/solitaire/play https://fuzzley.games/play/solitaire/
           expect_moved /projects/solitaire/play/docs/screenshots/klondike/preview.webp \
             https://fuzzley.games/play/solitaire/docs/screenshots/klondike/preview.webp
           expect_moved /project/solitaire/ https://fuzzley.games/play/solitaire/
+          expect_moved /projects/minesweeper/play/ https://fuzzley.games/play/minesweeper/
+          expect_moved /projects/minesweeper/play https://fuzzley.games/play/minesweeper/
+          expect_moved /project/minesweeper/ https://fuzzley.games/play/minesweeper/
           exit $failed
 
   deploy:
