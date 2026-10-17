@@ -11,12 +11,13 @@ export async function getProjects(): Promise<Project[]> {
 export const projectPath = (project: Project) => `/projects/${project.id}/`;
 
 /**
- * The game itself, built by the project's own repository and fetched from
- * its release (see games.json). A build with PLAY_ORIGIN set leaves the games
- * out and links to them on that site.
+ * The game itself: on the site its `playUrl` names, or else built by the
+ * project's own repository and fetched from its release (see games.json). A
+ * build with PLAY_ORIGIN set leaves the fetched games out and links to them on
+ * that site.
  */
 export const playPath = (project: Project) =>
-  `${__PLAY_ORIGIN__}/projects/${project.id}/play/`;
+  project.data.playUrl ?? `${__PLAY_ORIGIN__}/projects/${project.id}/play/`;
 
 /** One word for the play button on small tiles. */
 export const playShort = (project: Project) =>

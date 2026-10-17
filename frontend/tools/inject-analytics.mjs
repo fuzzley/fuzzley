@@ -1,8 +1,8 @@
 // Adds the site's analytics tags to the games in the build output.
 //
 // The pages under public/projects/<slug>/play/ are production builds of the
-// project repositories (fMinesweeper, fPong, fSolitaire, fSpider, PATH),
-// fetched from their releases by fetch-games.mjs. Those repositories
+// project repositories (fMinesweeper, fPong, fSpider, PATH), fetched from
+// their releases by fetch-games.mjs. Those repositories
 // deliberately carry no analytics code, so the tags are added here instead,
 // after `astro build`, to the copies in dist/, never to the fetched files in
 // public/.
@@ -13,6 +13,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { readManifest } from "./games.mjs";
 
 const frontendDir = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -49,12 +50,11 @@ function findProjectPages() {
     fail("dist/projects not found — run `astro build` first.");
   }
 
-  // Only the games: dist/projects/<slug>/index.html is the site's own project
-  // page, which already carries the tags from the base layout.
-  const pages = fs
-    .readdirSync(projectsDir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => path.join(projectsDir, entry.name, "play", "index.html"))
+  // Only the fetched games: dist/projects/<slug>/index.html is the site's own
+  // project page, which already carries the tags from the base layout, and
+  // the play/ page of a game played on another site only forwards there.
+  const pages = Object.keys(readManifest())
+    .map((slug) => path.join(projectsDir, slug, "play", "index.html"))
     .filter((page) => fs.existsSync(page));
 
   if (pages.length === 0) {

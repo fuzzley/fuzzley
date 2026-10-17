@@ -8,6 +8,8 @@ tagline: 41 games, most with rule variants
 summary: Forty-one solitaire games in the browser, from Klondike and FreeCell to Pyramid, TriPeaks and Grandfather's Clock.
 stack: [TypeScript, Phaser 4, Angular 22, Sass]
 repo: https://github.com/fuzzley/fSolitaire
+playUrl: https://fuzzley.games/play/solitaire/
+playLabel: Play on fuzzley.games
 tint: "#135c2b"
 cover: ../../assets/projects/solitaire-klondike.webp
 coverAlt: A game of Klondike dealt on green felt.
