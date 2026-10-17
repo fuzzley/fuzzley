@@ -83,19 +83,35 @@ jobs:
               failed=1
             fi
           }
+          expect_moved() {
+            location=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' "http://localhost:8080$1")
+            echo "$location  $1"
+            if [ "$location" != "301 $2" ]; then
+              echo "::error::Expected a 301 to $2 for $1, got '$location'."
+              failed=1
+            fi
+          }
           expect 200 /
           expect_cache / "no-cache"
           expect 200 /projects/
           expect 200 /cv/
           expect 404 /no-such-page/
-          # Every game, whether fetched from its release or still committed.
+          # Every project has its page here.
           for file in frontend/src/content/projects/*.md; do
-            slug=$(basename "$file" .md)
-            expect 200 "/projects/$slug/"
+            expect 200 "/projects/$(basename "$file" .md)/"
+          done
+          # Every game fetched from its release is served here.
+          for slug in $(jq -r 'keys[]' frontend/games.json); do
             expect 200 "/projects/$slug/play/"
             expect_cache "/projects/$slug/play/" "no-cache"
             expect 301 "/project/$slug/"
           done
+          # The Solitaire Collection moved to fuzzley.games, files and all.
+          expect_moved /projects/solitaire/play/ https://fuzzley.games/play/solitaire/
+          expect_moved /projects/solitaire/play https://fuzzley.games/play/solitaire/
+          expect_moved /projects/solitaire/play/docs/screenshots/klondike/preview.webp \
+            https://fuzzley.games/play/solitaire/docs/screenshots/klondike/preview.webp
+          expect_moved /project/solitaire/ https://fuzzley.games/play/solitaire/
           exit $failed
 
   deploy:
