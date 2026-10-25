@@ -91,6 +91,22 @@ jobs:
               failed=1
             fi
           }
+          # fuzzley.info is served; any other host is sent to the same path
+          # there.
+          expect_host() {
+            location=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' \
+              -H "Host: $1" "http://localhost:8080$2")
+            echo "$location  $1$2"
+            if [ "$1" = fuzzley.info ]; then
+              want="200 "
+            else
+              want="301 https://fuzzley.info$2"
+            fi
+            if [ "$location" != "$want" ]; then
+              echo "::error::Expected '$want' for $1$2, got '$location'."
+              failed=1
+            fi
+          }
           expect 200 /
           expect_cache / "no-cache"
           expect 200 /projects/
@@ -115,6 +131,17 @@ jobs:
           expect_moved /projects/minesweeper/play/ https://fuzzley.games/play/minesweeper/
           expect_moved /projects/minesweeper/play https://fuzzley.games/play/minesweeper/
           expect_moved /project/minesweeper/ https://fuzzley.games/play/minesweeper/
+          # Every other domain mapped to the service, and its run.app address,
+          # goes to fuzzley.info, path and query included.
+          expect_host fuzzley.info /
+          expect_host fuzzley.info /cv/
+          for host in andreygavel.com andrey-gavel.com fuzzley.net fuzzley.org \
+            fuzzley-git-fcskh6kaqa-uc.a.run.app; do
+            expect_host "$host" /
+            expect_host "$host" "/cv/?from=$host"
+          done
+          expect_host andreygavel.com /no-such-page/
+          expect_host andreygavel.com /project/solitaire/
           exit $failed
 
   deploy:
