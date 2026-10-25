@@ -1,20 +1,20 @@
 {
   "path": {
     "repo": "fuzzley/PATH",
-    "commit": "128aa0adc9826e18dbe521d2f1aec304a9fbd4db",
-    "asset": "path-128aa0a.tar.gz",
-    "sha256": "74e24d34f1df6e9f7adf2d0edbaf89d94b276e9e105ddd82341f1a13a68db4d4"
+    "commit": "39db392d87f38b16d22f6da273d226bde2593af6",
+    "asset": "path-39db392.tar.gz",
+    "sha256": "1dc7a5b754f9423b725f26e076b1f576279ebc54505f615ce130fa8881691e75"
   },
   "pong": {
     "repo": "fuzzley/fPong",
-    "commit": "fad3f3bee7404b651a8e8d899feaf70f1016b917",
-    "asset": "pong-fad3f3b.tar.gz",
-    "sha256": "11af6ffee402dffa909d8bca67974b6f76b680c112ba7936e1fff2870df47479"
+    "commit": "6a95729d86efd1071e7824468d54a3182110c0b0",
+    "asset": "pong-6a95729.tar.gz",
+    "sha256": "c67e8b3145b49e831803cd64a369da4feed312ff7d489229c31209dc050f6fbe"
   },
   "spider": {
     "repo": "fuzzley/fSpider",
-    "commit": "46a1b5073bc7f5480c77b48c850d799a962a677f",
-    "asset": "spider-46a1b50.tar.gz",
-    "sha256": "00a2acfa5cab480ff3c63f716676b86146dc01a7aadaa8a51566bced33a26776"
+    "commit": "815641fa3f6d33a75601770286813962fa003daf",
+    "asset": "spider-815641f.tar.gz",
+    "sha256": "d19099e91ce86a07e5e66cee58a7f629ecc412a3ad37abb85eb0d3deeda6de0b"
   }
 }
