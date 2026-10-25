@@ -15,7 +15,6 @@ import {
   focusAreas,
   getJobs,
   isPlaceholder,
-  longMonth,
   visibleHighlights,
   yearRange,
 } from "../lib/experience";
@@ -131,9 +130,7 @@ const jsonLd = {
       <div class="now-group">
         <p class="tile-label">Now</p>
         <h2 id="now-title">{current.data.org}</h2>
-        <p class="now-role">
-          {current.data.role}, since {longMonth(current.data.start)}
-        </p>
+        <p class="now-role">{current.data.role}</p>
       </div>
       <div class="now-group">
         <p class="tile-label">Focus</p>
