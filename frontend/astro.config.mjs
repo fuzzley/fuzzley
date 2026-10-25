@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import fs from "node:fs";
+import path from "node:path";
 import { buildInfo } from "./tools/build-info.mjs";
 import { readManifest } from "./tools/games.mjs";
 
@@ -78,6 +79,33 @@ function placeholderReport() {
   };
 }
 
+// Serves a folder's index.html in public/ at the folder's address, as nginx
+// does, so the fetched games play at /projects/<slug>/play/ in `astro dev`.
+// Without this the dev server sends that address to
+// src/pages/projects/[slug]/play/, which has pages only for games played on
+// another site, and answers 404.
+function servePublicIndexes() {
+  return {
+    name: "serve-public-indexes",
+    apply: "serve",
+    configureServer(server) {
+      const { publicDir } = server.config;
+      server.middlewares.use((req, _res, next) => {
+        const url = new URL(req.url ?? "/", "http://localhost");
+        const index = path.join(
+          publicDir,
+          decodeURIComponent(url.pathname),
+          "index.html",
+        );
+        if (url.pathname.endsWith("/") && fs.existsSync(index)) {
+          req.url = `${url.pathname}index.html${url.search}`;
+        }
+        next();
+      });
+    },
+  };
+}
+
 export default defineConfig({
   site,
   trailingSlash: "ignore",
@@ -101,6 +129,7 @@ export default defineConfig({
     port: 9000,
   },
   vite: {
+    plugins: [servePublicIndexes()],
     define: {
       __BUILD_INFO__: JSON.stringify(buildInfo),
       __PLAY_ORIGIN__: JSON.stringify(playOrigin),
