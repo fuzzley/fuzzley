@@ -1,18 +1,24 @@
 """Draw the home page's link preview, frontend/public/images/og-home.jpg.
 
 Two bento tiles on the page background: the name and role on the left, the
-Solitaire Collection board on the right, with the tiled-f mark in the corner.
+Solitaire Collection board on the right, with the fuzzball mark in the corner.
 Uses the site's own font from node_modules, so run `yarn install` in
 frontend/ first. Requires Pillow.
 
 Usage, from the repository root: python branding/og-image/make_og_home.py
 """
 
+import sys
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[2]
+
+# The mark is drawn by the favicon script, so the two can't drift apart.
+sys.path.insert(0, str(ROOT / "branding/favicon"))
+from make_favicons import render as render_mark  # noqa: E402
+
 FRONTEND = ROOT / "frontend"
 FONT = (
     FRONTEND
@@ -24,20 +30,13 @@ OUT = FRONTEND / "public/images/og-home.jpg"
 
 W, H = 1200, 630
 SS = 2  # drawn at 2x, then scaled down for smooth edges
-BG, TILE, INK, MUTED, GREEN, FELT = (
+BG, TILE, INK, MUTED, FELT = (
     "#E9ECEF",
     "#FFFFFF",
     "#14171B",
     "#5B636D",
-    "#179A50",
     "#135C2B",
 )
-MARK = [  # the favicon geometry, on a 32-unit grid
-    (2, 12, 6, 6, INK),
-    (10, 8, 6, 22, INK),
-    (18, 2, 10, 8, GREEN),
-    (18, 12, 8, 6, INK),
-]
 
 
 def font(size, weight, opsz=None):
@@ -67,14 +66,8 @@ def main():
     # Left tile: mark, name, role.
     left = (gap, gap, 640, H - gap)
     draw.rounded_rectangle([s(v) for v in left], radius=s(radius), fill=TILE)
-    unit = 56 / 32
-    for x, y, w, h, color in MARK:
-        x0, y0 = left[0] + 44 + x * unit, left[1] + 44 + y * unit
-        draw.rounded_rectangle(
-            [s(x0), s(y0), s(x0 + w * unit), s(y0 + h * unit)],
-            radius=s(1.5 * unit),
-            fill=color,
-        )
+    mark = render_mark(s(56))
+    img.paste(mark, (s(left[0] + 44), s(left[1] + 44)), mark)
 
     name = font(82, 800)
     lede = font(31, 420, opsz=24)

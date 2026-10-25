@@ -1,12 +1,12 @@
 # Favicon
 
-The letter f built from four bento tiles, with the hook in felt green.
+A fuzzball: a felt-green pom-pom with two eyes.
 `icon.svg` is the source of truth; everything else is exported from the same
 geometry by `make_favicons.py`.
 
 | File                   | Used by                                                     |
 | ---------------------- | ----------------------------------------------------------- |
-| `icon.svg`             | Modern browsers. Switches to light tiles in dark mode.      |
+| `icon.svg`             | Modern browsers. Switches to a brighter green in dark mode. |
 | `favicon.ico`          | Older browsers and `/favicon.ico` requests. 16, 32 and 48px. |
 | `apple-touch-icon.png` | iOS home screen, 180px.                                     |
 | `icon-192.png`, `icon-512.png` | Android home screen and install, via the manifest.  |

@@ -233,12 +233,22 @@
     text-decoration: none;
   }
 
-  .mark .ink {
-    fill: var(--ink);
-  }
-
   .mark .green {
     fill: var(--green);
+  }
+
+  .mark .fur {
+    fill: none;
+    stroke: var(--green);
+  }
+
+  /* The eyes sit on the green, so they stay dark in both themes. */
+  .mark .eye {
+    fill: #14171b;
+  }
+
+  .mark .glint {
+    fill: #ffffff;
   }
 
   .header-end {
