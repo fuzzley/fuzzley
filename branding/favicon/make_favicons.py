@@ -1,14 +1,17 @@
 """Generate the fuzzley favicon set.
 
-The mark is the letter f built from four bento tiles: a stem, a crossbar
-stub on each side, and a green hook. Every coordinate sits on even units of a
-32-unit grid, so at 16px each edge lands on a whole pixel.
+The mark is a fuzzball: a felt-green pom-pom with a tuft on top and two eyes
+glancing right. The fur is a ring of short strands around a disc, each
+curling clockwise like brushed fur. Their lengths are jittered from a fixed
+seed, so every run draws the same ball.
 
 Requires Pillow. Usage: python make_favicons.py <out_dir>
 """
 
 import io
 import json
+import math
+import random
 import struct
 import sys
 from pathlib import Path
@@ -18,55 +21,111 @@ from PIL import Image, ImageDraw
 INK = "#14171B"
 PORCELAIN = "#E9ECEF"
 GREEN = "#179A50"
+GREEN_DARK = "#3CC277"  # the site's --green in dark mode
+WHITE = "#FFFFFF"
 
-# (x, y, w, h, role) on a 32-unit grid. The stem starts below the hook's top
-# edge so the hook rises over it, which is what makes this read as a
-# lowercase f rather than a capital F.
-TILES = [
-    (2, 12, 6, 6, "ink"),     # crossbar, left of the stem
-    (10, 8, 6, 22, "ink"),    # stem
-    (18, 2, 10, 8, "green"),  # hook
-    (18, 12, 8, 6, "ink"),    # crossbar, right of the stem
-]
-RADIUS = 1.5
+# On a 32-unit grid. The ball sits a little low to leave room for the tuft.
+CX, CY = 16, 17.2
+BODY_R = 10.4
+FUR_WIDTH = 2.8
+EYES = [(13.4, 17, 2.3, 3), (20.6, 17, 2.3, 3)]  # cx, cy, rx, ry
+GLINTS = [(14.2, 15.8, 0.85), (21.4, 15.8, 0.85)]  # cx, cy, r
+
+
+def strands():
+    """The fur: 30 quadratic curves, (start, control, end), from inside the
+    disc outward. The ones nearest the top run longer, which is the tuft."""
+    rng = random.Random(11)
+    count, r0, curl = 30, 8.2, 0.2
+
+    def polar(r, a):
+        return (CX + r * math.cos(a), CY + r * math.sin(a))
+
+    out = []
+    for i in range(count):
+        a = 2 * math.pi * i / count + rng.uniform(-0.06, 0.06)
+        r1 = 11.6 + rng.uniform(-0.5, 0.5)
+        from_top = abs(math.atan2(math.sin(a + math.pi / 2), math.cos(a + math.pi / 2)))
+        r1 += max(0.0, 2.2 * (1 - from_top / 0.5))
+        rc = (r0 + r1) / 2
+        out.append((polar(r0, a), polar(rc, a + curl * 0.1), polar(r1, a + curl)))
+    return out
+
+
+def n(v):
+    return f"{v:.2f}".rstrip("0").rstrip(".")
 
 
 def svg_adaptive():
-    """icon.svg: ink tiles on light browser chrome, porcelain on dark."""
-    rects = "\n".join(
-        f'  <rect class="{role}" x="{x}" y="{y}" width="{w}" height="{h}" rx="{RADIUS}"/>'
-        for x, y, w, h, role in TILES
+    """icon.svg: felt green, switching to the site's brighter dark-mode green
+    on dark browser chrome. The eyes sit on the green, so they stay ink."""
+    fur = "".join(
+        f"M{n(p0[0])} {n(p0[1])}Q{n(c[0])} {n(c[1])} {n(p1[0])} {n(p1[1])}"
+        for p0, c, p1 in strands()
+    )
+    eyes = "\n".join(
+        f'  <ellipse class="eye" cx="{n(x)}" cy="{n(y)}" rx="{n(rx)}" ry="{n(ry)}"/>'
+        for x, y, rx, ry in EYES
+    )
+    glints = "\n".join(
+        f'  <circle class="glint" cx="{n(x)}" cy="{n(y)}" r="{n(r)}"/>'
+        for x, y, r in GLINTS
     )
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <style>
-    .ink {{ fill: {INK}; }}
     .green {{ fill: {GREEN}; }}
-    @media (prefers-color-scheme: dark) {{ .ink {{ fill: {PORCELAIN}; }} }}
+    .fur {{ fill: none; stroke: {GREEN}; }}
+    .eye {{ fill: {INK}; }}
+    .glint {{ fill: {WHITE}; }}
+    @media (prefers-color-scheme: dark) {{
+      .green {{ fill: {GREEN_DARK}; }}
+      .fur {{ stroke: {GREEN_DARK}; }}
+    }}
   </style>
-{rects}
+  <circle class="green" cx="{n(CX)}" cy="{n(CY)}" r="{n(BODY_R)}"/>
+  <path class="fur" d="{fur}" stroke-width="{n(FUR_WIDTH)}" stroke-linecap="round"/>
+{eyes}
+{glints}
 </svg>
 """
 
 
-def render(size, background=None, scale_of_canvas=1.0, radius=RADIUS):
+def render(size, background=None, scale_of_canvas=1.0, glints=True):
     """Draw the mark at `size` px. With a background, the mark fills
     `scale_of_canvas` of the canvas, centered."""
-    ss = 16  # supersampling factor; BOX downsampling keeps pixel edges exact
+    ss = 16  # supersampling factor; BOX downsampling averages it back down
     big = size * ss
     img = Image.new("RGBA", (big, big), background or (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
     mark = big * scale_of_canvas
     offset = (big - mark) / 2
     unit = mark / 32
-    colors = {"ink": INK, "green": GREEN}
-    for x, y, w, h, role in TILES:
-        x0 = offset + x * unit
-        y0 = offset + y * unit
-        draw.rounded_rectangle(
-            (x0, y0, x0 + w * unit - 1, y0 + h * unit - 1),
-            radius=radius * unit,
-            fill=colors[role],
-        )
+
+    def at(x, y):
+        return (offset + x * unit, offset + y * unit)
+
+    def ellipse(x, y, rx, ry, fill):
+        x, y = at(x, y)
+        draw.ellipse((x - rx * unit, y - ry * unit, x + rx * unit, y + ry * unit), fill=fill)
+
+    ellipse(CX, CY, BODY_R, BODY_R, GREEN)
+    width = FUR_WIDTH * unit
+    for p0, c, p1 in strands():
+        points = []
+        for i in range(17):
+            t = i / 16
+            points.append(at(*(
+                (1 - t) ** 2 * p0[k] + 2 * (1 - t) * t * c[k] + t ** 2 * p1[k]
+                for k in (0, 1)
+            )))
+        draw.line(points, fill=GREEN, width=round(width), joint="curve")
+        for x, y in (points[0], points[-1]):  # round caps
+            draw.ellipse((x - width / 2, y - width / 2, x + width / 2, y + width / 2), fill=GREEN)
+    for x, y, rx, ry in EYES:
+        ellipse(x, y, rx, ry, INK)
+    if glints:
+        for x, y, r in GLINTS:
+            ellipse(x, y, r, r, WHITE)
     return img.resize((size, size), Image.BOX)
 
 
@@ -95,15 +154,15 @@ def main(out):
 
     (out / "icon.svg").write_text(svg_adaptive(), encoding="utf-8")
 
-    # Tab icons: transparent, light-theme colors. At 16px the corners are
-    # squared off; a 0.75px radius only blurs them.
-    ico_sizes = [render(16, radius=0), render(32), render(48)]
+    # Tab icons: transparent, light-theme colors. At 16px the glints are
+    # under half a pixel and only turn the eyes grey, so they're left out.
+    ico_sizes = [render(16, glints=False), render(32), render(48)]
     write_ico(out / "favicon.ico", ico_sizes)
 
     # Home-screen and install icons: opaque porcelain square. At 0.6 of the
-    # canvas the mark's farthest corner sits inside the maskable safe zone
-    # (a circle 80% of the icon's width); iOS only rounds the corners, so the
-    # touch icon can run a little larger.
+    # canvas the tip of the tuft, the mark's farthest point, sits well inside
+    # the maskable safe zone (a circle 80% of the icon's width); iOS only
+    # rounds the corners, so the touch icon can run a little larger.
     render(180, background=PORCELAIN, scale_of_canvas=0.66).save(
         out / "apple-touch-icon.png", optimize=True
     )
