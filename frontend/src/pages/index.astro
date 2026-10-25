@@ -5,6 +5,7 @@ import GameTile from "../components/GameTile.astro";
 import GitHubLink from "../components/GitHubLink.astro";
 import me from "../assets/profile/me.jpg";
 import { education, links, profile } from "../data/profile";
+import { linkName, newTab } from "../lib/links";
 import {
   coverTransition,
   getProjects,
@@ -22,6 +23,7 @@ import {
 
 const projects = await getProjects();
 const feature = projects[0];
+const featurePlay = playPath(feature);
 // The games in the grid's four slots, in slot order (see `homeSlot`).
 const games = projects
   .filter((project) => project.data.homeSlot !== undefined)
@@ -83,7 +85,13 @@ const jsonLd = {
       <ul class="link-row" role="list">
         {links.map((link) => (
           <li>
-            <a href={link.href}>{link.label}</a>
+            <a
+              href={link.href}
+              {...newTab(link.href)}
+              aria-label={linkName(link.label, link.href)}
+            >
+              {link.label}
+            </a>
           </li>
         ))}
       </ul>
@@ -116,7 +124,15 @@ const jsonLd = {
           <p class="feature-tagline">{feature.data.tagline}</p>
         </div>
         <div class="feature-actions above">
-          <a class="button button--primary" href={playPath(feature)}>
+          <a
+            class="button button--primary"
+            href={featurePlay}
+            {...newTab(featurePlay)}
+            aria-label={linkName(
+              `${playShort(feature)} ${feature.data.title}`,
+              featurePlay,
+            )}
+          >
             {playShort(feature)}
           </a>
           <GitHubLink

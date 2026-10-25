@@ -7,6 +7,7 @@ import {
   monthRange,
   visibleHighlights,
 } from "../lib/experience";
+import { linkName, newTab } from "../lib/links";
 import { getProjects, projectPath, projectYears } from "../lib/projects";
 
 const jobs = await getJobs();
@@ -27,7 +28,13 @@ const projects = await getProjects();
         </li>
         {links.map((link) => (
           <li>
-            <a href={link.href}>{link.label}</a>
+            <a
+              href={link.href}
+              {...newTab(link.href)}
+              aria-label={linkName(link.label, link.href)}
+            >
+              {link.label}
+            </a>
           </li>
         ))}
         <li>

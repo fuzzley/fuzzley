@@ -1,7 +1,9 @@
 ---
 import { profile, sourceRepo } from "../data/profile";
+import { linkName, newTab } from "../lib/links";
 
 const build = __BUILD_INFO__;
+const commitUrl = `${sourceRepo}/commit/${build.commit}`;
 const builtAt = new Date(build.buildTime);
 const builtOn = builtAt.toLocaleDateString("en-US", {
   year: "numeric",
@@ -20,8 +22,14 @@ const builtOn = builtAt.toLocaleDateString("en-US", {
   ) : (
     <p>
       Built from{" "}
-      <a href={`${sourceRepo}/commit/${build.commit}`}>{build.commit}</a> on{" "}
-      {builtOn}
+      <a
+        href={commitUrl}
+        {...newTab(commitUrl)}
+        aria-label={linkName(build.commit, commitUrl)}
+      >
+        {build.commit}
+      </a>{" "}
+      on {builtOn}
     </p>
   )}
 </footer>

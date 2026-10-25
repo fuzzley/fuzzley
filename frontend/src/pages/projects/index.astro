@@ -2,6 +2,7 @@
 import { Picture } from "astro:assets";
 import Base from "../../layouts/Base.astro";
 import GitHubLink from "../../components/GitHubLink.astro";
+import { linkName, newTab } from "../../lib/links";
 import {
   coverTransition,
   getProjects,
@@ -52,7 +53,11 @@ const projects = (await getProjects()).sort(
           <a
             class="button button--primary"
             href={playPath(project)}
-            aria-label={`${project.data.playLabel}: ${project.data.title}`}
+            {...newTab(playPath(project))}
+            aria-label={linkName(
+              `${project.data.playLabel}: ${project.data.title}`,
+              playPath(project),
+            )}
           >
             {project.data.playLabel}
           </a>
