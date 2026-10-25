@@ -10,18 +10,20 @@ import {
   projectYears,
 } from "../../lib/projects";
 
-const projects = await getProjects();
+const projects = (await getProjects()).sort(
+  (a, b) => b.data.started - a.data.started || a.data.order - b.data.order,
+);
 ---
 
 <Base
   title="Projects | Andrey Gavel"
-  description="Browser games and prototypes by Andrey Gavel: Solitaire Collection, Spider Solitaire, Minesweeper, Pong and PATH."
+  description="Browser games by Andrey Gavel: Solitaire Collection, Spider Solitaire, Minesweeper and Pong, and Fuzzley Games, the site where the newest are played."
 >
   <header class="intro">
     <h1>Projects</h1>
     <p>
-      Games and prototypes I've built in my own time. Every one runs in the
-      browser, and the source for each is on GitHub.
+      Games I've built on the side, plus Fuzzley Games, my own game site,
+      hosting the newer games I've developed.
     </p>
   </header>
 

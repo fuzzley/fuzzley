@@ -15,13 +15,13 @@ const projects = defineCollection({
       title: z.string(),
       // Position in grids and lists, lowest first.
       order: z.number().int(),
-      // The game's slot in the home page grid: 1 and 4 are wide previews,
-      // 2 and 3 small tiles. Leave it out to keep a game off that grid; the
-      // featured game (the lowest `order`) has its own tile.
+      // The game's slot in the home page grid: 1 and 2 are small tiles, 3
+      // and 4 wide previews. Leave it out to keep a game off that grid; the
+      // featured project (the lowest `order`) has its own tile.
       homeSlot: z.number().int().min(1).max(4).optional(),
       started: z.number().int(),
       status: z.enum(["active", "finished"]),
-      kind: z.enum(["card-game", "arcade", "prototype"]),
+      kind: z.enum(["card-game", "arcade", "website"]),
       // A few words for small tiles.
       tagline: z.string().max(48),
       // One or two sentences for cards, meta descriptions and link previews.
@@ -30,7 +30,7 @@ const projects = defineCollection({
       repo: z.url(),
       // Where the game is played, when that is another site rather than this
       // one. Such a game has no entry in games.json, and its old addresses
-      // here forward to this one.
+      // here forward to this one. A website's own address goes here too.
       playUrl: z.url().optional(),
       playLabel: z.string().default("Play"),
       // The game's own background color, used behind its tile.
