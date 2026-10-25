@@ -4,6 +4,7 @@ import { getImage, Picture } from "astro:assets";
 import Base from "../../../layouts/Base.astro";
 import GameTile from "../../../components/GameTile.astro";
 import { profile } from "../../../data/profile";
+import { linkName, newTab } from "../../../lib/links";
 import {
   coverTransition,
   getProjects,
@@ -44,7 +45,8 @@ const preview = await getImage({
   format: "jpeg",
 });
 
-const playUrl = new URL(playPath(project), Astro.site).href;
+const play = playPath(project);
+const playUrl = new URL(play, Astro.site).href;
 const author = { "@type": "Person", name: profile.name, url: Astro.site?.href };
 const jsonLd =
   data.kind === "website"
@@ -88,10 +90,20 @@ const jsonLd =
       <h1 id="project-title">{data.title}</h1>
       <p class="intro-summary">{data.summary}</p>
       <div class="actions">
-        <a class="button button--primary" href={playPath(project)}>
+        <a
+          class="button button--primary"
+          href={play}
+          {...newTab(play)}
+          aria-label={linkName(data.playLabel, play)}
+        >
           {data.playLabel}
         </a>
-        <a class="button button--quiet" href={data.repo}>
+        <a
+          class="button button--quiet"
+          href={data.repo}
+          {...newTab(data.repo)}
+          aria-label={linkName("Source on GitHub", data.repo)}
+        >
           Source on GitHub
         </a>
       </div>

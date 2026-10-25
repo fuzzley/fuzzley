@@ -3,6 +3,7 @@
 // page and a button straight into the game.
 import { Picture } from "astro:assets";
 import GitHubLink from "./GitHubLink.astro";
+import { linkName, newTab } from "../lib/links";
 import {
   coverTransition,
   playPath,
@@ -32,6 +33,7 @@ const {
 } = Astro.props;
 const Heading = headingLevel === 3 ? "h3" : "h2";
 const widths = wide ? [480, 720, 960, 1280] : [320, 480, 640];
+const play = playPath(project);
 ---
 
 <article
@@ -57,8 +59,12 @@ const widths = wide ? [480, 720, 960, 1280] : [320, 480, 640];
     <div class="game-actions above">
       <a
         class="pill pill--dark"
-        href={playPath(project)}
-        aria-label={`${playShort(project)} ${project.data.title}`}
+        href={play}
+        {...newTab(play)}
+        aria-label={linkName(
+          `${playShort(project)} ${project.data.title}`,
+          play,
+        )}
       >
         {playShort(project)}
       </a>
