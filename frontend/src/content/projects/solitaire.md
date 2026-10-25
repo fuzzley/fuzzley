@@ -1,6 +1,7 @@
 ---
 title: Solitaire Collection
-order: 1
+homeSlot: 3
+order: 2
 started: 2018
 status: active
 kind: card-game

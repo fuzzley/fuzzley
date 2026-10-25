@@ -9,6 +9,7 @@ import {
   coverTransition,
   getProjects,
   playPath,
+  playShort,
   projectPath,
 } from "../lib/projects";
 import {
@@ -43,7 +44,7 @@ const jsonLd = {
 
 <Base
   title="Andrey Gavel | Software engineer and manager"
-  description="Andrey Gavel is a staff software engineer and manager at Google. Play his browser games: Solitaire Collection, Spider Solitaire, Minesweeper, Pong and more."
+  description="Andrey Gavel is a staff software engineer and manager at Google. Play his browser games, from the Solitaire Collection and Minesweeper on Fuzzley Games to Spider Solitaire and Pong."
   ogType="profile"
   jsonLd={jsonLd}
 >
@@ -116,7 +117,7 @@ const jsonLd = {
         </div>
         <div class="feature-actions above">
           <a class="button button--primary" href={playPath(feature)}>
-            Play
+            {playShort(feature)}
           </a>
           <GitHubLink
             href={feature.data.repo}
@@ -155,7 +156,7 @@ const jsonLd = {
       <GameTile
         project={project}
         class={`game-${project.data.homeSlot}`}
-        wide={project.data.homeSlot === 1 || project.data.homeSlot === 4}
+        wide={project.data.homeSlot === 3 || project.data.homeSlot === 4}
       />
     ))}
 
@@ -194,15 +195,15 @@ const jsonLd = {
 </Base>
 
 <style>
-  /* g1 and g4 are wide 16:9 game previews; g2 and g3 are 4:3 tiles. */
+  /* g1 and g2 are 4:3 game tiles; g3 and g4 are wide 16:9 previews. */
   .home {
     grid-template-areas:
       "hero hero"
       "mail mail"
       "feat feat"
       "now now"
-      "g1 g1"
-      "g2 g3"
+      "g1 g2"
+      "g3 g3"
       "g4 g4"
       "exp exp"
       "edu edu";
@@ -210,15 +211,15 @@ const jsonLd = {
 
   /* Wide screens pair cards of about the same height, alternating sides:
      the name and contact cards beside the featured game, the Now card beside
-     a wide preview over two tiles, and Education over a wide preview beside
+     two tiles over a wide preview, and Education over a wide preview beside
      Experience. */
   @media (min-width: 56rem) {
     .home {
       grid-template-areas:
         "hero hero feat feat"
         "mail mail feat feat"
-        "now now g1 g1"
-        "now now g2 g3"
+        "now now g1 g2"
+        "now now g3 g3"
         "edu edu exp exp"
         "g4 g4 exp exp";
     }
@@ -296,6 +297,15 @@ const jsonLd = {
   .feature {
     grid-area: feat;
     min-height: 23rem;
+  }
+
+  /* The same slow zoom as the game tiles (see GameTile.astro). */
+  .feature :global(img) {
+    transition: transform 0.4s ease;
+  }
+
+  .feature:hover :global(img) {
+    transform: scale(1.03);
   }
 
   .feature-card {

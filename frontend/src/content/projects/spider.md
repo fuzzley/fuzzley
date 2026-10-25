@@ -1,7 +1,7 @@
 ---
 title: Spider Solitaire
 homeSlot: 4
-order: 2
+order: 5
 started: 2013
 status: finished
 kind: card-game

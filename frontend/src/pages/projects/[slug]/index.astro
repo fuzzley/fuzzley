@@ -35,7 +35,7 @@ const { Content } = await render(project);
 const kindLabel = {
   "card-game": "Card game",
   arcade: "Arcade game",
-  prototype: "App prototype",
+  website: "Website",
 }[data.kind];
 
 const preview = await getImage({
@@ -47,15 +47,13 @@ const preview = await getImage({
 const playUrl = new URL(playPath(project), Astro.site).href;
 const author = { "@type": "Person", name: profile.name, url: Astro.site?.href };
 const jsonLd =
-  data.kind === "prototype"
+  data.kind === "website"
     ? {
         "@context": "https://schema.org",
-        "@type": "WebApplication",
+        "@type": "WebSite",
         name: data.title,
         description: data.summary,
         url: playUrl,
-        applicationCategory: "UtilitiesApplication",
-        operatingSystem: "Any",
         author,
       }
     : {

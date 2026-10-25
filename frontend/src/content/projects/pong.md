@@ -1,6 +1,6 @@
 ---
 title: Pong
-homeSlot: 3
+homeSlot: 2
 order: 4
 started: 2014
 status: finished

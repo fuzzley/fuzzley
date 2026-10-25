@@ -21,7 +21,11 @@ export const playPath = (project: Project) =>
 
 /** One word for the play button on small tiles. */
 export const playShort = (project: Project) =>
-  project.data.kind === "prototype" ? "Open" : "Play";
+  ({
+    "card-game": "Play",
+    arcade: "Play",
+    website: "Visit",
+  })[project.data.kind];
 
 /** "2018 to now" for a project still in development, otherwise its start year. */
 export const projectYears = (project: Project) =>
