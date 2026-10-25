@@ -7,8 +7,8 @@ status: active
 kind: card-game
 tagline: 41 games, most with rule variants
 summary: Forty-one solitaire games in the browser, from Klondike and FreeCell to Pyramid, TriPeaks and Grandfather's Clock.
-stack: [TypeScript, Phaser 4, Angular 22, Sass]
-repo: https://github.com/fuzzley/fSolitaire
+stack: [TypeScript, Phaser 4, Angular 22, Vite, Sass]
+repo: https://github.com/fuzzley/fuzzley-games/tree/main/frontend/games/solitaire
 playUrl: https://fuzzley.games/play/solitaire/
 playLabel: Play on fuzzley.games
 tint: "#135c2b"
@@ -32,8 +32,8 @@ with standard or Vegas scoring, Spider in one, two or four suits, and most games
 offer their traditional rule variants, from Whitehead and Saratoga to Will o'
 the Wisp and Super Challenge FreeCell.
 
-The playing card artwork is Chris Aguilar's
-[Vector Playing Cards](https://sourceforge.net/projects/vector-cards/).
+It's part of [Fuzzley Games](/projects/fuzzley-games/) now, which gives each
+game a page of its own.
 
 ## The games
 
