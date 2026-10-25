@@ -12,7 +12,7 @@ playUrl: https://fuzzley.games/
 playLabel: Visit fuzzley.games
 tint: "#0e1a2b"
 cover: ../../assets/projects/fuzzley-games.webp
-coverAlt: The Fuzzley Games home page, with a row of solitaire games from Klondike to Golf above Minesweeper, Sudoku and Reversi.
+coverAlt: The Fuzzley Games home page, with a row of solitaire games from Klondike to Pyramid above Minesweeper, Sudoku and Reversi.
 ---
 
 A gallery of card and puzzle games to play in the browser, grouped into
