@@ -1,10 +1,4 @@
 {
-  "path": {
-    "repo": "fuzzley/PATH",
-    "commit": "39db392d87f38b16d22f6da273d226bde2593af6",
-    "asset": "path-39db392.tar.gz",
-    "sha256": "1dc7a5b754f9423b725f26e076b1f576279ebc54505f615ce130fa8881691e75"
-  },
   "pong": {
     "repo": "fuzzley/fPong",
     "commit": "6a95729d86efd1071e7824468d54a3182110c0b0",
