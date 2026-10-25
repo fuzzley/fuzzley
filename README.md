@@ -67,7 +67,7 @@ A highlight in `experience.yaml` that starts with `TODO` is a placeholder:
 
 ## Games
 
-Each game is built in its own repository (fSpider, fPong, PATH). Every push
+Each game is built in its own repository (fSpider, fPong). Every push
 to a game's `main` builds it and uploads the build to
 that repository's `site-build` release as `<slug>-<short sha>.tar.gz`, then
 replaces `latest.json` there, which names the newest archive. The release keeps
