@@ -115,6 +115,15 @@ fuzzley.info is the site. Cloud Run serves it from the Docker image below, and
 rebuilds and deploys that image on every push to `main` by itself, without
 waiting for the checks that follow.
 
+Cloud Run also maps andreygavel.com, andrey-gavel.com, fuzzley.net and
+fuzzley.org to the same service (`fuzzley-git` in `us-central1`), and serves it
+at its own `run.app` address. nginx answers every host but fuzzley.info with a
+permanent redirect to the same path and query on fuzzley.info (see
+`nginx.conf.template`), so search engines index one copy of each page and
+Google Analytics sees one hostname. A domain mapped to the service later is
+redirected the same way, with no change here. Only `localhost` and `127.0.0.1`
+are served as they are, so the image can still be run locally.
+
 The images go to Artifact Registry (`cloud-run-source-deploy` in
 `northamerica-northeast2`), whose cleanup policy keeps the 30 newest versions,
 about ten builds since each build also stores two small provenance records,

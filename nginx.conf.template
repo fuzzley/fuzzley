@@ -1,6 +1,25 @@
+# fuzzley.info is the site's one address. Cloud Run also maps andreygavel.com,
+# andrey-gavel.com, fuzzley.net and fuzzley.org to this service, and serves it
+# at its own run.app address, so every other host is sent to the same path on
+# fuzzley.info. Search engines then index one copy of each page, and Google
+# Analytics sees one hostname. localhost and 127.0.0.1 are left alone, so the
+# image can still be run and checked locally.
+map $host $other_host {
+    default      1;
+    fuzzley.info 0;
+    localhost    0;
+    127.0.0.1    0;
+}
+
 server {
     listen ${PORT};
     server_name localhost;
+
+    # A permanent redirect that keeps the path and query. It comes before any
+    # location is chosen, so it also runs ahead of the redirects below.
+    if ($other_host) {
+        return 301 https://fuzzley.info$request_uri;
+    }
 
     # Ensure redirects (such as adding a trailing slash to directories like /project/solitaire)
     # are relative so that the internal container port (e.g. :8080) and HTTP scheme are not leaked
