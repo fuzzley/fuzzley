@@ -122,7 +122,9 @@ permanent redirect to the same path and query on fuzzley.info (see
 `nginx.conf.template`), so search engines index one copy of each page and
 Google Analytics sees one hostname. A domain mapped to the service later is
 redirected the same way, with no change here. Only `localhost` and `127.0.0.1`
-are served as they are, so the image can still be run locally.
+are served as they are, so the image can still be run locally. For the same
+reason, an address naming a folder's `index.html` (`/index.html`,
+`/cv/index.html`) is redirected to the folder's.
 
 The images go to Artifact Registry (`cloud-run-source-deploy` in
 `northamerica-northeast2`), whose cleanup policy keeps the 30 newest versions,

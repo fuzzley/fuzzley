@@ -83,6 +83,16 @@ jobs:
               failed=1
             fi
           }
+          expect_redirect() {
+            expect 301 "$1"
+            value=$(curl -s -o /dev/null -D - "http://localhost:8080$1" |
+              tr -d '\r' | sed -n 's/^location: //Ip')
+            echo "Location: $value  $1"
+            if [ "$value" != "$2" ]; then
+              echo "::error::Expected $1 to redirect to $2, got '$value'."
+              failed=1
+            fi
+          }
           # fuzzley.info is served; any other host is sent to the same path
           # there.
           expect_host() {
@@ -105,6 +115,11 @@ jobs:
           expect 200 /cv/
           expect 404 /no-such-page/
           expect 404 /project/no-such-game/
+          # A folder's index.html is sent to the folder's address, query and
+          # all.
+          expect_redirect /index.html /
+          expect_redirect /cv/index.html /cv/
+          expect_redirect "/cv/index.html?from=check" "/cv/?from=check"
           # Every project has its page here.
           for file in frontend/src/content/projects/*.md; do
             expect 200 "/projects/$(basename "$file" .md)/"
@@ -113,6 +128,7 @@ jobs:
           for slug in $(jq -r 'keys[]' frontend/games.json); do
             expect 200 "/projects/$slug/play/"
             expect_cache "/projects/$slug/play/" "no-cache"
+            expect_redirect "/projects/$slug/play/index.html" "/projects/$slug/play/"
             expect 301 "/project/$slug/"
           done
           # A game played on another site, such as the Solitaire Collection

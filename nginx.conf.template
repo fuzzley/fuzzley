@@ -21,6 +21,15 @@ server {
         return 301 https://fuzzley.info$request_uri;
     }
 
+    # A folder's index.html has the folder's address, so search engines and
+    # analytics see one URL for each page: /cv/index.html is sent to /cv/
+    # with its query, and the browser keeps any #hash. It matches the address
+    # as sent: `index` rewrites $uri to …/index.html internally, so matching
+    # $uri would loop.
+    if ($request_uri ~ "^(?<folder>[^?]*/)index\.html(?:\?|$)") {
+        return 301 $folder$is_args$args;
+    }
+
     # Ensure redirects (such as adding a trailing slash to directories like /projects/pong/play)
     # are relative so that the internal container port (e.g. :8080) and HTTP scheme are not leaked
     # when running behind a TLS-terminating reverse proxy (Cloud Run).
