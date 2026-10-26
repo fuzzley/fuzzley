@@ -97,8 +97,8 @@ is enabled under Actions.
   from its `latest.json`, and add `frontend/src/content/projects/<slug>.md`.
 
 A game can move to another site. The Solitaire Collection (fSolitaire) and
-Minesweeper (fMinesweeper) did, to fuzzley.games, which pins and fetches them
-the same way. Such a game has no
+Minesweeper (fMinesweeper) did, to fuzzley.games, which builds them from its
+own branch of their code. Such a game has no
 entry in `games.json`, and its content file names its new address in
 `playUrl`, which every play link uses. `fetch-games.mjs` deletes its old
 folder from `public/projects/`, and nothing forwards from its old addresses
