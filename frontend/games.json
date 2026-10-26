@@ -1,14 +1,14 @@
 {
   "pong": {
     "repo": "fuzzley/fPong",
-    "commit": "6a95729d86efd1071e7824468d54a3182110c0b0",
-    "asset": "pong-6a95729.tar.gz",
-    "sha256": "c67e8b3145b49e831803cd64a369da4feed312ff7d489229c31209dc050f6fbe"
+    "commit": "d83ba78abe142abc6835fc9edf051028810eee2e",
+    "asset": "pong-d83ba78.tar.gz",
+    "sha256": "ec586c8d146a1ea109196fc92c91c415fd23c42a78ae95089035c8e93f637229"
   },
   "spider": {
     "repo": "fuzzley/fSpider",
-    "commit": "815641fa3f6d33a75601770286813962fa003daf",
-    "asset": "spider-815641f.tar.gz",
-    "sha256": "d19099e91ce86a07e5e66cee58a7f629ecc412a3ad37abb85eb0d3deeda6de0b"
+    "commit": "5a5c4eee2054f57ed7ad6a27a1d723b6de6f27a8",
+    "asset": "spider-5a5c4ee.tar.gz",
+    "sha256": "c57bee4008fd2264f708edafd2f81f42ad33ef21a6dcd9d175aa11f986b15b75"
   }
 }
