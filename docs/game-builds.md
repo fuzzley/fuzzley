@@ -37,10 +37,11 @@ plan below:
 fuzzley/fuzzley-games now pins and serves the Solitaire Collection at
 https://fuzzley.games/play/solitaire/ and Minesweeper at
 https://fuzzley.games/play/minesweeper/, from the same releases, with the same
-manifest and scheduled update. fuzzley.info keeps their project pages and
-answers their old addresses with a 301 there; the README's Games section says
-how. The move gave up requirement 1 below for these games on purpose: their
-players' settings and saved games stay behind on fuzzley.info's origin.
+manifest and scheduled update. fuzzley.info keeps their project pages, which
+link there directly. Their old addresses here redirected there at first, and
+answer 404 since 2026-10-26; the README's Games section says how. The move
+gave up requirement 1 below for these games on purpose: their players'
+settings and saved games stay behind on fuzzley.info's origin.
 
 The rest of this document is the analysis as written before the work.
 

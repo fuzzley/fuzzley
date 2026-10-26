@@ -29,8 +29,9 @@ const projects = defineCollection({
       stack: z.array(z.string()).min(1),
       repo: z.url(),
       // Where the game is played, when that is another site rather than this
-      // one. Such a game has no entry in games.json, and its old addresses
-      // here forward to this one. A website's own address goes here too.
+      // one. Such a game has no entry in games.json, and nothing here but its
+      // project page: its old addresses answer 404. A website's own address
+      // goes here too.
       playUrl: z.url().optional(),
       playLabel: z.string().default("Play"),
       // The game's own background color, used behind its tile.

@@ -51,8 +51,7 @@ function findProjectPages() {
   }
 
   // Only the fetched games: dist/projects/<slug>/index.html is the site's own
-  // project page, which already carries the tags from the base layout, and
-  // the play/ page of a game played on another site only forwards there.
+  // project page, which already carries the tags from the base layout.
   const pages = Object.keys(readManifest())
     .map((slug) => path.join(projectsDir, slug, "play", "index.html"))
     .filter((page) => fs.existsSync(page));

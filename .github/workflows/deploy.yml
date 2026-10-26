@@ -83,14 +83,6 @@ jobs:
               failed=1
             fi
           }
-          expect_moved() {
-            location=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' "http://localhost:8080$1")
-            echo "$location  $1"
-            if [ "$location" != "301 $2" ]; then
-              echo "::error::Expected a 301 to $2 for $1, got '$location'."
-              failed=1
-            fi
-          }
           # fuzzley.info is served; any other host is sent to the same path
           # there.
           expect_host() {
@@ -112,6 +104,7 @@ jobs:
           expect 200 /projects/
           expect 200 /cv/
           expect 404 /no-such-page/
+          expect 404 /project/no-such-game/
           # Every project has its page here.
           for file in frontend/src/content/projects/*.md; do
             expect 200 "/projects/$(basename "$file" .md)/"
@@ -122,15 +115,15 @@ jobs:
             expect_cache "/projects/$slug/play/" "no-cache"
             expect 301 "/project/$slug/"
           done
-          # The Solitaire Collection and Minesweeper moved to fuzzley.games, files and all.
-          expect_moved /projects/solitaire/play/ https://fuzzley.games/play/solitaire/
-          expect_moved /projects/solitaire/play https://fuzzley.games/play/solitaire/
-          expect_moved /projects/solitaire/play/docs/screenshots/klondike/preview.webp \
-            https://fuzzley.games/play/solitaire/docs/screenshots/klondike/preview.webp
-          expect_moved /project/solitaire/ https://fuzzley.games/play/solitaire/
-          expect_moved /projects/minesweeper/play/ https://fuzzley.games/play/minesweeper/
-          expect_moved /projects/minesweeper/play https://fuzzley.games/play/minesweeper/
-          expect_moved /project/minesweeper/ https://fuzzley.games/play/minesweeper/
+          # A game played on another site, such as the Solitaire Collection
+          # on fuzzley.games, is linked there directly. Nothing is served or
+          # redirected at its old addresses here.
+          for file in $(grep -l '^playUrl:' frontend/src/content/projects/*.md); do
+            slug=$(basename "$file" .md)
+            expect 404 "/projects/$slug/play/"
+            expect 404 "/projects/$slug/play/assets/index.js"
+            expect 404 "/project/$slug/"
+          done
           # Every other domain mapped to the service, and its run.app address,
           # goes to fuzzley.info, path and query included.
           expect_host fuzzley.info /
