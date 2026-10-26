@@ -14,8 +14,8 @@ Figures were measured on 2026-10-10.
 rolling `site-build` release, `frontend/games.json` pins one build of each,
 `tools/fetch-games.mjs` fetches them at build time, and
 `.github/workflows/update-games.yml` moves the pins every 15 minutes. The
-README's Games section describes how to run it. Where it differs from the
-plan below:
+Games section of [DEVELOPMENT.md](../DEVELOPMENT.md#games) describes how to run
+it. Where it differs from the plan below:
 
 - **Releases:** one rolling release per game (the owner's choice), which
   keeps the ten newest archives plus whichever one `games.json` pins, so a
@@ -39,7 +39,8 @@ https://fuzzley.games/play/solitaire/ and Minesweeper at
 https://fuzzley.games/play/minesweeper/, from the same releases, with the same
 manifest and scheduled update. fuzzley.info keeps their project pages, which
 link there directly. Their old addresses here redirected there at first, and
-answer 404 since 2026-10-26; the README's Games section says how. The move
+answer 404 since 2026-10-26; the Games section of
+[DEVELOPMENT.md](../DEVELOPMENT.md#games) says how. The move
 gave up requirement 1 below for these games on purpose: their players'
 settings and saved games stay behind on fuzzley.info's origin.
 
