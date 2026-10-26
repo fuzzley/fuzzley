@@ -45,9 +45,9 @@ yarn verify      # type-check, lint, check formatting and build
 The Solitaire Collection and Minesweeper are played on
 [fuzzley.games](https://fuzzley.games) now, at
 https://fuzzley.games/play/solitaire/ and
-https://fuzzley.games/play/minesweeper/. Their project pages stay here, and
-their old addresses, `/projects/<slug>/play/` and `/project/<slug>/`,
-redirect there with every file under them (see [Games](#games)).
+https://fuzzley.games/play/minesweeper/. Their project pages stay here and
+link there directly; their old addresses, `/projects/<slug>/play/` and
+`/project/<slug>/`, answer 404 (see [Games](#games)).
 
 The words and pictures live in content files, not in the pages:
 
@@ -101,10 +101,10 @@ Minesweeper (fMinesweeper) did, to fuzzley.games, which pins and fetches them
 the same way. Such a game has no
 entry in `games.json`, and its content file names its new address in
 `playUrl`, which every play link uses. `fetch-games.mjs` deletes its old
-folder from `public/projects/`. nginx answers its old addresses with a 301
-(see `nginx.conf.template`); GitHub Pages can't, so the build also makes a
-`/projects/<slug>/play/` page that forwards there, as the `/project/<slug>/`
-pages do.
+folder from `public/projects/`, and nothing forwards from its old addresses
+here: nginx redirects `/project/<slug>/` only for a game it still serves (see
+`nginx.conf.template`), and the build makes that page only for a game without
+a `playUrl`.
 
 Why it works this way, and the options considered, are in
 [docs/game-builds.md](docs/game-builds.md).
@@ -142,8 +142,9 @@ deploy to finish, so a failed deploy shows on the commit.
 The GitHub Pages copy leaves out the games. Its workflow builds with
 `PLAY_ORIGIN=https://fuzzley.info`, which deletes each fetched game's
 `projects/<slug>/play/` from `dist/` and points every play link, and the old
-`/project/<slug>/` redirects, at the games on fuzzley.info. A game with a
-`playUrl` is linked there instead, from both copies. To see that build locally:
+`/project/<slug>/` pages that forward, at the games on fuzzley.info. A game
+with a `playUrl` is linked there instead, from both copies. To see that build
+locally:
 
 ```sh
 cd frontend

@@ -1,7 +1,7 @@
 ---
-// A page that forwards to a game's address and keeps any #hash, which the
-// solitaire game uses to pick a game. For hosts that can't send a real 301,
-// such as GitHub Pages; nginx answers these addresses with a 301 instead.
+// A page that forwards to a game's address and keeps any #hash. For hosts that
+// can't send a real 301, such as GitHub Pages; nginx answers these addresses
+// with a 301 instead.
 import { playPath, type Project } from "../lib/projects";
 
 interface Props {

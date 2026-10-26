@@ -37,8 +37,7 @@ function versionJson() {
 }
 
 // With PLAY_ORIGIN set, deletes the fetched games from dist/. Only their play/
-// folders go: dist/projects/<slug>/ itself is the site's own project page, and
-// the play/ page of a game played on another site forwards there.
+// folders go: dist/projects/<slug>/ itself is the site's own project page.
 function omitGames() {
   return {
     name: "omit-games",
@@ -80,10 +79,8 @@ function placeholderReport() {
 }
 
 // Serves a folder's index.html in public/ at the folder's address, as nginx
-// does, so the fetched games play at /projects/<slug>/play/ in `astro dev`.
-// Without this the dev server sends that address to
-// src/pages/projects/[slug]/play/, which has pages only for games played on
-// another site, and answers 404.
+// does, so the fetched games play at /projects/<slug>/play/ in `astro dev`,
+// which otherwise answers 404 there.
 function servePublicIndexes() {
   return {
     name: "serve-public-indexes",
@@ -114,11 +111,8 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      // The /project/<slug>/ pages only redirect to the games, as does the
-      // play/ page of a game played on another site.
-      filter: (page) =>
-        !page.includes("/project/") &&
-        (!page.endsWith("/play/") || playPages.includes(page)),
+      // The /project/<slug>/ pages only redirect to the games.
+      filter: (page) => !page.includes("/project/"),
       customPages: playPages,
     }),
     versionJson(),

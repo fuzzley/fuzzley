@@ -1,17 +1,19 @@
 ---
 // The games used to live at /project/<slug>/. Hosts that can send real 301s
 // (nginx) never serve these pages; GitHub Pages can't, so it serves this one,
-// which forwards to the game's address (on fuzzley.info, for the Pages copy,
-// or wherever the project's `playUrl` says).
+// which forwards to the game on fuzzley.info. A game played on another site
+// (its `playUrl`) is linked there directly and has no old address here.
 import Moved from "../../components/Moved.astro";
 import { getProjects } from "../../lib/projects";
 
 export async function getStaticPaths() {
   const projects = await getProjects();
-  return projects.map((project) => ({
-    params: { slug: project.id },
-    props: { project },
-  }));
+  return projects
+    .filter((project) => !project.data.playUrl)
+    .map((project) => ({
+      params: { slug: project.id },
+      props: { project },
+    }));
 }
 
 const { project } = Astro.props;
