@@ -10,24 +10,25 @@ side.
 
 ## Games
 
-- **[Fuzzley Games](https://fuzzley.games/)**: a gallery of card and puzzle
-  games to play in the browser, and the new home of the Solitaire Collection
-  and Minesweeper. TypeScript, Angular, Vite, Sass.
+- **[Fuzzley Games](https://fuzzley.games/)**: card and puzzle games to play in
+  your browser. It's the new home of the Solitaire Collection and Minesweeper.
+  TypeScript, Angular, Vite, Sass.
   [Source](https://github.com/fuzzley/fuzzley-games)
-- **[Solitaire Collection](https://fuzzley.games/play/solitaire/)**: forty-one
-  solitaire games, from Klondike and FreeCell to Pyramid, TriPeaks and
-  Grandfather's Clock, most with their traditional rule variants. TypeScript,
-  Phaser 4, Angular.
+- **[Solitaire Collection](https://fuzzley.games/play/solitaire/)**: 41
+  solitaire games, from Klondike and FreeCell to Pyramid and Grandfather's
+  Clock. Most have their traditional rule variants. TypeScript, Phaser 4,
+  Angular.
   [Source](https://github.com/fuzzley/fuzzley-games/tree/main/frontend/games/solitaire)
-- **[Minesweeper](https://fuzzley.games/play/minesweeper/)**: the classic, with
-  lives, so one wrong click doesn't have to end the game. First written in 2016
-  with jQuery and Knockout, now an Angular app.
+- **[Minesweeper](https://fuzzley.games/play/minesweeper/)**: Minesweeper, but
+  you get lives. Hitting a mine costs one instead of ending the game. I first
+  wrote it in 2016 with jQuery and Knockout, and later rebuilt it in Angular.
   [Source](https://github.com/fuzzley/fuzzley-games/tree/main/frontend/games/minesweeper)
-- **[Spider Solitaire](https://fuzzley.info/projects/spider/play/)**: the
-  two-deck classic, drawn on canvas with KineticJS, with card sounds from
-  howler.js. [Source](https://github.com/fuzzley/fSpider)
-- **[Pong](https://fuzzley.info/projects/pong/play/)**: two paddles, one ball,
-  built on the Phaser game engine. [Source](https://github.com/fuzzley/fPong)
+- **[Spider Solitaire](https://fuzzley.info/projects/spider/play/)**: 2 decks
+  on 10 columns. I wrote it in 2013. JavaScript, KineticJS, howler.js,
+  Knockout. [Source](https://github.com/fuzzley/fSpider)
+- **[Pong](https://fuzzley.info/projects/pong/play/)**: the original arcade
+  game. I wrote it in 2014. JavaScript, Phaser, jQuery.
+  [Source](https://github.com/fuzzley/fPong)
 
 ## Experience
 
