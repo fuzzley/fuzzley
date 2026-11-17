@@ -10,9 +10,9 @@ side.
 
 ## Games
 
-- **[Fuzzley Games](https://fuzzley.games/)**: card and puzzle games to play in
-  your browser. It's the new home of the Solitaire Collection and Minesweeper.
-  TypeScript, Angular, Vite, Sass.
+- **[Fuzzley Games](https://fuzzley.games/)**: card, puzzle and arcade games to
+  play in your browser. It's the new home of the Solitaire Collection and
+  Minesweeper. TypeScript, Angular, Vite, Sass.
   [Source](https://github.com/fuzzley/fuzzley-games)
 - **[Solitaire Collection](https://fuzzley.games/play/solitaire/)**: 41
   solitaire games, from Klondike and FreeCell to Pyramid and Grandfather's
