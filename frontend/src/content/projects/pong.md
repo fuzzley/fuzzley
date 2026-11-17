@@ -6,7 +6,7 @@ started: 2014
 status: finished
 kind: arcade
 tagline: Two paddles, one ball
-summary: Pong in the browser, built on the Phaser game engine.
+summary: Pong, the original arcade game, in your browser.
 stack: [JavaScript, Phaser, jQuery]
 repo: https://github.com/fuzzley/fPong
 tint: "#74665a"
@@ -14,4 +14,4 @@ cover: ../../assets/projects/pong.png
 coverAlt: A game of Pong with two orange paddles and the score at the top.
 ---
 
-The original arcade game, rebuilt for the browser on the Phaser game engine.
+I wrote it in 2014, on the Phaser game engine.

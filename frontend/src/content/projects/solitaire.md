@@ -6,7 +6,7 @@ started: 2018
 status: active
 kind: card-game
 tagline: 41 games, most with rule variants
-summary: Forty-one solitaire games in the browser, from Klondike and FreeCell to Pyramid, TriPeaks and Grandfather's Clock.
+summary: 41 solitaire games in your browser, from Klondike and FreeCell to Pyramid and Grandfather's Clock. Most have their traditional rule variants.
 stack: [TypeScript, Phaser 4, Angular 22, Vite, Sass]
 repo: https://github.com/fuzzley/fuzzley-games/tree/main/frontend/games/solitaire
 playUrl: https://fuzzley.games/play/solitaire/
@@ -16,24 +16,22 @@ cover: ../../assets/projects/solitaire-klondike.webp
 coverAlt: A game of Klondike dealt on green felt.
 gallery:
   - image: ../../assets/projects/solitaire-freecell.webp
-    alt: A game of FreeCell with four empty reserve cells.
+    alt: A game of FreeCell with 4 empty free cells.
     caption: FreeCell
   - image: ../../assets/projects/solitaire-pyramid.webp
-    alt: A pyramid of twenty-eight cards dealt for Pyramid solitaire.
+    alt: A pyramid of 28 cards dealt for Pyramid solitaire.
     caption: Pyramid
   - image: ../../assets/projects/solitaire-spider.webp
-    alt: Ten columns dealt for a game of Spider.
+    alt: A game of Spider dealt on 10 columns.
     caption: Spider
 ---
 
-A solitaire engine with a game browser, built on Phaser 4 for the table and an
-Angular 22 shell for everything around it. Klondike plays in Draw 1 or Draw 3
-with standard or Vegas scoring, Spider in one, two or four suits, and most games
-offer their traditional rule variants, from Whitehead and Saratoga to Will o'
-the Wisp and Super Challenge FreeCell.
+You can play Klondike in Draw 1 or Draw 3, with standard or Vegas scoring.
+Spider comes in 1, 2 or 4 suits.
 
-It's part of [Fuzzley Games](/projects/fuzzley-games/) now, which gives each
-game a page of its own.
+I built one engine for all 41 games, with Phaser 4 for the table and Angular 22
+for everything around it. It's part of [Fuzzley Games](/projects/fuzzley-games/)
+now, which gives each game a page of its own.
 
 ## The games
 
