@@ -1,0 +1,16 @@
+Part A, as dry-run on r3's main (c661ea8):
+  fuzzley-games.webp: 1600x1000, 389216 bytes
+  minesweeper.webp: 1200x900, 11068 bytes
+  pong.webp: 1024x768, 1446 bytes
+  solitaire-freecell.webp: 1200x675, 191594 bytes
+  solitaire-klondike.webp: 1600x1000, 244362 bytes
+  solitaire-pyramid.webp: 1200x675, 178428 bytes
+  solitaire-spider.webp: 1200x675, 139062 bytes
+  spider.webp: 1600x996, 453004 bytes
+ 14 files changed, 3 insertions(+), 3 deletions(-)
+Part A adds 1.54 MiB packed
+Part B strips 8 more image blobs
+fsck: ok
+commits on main: 239
+after A and B, size-pack: 2.00 MiB
+of which images at main's tip: 1.69 MiB at full size

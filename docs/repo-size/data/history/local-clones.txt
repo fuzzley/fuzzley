@@ -1,0 +1,13 @@
+# Local clones of https://github.com/fuzzley/fuzzley.git under /home/dev/Projects/personal, 2026-11-22T03:17:49Z
+
+## /home/dev/Projects/personal/fuzzley (git dir /home/dev/Projects/personal/fuzzley/.git)
+branch: main
+commits on no remote branch: 0
+stash entries: 0
+changed or untracked paths: 0
+
+## /home/dev/Projects/personal/fuzzley-repo-size (git dir /home/dev/Projects/personal/fuzzley/.git)
+branch: repo-size-plan
+commits on no remote branch: 0
+stash entries: 0
+changed or untracked paths: 1

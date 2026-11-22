@@ -1,0 +1,55 @@
+blob	on disk KiB	paths
+a2af2e83	648.9	frontend/public/images/spider_solitaire.PNG, frontend/src/assets/projects/spider.png, images/spider_solitaire.PNG
+72f9ab2b	431.6	frontend/public/images/solitaire_500_350.png
+849aa00f	106.4	frontend/public/images/spider_solitaire_500_350.png, images/spider_solitaire_500_350.png
+ebf557ae	83.6	frontend/public/images/og-home.jpg
+a7010f05	79.4	frontend/src/assets/projects/solitaire-pyramid.webp
+97396925	70.3	frontend/src/assets/projects/solitaire-freecell.webp
+e7095a6e	70.0	frontend/public/images/og-home.jpg
+e6942a6e	68.3	frontend/public/project/solitaire/docs/screenshots/freecell/preview.webp, frontend/public/projects/solitaire/play/docs/screenshots/freecell/preview.webp, frontend/src/assets/projects/solitaire-freecell.webp
+37231988	65.7	frontend/public/project/solitaire/docs/screenshots/pyramid/preview.webp, frontend/public/projects/solitaire/play/docs/screenshots/pyramid/preview.webp, frontend/src/assets/projects/solitaire-pyramid.webp
+f64557ad	64.5	frontend/public/project/solitaire/docs/screenshots/spider/preview.webp, frontend/public/projects/solitaire/play/docs/screenshots/spider/preview.webp, frontend/src/assets/projects/solitaire-spider.webp
+030074f7	58.6	frontend/public/images/usc_map.png, images/usc_map.png
+e6dc5cb7	58.3	frontend/src/assets/projects/solitaire-spider.webp
+a9358205	57.8	frontend/src/assets/projects/fuzzley-games.webp
+7ca6cb29	57.5	frontend/src/assets/projects/solitaire-klondike.webp
+089c541f	44.9	frontend/public/project/solitaire/docs/screenshots/klondike/preview.webp, frontend/public/projects/solitaire/play/docs/screenshots/klondike/preview.webp, frontend/src/assets/projects/solitaire-klondike.webp
+5e61f505	42.4	frontend/public/images/solitaire_500_350.webp
+3d9d2a09	35.8	frontend/public/images/spider_solitaire_250_250.png, images/spider_solitaire_250_250.png
+1f3f2869	34.2	frontend/public/images/usc_logo_2.jpg, images/usc_logo_2.jpg
+61ce06d7	28.6	frontend/public/images/SysEda.png, images/SysEda.png
+2000d8bb	24.6	frontend/public/images/minesweeper.PNG, frontend/src/assets/projects/minesweeper.png, images/minesweeper.PNG
+ad8aee32	22.2	frontend/public/images/design_it_logo.png, images/design_it_logo.png
+05b7a02b	22.0	frontend/public/images/path.PNG, frontend/src/assets/projects/path.png, images/path.PNG
+2d395a5e	21.6	frontend/public/images/spider_solitaire_500_350.webp
+7a682ec2	17.0	frontend/public/images/path_500_350.png, images/path_500_350.png
+b8ee5af8	16.9	frontend/public/images/minesweeper_500_350.png, images/minesweeper_500_350.png
+3a859be8	16.2	frontend/public/images/SysEda.webp
+d5d4c6c3	12.6	frontend/public/images/andrey.jpg, images/andrey.jpg
+1e236129	12.0	frontend/public/images/github_logo.png, images/github_logo.png
+a586a236	11.9	frontend/public/images/usc_logo_2.webp
+c6fff438	11.4	frontend/public/images/minesweeper_500_350.webp
+5ddaf5ca	11.0	frontend/public/images/path_250_250.png, images/path_250_250.png
+d86300f4	10.3	frontend/public/images/g_logo.png
+c4f47ac8	8.2	frontend/public/images/swampfox_logo.png, images/swampfox_logo.png
+5f7f7e3e	8.1	frontend/public/images/google_logo.png, images/google_logo.png
+232f0468	7.8	frontend/public/images/google_plus_logo.png, images/google_plus_logo.png
+a9cf2b80	6.7	frontend/public/images/design_it_logo.webp
+8f2d100b	6.5	frontend/public/images/path_500_350.webp
+778fd558	6.0	frontend/public/images/swampfox_logo.webp
+10579550	4.9	frontend/public/images/google_logo.webp
+899036aa	4.8	frontend/public/images/usc.jpg, images/usc.jpg
+7c9ab179	4.8	frontend/public/images/pong.PNG, frontend/src/assets/projects/pong.png, images/pong.PNG
+deacbfb2	3.2	branding/favicon/icon-512.png, frontend/public/icon-512.png
+1a6daa48	3.1	frontend/public/images/linked_in_logo.png, images/linked_in_logo.png
+f6109766	1.9	frontend/public/images/pong_500_350.png, images/pong_500_350.png
+cfdf3043	1.8	frontend/public/images/g_logo.webp
+1daae6ad	1.6	images/google_logo.png
+193a4b79	1.4	frontend/public/images/github_logo.webp
+7ba3cfbd	1.3	branding/favicon/icon-192.png, frontend/public/icon-192.png
+10db4553	1.3	branding/favicon/apple-touch-icon.png, frontend/public/apple-touch-icon.png
+557e4998	1.2	favicon.ico, frontend/public/favicon.ico
+b8f32725	0.9	frontend/public/images/pong_500_350.webp
+a4a70da7	0.7	branding/favicon/favicon.ico, frontend/public/favicon.ico
+7af3724b	0.6	frontend/public/images/linked_in_logo.webp
+9b8b3b2d	0.2	branding/favicon/icon.svg, frontend/public/icon.svg

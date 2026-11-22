@@ -1,0 +1,47 @@
+# fuzzley/fuzzley, read 2026-11-22T03:03:07Z
+
+## The repository
+size (KB, GitHub's diskUsage): 166874
+visibility: public
+created: 2016-08-29T01:19:29Z
+default branch: main
+stars: 1
+watchers: 1
+forks: 0
+open issues and pull requests: 0
+has pages: false
+
+## Pull requests (all states)
+#3 MERGED by fuzzley, redirect-other-domains, merged 2026-10-25T23:14:47Z
+#2 MERGED by fuzzley, move-remaining-games, merged 2026-10-11T02:36:20Z
+#1 MERGED by fuzzley, games-from-releases, merged 2026-10-11T02:11:12Z
+
+## Issues
+open: 0
+closed: 0
+
+## Branch protection and rulesets
+rulesets: 0
+main's classic protection: {"message":"Branch not protected","documentation_url":"https://docs.github.com/rest/branches/branch-protection#get-branch-protection","status":"404"}gh: Branch not protected (HTTP 404)
+
+## Settings an integration needs
+Actions secrets: MAIN_GITHUB_IO_REPO_DEPLOY_PAT
+Actions variables: 
+webhooks: 0
+deploy keys: 0
+collaborators: fuzzley
+installed apps (the owner's, any repository): {"message":"You must authenticate with an access token authorized to a GitHub App in order to list installations","documentation_url":"https://docs.github.com/rest/apps/installations#list-app-installations-accessible-to-the-user-access-token","status":"403"}gh: You must authenticate with an access token authorized to a GitHub App in order to list installations (HTTP 403)
+
+## Releases, tags, deployments, environments
+releases: 0
+tags: 0
+deployments: 0
+environments: 0
+
+## Actions
+workflows: Verify and deploy (active), Update games (active)
+workflow runs: 338
+caches: 0
+
+## Dependabot alerts
+open: 0

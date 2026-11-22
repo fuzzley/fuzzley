@@ -1,0 +1,5 @@
+scenario	size-pack MiB	objects	branches only MiB	depth 1 MiB	filter-repo s	fsck	main tip differences	commits on main	pruned by default	message refs wrong
+baseline	154.7	2755	154.7	2.6	0.0	ok	0	238	0	0
+r1	6.3	1210	6.3	2.6	0.2	ok	0	238	94	0
+r2	5.1	1126	5.1	2.6	0.2	ok	0	238	94	0
+r3	2.8	1052	2.8	2.6	0.2	ok	0	238	95	0

@@ -1,0 +1,130 @@
+mode: write
+files read: 496
+tokens: 5194
+commits in old: 18
+ambiguous in old: 0
+resolve in other repository too: 0
+pruned (map gives 0000…): 0
+hash unchanged: 0
+rewritten at the same length: 18
+rewritten longer, as the same length was ambiguous: 0
+old token resolves to something else in the new repository: 0
+replacements: 27 in 4 files
+  24	/home/dev/Projects/personal/repo-size-fuzzley-2026-11-21/rewrite-dry-run-r3/repo/docs/worklog.md
+  1	/home/dev/Projects/personal/repo-size-fuzzley-2026-11-21/rewrite-dry-run-r3/memory/fuzzley-dependabot-resolution.md
+  1	/home/dev/Projects/personal/repo-size-fuzzley-2026-11-21/rewrite-dry-run-r3/memory/player-text-style-plan.md
+  1	/home/dev/Projects/personal/repo-size-fuzzley-2026-11-21/rewrite-dry-run-r3/fuzzley-games/docs/repo-size/research/history-rewrite.md
+
+== the copies afterwards
+changed lines (diff -r, - and + each): 50
+second pass: commits in old: 0
+second pass: rewritten at the same length: 0
+second pass: rewritten longer, as the same length was ambiguous: 0
+second pass: replacements: 0 in 0 files
+
+== references to the commits default pruning would drop
+0211887b 2026-10-04: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+02a491d2 2026-07-27: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+037f60c4 2026-10-04: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+0731dae9 2026-10-05: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+087c19a8 2026-10-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+0db1c8fa 2026-07-26: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+13930742 2026-07-26: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+13e06bc2 2026-08-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+183db379 2026-09-27: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+24cc59f2 2026-10-05: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+2e70b28d 2026-10-10: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+2f1fe469 2026-07-28: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+3485550b 2026-08-02: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+349c22aa 2026-10-04: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+352f82ac 2026-09-27: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+358b259c 2026-09-27: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+3931f5f3 2026-09-27: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+3b225391 2026-07-26: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+3ef4540f 2026-08-04: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+415d7cec 2026-08-01: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+41644722 2026-09-27: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+422ef830 2026-10-05: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+43baf61a 2026-09-26: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+45d5ee60 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+4af3f2e4 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+509f6b18 2026-10-04: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+53db66ba 2026-10-04: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+5583aeac 2026-08-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+56f58472 2026-09-27: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+57a8a9d1 2026-10-05: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+5905dd53 2026-08-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+5a865892 2026-08-01: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+5b8cf494 2026-09-27: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+5f5bf444 2026-10-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+6317458c 2026-10-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+6bd1af79 2026-08-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+6ddb65bd 2026-07-26: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+7175b0ca 2026-07-26: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+74452e83 2026-08-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+7a01c1ca 2026-07-26: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+7c35415e 2026-10-05: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+7f8b84e6 2026-09-26: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+81017d3f 2026-10-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+8109476f 2026-08-02: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+8562e210 2026-10-10: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+8609229a 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+864114fb 2026-08-02: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+87101bab 2026-09-15: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+87f3dbe4 2026-10-10: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+9022c568 2026-09-26: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+92b04300 2026-08-02: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+98a6e1c4 2026-10-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+9901521c 2026-10-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+a2f77a53 2026-10-10: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+a3979412 2026-10-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+a4734ca7 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+a7dfc53d 2026-10-04: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+a83b49f9 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+ab82e304 2026-08-01: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+aca01146 2026-09-26: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+b0b2b3af 2026-09-26: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+b12491ad 2026-08-02: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+b6c40f9d 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+b6ea78aa 2026-07-28: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+b88d94f3 2026-10-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+b8d6fa17 2026-09-27: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+ba3792f5 2026-10-04: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+bd108a5e 2026-10-10: 3 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+bd7d4035 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+bdc958b1 2026-08-02: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+bf1d2b99 2026-08-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+c24fe170 2026-10-04: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+c27d720d 2026-10-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+c3e03346 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+c621e4ac 2026-09-27: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+c97a5258 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+cca57f8e 2026-09-27: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+cdb46b78 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+cf092ae9 2026-10-10: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+d4ad3d62 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+d885953c 2026-07-28: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+d88a78b6 2026-08-02: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+d9e8d133 2026-10-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+e4872f02 2026-08-02: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+e6b5abe5 2026-10-04: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+e7632b7a 2026-07-19: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+ec974524 2026-09-27: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+ecc31ceb 2026-10-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+f0eed66b 2026-10-10: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+f113e3dc 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+f275cbb3 2026-08-05: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+f5018e29 2026-09-26: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+f7ed5870 2026-10-03: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+f92cb411 2026-08-05: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+fb3e46c4 2026-07-12: 0 references in the copies of docs/, fuzzley-games' docs/ and the memory notes
+
+== this worktree's docs/repo-size/, at 2026-11-22T03:16:57Z, a dry run
+files read: 18
+excluded: /home/dev/Projects/personal/fuzzley-repo-size/docs/repo-size/data/history
+excluded: /home/dev/Projects/personal/fuzzley-repo-size/docs/repo-size/research/history-rewrite.md
+commits in old: 16
+ambiguous in old: 0
+rewritten at the same length: 16
+rewritten longer, as the same length was ambiguous: 0
+replacements: 16 in 2 files

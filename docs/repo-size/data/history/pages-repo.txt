@@ -1,0 +1,30 @@
+# fuzzley/fuzzley.github.io, read 2026-11-22T03:19:14Z
+
+GitHub's size (KB): 140846
+stars: 0, forks: 0, Pages: true
+refs: refs/heads/main 
+pull requests: 0
+rulesets: 0
+environments: github-pages
+workflow runs: 138
+commits: 117, signed: 0
+first: 9cb2e06 2024-10-20 Clone the original fuzzley site.
+last: d1f81f2 2026-10-26 docs: say the moved games' old addresses answer 404
+main's tip: .github/workflows/pages.yml README.md 
+
+## Blobs on disk, by the first path each was stored under
+  137.47 MiB  all
+  115.36 MiB  project/solitaire/
+   16.11 MiB  project/path/
+    1.61 MiB  project/spider/
+    1.13 MiB  external/materialize/
+    0.99 MiB  project/pong/
+    0.66 MiB  project/minesweeper/
+    0.63 MiB  images/spider_solitaire.PNG
+
+## The dry run: --path .github/ --path README.md, --prune-empty never
+size-pack before (repacked as after): 126.41 MiB
+size-pack after: 23.69 KiB
+commits after: 117
+main's tree: the same
+fsck: ok

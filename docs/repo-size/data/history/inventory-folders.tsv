@@ -1,0 +1,17 @@
+folder	kind	blobs	on disk MiB
+frontend/public/project/solitaire/	mixed	625	129.02
+frontend/public/project/path/	game builds	67	16.09
+frontend/src/assets/	site images	13	2.60
+frontend/public/images/	site images	40	1.88
+frontend/public/project/spider/	game builds	23	1.61
+external/materialize/	vendored libraries	66	1.13
+frontend/public/project/pong/	game builds	24	0.99
+frontend/public/project/minesweeper/	game builds	44	0.66
+frontend/public/projects/solitaire/	game builds	2	0.17
+frontend/yarn.lock	text and code	10	0.10
+branding/favicon/	mixed	15	0.03
+external/jQuery/	vendored libraries	1	0.02
+docs/worklog.md	text and code	16	0.02
+frontend/src/pages/	text and code	35	0.01
+docs/game-builds.md	text and code	7	0.01
+external/hasher/	vendored libraries	4	0.01

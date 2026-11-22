@@ -1,0 +1,32 @@
+scenario: r3
+tree entries, refs/heads/main: 86 before, 86 after
+tree entries removed on purpose, refs/heads/main: 0
+tree differences, refs/heads/main: 0
+tip, refs/heads/main: d13a053bd3ad32e3856e0e214a4cb30a44a1e1a7 -> c661ea86dad5de0e6aad1df17708e5c53d06c26a; commit-map gives c661ea86dad5de0e6aad1df17708e5c53d06c26a
+commits, refs/heads/main: 238 before, 238 after
+commits, --all: 238 before, 238 after
+commits whose hash changed: 238 of 238
+commits whose hash stayed: 0
+commits default pruning drops: 95, 95 of them on main
+  0211887 2026-10-04 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@3edd791fa9e8a27838e
+  02a491d 2026-07-27 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@9b1478a1076ed8e854a
+  037f60c 2026-10-04 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@6370d9976deee1be021
+  0731dae 2026-10-05 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@9ec136fd904077661b2
+  087c19a 2026-10-03 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@0a0c719c31608007133
+  0db1c8f 2026-07-26 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@6020f5132292ae5f33b
+  1393074 2026-07-26 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@bb06c09d103f0ca3a31
+  13e06bc 2026-08-03 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@5a4f33660ef0d30e5d2
+  183db37 2026-09-27 chore(deploy): sync PATH production build from fuzzley/PATH@9e95ed3df6592cfde05d4f85cf60a64
+  24cc59f 2026-10-05 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@31c1082c3ecf3df2f7a
+  2e70b28 2026-10-10 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@5b87934f40b2f7573d7
+  2f1fe46 2026-07-28 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@a7b0ce0c66d5cc65565
+  3485550 2026-08-02 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@7b5828eb7251c84adcf
+  349c22a 2026-10-04 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@0dc7f0b324d036a7bc7
+  352f82a 2026-09-27 chore(deploy): sync fSolitaire production build from fuzzley/fSolitaire@c4649bb5b52cc230269
+  ... and 80 more
+message hash references: 2, 2 of them in main's commits
+message hash references rewritten: 2
+message hash references to commits that kept their hash: 0
+message hash references wrong: 0
+  2a47525169 names 8119ace -> 372984918f names 37ac743
+  a5631ec247 names 4b38a1a -> fd3ea3e464 names 5eda8ff

@@ -1,0 +1,41 @@
+image	size today	form	size	KiB	of today	mean error	worst width	worst error
+fuzzley-games.webp	1920x1200	today	1920x1200	367.5	100%	2.07	320	2.94
+fuzzley-games.webp	1920x1200	lossless WebP	1280x800	261.9	71%	2.11	320	2.99
+fuzzley-games.webp	1920x1200	lossless PNG	1280x800	352.2	96%	1.83	320	2.58
+fuzzley-games.webp	1920x1200	q90 WebP	1920x1200	114.1	31%	2.13	320	2.97
+minesweeper.png	1200x900	today	1200x900	71.2	100%	1.28	320	1.88
+minesweeper.png	1200x900	lossless WebP	1200x900	10.8	15%	1.55	320	2.30
+minesweeper.png	1200x900	lossless PNG	1200x900	35.2	50%	1.28	320	1.88
+minesweeper.png	1200x900	q90 WebP	1200x900	37.1	52%	1.86	320	2.32
+pong.png	1024x768	today	1024x768	5.4	100%	0.36	320	0.40
+pong.png	1024x768	lossless WebP	1024x768	1.4	26%	0.38	320	0.45
+pong.png	1024x768	lossless PNG	1024x768	5.7	106%	0.36	320	0.40
+pong.png	1024x768	q90 WebP	1024x768	2.8	52%	0.41	320	0.46
+solitaire-freecell.webp	2880x1620	today	2880x1620	431.5	100%	2.97	400	3.71
+solitaire-freecell.webp	2880x1620	lossless WebP	800x450	112.6	26%	3.20	400	3.91
+solitaire-freecell.webp	2880x1620	lossless PNG	800x450	168.0	39%	2.62	400	3.17
+solitaire-freecell.webp	2880x1620	q90 WebP	2880x1620	272.2	63%	3.18	400	3.89
+solitaire-klondike.webp	2560x1600	today	2560x1600	307.4	100%	2.20	320	3.37
+solitaire-klondike.webp	2560x1600	lossless WebP	1280x800	165.5	54%	2.31	320	3.40
+solitaire-klondike.webp	2560x1600	lossless PNG	1280x800	254.4	83%	1.88	320	2.68
+solitaire-klondike.webp	2560x1600	q90 WebP	2560x1600	183.5	60%	2.44	320	3.52
+solitaire-pyramid.webp	2880x1620	today	2880x1620	424.9	100%	2.36	400	2.87
+solitaire-pyramid.webp	2880x1620	lossless WebP	800x450	102.1	24%	2.55	400	2.99
+solitaire-pyramid.webp	2880x1620	lossless PNG	800x450	153.3	36%	2.15	400	2.57
+solitaire-pyramid.webp	2880x1620	q90 WebP	2880x1620	255.6	60%	2.65	400	3.09
+solitaire-spider.webp	2880x1620	today	2880x1620	241.5	100%	2.43	400	2.98
+solitaire-spider.webp	2880x1620	lossless WebP	800x450	81.8	34%	2.59	400	3.20
+solitaire-spider.webp	2880x1620	lossless PNG	800x450	129.1	53%	2.02	400	2.32
+solitaire-spider.webp	2880x1620	q90 WebP	2880x1620	171.9	71%	2.63	400	3.14
+spider.png	1684x1048	today	1684x1048	515.1	100%	2.04	320	2.49
+spider.png	1684x1048	lossless WebP	1280x797	309.6	60%	2.54	320	3.01
+spider.png	1684x1048	lossless PNG	1280x797	450.4	87%	2.23	640	3.16
+spider.png	1684x1048	q90 WebP	1684x1048	133.7	26%	2.85	320	3.38
+
+the 8 screenshots as	KiB	of today	mean error, every width	mean error, the widest width
+today	2364.5	100%	1.96	1.53
+lossless WebP	1045.7	44%	2.15	1.36
+lossless PNG	1548.4	65%	1.80	1.36
+q90 WebP	1171.0	50%	2.27	1.88
+
+sharp 0.35.5, libvips 8.18.7, libwebp 1.6.0

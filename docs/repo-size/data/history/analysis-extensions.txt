@@ -1,0 +1,39 @@
+=== All extensions by reverse size ===
+Format: unpacked size, packed size, date deleted, extension name
+   182409808  175769158 <present>  .png
+    48662830   29795858 2026-10-10 .pdf
+    13249770   13236733 <present>  .webp
+    68977592    6776756 <present>  .js
+     2690319    2327832 <present>  .jpg
+     7086054    2219434 <present>  .svg
+     1524804    1434234 2026-10-10 .PNG
+     4124090    1154828 2026-10-10 .map
+     1051580    1039564 2026-10-10 .woff
+     2040892     904191 2026-10-10 .ttf
+      579947     579006 2026-10-10 .eot
+      530736     530796 2026-10-10 .woff2
+     4409717     452503 <present>  .css
+      481296     388690 2026-10-10 .otf
+      356026     334922 2026-10-10 .docx
+     1685884     182675 <present>  .lock
+       98640      74358 2026-10-10 .wav
+      274618      73536 2026-10-10 .scss
+      616786      65827 <present>  .md
+      914618      40820 2026-10-10 .html
+      263996      38436 <present>  .astro
+       24222      19035 2026-10-10 .ogg
+      102952      18964 <present>  .mjs
+       18608       9794 <present>  .ico
+       11520       9378 2026-10-10 .mp3
+       22317       8535 <present>  .py
+       73886       8146 <present>  .yml
+       27412       6502 <present>  .ts
+       15073       4359 <present>  <no extension>
+       19693       4315 <present>  .json
+       27715       4225 <present>  .template
+       16001       2334 <present>  .yaml
+        2977        575 2026-10-10 .cjs
+         613        384 <present>  .sh
+         890        382 <present>  .webmanifest
+         200        190 2026-10-10 .docx#
+          72         78 <present>  .txt

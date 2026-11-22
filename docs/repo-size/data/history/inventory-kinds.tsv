@@ -1,0 +1,8 @@
+kind	where	blobs	raw MiB	on disk MiB	share of blobs on disk
+game builds	old	783	222.53	148.30	96.0%
+site images	at main's tip	15	2.44	2.41	1.6%
+site images	old	54	2.44	2.34	1.5%
+vendored libraries	old	71	2.14	1.16	0.8%
+text and code	at main's tip	65	0.42	0.13	0.1%
+text and code	old	266	3.01	0.10	0.1%
+all		1254	232.99	154.44	100%

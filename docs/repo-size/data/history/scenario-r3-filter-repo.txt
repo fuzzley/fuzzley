@@ -1,0 +1,29 @@
+Parsed 238 commits
+New history written in 0.08 seconds; now repacking/cleaning...
+You rewrote 238 (of 238) commits.
+
+NOTE: First Changed Commit(s) is/are:
+  7b3227d28852edca59176377229fa863addf250c
+NOTE: LFS object orphaning not checked (LFS not in use)
+
+Repacking your repo and cleaning out old unneeded objects
+Completely finished after 0.19 seconds.
+
+NEXT STEPS FOR YOUR SENSITIVE DATA REMOVAL:
+  * If you are doing your rewrite in multiple steps, ignore these next steps
+    until you have completed all your invocations of git-filter-repo.
+  * See the "Sensitive Data Removal" subsection of the "DISCUSSION" section
+    of the manual for more details about any of the steps below.
+  * Inspect this repository and verify that the sensitive data is indeed
+    completely removed from all commits.
+  * Force push the rewritten history to the server:
+      git push --all --tags origin
+  * Contact the server admins for additional steps they need to take; the
+    First Changed Commit(s) may come in handy here.
+  * Have other colleagues with a clone either discard their clone and reclone
+    OR follow the detailed steps in the manual to repeatedly rebase and
+    purge the sensitive data from their copy.  Again, the First Changed
+    Commit(s) may come in handy.
+  * See the "Prevent repeats and avoid future sensitive data spills" section
+    of the manual.
+

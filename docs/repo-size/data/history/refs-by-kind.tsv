@@ -1,0 +1,4 @@
+kind	count	in a normal clone
+branch-main	1	yes, as refs/remotes/origin/*
+pull-head	3	no: only a mirror or an explicit refspec fetches refs/pull/*
+total	4	

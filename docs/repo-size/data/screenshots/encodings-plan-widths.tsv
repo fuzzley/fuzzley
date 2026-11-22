@@ -1,0 +1,249 @@
+image	form	width	change before AVIF	error
+fuzzley-games.webp	today	320	1.58	2.94
+fuzzley-games.webp	today	400	1.28	2.62
+fuzzley-games.webp	today	480	1.19	2.32
+fuzzley-games.webp	today	640	0.94	2.08
+fuzzley-games.webp	today	720	0.89	2.01
+fuzzley-games.webp	today	800	0.84	1.90
+fuzzley-games.webp	today	960	0.64	1.68
+fuzzley-games.webp	today	1200	0.64	1.59
+fuzzley-games.webp	today	1280	0.61	1.52
+fuzzley-games.webp	today	1600	0.55	1.40
+fuzzley-games.webp	lossless WebP	320	1.59	2.95
+fuzzley-games.webp	lossless WebP	400	1.35	2.65
+fuzzley-games.webp	lossless WebP	480	1.13	2.31
+fuzzley-games.webp	lossless WebP	640	0.98	2.13
+fuzzley-games.webp	lossless WebP	720	0.89	2.04
+fuzzley-games.webp	lossless WebP	800	0.76	1.83
+fuzzley-games.webp	lossless WebP	960	0.74	1.79
+fuzzley-games.webp	lossless WebP	1200	0.67	1.63
+fuzzley-games.webp	lossless WebP	1280	0.66	1.62
+fuzzley-games.webp	lossless WebP	1600	0.00	1.19
+fuzzley-games.webp	lossless PNG	320	0.39	2.61
+fuzzley-games.webp	lossless PNG	400	0.26	2.44
+fuzzley-games.webp	lossless PNG	480	0.32	1.99
+fuzzley-games.webp	lossless PNG	640	0.07	1.87
+fuzzley-games.webp	lossless PNG	720	0.08	1.75
+fuzzley-games.webp	lossless PNG	800	0.08	1.62
+fuzzley-games.webp	lossless PNG	960	0.10	1.53
+fuzzley-games.webp	lossless PNG	1200	0.13	1.39
+fuzzley-games.webp	lossless PNG	1280	0.18	1.35
+fuzzley-games.webp	lossless PNG	1600	0.00	1.19
+fuzzley-games.webp	q90 WebP	320	1.96	2.97
+fuzzley-games.webp	q90 WebP	400	1.70	2.68
+fuzzley-games.webp	q90 WebP	480	1.62	2.37
+fuzzley-games.webp	q90 WebP	640	1.43	2.14
+fuzzley-games.webp	q90 WebP	720	1.40	2.05
+fuzzley-games.webp	q90 WebP	800	1.37	1.94
+fuzzley-games.webp	q90 WebP	960	1.19	1.71
+fuzzley-games.webp	q90 WebP	1200	1.27	1.67
+fuzzley-games.webp	q90 WebP	1280	1.27	1.62
+fuzzley-games.webp	q90 WebP	1600	1.28	1.53
+minesweeper.png	today	320	0.00	1.88
+minesweeper.png	today	400	0.00	1.68
+minesweeper.png	today	480	0.00	1.59
+minesweeper.png	today	640	0.00	1.41
+minesweeper.png	today	720	0.00	1.23
+minesweeper.png	today	800	0.00	1.16
+minesweeper.png	today	960	0.00	1.05
+minesweeper.png	today	1200	0.00	0.76
+minesweeper.png	today	1280	0.00	0.76
+minesweeper.png	today	1600	0.00	0.76
+minesweeper.png	lossless WebP	320	1.28	2.30
+minesweeper.png	lossless WebP	400	1.32	2.14
+minesweeper.png	lossless WebP	480	1.06	1.95
+minesweeper.png	lossless WebP	640	0.81	1.70
+minesweeper.png	lossless WebP	720	0.73	1.54
+minesweeper.png	lossless WebP	800	0.79	1.50
+minesweeper.png	lossless WebP	960	0.67	1.32
+minesweeper.png	lossless WebP	1200	0.00	0.76
+minesweeper.png	lossless WebP	1280	0.00	0.76
+minesweeper.png	lossless WebP	1600	0.00	0.76
+minesweeper.png	lossless PNG	320	0.00	1.88
+minesweeper.png	lossless PNG	400	0.00	1.68
+minesweeper.png	lossless PNG	480	0.00	1.59
+minesweeper.png	lossless PNG	640	0.00	1.41
+minesweeper.png	lossless PNG	720	0.00	1.23
+minesweeper.png	lossless PNG	800	0.00	1.16
+minesweeper.png	lossless PNG	960	0.00	1.05
+minesweeper.png	lossless PNG	1200	0.00	0.76
+minesweeper.png	lossless PNG	1280	0.00	0.76
+minesweeper.png	lossless PNG	1600	0.00	0.76
+minesweeper.png	q90 WebP	320	1.72	2.32
+minesweeper.png	q90 WebP	400	1.77	2.16
+minesweeper.png	q90 WebP	480	1.59	2.06
+minesweeper.png	q90 WebP	640	1.52	1.85
+minesweeper.png	q90 WebP	720	1.51	1.75
+minesweeper.png	q90 WebP	800	1.53	1.69
+minesweeper.png	q90 WebP	960	1.61	1.74
+minesweeper.png	q90 WebP	1200	1.52	1.57
+minesweeper.png	q90 WebP	1280	1.52	1.57
+minesweeper.png	q90 WebP	1600	1.52	1.57
+pong.png	today	320	0.00	0.40
+pong.png	today	400	0.00	0.37
+pong.png	today	480	0.00	0.37
+pong.png	today	640	0.00	0.36
+pong.png	today	720	0.00	0.36
+pong.png	today	800	0.00	0.35
+pong.png	today	960	0.00	0.35
+pong.png	today	1200	0.00	0.35
+pong.png	today	1280	0.00	0.35
+pong.png	today	1600	0.00	0.35
+pong.png	lossless WebP	320	0.09	0.45
+pong.png	lossless WebP	400	0.06	0.40
+pong.png	lossless WebP	480	0.05	0.39
+pong.png	lossless WebP	640	0.04	0.39
+pong.png	lossless WebP	720	0.03	0.37
+pong.png	lossless WebP	800	0.04	0.38
+pong.png	lossless WebP	960	0.03	0.38
+pong.png	lossless WebP	1200	0.00	0.35
+pong.png	lossless WebP	1280	0.00	0.35
+pong.png	lossless WebP	1600	0.00	0.35
+pong.png	lossless PNG	320	0.00	0.40
+pong.png	lossless PNG	400	0.00	0.37
+pong.png	lossless PNG	480	0.00	0.37
+pong.png	lossless PNG	640	0.00	0.36
+pong.png	lossless PNG	720	0.00	0.36
+pong.png	lossless PNG	800	0.00	0.35
+pong.png	lossless PNG	960	0.00	0.35
+pong.png	lossless PNG	1200	0.00	0.35
+pong.png	lossless PNG	1280	0.00	0.35
+pong.png	lossless PNG	1600	0.00	0.35
+pong.png	q90 WebP	320	0.43	0.46
+pong.png	q90 WebP	400	0.40	0.41
+pong.png	q90 WebP	480	0.40	0.42
+pong.png	q90 WebP	640	0.40	0.41
+pong.png	q90 WebP	720	0.40	0.40
+pong.png	q90 WebP	800	0.41	0.42
+pong.png	q90 WebP	960	0.40	0.40
+pong.png	q90 WebP	1200	0.39	0.40
+pong.png	q90 WebP	1280	0.39	0.40
+pong.png	q90 WebP	1600	0.39	0.40
+solitaire-freecell.webp	today	400	2.31	3.71
+solitaire-freecell.webp	today	640	1.49	2.76
+solitaire-freecell.webp	today	800	1.23	2.43
+solitaire-freecell.webp	today	1200	0.96	1.90
+solitaire-freecell.webp	lossless WebP	400	2.49	3.87
+solitaire-freecell.webp	lossless WebP	640	1.61	2.96
+solitaire-freecell.webp	lossless WebP	800	1.58	2.77
+solitaire-freecell.webp	lossless WebP	1200	0.00	1.58
+solitaire-freecell.webp	lossless PNG	400	0.51	3.22
+solitaire-freecell.webp	lossless PNG	640	0.46	2.44
+solitaire-freecell.webp	lossless PNG	800	0.38	2.13
+solitaire-freecell.webp	lossless PNG	1200	0.00	1.58
+solitaire-freecell.webp	q90 WebP	400	2.48	3.89
+solitaire-freecell.webp	q90 WebP	640	1.71	2.97
+solitaire-freecell.webp	q90 WebP	800	1.51	2.67
+solitaire-freecell.webp	q90 WebP	1200	1.33	2.23
+solitaire-klondike.webp	today	320	2.11	3.37
+solitaire-klondike.webp	today	400	1.68	2.99
+solitaire-klondike.webp	today	480	1.34	2.58
+solitaire-klondike.webp	today	640	1.11	2.13
+solitaire-klondike.webp	today	720	0.94	2.04
+solitaire-klondike.webp	today	800	0.94	1.97
+solitaire-klondike.webp	today	960	0.79	1.78
+solitaire-klondike.webp	today	1200	0.69	1.57
+solitaire-klondike.webp	today	1280	0.61	1.41
+solitaire-klondike.webp	today	1600	0.62	1.37
+solitaire-klondike.webp	lossless WebP	320	2.13	3.37
+solitaire-klondike.webp	lossless WebP	400	1.79	3.04
+solitaire-klondike.webp	lossless WebP	480	1.34	2.58
+solitaire-klondike.webp	lossless WebP	640	1.13	2.16
+solitaire-klondike.webp	lossless WebP	720	1.04	2.15
+solitaire-klondike.webp	lossless WebP	800	0.98	1.97
+solitaire-klondike.webp	lossless WebP	960	0.93	1.91
+solitaire-klondike.webp	lossless WebP	1200	0.87	1.72
+solitaire-klondike.webp	lossless WebP	1280	0.91	1.75
+solitaire-klondike.webp	lossless WebP	1600	0.00	1.07
+solitaire-klondike.webp	lossless PNG	320	0.46	2.77
+solitaire-klondike.webp	lossless PNG	400	0.45	2.48
+solitaire-klondike.webp	lossless PNG	480	0.25	2.19
+solitaire-klondike.webp	lossless PNG	640	0.31	1.86
+solitaire-klondike.webp	lossless PNG	720	0.13	1.77
+solitaire-klondike.webp	lossless PNG	800	0.13	1.64
+solitaire-klondike.webp	lossless PNG	960	0.14	1.53
+solitaire-klondike.webp	lossless PNG	1200	0.19	1.33
+solitaire-klondike.webp	lossless PNG	1280	0.25	1.30
+solitaire-klondike.webp	lossless PNG	1600	0.00	1.07
+solitaire-klondike.webp	q90 WebP	320	2.33	3.52
+solitaire-klondike.webp	q90 WebP	400	1.91	3.14
+solitaire-klondike.webp	q90 WebP	480	1.59	2.74
+solitaire-klondike.webp	q90 WebP	640	1.40	2.36
+solitaire-klondike.webp	q90 WebP	720	1.27	2.29
+solitaire-klondike.webp	q90 WebP	800	1.28	2.26
+solitaire-klondike.webp	q90 WebP	960	1.17	2.06
+solitaire-klondike.webp	q90 WebP	1200	1.13	1.88
+solitaire-klondike.webp	q90 WebP	1280	0.98	1.70
+solitaire-klondike.webp	q90 WebP	1600	1.16	1.77
+solitaire-pyramid.webp	today	400	1.63	2.87
+solitaire-pyramid.webp	today	640	1.20	2.22
+solitaire-pyramid.webp	today	800	0.97	1.99
+solitaire-pyramid.webp	today	1200	0.75	1.61
+solitaire-pyramid.webp	lossless WebP	400	1.75	2.98
+solitaire-pyramid.webp	lossless WebP	640	1.20	2.43
+solitaire-pyramid.webp	lossless WebP	800	1.17	2.30
+solitaire-pyramid.webp	lossless WebP	1200	0.00	1.36
+solitaire-pyramid.webp	lossless PNG	400	0.41	2.57
+solitaire-pyramid.webp	lossless PNG	640	0.39	2.03
+solitaire-pyramid.webp	lossless PNG	800	0.32	1.83
+solitaire-pyramid.webp	lossless PNG	1200	0.00	1.36
+solitaire-pyramid.webp	q90 WebP	400	1.84	3.09
+solitaire-pyramid.webp	q90 WebP	640	1.46	2.54
+solitaire-pyramid.webp	q90 WebP	800	1.27	2.32
+solitaire-pyramid.webp	q90 WebP	1200	1.14	1.99
+solitaire-spider.webp	today	400	1.90	2.98
+solitaire-spider.webp	today	640	1.24	2.30
+solitaire-spider.webp	today	800	1.01	2.02
+solitaire-spider.webp	today	1200	0.69	1.53
+solitaire-spider.webp	lossless WebP	400	2.02	3.10
+solitaire-spider.webp	lossless WebP	640	1.30	2.47
+solitaire-spider.webp	lossless WebP	800	1.22	2.27
+solitaire-spider.webp	lossless WebP	1200	0.00	1.31
+solitaire-spider.webp	lossless PNG	400	0.40	2.32
+solitaire-spider.webp	lossless PNG	640	0.37	2.00
+solitaire-spider.webp	lossless PNG	800	0.28	1.78
+solitaire-spider.webp	lossless PNG	1200	0.00	1.31
+solitaire-spider.webp	q90 WebP	400	2.11	3.14
+solitaire-spider.webp	q90 WebP	640	1.52	2.54
+solitaire-spider.webp	q90 WebP	800	1.31	2.23
+solitaire-spider.webp	q90 WebP	1200	1.09	1.84
+spider.png	today	320	0.54	2.49
+spider.png	today	400	0.25	2.20
+spider.png	today	480	0.98	2.43
+spider.png	today	640	0.91	2.19
+spider.png	today	720	0.22	1.80
+spider.png	today	800	0.38	1.78
+spider.png	today	960	1.05	2.09
+spider.png	today	1200	0.44	1.56
+spider.png	today	1280	0.86	1.78
+spider.png	today	1600	0.48	1.44
+spider.png	lossless WebP	320	1.82	2.92
+spider.png	lossless WebP	400	1.81	2.79
+spider.png	lossless WebP	480	1.46	2.55
+spider.png	lossless WebP	640	1.39	2.34
+spider.png	lossless WebP	720	1.37	2.35
+spider.png	lossless WebP	800	1.36	2.17
+spider.png	lossless WebP	960	1.32	2.19
+spider.png	lossless WebP	1200	1.33	2.15
+spider.png	lossless WebP	1280	1.38	2.19
+spider.png	lossless WebP	1600	0.48	1.44
+spider.png	lossless PNG	320	0.77	2.51
+spider.png	lossless PNG	400	0.61	2.31
+spider.png	lossless PNG	480	1.04	2.45
+spider.png	lossless PNG	640	0.99	2.22
+spider.png	lossless PNG	720	0.35	1.83
+spider.png	lossless PNG	800	0.51	1.79
+spider.png	lossless PNG	960	1.45	2.36
+spider.png	lossless PNG	1200	0.62	1.62
+spider.png	lossless PNG	1280	1.04	1.87
+spider.png	lossless PNG	1600	0.48	1.44
+spider.png	q90 WebP	320	2.10	3.38
+spider.png	q90 WebP	400	2.01	3.12
+spider.png	q90 WebP	480	1.90	3.08
+spider.png	q90 WebP	640	1.79	2.82
+spider.png	q90 WebP	720	1.81	2.81
+spider.png	q90 WebP	800	1.78	2.72
+spider.png	q90 WebP	960	1.79	2.62
+spider.png	q90 WebP	1200	1.86	2.57
+spider.png	q90 WebP	1280	1.84	2.55
+spider.png	q90 WebP	1600	1.96	2.57
