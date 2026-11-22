@@ -21,6 +21,8 @@ yarn install     # install dev dependencies
 yarn dev         # fetch the games, then start the dev server on http://localhost:9000
 yarn build       # fetch the games, then produce a production build in dist/
 yarn games       # fetch the games pinned in games.json (--force to fetch them again)
+yarn screenshot  # add or retake a project screenshot, as WebP sized for the site:
+                 #   yarn screenshot <capture> <name> [--gallery]
 yarn preview     # serve the production build locally
 yarn stop        # stop a dev server started with `astro dev --background`
 yarn force-stop  # stop every dev or preview server running from this checkout

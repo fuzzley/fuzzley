@@ -12,6 +12,21 @@ when you are asked to.
 Run `yarn verify` from `frontend/` before you commit. It type-checks, lints,
 checks the formatting and builds.
 
+## Images
+
+- **Add or retake a screenshot with `yarn screenshot`.** Every version stays in
+  history for good, so retake one only for a change a visitor will see. The
+  content schema fails a screenshot that isn't WebP, is wider than the site
+  serves or is the wrong shape.
+- **A cover is 4:3 to 16:10, with what matters in its top three quarters,**
+  since a 16:9 tile cuts a 4:3 cover's bottom. A tile shows the project's
+  `tint` below its cover, so set the tint when `yarn screenshot` says to: to
+  the color along the cover's bottom edge.
+- **A gallery image is 16:9.** A Fuzzley Games one starts from fuzzley-games'
+  committed `preview.webp` rather than a new capture.
+- **A picture kept with a plan under `docs/` is WebP,** lossless only where it
+  must be exact. A "before" picture copies the committed screenshot.
+
 ## Writing for visitors
 
 These rules cover every word a visitor reads: summaries, taglines, the write-up
