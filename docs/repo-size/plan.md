@@ -1260,4 +1260,59 @@ commits' builds, and the Docker image built again.
 **Not pushed.** A push to `main` deploys at once, so it waits for the
 user's word (§7).
 
-B and C are not built yet.
+**B and C, 2026-11-22,** run on the user's word ("Do it now") straight after
+A went live, from the main checkout's scripts at A's tip, with
+`WORK=~/Projects/personal/repo-rewrite-fuzzley-2026-11-22`.
+
+- **Before.** No pull request was open and `main` was the only branch.
+  `04-local-clones.sh` found no commits that no remote held and no stash in
+  the two local copies. The plan's worktree was removed and its branch
+  deleted, as its work was on `main`. There was no separate rehearsal the
+  day before: B3 to B5 ran the same checks on the day's mirror before the
+  push.
+- **B1.** Update games was disabled. No run was in progress, the last Verify
+  and deploy had passed, and fuzzley.info served `main`'s tip, c11b0db, a
+  hash only the backup holds now.
+- **B2.** The backup was fetched to the same 4 refs as the fresh mirror
+  (`main` and 3 pull request refs), cut off from GitHub, and passed
+  `fsck --full`. `~/Projects/personal/fuzzley-pre-rewrite.bundle` (164 MiB)
+  records the complete history, and `fuzzley-backup.refs.txt` its refs.
+- **B3 and B4.** The r3 rewrite left `main`'s tree with 0 differences, kept
+  all 243 commits, and got 0 message references wrong. fsck ok. Its
+  `size-pack` is 2.1 MiB, against the 2.00 that `08-after-plan.sh`
+  projected before P0 and A were committed.
+- **B5.** 160 commits named across docs/, fuzzley-games' docs and the
+  memory notes, none ambiguous or lengthened, and a second pass found
+  nothing to replace.
+- **B6 and B7.** `main` went from c11b0db to f9ebd34, leased. Verify and
+  deploy passed, and fuzzley.info and the Pages copy served f9ebd34.
+- **B8.** 66 hashes in 6 files under docs/, as B5 counted for them, now name
+  the new commits, in e2ee899. `yarn verify` passed and the site deployed
+  it. In the memory notes, 12 hashes in 4 files were rewritten. None was
+  removed by hand: each says where work landed.
+- **B9.** Update games was enabled again, and its run by hand passed. Both
+  games were up to date, so it pushed nothing.
+- **B10.** GitHub's figure for fuzzley was 168,573 KB on the day, as before.
+- **B11.** `~/Projects/personal/fuzzley` was moved to `fuzzley-old` and
+  cloned again: `size-pack` 2.21 MiB, at e2ee899. The old copy held nothing
+  that wasn't pushed, and its local config only the remote. It is kept until
+  the user says otherwise. Any clone on the Windows side is the user's to
+  clone again.
+- **C1.** The Pages repository's backup was fetched to `main`, d1f81f2, cut
+  off from GitHub, and passed `fsck --full`. Its bundle is
+  `fuzzley.github.io-pre-rewrite.bundle` (138 MiB).
+- **C2 and C3.** The rewrite kept `main`'s tree the same and all 117
+  commits, fsck ok, and took a repack from 126.41 MiB to 23.69 KiB. `main`
+  went from d1f81f2 to 2b304d5, leased.
+- **C4.** The Pages deploy, run by hand, passed, and fuzzley.github.io
+  served e2ee899. The freeze ended there.
+- **C5.** GitHub's figure for fuzzley.github.io was 140,846 KB on the day,
+  as before. A fresh clone is 23.69 KiB. GitHub's figures for both are still
+  to be read on 2026-11-23 and 2026-11-29.
+- **B12.** The two backup repositories and their bundles are kept until at
+  least 2027-02-22. The dry runs' folder and `$WORK` were deleted. The day's
+  records and both commit maps, which a rollback after new commits needs,
+  are kept in `~/Projects/personal/fuzzley-rewrite-records-2026-11-22/`.
+
+Left: GitHub's figures on 2026-11-23 and 2026-11-29, then moving this folder
+to `docs/archive/repo-size/` (§11).
