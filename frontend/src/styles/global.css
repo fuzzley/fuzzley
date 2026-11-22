@@ -352,16 +352,22 @@
     background: var(--tint, var(--tile-strong));
   }
 
+  /* Clips its screenshot and carries the tint, so a view transition that
+     names it moves the tile's picture as the tile shows it, not the
+     screenshot's cut-off bottom. */
   .tile-media {
     position: absolute;
     inset: 0;
+    overflow: hidden;
+    background: inherit;
   }
 
+  /* A screenshot fills its tile's width from the top. A tile taller than it
+     shows the tint below, and one wider cuts its bottom: never its sides, so
+     each page's `sizes` is the width it is drawn at. */
   .tile-media img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: left top;
+    height: auto;
   }
 
   /* Makes a heading's link cover its whole tile. Other links in the tile sit

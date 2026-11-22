@@ -10,12 +10,12 @@
 // screenshot at each of VIEWPORTS, makes every image load at once, and
 // writes a row for each image to <out-file>. With --shots, it also writes a
 // PNG of each space into <dir>, at one pixel to a CSS pixel, for a person to
-// look at. With --sweep, it opens the home page and a project page at every
-// window width from 896 px, where the wide layout starts, to 1366, at one
-// device pixel to a CSS pixel, instead.
+// look at. With --sweep, it opens the home page, the Projects page and a
+// project page at every window width from 896 px, where the wide layout
+// starts, to 1366, at one device pixel to a CSS pixel, instead.
 //
 // It reads where the image is drawn from the page's own styles: with
-// `object-fit: cover` from the top left, as the site draws today, the
+// `object-fit: cover` from the top left, as the site drew before Part A, the
 // screenshot fills its space and loses its right or its bottom; otherwise it
 // is drawn at its own box, and what the space doesn't hold is cut.
 import { createServer } from "node:http";
@@ -78,7 +78,9 @@ const VIEWPORTS = values.sweep
       deviceScaleFactor: 1,
     }))
   : SCREENS;
-const PAGES = values.sweep ? ["/", "/projects/solitaire/"] : ALL_PAGES;
+const PAGES = values.sweep
+  ? ["/", "/projects/", "/projects/solitaire/"]
+  : ALL_PAGES;
 
 /** @type {Record<string, string>} */
 const TYPES = {

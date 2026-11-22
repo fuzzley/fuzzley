@@ -5,6 +5,7 @@ import GameTile from "../components/GameTile.astro";
 import GitHubLink from "../components/GitHubLink.astro";
 import me from "../assets/profile/me.jpg";
 import { education, links, profile } from "../data/profile";
+import { WIDE_COVER_WIDTHS } from "../lib/image-widths";
 import { linkName, newTab } from "../lib/links";
 import {
   coverTransition,
@@ -106,12 +107,14 @@ const jsonLd = {
       <Picture
         src={feature.data.cover}
         alt={feature.data.coverAlt}
-        pictureAttributes={{ class: "tile-media" }}
-        widths={[480, 720, 960, 1280]}
+        pictureAttributes={{
+          class: "tile-media",
+          style: coverTransition(feature),
+        }}
+        widths={WIDE_COVER_WIDTHS}
         sizes="(min-width: 56rem) 37rem, calc(100vw - 32px)"
         formats={["avif"]}
         fallbackFormat="webp"
-        style={coverTransition(feature)}
         loading="eager"
       />
       <div class="feature-card">

@@ -2,6 +2,7 @@
 import { Picture } from "astro:assets";
 import Base from "../../layouts/Base.astro";
 import GitHubLink from "../../components/GitHubLink.astro";
+import { CARD_COVER_WIDTHS } from "../../lib/image-widths";
 import { linkName, newTab } from "../../lib/links";
 import {
   coverTransition,
@@ -35,12 +36,14 @@ const projects = (await getProjects()).sort(
           <Picture
             src={project.data.cover}
             alt=""
-            pictureAttributes={{ class: "tile-media" }}
-            widths={[400, 640, 800]}
-            sizes="(min-width: 56rem) 24rem, calc(100vw - 32px)"
+            pictureAttributes={{
+              class: "tile-media",
+              style: coverTransition(project),
+            }}
+            widths={CARD_COVER_WIDTHS}
+            sizes="(min-width: 65rem) 24rem, (min-width: 44rem) calc(50vw - 21px), calc(100vw - 32px)"
             formats={["avif"]}
             fallbackFormat="webp"
-            style={coverTransition(project)}
           />
         </div>
         <p class="tile-label">{projectYears(project)}</p>
@@ -91,6 +94,9 @@ const projects = (await getProjects()).sort(
     font-size: var(--step-1);
   }
 
+  /* One column, two from about 43rem and three from about 64rem, or a little
+     wider beside a scrollbar. Each cover's `sizes` switches at 44rem and 65rem,
+     so between the two it asks for a copy too wide rather than too narrow. */
   .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));

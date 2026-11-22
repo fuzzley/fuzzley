@@ -4,6 +4,11 @@ import { getImage, Picture } from "astro:assets";
 import Base from "../../../layouts/Base.astro";
 import GameTile from "../../../components/GameTile.astro";
 import { profile } from "../../../data/profile";
+import {
+  GALLERY_WIDTHS,
+  PREVIEW_WIDTH,
+  WIDE_COVER_WIDTHS,
+} from "../../../lib/image-widths";
 import { linkName, newTab } from "../../../lib/links";
 import {
   coverTransition,
@@ -41,7 +46,7 @@ const kindLabel = {
 
 const preview = await getImage({
   src: data.cover,
-  width: 1200,
+  width: PREVIEW_WIDTH,
   format: "jpeg",
 });
 
@@ -113,12 +118,14 @@ const jsonLd =
       <Picture
         src={data.cover}
         alt={data.coverAlt}
-        pictureAttributes={{ class: "tile-media" }}
-        widths={[480, 720, 960, 1280]}
+        pictureAttributes={{
+          class: "tile-media",
+          style: coverTransition(project),
+        }}
+        widths={WIDE_COVER_WIDTHS}
         sizes="(min-width: 56rem) 37rem, calc(100vw - 32px)"
         formats={["avif"]}
         fallbackFormat="webp"
-        style={coverTransition(project)}
         loading="eager"
       />
     </figure>
@@ -158,7 +165,7 @@ const jsonLd =
               src={shot.image}
               alt={shot.alt}
               pictureAttributes={{ class: "tile-media" }}
-              widths={[400, 640, 800]}
+              widths={GALLERY_WIDTHS}
               sizes="(min-width: 56rem) 24rem, calc(100vw - 32px)"
               formats={["avif"]}
               fallbackFormat="webp"

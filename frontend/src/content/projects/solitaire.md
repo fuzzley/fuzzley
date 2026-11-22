@@ -11,7 +11,7 @@ stack: [TypeScript, Phaser 4, Angular 22, Vite, Sass]
 repo: https://github.com/fuzzley/fuzzley-games/tree/main/frontend/games/solitaire
 playUrl: https://fuzzley.games/play/solitaire/
 playLabel: Play on fuzzley.games
-tint: "#135c2b"
+tint: "#0e420e"
 cover: ../../assets/projects/solitaire-klondike.webp
 coverAlt: A game of Klondike dealt on green felt.
 gallery:

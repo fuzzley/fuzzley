@@ -3,6 +3,7 @@
 // page and a button straight into the game.
 import { Picture } from "astro:assets";
 import GitHubLink from "./GitHubLink.astro";
+import { TILE_COVER_WIDTHS, WIDE_COVER_WIDTHS } from "../lib/image-widths";
 import { linkName, newTab } from "../lib/links";
 import {
   coverTransition,
@@ -32,7 +33,7 @@ const {
     : "(min-width: 56rem) 18rem, 50vw",
 } = Astro.props;
 const Heading = headingLevel === 3 ? "h3" : "h2";
-const widths = wide ? [480, 720, 960, 1280] : [320, 480, 640];
+const widths = wide ? WIDE_COVER_WIDTHS : TILE_COVER_WIDTHS;
 const play = playPath(project);
 ---
 
@@ -43,12 +44,14 @@ const play = playPath(project);
   <Picture
     src={project.data.cover}
     alt=""
-    pictureAttributes={{ class: "tile-media" }}
+    pictureAttributes={{
+      class: "tile-media",
+      style: coverTransition(project),
+    }}
     widths={widths}
     sizes={sizes}
     formats={["avif"]}
     fallbackFormat="webp"
-    style={coverTransition(project)}
   />
   <div class="game-bar">
     <Heading class="pill game-title">
