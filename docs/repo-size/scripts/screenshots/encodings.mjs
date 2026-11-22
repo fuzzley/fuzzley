@@ -23,7 +23,7 @@
 // a channel, of 255. It also gives the change before the AVIF encode, which is
 // the resizes' alone.
 //
-// The widths are the site's at d13a053, or with `plan`, the ones the plan
+// The widths are the site's at b45c184, or with `plan`, the ones the plan
 // gives the site, which reach 2x tablets and 3x phones (§5).
 //
 // Writes a summary to <out-file> and every width's figures to <widths-file>.
@@ -40,7 +40,7 @@ if (!frontend || !outFile || !widthsFile) {
 /** @type {import("sharp")} */
 const sharp = createRequire(resolve(frontend, "package.json"))("sharp");
 
-// The widths each use asks for, from the pages and components at d13a053:
+// The widths each use asks for, from the pages and components at b45c184:
 // GameTile (wide and small), the project page's cover and gallery, the
 // Projects page's cards, and the project page's 1200 px link preview. The
 // plan's add 1600 to the wide covers, 800 to the small tiles, and 1200 to the

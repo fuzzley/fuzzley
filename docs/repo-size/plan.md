@@ -1,6 +1,6 @@
 # Repository size: the plan
 
-Written 2026-11-21, against `main` at d13a053, before any change was made.
+Written 2026-11-21, against `main` at b45c184, before any change was made.
 It follows fuzzley-games' own plan, `docs/repo-size/plan.md` there at
 92f00d6b, and borrows its scripts and its runbook where they fit. It plans
 three parts, in the order they should be built:
@@ -68,7 +68,7 @@ What each future change adds to history:
 
 | Change                     | Today              | After A     | Source                                                                                     |
 | -------------------------- | ------------------ | ----------- | ------------------------------------------------------------------------------------------ |
-| Retaking all 8 screenshots | 2.29 MiB (ca4e5fc) | 1.54 MiB    | [`churn.tsv`](data/screenshots/churn.tsv), [`after-plan.txt`](data/history/after-plan.txt) |
+| Retaking all 8 screenshots | 2.29 MiB (5ab9795) | 1.54 MiB    | [`churn.tsv`](data/screenshots/churn.tsv), [`after-plan.txt`](data/history/after-plan.txt) |
 | A Solitaire gallery image  | 241–431 KiB        | 136–192 KiB | [`encodings-plan.tsv`](data/screenshots/encodings-plan.tsv)                                |
 | A cover such as Klondike's | 307 KiB            | 239 KiB     | [`encodings-plan.tsv`](data/screenshots/encodings-plan.tsv)                                |
 | Update games moving a pin  | under 1 KiB        | the same    | `frontend/games.json`                                                                      |
@@ -289,7 +289,7 @@ Each screenshot is written on purpose, for a change a visitor will see
 - It strips every old version of a site image that `main`'s tip doesn't
   hold, by blob id, from `inventory.mjs`'s list on the day.
 - The run uses `--prune-empty never --prune-degenerate never`, so no commit
-  is dropped. One of the 95 commits that would empty out, bd108a5, is named
+  is dropped. One of the 95 commits that would empty out, 6cf1149, is named
   3 times in `docs/worklog.md`.
 - `main` is pushed leased to its old commit, by name, not with `--mirror`.
 
@@ -523,7 +523,7 @@ built in the order A1, A2, A3. §6.0 is the routine every package follows.
 Each package after it gives its edits file by file, its checks and its
 commit's subject.
 
-Line numbers are as of d13a053. An earlier package can move them, so find
+Line numbers are as of b45c184. An earlier package can move them, so find
 each place by the name given with it.
 
 ### 6.0 How every package is built
@@ -632,7 +632,7 @@ don't change.
 **Checks:**
 
 1. `yarn verify`.
-2. **The space check** (§6.0) on d13a053's build and on A1's, kept as
+2. **The space check** (§6.0) on b45c184's build and on A1's, kept as
    `data/screenshots/slots-a1.tsv` beside today's `slots.tsv`.
    - Every row shows 100% of the screenshot's width, on every screen and
      in the sweep.
@@ -727,7 +727,7 @@ pong-check` writes `src/assets/projects/pong-check.webp` at 1024 × 768,
    `docs/repo-size/scripts/screenshots/compare-builds.mjs`. It decodes each
    AVIF file in a `dist/_astro/` folder and finds its screenshot by name.
    Then it gives the error against the reference, as `encodings.mjs` does:
-   the committed screenshot at d13a053, decoded in full and resized to the
+   the committed screenshot at b45c184, decoded in full and resized to the
    same size with lanczos3 alone.
    - Run it on A1's `dist/` and A2's, and keep its output as
      `data/screenshots/compare-builds.txt`.
@@ -1146,7 +1146,7 @@ commit that adds it, under D7. It adds 0.09 MiB packed. The backups (D3),
 GitHub right after, with their push URLs disabled.
 
 **A, 2026-11-22.** Built on `repo-size-plan` as three commits, not pushed:
-b6cda48 (A1), 3d2c153 (A2) and 7fc2594 (A3). Together they add 1.56 MiB
+aecde12 (A1), f9a74ca (A2) and 0ea96fc (A3). Together they add 1.56 MiB
 packed: A1 0.01 (its raw 0.10 MiB is the space check's tables), A2 1.55, A3
 under 0.01.
 
@@ -1205,7 +1205,7 @@ What the checks found:
   tablet fetches a cover's 1600 px copy and the phone a gallery image's 1200
   px copy, where the live site stops at 1280 and 800. Side by side with the
   live site, they look at least as sharp.
-- **The Docker image** built from 7fc2594, and every request in
+- **The Docker image** built from 0ea96fc, and every request in
   `deploy.yml`'s `docker` job got the status, redirect and cache header it
   expects.
 

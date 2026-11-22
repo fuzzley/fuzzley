@@ -1,6 +1,6 @@
 # Screenshots: what they cost history, and how to make each retake cheaper
 
-Written 2026-11-21, against `main` at d13a053. The scripts are in
+Written 2026-11-21, against `main` at b45c184. The scripts are in
 [`../scripts/screenshots/`](../scripts/screenshots/), and what they printed
 is in [`../data/screenshots/`](../data/screenshots/). sharp is 0.35.5, the
 version Astro uses here, with libvips 8.18.7 and libwebp 1.6.0.
@@ -14,7 +14,7 @@ result.
 
 - **The site's images are small next to the old game builds,** but they are
   what keeps growing. Since 2016, 15 commits brought new site images into
-  history, 5.19 MiB packed. The largest, ca4e5fc on 2026-10-25 ("sharpen the
+  history, 5.19 MiB packed. The largest, 5ab9795 on 2026-10-25 ("sharpen the
   project screenshots"), added 2.29 MiB on its own.
 - **Lossless WebP neither compresses nor deltas in git.** A retake adds its
   full size, every time.
@@ -82,7 +82,7 @@ What is committed today ([`encodings.tsv`](../data/screenshots/encodings.tsv)):
 | `spider.png`              | 1684 × 1048 | PNG           |       515.1 | cover   |
 | **All 8**                 |             |               | **2,364.5** |         |
 
-ca4e5fc's message says why they are this size. The covers had been lossy 1x
+5ab9795's message says why they are this size. The covers had been lossy 1x
 shots, and looked soft once a 16:9 shot filled a 16:10 box. So they were
 retaken as lossless captures at twice the size. The three gallery images are
 fuzzley-games' lossless PNG originals (`docs/screenshots/<id>/overview.png`),
@@ -97,20 +97,20 @@ So a file moved by the move into `frontend/` counts once.
 
 | Commit  | Date       | Images | Packed (KiB) | What                                                   |
 | ------- | ---------- | -----: | -----------: | ------------------------------------------------------ |
-| 7b3227d | 2016-08-28 |     20 |      1,070.4 | the first site                                         |
-| 28949f4 | 2026-07-12 |      1 |        431.6 | the Solitaire Collection's first screenshot            |
-| 4d83cf4 | 2026-10-10 |     14 |        216.1 | the old site's images as WebP                          |
-| 90c7129 | 2026-10-10 |      4 |        700.3 | the Astro rebuild's screenshots                        |
-| 47bda53 | 2026-10-25 |      1 |         57.8 | Fuzzley Games' screenshot                              |
-| aa8a510 | 2026-10-25 |      5 |        317.5 | Minesweeper and the Solitaire Collection, retaken      |
-| ca4e5fc | 2026-10-25 |      7 |      2,289.3 | every screenshot retaken at 2×, lossless               |
+| 28c658d | 2016-08-28 |     20 |      1,070.4 | the first site                                         |
+| dea981a | 2026-07-12 |      1 |        431.6 | the Solitaire Collection's first screenshot            |
+| cf9660f | 2026-10-10 |     14 |        216.1 | the old site's images as WebP                          |
+| a44febd | 2026-10-10 |      4 |        700.3 | the Astro rebuild's screenshots                        |
+| 69fc682 | 2026-10-25 |      1 |         57.8 | Fuzzley Games' screenshot                              |
+| c1506cd | 2026-10-25 |      5 |        317.5 | Minesweeper and the Solitaire Collection, retaken      |
+| 5ab9795 | 2026-10-25 |      7 |      2,289.3 | every screenshot retaken at 2×, lossless               |
 | 8 more  |            |     17 |        234.7 | the photo, the favicons, the link preview, small icons |
 | **All** |            | **69** |  **5,317.7** |                                                        |
 
 - **Packed is almost the same as raw** (5,494.6 KiB raw). WebP, PNG and JPEG
   are already compressed, and git finds no deltas between two captures.
-- **Retakes follow changes:** the Astro rebuild (90c7129), the games' new
-  look on fuzzley.games (aa8a510), and a fix for soft covers (ca4e5fc). More
+- **Retakes follow changes:** the Astro rebuild (a44febd), the games' new
+  look on fuzzley.games (c1506cd), and a fix for soft covers (5ab9795). More
   will come while Fuzzley Games keeps changing how its games look.
 - **The photo, the favicons, the link preview and the old site's icons**
   are 235 KiB across 8 commits since 2016. They aren't worth a rule.
@@ -204,7 +204,7 @@ the smaller the tip's, the smaller the result.
 ### (a) Commit each screenshot at the widest size the site draws it
 
 Lossless WebP, at the cap. A full retake of all 8 then adds 1.02 MiB at
-most, against 2.29 MiB for ca4e5fc. A Solitaire gallery image adds 82 to
+most, against 2.29 MiB for 5ab9795. A Solitaire gallery image adds 82 to
 113 KiB, against 241 to 431.
 
 - _Work:_ small.

@@ -1,17 +1,17 @@
 commit	date	images added	raw KiB	packed KiB	subject
-7b3227d	2016-08-28	20	1138.6	1070.4	Initial commit
-0f4cbf0	2016-09-29	1	12.7	12.6	Added a personal summary to the About Me page.
-80cab41	2017-11-12	1	8.1	8.2	Add Google under Work Experience section.
-e53061a	2017-11-12	1	5.4	1.2	Add favicon.
-28949f4	2026-07-12	1	440.4	431.6	Add fSolitaire to portfolio projects list and include screenshot
-e7632b7	2026-07-19	1	10.9	10.3	Add g_logo.png image asset
-960d95f	2026-07-19	1	33.8	33.8	Update picture of myself.
-b844897	2026-10-10	5	8.8	6.9	docs: start redesign work log and add favicon source assets
-4d83cf4	2026-10-10	14	223.8	216.1	fix(frontend): make the site usable on phones and remove the phone number
-90c7129	2026-10-10	4	744.5	700.3	feat(frontend): rebuild the site with Astro as a bento grid
-44c80b6	2026-10-10	1	77.0	70.0	feat(frontend): draw a bento-style link preview for the home page
-47bda53	2026-10-25	1	58.5	57.8	feat: add Fuzzley Games and feature it on the home page
-aa8a510	2026-10-25	5	337.7	317.5	feat: describe Minesweeper and Solitaire as part of Fuzzley Games
-2a47525	2026-10-25	6	101.1	91.7	feat: replace the tiled f mark with a fuzzball
-ca4e5fc	2026-10-25	7	2293.3	2289.3	fix(frontend): sharpen the project screenshots
+28c658d	2016-08-28	20	1138.6	1070.4	Initial commit
+d5b46d3	2016-09-29	1	12.7	12.6	Added a personal summary to the About Me page.
+dfeb0b3	2017-11-12	1	8.1	8.2	Add Google under Work Experience section.
+f28fb43	2017-11-12	1	5.4	1.2	Add favicon.
+dea981a	2026-07-12	1	440.4	431.6	Add fSolitaire to portfolio projects list and include screenshot
+8d1aa1c	2026-07-19	1	10.9	10.3	Add g_logo.png image asset
+b91f471	2026-07-19	1	33.8	33.8	Update picture of myself.
+43df6df	2026-10-10	5	8.8	6.9	docs: start redesign work log and add favicon source assets
+cf9660f	2026-10-10	14	223.8	216.1	fix(frontend): make the site usable on phones and remove the phone number
+a44febd	2026-10-10	4	744.5	700.3	feat(frontend): rebuild the site with Astro as a bento grid
+d72faa0	2026-10-10	1	77.0	70.0	feat(frontend): draw a bento-style link preview for the home page
+69fc682	2026-10-25	1	58.5	57.8	feat: add Fuzzley Games and feature it on the home page
+c1506cd	2026-10-25	5	337.7	317.5	feat: describe Minesweeper and Solitaire as part of Fuzzley Games
+749b2b6	2026-10-25	6	101.1	91.7	feat: replace the tiled f mark with a fuzzball
+5ab9795	2026-10-25	7	2293.3	2289.3	fix(frontend): sharpen the project screenshots
 total		15 commits	5494.6	5317.7	

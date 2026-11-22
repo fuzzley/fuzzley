@@ -72,4 +72,4 @@ build	mean error, every copy	mean error, each one's widest
 A1	1.82	1.32
 A2	1.95	1.13
 
-reference: the screenshots at d13a053; sharp 0.35.5, libvips 8.18.7
+reference: the screenshots at b45c184; sharp 0.35.5, libvips 8.18.7

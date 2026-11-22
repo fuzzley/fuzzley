@@ -76,7 +76,7 @@ Agreed with the owner on 2026-10-10.
 
 | Repository   | Commits                | What                                                          |
 | ------------ | ---------------------- | ------------------------------------------------------------- |
-| fuzzley      | `063efcc` to `c24957c` | This log, the long-term plan, the trimmed copies (`bd108a5`). |
+| fuzzley      | `56030a2` to `8580399` | This log, the long-term plan, the trimmed copies (`6cf1149`). |
 | fMinesweeper | `247f16a`              | Deletes 21 unused files from `public/` (1.1 MiB).             |
 | fPong        | `229f43b`              | Deletes 11 unused files from `public/` (2.0 MiB).             |
 | fSpider      | `b984747`              | Deletes 8 unused files from `public/` (2.5 MiB).              |
@@ -124,7 +124,7 @@ Phase 1, trim (done):
 - [x] fSpider: delete the unused files from `public/`
 - [x] PATH: delete the unused files from `public/`
 - [x] fSolitaire: confirm nothing unused ships
-- [x] fuzzley: trim the deployed copies to match (`bd108a5`)
+- [x] fuzzley: trim the deployed copies to match (`6cf1149`)
 - [x] Check every game plays from a local build
 - [x] Long-term plan in `docs/game-builds.md`
 - [x] Push to `main` and delete the branches (see [Shipping](#shipping))
@@ -134,7 +134,7 @@ Phase 1, trim (done):
 
 Done on 2026-10-10, in this order:
 
-1. This repository's `main` fast-forwarded to `c24957c` and pushed first,
+1. This repository's `main` fast-forwarded to `8580399` and pushed first,
    so the game deploys would find their trimmed folders already here.
    `deploy.yml` passed `verify` and the GitHub Pages deploy.
 2. fMinesweeper, fPong, fSpider and PATH fast-forwarded and pushed. Each
@@ -143,13 +143,13 @@ Done on 2026-10-10, in this order:
    what each game now builds.
 3. The `trim-game-builds` branches deleted. They were never pushed.
 4. Cloud Run rebuilt on its own; `https://fuzzley.info/version.json`
-   reported `c24957c` about ten minutes after the push.
+   reported `8580399` about ten minutes after the push.
 
 ## Log
 
 ### 2026-10-10: setup
 
-- Created `trim-game-builds` from `main` at `3f97037`.
+- Created `trim-game-builds` from `main` at `d5c57f4`.
 - Cloned fSpider, fMinesweeper, fPong and PATH beside fSolitaire.
 - How the games ship today: each game repository's `deploy.yml` builds with
   Vite on every push to its `main`, then clones this repository with the
@@ -165,7 +165,7 @@ Done on 2026-10-10, in this order:
 
 ### 2026-10-10: the short-term trim
 
-Commits: fuzzley `bd108a5`; fMinesweeper `247f16a`, fPong `229f43b`,
+Commits: fuzzley `6cf1149`; fMinesweeper `247f16a`, fPong `229f43b`,
 fSpider `b984747`, PATH `e346f36`. Each commit message lists what it
 removes and why.
 
@@ -238,7 +238,7 @@ removes and why.
   `trim-game-builds` branches. See [Shipping](#shipping).
 - Every game deploy logged "No changes ... Skipping commit", so no sync
   commits followed. This repository's `verify` and Pages deploy passed.
-- Checked on fuzzley.info once it served `c24957c`: each game's page and a
+- Checked on fuzzley.info once it served `8580399`: each game's page and a
   sample of the files it loads return 200 (Pong's `phaser.js`, Spider's
   card sound and minified Kinetic, PATH's step 3 picture, Minesweeper's
   Knockout); a sample of removed files return 404.
@@ -255,11 +255,11 @@ removes and why.
   repository still ran ("No changes"). The prune step warned that
   `games.json` didn't exist yet, and deleted nothing, as designed.
 - **This repository, branch `games-from-releases`** (not pushed yet):
-  `6be48b1` adds `games.json`, `tools/games.mjs` and
+  `d67f20f` adds `games.json`, `tools/games.mjs` and
   `tools/fetch-games.mjs`, runs the fetch from `yarn dev` (with
   `--optional`) and `yarn build`, lists pinned games in the sitemap, and
   takes `public/projects/pong/` out of git (ignored here and in the Docker
-  context). `22cf3fa` adds a `docker` job to `deploy.yml` that builds the
+  context). `6fab4e6` adds a `docker` job to `deploy.yml` that builds the
   image, serves it, and checks every project's page, game and old
   redirect.
 - **Checks:** fetching Pong over its committed folder gave the same 11
@@ -283,14 +283,14 @@ removes and why.
 - **Step 3 live.** Pull request #1 (`games-from-releases`) passed `verify`
   and the new `docker` job, whose image build fetched Pong and served every
   project's page, game and old redirect. `main` was fast-forwarded to
-  `056ec44` and the branch deleted. Cloud Run's own image build fetched
-  Pong too: fuzzley.info served `056ec44`, with Pong's page, assets,
+  `0c0a73e` and the branch deleted. Cloud Run's own image build fetched
+  Pong too: fuzzley.info served `0c0a73e`, with Pong's page, assets,
   analytics tag, `/project/pong/` redirect and sitemap entry all in place.
 - **Step 3b.** fPong `6dfa7d0` drops the sync step and its token use; the
   workflow is now "Build and publish to fuzzley.info". Its run published
   `pong-6dfa7d0.tar.gz`, moved the tag, and kept `pong-76b68ce.tar.gz`
   because `games.json` pins it.
-- **Step 4.** `57c127e` adds `tools/update-games.mjs` and
+- **Step 4.** `90b2fbe` adds `tools/update-games.mjs` and
   `.github/workflows/update-games.yml`. Locally, the script found
   `pong-6dfa7d0.tar.gz`, wrote the expected outputs and commit message, and
   left the pin alone when that archive was in `SKIP_ASSETS`.
@@ -302,9 +302,9 @@ removes and why.
 ### 2026-10-10: option E, steps 4 (tried) and 5
 
 - **Step 4 works end to end.** Run by hand, Update games moved Pong's pin
-  to `pong-6dfa7d0.tar.gz`, built the site, and pushed `60de5f9` as
+  to `pong-6dfa7d0.tar.gz`, built the site, and pushed `00b2bc2` as
   `github-actions[bot]`. `deploy.yml` didn't run for it, as expected, and
-  Cloud Run deployed it: fuzzley.info served `60de5f9`.
+  Cloud Run deployed it: fuzzley.info served `00b2bc2`.
 - **Game repositories switched to publishing** (pushed): fMinesweeper
   `2a2d1db`, fSpider `9379bb8`, PATH `58259ac` (workflow copied from
   fPong's, with their names), and fSolitaire `1c72dce` (its `verify` job
@@ -314,13 +314,13 @@ removes and why.
   admin, so the push went through as a bypass, as its earlier deploy
   change did.
 - **Found:** fSolitaire's `latest.json` answered 404 for about 40 seconds
-  after its deploy finished. `9d997b9` makes `fetch-games.mjs` retry 404s
+  after its deploy finished. `081cdfd` makes `fetch-games.mjs` retry 404s
   for about 30 seconds and `update-games.mjs` wait until a build is two
   minutes old (and warn, not fail, when one game's `latest.json` can't be
   read).
-- **This repository, branch `move-remaining-games`:** `0b60b86` pins the
+- **This repository, branch `move-remaining-games`:** `2d945b8` pins the
   other four games and takes all of `public/projects/` out of git (238
-  files); `af830a1` adds a Games section to the README. Release builds of
+  files); `3375205` adds a Games section to the README. Release builds of
   Minesweeper, PATH and Spider were byte-identical to the committed copies;
   Solitaire's differed only in its main bundle (it embeds the commit) and
   the `index.html` line that loads it. From a clean state `yarn build`
@@ -336,8 +336,8 @@ removes and why.
 
 - Pull request #2 (`move-remaining-games`) passed `verify`, `docker` (the
   image fetched all five games and served each one's page, game and old
-  redirect) and a Cloud Build check. `main` fast-forwarded to `2ad9f82`;
-  the branch is deleted. Cloud Run served `2ad9f82`, with all five games
+  redirect) and a Cloud Build check. `main` fast-forwarded to `9a6a5a5`;
+  the branch is deleted. Cloud Run served `9a6a5a5`, with all five games
   answering 200 and carrying the analytics tag. Solitaire, whose bundle
   changed, loaded in Chrome on fuzzley.info with no console errors or failed
   requests.
@@ -405,9 +405,9 @@ removes and why.
   Actions are enabled. GitHub documents that scheduled runs are delayed,
   and under load dropped, at busy times, the start of each hour most of
   all; a new schedule can also take a while to start.
-- To ship phases 3 and 4, Update games was run by hand: `66997ae` pinned
+- To ship phases 3 and 4, Update games was run by hand: `f904768` pinned
   all five new builds after the site built, and Cloud Run deployed it.
-- `fc7a802` moves the schedule to 4, 19, 34 and 49 past the hour, which
+- `3218433` moves the schedule to 4, 19, 34 and 49 past the hour, which
   avoids minute 0 and makes GitHub register the schedule again.
 - **To check:** `gh run list --workflow update-games.yml --event schedule`
   should list runs. If it stays empty for a few hours, try disabling and
@@ -427,7 +427,7 @@ removes and why.
   already asks for, so no override or major upgrade was needed.
 - `yarn up -R brace-expansion source-map-js undici` in all six
   repositories, and `sharp` to `^0.35.5` in fSolitaire. Commits (pushed):
-  this repository `52c1347`, fSolitaire `a4d7808`, fSpider `46a1b50`,
+  this repository `51bb68c`, fSolitaire `a4d7808`, fSpider `46a1b50`,
   fMinesweeper `5c7234a`, fPong `fad3f3b`, PATH `128aa0a`.
 - **Checks:** `yarn install --immutable`, then here `astro check`, ESLint
   and the build; in each older game lint and build (the minified output
