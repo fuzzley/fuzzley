@@ -1,0 +1,199 @@
+viewport	page	space	image	space w x h	space aspect	image aspect	shown wide	shown high	tint shown	copy w	needed w	widest w	enlarged
+window 896	/	feature	fuzzley-games	427x368	1.159	1.600	100%	100%	28%	720	427	1600	0.59
+window 896	/	small tile	minesweeper	208x277	0.752	1.333	100%	100%	44%	320	208	800	0.65
+window 896	/	small tile	pong	208x277	0.752	1.333	100%	100%	44%	320	208	800	0.65
+window 896	/	wide tile	solitaire-klondike	427x361	1.183	1.600	100%	100%	26%	720	427	1600	0.59
+window 896	/	wide tile	spider	427x259	1.648	1.609	100%	98%	0%	720	427	1600	0.59
+window 896	/projects/	card	fuzzley-games	427x267	1.600	1.605	100%	100%	0%	640	427	1200	0.67
+window 896	/projects/	card	solitaire-klondike	427x267	1.600	1.605	100%	100%	0%	640	427	1200	0.67
+window 896	/projects/	card	minesweeper	427x267	1.600	1.334	100%	83%	0%	640	427	1200	0.67
+window 896	/projects/	card	pong	427x267	1.600	1.334	100%	83%	0%	640	427	1024	0.67
+window 896	/projects/	card	spider	427x267	1.600	1.611	100%	100%	1%	640	427	1200	0.67
+window 896	/projects/solitaire/	cover	solitaire-klondike	427x418	1.021	1.600	100%	100%	36%	720	427	1600	0.59
+window 896	/projects/solitaire/	gallery	solitaire-freecell	281x158	1.778	1.778	100%	100%	0%	400	281	1200	0.70
+window 896	/projects/solitaire/	gallery	solitaire-pyramid	281x158	1.778	1.778	100%	100%	0%	400	281	1200	0.70
+window 896	/projects/solitaire/	gallery	solitaire-spider	281x158	1.778	1.778	100%	100%	0%	400	281	1200	0.70
+window 896	/projects/solitaire/	small tile (more)	fuzzley-games	208x156	1.333	1.600	100%	100%	17%	640	208	800	0.32
+window 896	/projects/solitaire/	small tile (more)	minesweeper	208x156	1.333	1.333	100%	100%	0%	640	208	800	0.32
+window 896	/projects/solitaire/	small tile (more)	pong	208x156	1.333	1.333	100%	100%	0%	640	208	800	0.32
+window 896	/projects/solitaire/	small tile (more)	spider	208x156	1.333	1.609	100%	100%	17%	640	208	800	0.32
+window 920	/	feature	fuzzley-games	438x368	1.192	1.600	100%	100%	26%	720	438	1600	0.61
+window 920	/	small tile	minesweeper	214x276	0.774	1.333	100%	100%	42%	320	214	800	0.67
+window 920	/	small tile	pong	214x276	0.774	1.333	100%	100%	42%	320	214	800	0.67
+window 920	/	wide tile	solitaire-klondike	438x362	1.210	1.600	100%	100%	24%	720	438	1600	0.61
+window 920	/	wide tile	spider	438x262	1.673	1.609	100%	96%	0%	720	438	1600	0.61
+window 920	/projects/	card	fuzzley-games	438x274	1.600	1.599	100%	100%	0%	640	438	1200	0.69
+window 920	/projects/	card	solitaire-klondike	438x274	1.600	1.599	100%	100%	0%	640	438	1200	0.69
+window 920	/projects/	card	minesweeper	438x274	1.600	1.331	100%	83%	0%	640	438	1200	0.69
+window 920	/projects/	card	pong	438x274	1.600	1.331	100%	83%	0%	640	438	1024	0.69
+window 920	/projects/	card	spider	438x274	1.600	1.604	100%	100%	0%	640	438	1200	0.69
+window 920	/projects/solitaire/	cover	solitaire-klondike	438x373	1.174	1.600	100%	100%	27%	720	438	1600	0.61
+window 920	/projects/solitaire/	gallery	solitaire-freecell	289x162	1.778	1.778	100%	100%	0%	400	289	1200	0.72
+window 920	/projects/solitaire/	gallery	solitaire-pyramid	289x162	1.778	1.778	100%	100%	0%	400	289	1200	0.72
+window 920	/projects/solitaire/	gallery	solitaire-spider	289x162	1.778	1.778	100%	100%	0%	400	289	1200	0.72
+window 920	/projects/solitaire/	small tile (more)	fuzzley-games	214x160	1.333	1.600	100%	100%	17%	640	214	800	0.33
+window 920	/projects/solitaire/	small tile (more)	minesweeper	214x160	1.333	1.333	100%	100%	0%	640	214	800	0.33
+window 920	/projects/solitaire/	small tile (more)	pong	214x160	1.333	1.333	100%	100%	0%	640	214	800	0.33
+window 920	/projects/solitaire/	small tile (more)	spider	214x160	1.333	1.609	100%	100%	17%	640	214	800	0.33
+window 960	/	feature	fuzzley-games	458x368	1.245	1.600	100%	100%	22%	720	458	1600	0.64
+window 960	/	small tile	minesweeper	223x245	0.913	1.333	100%	100%	32%	320	223	800	0.70
+window 960	/	small tile	pong	223x245	0.913	1.333	100%	100%	32%	320	223	800	0.70
+window 960	/	wide tile	solitaire-klondike	458x335	1.368	1.600	100%	100%	14%	720	458	1600	0.64
+window 960	/	wide tile	spider	458x268	1.713	1.609	100%	94%	0%	720	458	1600	0.64
+window 960	/projects/	card	fuzzley-games	458x286	1.600	1.605	100%	100%	0%	640	458	1200	0.72
+window 960	/projects/	card	solitaire-klondike	458x286	1.600	1.605	100%	100%	0%	640	458	1200	0.72
+window 960	/projects/	card	minesweeper	458x286	1.600	1.334	100%	83%	0%	640	458	1200	0.72
+window 960	/projects/	card	pong	458x286	1.600	1.334	100%	83%	0%	640	458	1024	0.72
+window 960	/projects/	card	spider	458x286	1.600	1.611	100%	100%	1%	640	458	1200	0.72
+window 960	/projects/solitaire/	cover	solitaire-klondike	458x352	1.302	1.600	100%	100%	19%	720	458	1600	0.64
+window 960	/projects/solitaire/	gallery	solitaire-freecell	302x170	1.778	1.778	100%	100%	0%	400	302	1200	0.75
+window 960	/projects/solitaire/	gallery	solitaire-pyramid	302x170	1.778	1.778	100%	100%	0%	400	302	1200	0.75
+window 960	/projects/solitaire/	gallery	solitaire-spider	302x170	1.778	1.778	100%	100%	0%	400	302	1200	0.75
+window 960	/projects/solitaire/	small tile (more)	fuzzley-games	223x168	1.333	1.600	100%	100%	17%	640	223	800	0.35
+window 960	/projects/solitaire/	small tile (more)	minesweeper	223x168	1.333	1.333	100%	100%	0%	640	223	800	0.35
+window 960	/projects/solitaire/	small tile (more)	pong	223x168	1.333	1.333	100%	100%	0%	640	223	800	0.35
+window 960	/projects/solitaire/	small tile (more)	spider	223x168	1.333	1.609	100%	100%	17%	640	223	800	0.35
+window 1000	/	feature	fuzzley-games	478x368	1.299	1.600	100%	100%	19%	720	478	1600	0.66
+window 1000	/	small tile	minesweeper	233x244	0.956	1.333	100%	100%	28%	320	233	800	0.73
+window 1000	/	small tile	pong	233x244	0.956	1.333	100%	100%	28%	320	233	800	0.73
+window 1000	/	wide tile	solitaire-klondike	478x338	1.415	1.600	100%	100%	12%	720	478	1600	0.66
+window 1000	/	wide tile	spider	478x273	1.751	1.609	100%	92%	0%	720	478	1600	0.66
+window 1000	/projects/	card	fuzzley-games	478x299	1.600	1.602	100%	100%	0%	640	478	1200	0.75
+window 1000	/projects/	card	solitaire-klondike	478x299	1.600	1.602	100%	100%	0%	640	478	1200	0.75
+window 1000	/projects/	card	minesweeper	478x299	1.600	1.334	100%	83%	0%	640	478	1200	0.75
+window 1000	/projects/	card	pong	478x299	1.600	1.334	100%	83%	0%	640	478	1024	0.75
+window 1000	/projects/	card	spider	478x299	1.600	1.613	100%	100%	1%	640	478	1200	0.75
+window 1000	/projects/solitaire/	cover	solitaire-klondike	478x353	1.353	1.600	100%	100%	15%	720	478	1600	0.66
+window 1000	/projects/solitaire/	gallery	solitaire-freecell	315x177	1.778	1.778	100%	100%	0%	400	315	1200	0.79
+window 1000	/projects/solitaire/	gallery	solitaire-pyramid	315x177	1.778	1.778	100%	100%	0%	400	315	1200	0.79
+window 1000	/projects/solitaire/	gallery	solitaire-spider	315x177	1.778	1.778	100%	100%	0%	400	315	1200	0.79
+window 1000	/projects/solitaire/	small tile (more)	fuzzley-games	233x175	1.333	1.600	100%	100%	17%	640	233	800	0.36
+window 1000	/projects/solitaire/	small tile (more)	minesweeper	233x175	1.333	1.333	100%	100%	0%	640	233	800	0.36
+window 1000	/projects/solitaire/	small tile (more)	pong	233x175	1.333	1.333	100%	100%	0%	640	233	800	0.36
+window 1000	/projects/solitaire/	small tile (more)	spider	233x175	1.333	1.609	100%	100%	17%	640	233	800	0.36
+window 1024	/	feature	fuzzley-games	490x370	1.324	1.600	100%	100%	17%	720	490	1600	0.68
+window 1024	/	small tile	minesweeper	239x243	0.982	1.333	100%	100%	26%	320	239	800	0.75
+window 1024	/	small tile	pong	239x243	0.982	1.333	100%	100%	26%	320	239	800	0.75
+window 1024	/	wide tile	solitaire-klondike	490x340	1.442	1.600	100%	100%	10%	720	490	1600	0.68
+window 1024	/	wide tile	spider	490x276	1.773	1.609	100%	91%	0%	720	490	1600	0.68
+window 1024	/projects/	card	fuzzley-games	322x202	1.600	1.605	100%	100%	0%	640	322	1200	0.50
+window 1024	/projects/	card	solitaire-klondike	322x202	1.600	1.605	100%	100%	0%	640	322	1200	0.50
+window 1024	/projects/	card	minesweeper	322x202	1.600	1.334	100%	83%	0%	640	322	1200	0.50
+window 1024	/projects/	card	pong	322x202	1.600	1.334	100%	83%	0%	640	322	1024	0.50
+window 1024	/projects/	card	spider	322x202	1.600	1.610	100%	100%	1%	640	322	1200	0.50
+window 1024	/projects/solitaire/	cover	solitaire-klondike	490x354	1.383	1.600	100%	100%	14%	720	490	1600	0.68
+window 1024	/projects/solitaire/	gallery	solitaire-freecell	322x181	1.778	1.778	100%	100%	0%	400	322	1200	0.81
+window 1024	/projects/solitaire/	gallery	solitaire-pyramid	322x181	1.778	1.778	100%	100%	0%	400	322	1200	0.81
+window 1024	/projects/solitaire/	gallery	solitaire-spider	322x181	1.778	1.778	100%	100%	0%	400	322	1200	0.81
+window 1024	/projects/solitaire/	small tile (more)	fuzzley-games	239x179	1.333	1.600	100%	100%	17%	640	239	800	0.37
+window 1024	/projects/solitaire/	small tile (more)	minesweeper	239x179	1.333	1.333	100%	100%	0%	640	239	800	0.37
+window 1024	/projects/solitaire/	small tile (more)	pong	239x179	1.333	1.333	100%	100%	0%	640	239	800	0.37
+window 1024	/projects/solitaire/	small tile (more)	spider	239x179	1.333	1.609	100%	100%	17%	640	239	800	0.37
+window 1080	/	feature	fuzzley-games	518x376	1.375	1.600	100%	100%	14%	720	518	1600	0.72
+window 1080	/	small tile	minesweeper	252x242	1.043	1.333	100%	100%	22%	320	252	800	0.79
+window 1080	/	small tile	pong	252x242	1.043	1.333	100%	100%	22%	320	252	800	0.79
+window 1080	/	wide tile	solitaire-klondike	518x344	1.506	1.600	100%	100%	6%	720	518	1600	0.72
+window 1080	/	wide tile	spider	518x291	1.778	1.609	100%	90%	0%	720	518	1600	0.72
+window 1080	/projects/	card	fuzzley-games	341x213	1.600	1.600	100%	100%	0%	400	341	1200	0.85
+window 1080	/projects/	card	solitaire-klondike	341x213	1.600	1.600	100%	100%	0%	400	341	1200	0.85
+window 1080	/projects/	card	minesweeper	341x213	1.600	1.333	100%	83%	0%	400	341	1200	0.85
+window 1080	/projects/	card	pong	341x213	1.600	1.333	100%	83%	0%	400	341	1024	0.85
+window 1080	/projects/	card	spider	341x213	1.600	1.607	100%	100%	0%	400	341	1200	0.85
+window 1080	/projects/solitaire/	cover	solitaire-klondike	518x357	1.450	1.600	100%	100%	9%	720	518	1600	0.72
+window 1080	/projects/solitaire/	gallery	solitaire-freecell	341x192	1.778	1.778	100%	100%	0%	400	341	1200	0.85
+window 1080	/projects/solitaire/	gallery	solitaire-pyramid	341x192	1.778	1.778	100%	100%	0%	400	341	1200	0.85
+window 1080	/projects/solitaire/	gallery	solitaire-spider	341x192	1.778	1.778	100%	100%	0%	400	341	1200	0.85
+window 1080	/projects/solitaire/	small tile (more)	fuzzley-games	252x189	1.333	1.600	100%	100%	17%	320	252	800	0.79
+window 1080	/projects/solitaire/	small tile (more)	minesweeper	252x189	1.333	1.333	100%	100%	0%	320	252	800	0.79
+window 1080	/projects/solitaire/	small tile (more)	pong	252x189	1.333	1.333	100%	100%	0%	320	252	800	0.79
+window 1080	/projects/solitaire/	small tile (more)	spider	252x189	1.333	1.609	100%	100%	17%	320	252	800	0.79
+window 1120	/	feature	fuzzley-games	537x377	1.424	1.600	100%	100%	11%	720	537	1600	0.75
+window 1120	/	small tile	minesweeper	262x228	1.150	1.333	100%	100%	14%	320	262	800	0.82
+window 1120	/	small tile	pong	262x228	1.150	1.333	100%	100%	14%	320	262	800	0.82
+window 1120	/	wide tile	solitaire-klondike	537x334	1.611	1.600	100%	99%	0%	720	537	1600	0.75
+window 1120	/	wide tile	spider	537x302	1.778	1.609	100%	90%	0%	720	537	1600	0.75
+window 1120	/projects/	card	fuzzley-games	354x221	1.600	1.600	100%	100%	0%	400	354	1200	0.88
+window 1120	/projects/	card	solitaire-klondike	354x221	1.600	1.600	100%	100%	0%	400	354	1200	0.88
+window 1120	/projects/	card	minesweeper	354x221	1.600	1.333	100%	83%	0%	400	354	1200	0.88
+window 1120	/projects/	card	pong	354x221	1.600	1.333	100%	83%	0%	400	354	1024	0.88
+window 1120	/projects/	card	spider	354x221	1.600	1.607	100%	100%	0%	400	354	1200	0.88
+window 1120	/projects/solitaire/	cover	solitaire-klondike	537x357	1.504	1.600	100%	100%	6%	720	537	1600	0.75
+window 1120	/projects/solitaire/	gallery	solitaire-freecell	354x199	1.778	1.778	100%	100%	0%	400	354	1200	0.88
+window 1120	/projects/solitaire/	gallery	solitaire-pyramid	354x199	1.778	1.778	100%	100%	0%	400	354	1200	0.88
+window 1120	/projects/solitaire/	gallery	solitaire-spider	354x199	1.778	1.778	100%	100%	0%	400	354	1200	0.88
+window 1120	/projects/solitaire/	small tile (more)	fuzzley-games	262x196	1.333	1.600	100%	100%	17%	320	262	800	0.82
+window 1120	/projects/solitaire/	small tile (more)	minesweeper	262x196	1.333	1.333	100%	100%	0%	320	262	800	0.82
+window 1120	/projects/solitaire/	small tile (more)	pong	262x196	1.333	1.333	100%	100%	0%	320	262	800	0.82
+window 1120	/projects/solitaire/	small tile (more)	spider	262x196	1.333	1.609	100%	100%	17%	320	262	800	0.82
+window 1180	/	feature	fuzzley-games	567x378	1.500	1.600	100%	100%	6%	720	567	1600	0.79
+window 1180	/	small tile	minesweeper	277x207	1.333	1.333	100%	100%	0%	320	277	800	0.86
+window 1180	/	small tile	pong	277x207	1.333	1.333	100%	100%	0%	320	277	800	0.86
+window 1180	/	wide tile	solitaire-klondike	567x319	1.778	1.600	100%	90%	0%	720	567	1600	0.79
+window 1180	/	wide tile	spider	567x319	1.778	1.609	100%	90%	0%	720	567	1600	0.79
+window 1180	/projects/	card	fuzzley-games	373x233	1.600	1.600	100%	100%	0%	400	373	1200	0.93
+window 1180	/projects/	card	solitaire-klondike	373x233	1.600	1.600	100%	100%	0%	400	373	1200	0.93
+window 1180	/projects/	card	minesweeper	373x233	1.600	1.333	100%	83%	0%	400	373	1200	0.93
+window 1180	/projects/	card	pong	373x233	1.600	1.333	100%	83%	0%	400	373	1024	0.93
+window 1180	/projects/	card	spider	373x233	1.600	1.607	100%	100%	0%	400	373	1200	0.93
+window 1180	/projects/solitaire/	cover	solitaire-klondike	567x352	1.611	1.600	100%	99%	0%	720	567	1600	0.79
+window 1180	/projects/solitaire/	gallery	solitaire-freecell	373x210	1.778	1.778	100%	100%	0%	400	373	1200	0.93
+window 1180	/projects/solitaire/	gallery	solitaire-pyramid	373x210	1.778	1.778	100%	100%	0%	400	373	1200	0.93
+window 1180	/projects/solitaire/	gallery	solitaire-spider	373x210	1.778	1.778	100%	100%	0%	400	373	1200	0.93
+window 1180	/projects/solitaire/	small tile (more)	fuzzley-games	277x207	1.333	1.600	100%	100%	17%	320	277	800	0.86
+window 1180	/projects/solitaire/	small tile (more)	minesweeper	277x207	1.333	1.333	100%	100%	0%	320	277	800	0.86
+window 1180	/projects/solitaire/	small tile (more)	pong	277x207	1.333	1.333	100%	100%	0%	320	277	800	0.86
+window 1180	/projects/solitaire/	small tile (more)	spider	277x207	1.333	1.609	100%	100%	17%	320	277	800	0.86
+window 1240	/	feature	fuzzley-games	593x378	1.569	1.600	100%	100%	2%	720	593	1600	0.82
+window 1240	/	small tile	minesweeper	290x217	1.333	1.333	100%	100%	0%	320	290	800	0.90
+window 1240	/	small tile	pong	290x217	1.333	1.333	100%	100%	0%	320	290	800	0.90
+window 1240	/	wide tile	solitaire-klondike	593x334	1.778	1.600	100%	90%	0%	720	593	1600	0.82
+window 1240	/	wide tile	spider	593x334	1.778	1.609	100%	90%	0%	720	593	1600	0.82
+window 1240	/projects/	card	fuzzley-games	391x244	1.600	1.600	100%	100%	0%	400	391	1200	0.98
+window 1240	/projects/	card	solitaire-klondike	391x244	1.600	1.600	100%	100%	0%	400	391	1200	0.98
+window 1240	/projects/	card	minesweeper	391x244	1.600	1.333	100%	83%	0%	400	391	1200	0.98
+window 1240	/projects/	card	pong	391x244	1.600	1.333	100%	83%	0%	400	391	1024	0.98
+window 1240	/projects/	card	spider	391x244	1.600	1.607	100%	100%	0%	400	391	1200	0.98
+window 1240	/projects/solitaire/	cover	solitaire-klondike	593x352	1.685	1.600	100%	95%	0%	720	593	1600	0.82
+window 1240	/projects/solitaire/	gallery	solitaire-freecell	391x220	1.778	1.778	100%	100%	0%	400	391	1200	0.98
+window 1240	/projects/solitaire/	gallery	solitaire-pyramid	391x220	1.778	1.778	100%	100%	0%	400	391	1200	0.98
+window 1240	/projects/solitaire/	gallery	solitaire-spider	391x220	1.778	1.778	100%	100%	0%	400	391	1200	0.98
+window 1240	/projects/solitaire/	small tile (more)	fuzzley-games	290x217	1.333	1.600	100%	100%	17%	320	290	800	0.90
+window 1240	/projects/solitaire/	small tile (more)	minesweeper	290x217	1.333	1.333	100%	100%	0%	320	290	800	0.90
+window 1240	/projects/solitaire/	small tile (more)	pong	290x217	1.333	1.333	100%	100%	0%	320	290	800	0.90
+window 1240	/projects/solitaire/	small tile (more)	spider	290x217	1.333	1.609	100%	100%	17%	320	290	800	0.90
+window 1280	/	feature	fuzzley-games	593x378	1.569	1.600	100%	100%	2%	720	593	1600	0.82
+window 1280	/	small tile	minesweeper	290x217	1.333	1.333	100%	100%	0%	320	290	800	0.90
+window 1280	/	small tile	pong	290x217	1.333	1.333	100%	100%	0%	320	290	800	0.90
+window 1280	/	wide tile	solitaire-klondike	593x334	1.778	1.600	100%	90%	0%	720	593	1600	0.82
+window 1280	/	wide tile	spider	593x334	1.778	1.609	100%	90%	0%	720	593	1600	0.82
+window 1280	/projects/	card	fuzzley-games	391x244	1.600	1.600	100%	100%	0%	400	391	1200	0.98
+window 1280	/projects/	card	solitaire-klondike	391x244	1.600	1.600	100%	100%	0%	400	391	1200	0.98
+window 1280	/projects/	card	minesweeper	391x244	1.600	1.333	100%	83%	0%	400	391	1200	0.98
+window 1280	/projects/	card	pong	391x244	1.600	1.333	100%	83%	0%	400	391	1024	0.98
+window 1280	/projects/	card	spider	391x244	1.600	1.607	100%	100%	0%	400	391	1200	0.98
+window 1280	/projects/solitaire/	cover	solitaire-klondike	593x352	1.685	1.600	100%	95%	0%	720	593	1600	0.82
+window 1280	/projects/solitaire/	gallery	solitaire-freecell	391x220	1.778	1.778	100%	100%	0%	400	391	1200	0.98
+window 1280	/projects/solitaire/	gallery	solitaire-pyramid	391x220	1.778	1.778	100%	100%	0%	400	391	1200	0.98
+window 1280	/projects/solitaire/	gallery	solitaire-spider	391x220	1.778	1.778	100%	100%	0%	400	391	1200	0.98
+window 1280	/projects/solitaire/	small tile (more)	fuzzley-games	290x217	1.333	1.600	100%	100%	17%	320	290	800	0.90
+window 1280	/projects/solitaire/	small tile (more)	minesweeper	290x217	1.333	1.333	100%	100%	0%	320	290	800	0.90
+window 1280	/projects/solitaire/	small tile (more)	pong	290x217	1.333	1.333	100%	100%	0%	320	290	800	0.90
+window 1280	/projects/solitaire/	small tile (more)	spider	290x217	1.333	1.609	100%	100%	17%	320	290	800	0.90
+window 1366	/	feature	fuzzley-games	593x378	1.569	1.600	100%	100%	2%	720	593	1600	0.82
+window 1366	/	small tile	minesweeper	290x217	1.333	1.333	100%	100%	0%	320	290	800	0.90
+window 1366	/	small tile	pong	290x217	1.333	1.333	100%	100%	0%	320	290	800	0.90
+window 1366	/	wide tile	solitaire-klondike	593x334	1.778	1.600	100%	90%	0%	720	593	1600	0.82
+window 1366	/	wide tile	spider	593x334	1.778	1.609	100%	90%	0%	720	593	1600	0.82
+window 1366	/projects/	card	fuzzley-games	391x244	1.600	1.600	100%	100%	0%	400	391	1200	0.98
+window 1366	/projects/	card	solitaire-klondike	391x244	1.600	1.600	100%	100%	0%	400	391	1200	0.98
+window 1366	/projects/	card	minesweeper	391x244	1.600	1.333	100%	83%	0%	400	391	1200	0.98
+window 1366	/projects/	card	pong	391x244	1.600	1.333	100%	83%	0%	400	391	1024	0.98
+window 1366	/projects/	card	spider	391x244	1.600	1.607	100%	100%	0%	400	391	1200	0.98
+window 1366	/projects/solitaire/	cover	solitaire-klondike	593x352	1.685	1.600	100%	95%	0%	720	593	1600	0.82
+window 1366	/projects/solitaire/	gallery	solitaire-freecell	391x220	1.778	1.778	100%	100%	0%	400	391	1200	0.98
+window 1366	/projects/solitaire/	gallery	solitaire-pyramid	391x220	1.778	1.778	100%	100%	0%	400	391	1200	0.98
+window 1366	/projects/solitaire/	gallery	solitaire-spider	391x220	1.778	1.778	100%	100%	0%	400	391	1200	0.98
+window 1366	/projects/solitaire/	small tile (more)	fuzzley-games	290x217	1.333	1.600	100%	100%	17%	320	290	800	0.90
+window 1366	/projects/solitaire/	small tile (more)	minesweeper	290x217	1.333	1.333	100%	100%	0%	320	290	800	0.90
+window 1366	/projects/solitaire/	small tile (more)	pong	290x217	1.333	1.333	100%	100%	0%	320	290	800	0.90
+window 1366	/projects/solitaire/	small tile (more)	spider	290x217	1.333	1.609	100%	100%	17%	320	290	800	0.90

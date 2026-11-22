@@ -12,7 +12,7 @@ repo: https://github.com/fuzzley/fuzzley-games/tree/main/frontend/games/mineswee
 playUrl: https://fuzzley.games/play/minesweeper/
 playLabel: Play on fuzzley.games
 tint: "#0e1a2b"
-cover: ../../assets/projects/minesweeper.png
+cover: ../../assets/projects/minesweeper.webp
 coverAlt: A partly cleared Minesweeper board of cyan squares, with 3 lives shown at the top.
 ---
 

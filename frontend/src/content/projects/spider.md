@@ -10,7 +10,7 @@ summary: Spider Solitaire in your browser, with 2 decks on 10 columns.
 stack: [JavaScript, KineticJS, howler.js, Knockout]
 repo: https://github.com/fuzzley/fSpider
 tint: "#0f4d0e"
-cover: ../../assets/projects/spider.png
+cover: ../../assets/projects/spider.webp
 coverAlt: Spider Solitaire in progress, with 10 columns of cards and the stock in the corner.
 ---
 

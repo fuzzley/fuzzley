@@ -58,8 +58,11 @@ The words and pictures live in content files, not in the pages:
   another site, which `playUrl` names.
 - `frontend/src/content/experience.yaml`: the work history.
 - `frontend/src/data/profile.ts`: name, bio, links and education.
-- `frontend/src/assets/`: screenshots and the photo. The build resizes them
-  and converts them to AVIF and WebP.
+- `frontend/src/assets/`: the photo, and the project screenshots in
+  `projects/`. A screenshot is lossless WebP written with `yarn screenshot`,
+  which sizes it for the site. The schema fails one that isn't WebP, is wider
+  than the site serves or is the wrong shape. The build makes the AVIF and
+  WebP copies the pages serve.
 
 A highlight in `experience.yaml` that starts with `TODO` is a placeholder:
 `yarn dev` shows it with a dashed outline, production builds leave it out, and

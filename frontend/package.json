@@ -9,13 +9,14 @@
     "start": "yarn dev",
     "build": "node tools/fetch-games.mjs && astro build && node tools/inject-analytics.mjs",
     "games": "node tools/fetch-games.mjs",
+    "screenshot": "node tools/screenshot.mjs",
     "preview": "astro preview",
     "force-stop": "node tools/stop-dev-servers.mjs",
     "stop": "astro dev stop",
-    "check": "astro check",
+    "check": "astro sync --force && astro check",
     "lint": "eslint .",
     "prettier": "prettier . --write",
-    "verify": "astro check && eslint . && prettier . --check && yarn build"
+    "verify": "astro sync --force && astro check && eslint . && prettier . --check && yarn build"
   },
   "author": "Andrey Gavel",
   "license": "GPL-3.0-only",

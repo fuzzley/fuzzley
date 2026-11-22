@@ -1,8 +1,43 @@
+import { readFile } from "node:fs/promises";
 import { defineCollection } from "astro:content";
+import { imageMetadata } from "astro/assets/utils";
 import { file, glob } from "astro/loaders";
 import { z } from "astro/zod";
+import {
+  COVER_MAX_WIDTH,
+  COVER_RATIOS,
+  GALLERY_MAX_WIDTH,
+  GALLERY_RATIO,
+  RATIO_TOLERANCE,
+} from "./lib/image-widths";
 
 const yearMonth = z.string().regex(/^\d{4}-\d{2}$/, "Use YYYY-MM");
+
+const projectsDir = new URL("./content/projects/", import.meta.url);
+
+type Screenshot = { width: number; height: number; format: string };
+
+/**
+ * A screenshot's form and size. `image()` is typed as giving them, but the
+ * content layer gives the schema the path a project file names, marked for
+ * Astro to resolve later, so this reads the file. "elsewhere" for a path that
+ * isn't relative to the project file, which it can't follow, and undefined
+ * for a relative one that names no file, which Astro reports itself.
+ */
+async function screenshotMetadata(
+  img: Screenshot | string,
+): Promise<Screenshot | "elsewhere" | undefined> {
+  if (typeof img !== "string") return img;
+  const relative = img.replace(/^__ASTRO_IMAGE_/, "");
+  if (!/^\.\.?\//.test(relative)) return "elsewhere";
+  let bytes;
+  try {
+    bytes = await readFile(new URL(relative, projectsDir));
+  } catch {
+    return undefined;
+  }
+  return imageMetadata(bytes, relative);
+}
 
 // One Markdown file per project. The file name is the slug: it sets both the
 // project page (/projects/<slug>/) and the game (/projects/<slug>/play/), so
@@ -10,8 +45,39 @@ const yearMonth = z.string().regex(/^\d{4}-\d{2}$/, "Use YYYY-MM");
 // another site (`playUrl`).
 const projects = defineCollection({
   loader: glob({ pattern: "*.md", base: "./src/content/projects" }),
-  schema: ({ image }) =>
-    z.object({
+  schema: ({ image }) => {
+    // A screenshot is committed as WebP, no wider than the widest copy the
+    // site serves of it, since every version stays in history for good, and in
+    // a shape its spaces draw well.
+    const screenshot = (maxWidth: number, minRatio: number, maxRatio: number) =>
+      image().superRefine(async (value, ctx) => {
+        const img = await screenshotMetadata(value);
+        const failed = (message: string) =>
+          ctx.addIssue({ code: "custom", message });
+        if (img === "elsewhere") {
+          failed(
+            "Name a screenshot by its path from the project file, as ../../assets/projects/<name>.webp",
+          );
+          return;
+        }
+        if (!img) return;
+        const ratio = img.width / img.height;
+        if (img.format !== "webp") {
+          failed("Write screenshots with yarn screenshot, as WebP");
+        }
+        if (img.width > maxWidth) {
+          failed(
+            `Write screenshots with yarn screenshot: at most ${maxWidth} px wide here`,
+          );
+        }
+        if (
+          ratio < minRatio * (1 - RATIO_TOLERANCE) ||
+          ratio > maxRatio * (1 + RATIO_TOLERANCE)
+        ) {
+          failed("A cover is 4:3 to 16:10, and a gallery image 16:9");
+        }
+      });
+    return z.object({
       title: z.string(),
       // Position in grids and lists, lowest first.
       order: z.number().int(),
@@ -34,20 +100,23 @@ const projects = defineCollection({
       // goes here too.
       playUrl: z.url().optional(),
       playLabel: z.string().default("Play"),
-      // The game's own background color, used behind its tile.
+      // The game's own background color, used behind its tile: the color
+      // along its cover's bottom edge, which `yarn screenshot` prints, since a
+      // tile taller than its cover shows the tint below it.
       tint: z.string().regex(/^#[0-9a-f]{6}$/i),
-      cover: image(),
+      cover: screenshot(COVER_MAX_WIDTH, COVER_RATIOS.min, COVER_RATIOS.max),
       coverAlt: z.string().min(1),
       gallery: z
         .array(
           z.object({
-            image: image(),
+            image: screenshot(GALLERY_MAX_WIDTH, GALLERY_RATIO, GALLERY_RATIO),
             alt: z.string().min(1),
             caption: z.string(),
           }),
         )
         .default([]),
-    }),
+    });
+  },
 });
 
 // Work history, keyed by a short id. Highlights that start with "TODO" are
