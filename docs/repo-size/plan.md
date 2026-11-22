@@ -248,8 +248,10 @@ serves of it.**
 
 **S3. The rule is held by the content schema, not a lint script.**
 
-- Astro's `image()` gives each image's width, height and format to
-  `refine()`.
+- Astro 7.4.7's content layer gives the schema the path a project file
+  names, not the image's size, so the rule reads the file with Astro's
+  `imageMetadata`. This plan first had `refine()` read them from `image()`,
+  which A2 found doesn't work (§12).
 - So `yarn dev`, `astro check` and `yarn build` all fail a screenshot of
   the wrong width, form or shape, with a message that names
   `yarn screenshot`. `yarn verify` runs two of those, and so does CI.
@@ -506,6 +508,11 @@ const screenshot = (maxWidth: number, minRatio: number, maxRatio: number) =>
 `screenshot(COVER_MAX_WIDTH, COVER_RATIOS.min, COVER_RATIOS.max)`, and each
 gallery `image` becomes
 `screenshot(GALLERY_MAX_WIDTH, GALLERY_RATIO, GALLERY_RATIO)`.
+
+**As built,** `img` here is a path marked for Astro to resolve later, not the
+image's size, so every screenshot failed. The helper uses `superRefine`, reads
+the file the path names with `imageMetadata` from `astro/assets/utils`, and
+keeps the three messages (§12).
 
 ---
 
@@ -1101,7 +1108,7 @@ For a single commit, use `<sha> ^<sha>~1` in the first command and
 | A squeezed tile shows much of its tint                        | A1     | certain    | Up to 43% at a 900 px window, rather than cutting the game; only between 896 and 1180 px                                                                      |
 | 2× and 3× screens download more                               | A1     | certain    | Only they fetch the new widest copies, and they are the screens that were enlarging                                                                           |
 | A later layout draws a screenshot wider than it was committed | A      | low        | Astro serves the committed width rather than enlarging, so nothing breaks; the cap moves with the width lists, and a retake fixes it. The schema doesn't warn |
-| `refine()` on `image()` behaves differently in a later Astro  | A2     | low        | It is in Astro's documented content-collection API; A2's check 2 proves it fails as it should                                                                 |
+| A later Astro hands the schema something else for `image()`   | A2     | low        | The rule takes the image's size if given it, and reads the file if given a path; one it can't read passes, so re-run A2's check 2 after an Astro upgrade      |
 | Node stops running `.ts` imports without a flag               | A1     | very low   | Node 26 does so by default; the Docker image and CI run Node 26                                                                                               |
 | Someone pushes during the rewrite                             | B6     | low        | The freeze, Update games off, and the lease: the push fails rather than overwrite                                                                             |
 | Cloud Run doesn't build the force-pushed `main`               | B7     | low        | The site keeps the last revision; the user checks the trigger                                                                                                 |
@@ -1138,4 +1145,119 @@ commit that adds it, under D7. It adds 0.09 MiB packed. The backups (D3),
 `~/Projects/personal/fuzzley.github.io-backup.git`, were mirrored from
 GitHub right after, with their push URLs disabled.
 
-A, B and C are not built yet.
+**A, 2026-11-22.** Built on `repo-size-plan` as three commits, not pushed:
+b6cda48 (A1), 3d2c153 (A2) and 7fc2594 (A3). Together they add 1.56 MiB
+packed: A1 0.01 (its raw 0.10 MiB is the space check's tables), A2 1.55, A3
+under 0.01.
+
+What the checks found:
+
+- **The spaces (A1, A2).** Of 378 rows on 9 screens, 153 were cut at the
+  side before, down to 57% of the width shown. None are now. 111 rows were
+  enlarged by more than 5%, by up to 1.48×. None are now, except Pong's and
+  Minesweeper's covers, whose captures are narrower than the 2× screens want
+  (up to 1.54×, as before). The tint shows on 17% of a space at most, except
+  at 896 to 1080 px windows (up to 44%), on the 1024 px tablet (26%), and on
+  the 360 px phone (18%), where Spider Solitaire's 1600 × 996 is 0.4% wider
+  than 16:10. A2's build gives the same rows as A1's.
+- **The pictures (A1).** No game is cut at its side, and Pong keeps both
+  paddles in every tile. The band below Klondike is the felt's color. At a
+  900 px window a faint line shows where the felt's shading ends and the
+  flat tint begins.
+- **In a browser (A1).** Hovering a tile still zooms its screenshot within
+  the tile. Following a tile to its project page still carries the cover
+  across. That transition was frozen at 25, 50 and 75% in a headless Chrome
+  and compared with the live site's.
+- **The schema (A2).** Pong's cover pointed at a PNG, at a WebP 1601 px wide,
+  at a 2:1 WebP and at `/src/assets/…`, a path from the project's root,
+  each failed with its own message. A gallery image pointed at the 16:10
+  Fuzzley Games cover failed on width and shape. A 2:1 file put in place of
+  `pong.webp`, with `pong.md` untouched, passed `astro check` and failed
+  `astro sync --force`.
+- **The tool (A2).** `pong-check` came out 1024 × 768, 1.4 KiB, with a
+  bottom edge of `#736357`. A 2:1 capture, and a 16:10 one with `--gallery`,
+  were refused with exit 1 and nothing written, and a missing one exited 1
+  with a line saying so. No arguments, `Bad/Name` and an unknown option each
+  printed the usage and exited 2. Through `yarn` from `frontend/src/`, it
+  read a capture by a path relative to there. Run again on the committed
+  files, it wrote them byte for byte as they were.
+- **The 8 screenshots (A2)** came to 1,570 KiB (1.53 MiB), from 2,365 KiB.
+  The bottom edges printed: Fuzzley Games `#0e1a2b` (32%), Klondike
+  `#0d410c` (49%), Minesweeper `#0e1a2b`, Pong `#736357`, Spider Solitaire
+  `#104e0f` (55%). Each is within 3 of its tint in every channel, so the
+  tool says to keep each, and no tint changed beyond A1's.
+- **The real build's pictures (A2),**
+  [`compare-builds.txt`](data/screenshots/compare-builds.txt). At each
+  screenshot's widest copy, the five former WebP ones come out closer than
+  A1's (Klondike 1.37 to 1.07), Minesweeper and Pong the same, and Spider
+  Solitaire closer (1.62 to 1.44). At narrower widths, lossless WebP comes
+  out further off, by up to 0.55, as the research measured. Every copy
+  matches
+  [`encodings-plan-widths.tsv`](data/screenshots/encodings-plan-widths.tsv)
+  to the hundredth, but Spider Solitaire's: A1's at 400, 480, 800, 1200,
+  1280 and 1600, and A2's at 960. Astro asks sharp for a rounded height
+  there, and sharp crops to it, so the copy sits a fraction of a pixel off
+  the stretched reference. At 960 px A2's measures 4.36 against A1's 2.09,
+  but side by side at 3× the two look the same.
+- **In a browser (A2).** On the home page, the Projects page, the Solitaire
+  Collection's and Spider Solitaire's pages, at 1440 × 900 at 1× and 2×, an
+  820 px tablet at 2× and a 390 px phone at 3×, every image loads. The
+  tablet fetches a cover's 1600 px copy and the phone a gallery image's 1200
+  px copy, where the live site stops at 1280 and 800. Side by side with the
+  live site, they look at least as sharp.
+- **The Docker image** built from 7fc2594, and every request in
+  `deploy.yml`'s `docker` job got the status, redirect and cache header it
+  expects.
+
+Where it differs from this plan:
+
+1. **The Projects page's cards had the wrong `sizes`** (A1). It said one
+   column below 56rem and 24rem above, but the grid fits two columns from
+   about 43rem and three from about 64rem. A 900 px window drew a card 7%
+   wider than its copy, and an 820 px tablet fetched one twice as wide as
+   needed. `sizes` now switches at 44rem and 65rem, just past where a
+   desktop scrollbar moves the grid's own switches. Between the two it asks
+   for too wide a copy rather than too narrow: a 1024 px tablet's cards
+   fetch 1200 px copies where 800 would do. The sweep covers the Projects
+   page too.
+2. **The cover's view transition moved to the `<picture>`** (A1). It named
+   the `<img>`, which is now taller than a 16:9 tile, and a transition draws
+   a named element without its ancestors' clip. So the cut-off bottom of a
+   cover showed while it moved, then vanished. `.tile-media` now clips its
+   screenshot and has the tint behind it, and carries the name.
+3. **The schema reads the file** (A2). In Astro 7.4.7 the content layer
+   gives `image()` a path marked `__ASTRO_IMAGE_`, not the image's size, so
+   the `refine()` calls of §5 failed every screenshot. The helper uses
+   `superRefine` and Astro's `imageMetadata`. §3, §5 and §10 now say so.
+4. **The bottom edge is the mean of its commonest color's pixels,** not the
+   6-bit bin's middle, so Pong's reads `#736357` rather than `#726256`. And
+   rather than only print it, the tool compares it with the project's tint:
+   within 4 in every channel it says to keep the tint, and otherwise what to
+   set it to. Without that, AGENTS.md's rule would have had the next agent
+   change three tints no one can tell apart.
+5. **[`compare-builds.mjs`](scripts/screenshots/compare-builds.mjs) lists
+   the reference with `git ls-tree --full-tree`.** Without it, run from
+   `frontend/`, git lists nothing.
+6. **`yarn check` and `yarn verify` run `astro sync --force` first** (A2).
+   Astro checks a project file against the schema again only when the file
+   changes, and keeps the result in `node_modules/.astro`. So a screenshot
+   retaken in place, or a cap raised in `image-widths.ts`, passed a local
+   check. CI and the Docker build start without that cache, so they would
+   have failed, but only after the push that deploys.
+7. **The schema fails a path that isn't relative to the project file,**
+   which it can't read, rather than passing it.
+
+**The review** read the three commits against §5 and §6 and found nothing
+that breaks the site or the tool. Each finding was taken, in `fixup!` and
+`amend!` commits folded in before the report: items 1, 4, 6 and 7 above;
+the tool's capture path, which an `INIT_CWD` left by an outer process could
+send astray when run as `node tools/screenshot.mjs`; DEVELOPMENT.md and
+AGENTS.md saying the schema fails any screenshot the tool didn't write,
+where it checks form, width and shape; a stale comment in `slots.mjs`; and
+a figure in A2's message. The space check was then run again on both
+commits' builds, and the Docker image built again.
+
+**Not pushed.** A push to `main` deploys at once, so it waits for the
+user's word (§7).
+
+B and C are not built yet.

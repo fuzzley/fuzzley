@@ -212,7 +212,9 @@ most, against 2.29 MiB for ca4e5fc. A Solitaire gallery image adds 82 to
     script share.
   - The schema fails a cover wider than 1280 px, a gallery image wider than
     800, or one in the wrong format. Astro's `image()` gives each image's
-    width and format to `refine()`.
+    width and format to `refine()`. (It doesn't: Astro 7.4.7's content layer
+    gives the schema the path, so the rule as built reads the file. See the
+    plan's §12.)
   - A script, `yarn screenshot`, writes an image in that form. It decodes the
     capture in full before resizing it, so shrink-on-load doesn't blur the
     copy.
